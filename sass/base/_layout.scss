@@ -1,3 +1,4 @@
+//定義各種標籤中的字體大小及顏色
 $max-width: 1000px;
 
 *{
@@ -29,7 +30,7 @@ h3{
 a{
 	text-decoration: none;
 	outline-width: 0;
-	color: $color-main;
+	color: $color-yellow01//底部連結文字
 }
 .alignleft{
 	float: left;
