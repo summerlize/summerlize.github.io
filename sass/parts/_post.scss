@@ -1,3 +1,4 @@
+//左列表：日期、分類、意見
 .post{
 	h2.title, .entry-content{
 		margin-left: 200px;
@@ -7,11 +8,12 @@
 	}
 	.meta{
 		position: absolute;
-		top: 85px;
+		top: 50px;
 		line-height: 2;
 		font-size: 0.9em;
 		color: $color-gray02;
 		width: 170px;
+		bottom: 20px;
 		@media screen and (max-width: 800px){
 			margin-top: 15px;
 			position: static;
