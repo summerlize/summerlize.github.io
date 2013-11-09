@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://summerlize.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: 這個夏天。
+subtitle: 小小筆記本
+author: SUMMERLIZE
 simple_search: http://google.com/search
 description:
 
@@ -96,5 +96,7 @@ disqus_show_comment_count: false
 # Google Analytics
 google_analytics_tracking_id:
 
+# Facebook
+facebook_user:
 # Facebook Like
-facebook_like: false
+facebook_like: true
