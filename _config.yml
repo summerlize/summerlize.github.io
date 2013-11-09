@@ -16,10 +16,10 @@ description:
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
+subscribe_rss: # /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email:summerlize@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -73,7 +73,7 @@ twitter_user:
 twitter_tweet_button: true
 
 # Google +1
-google_plus_one: false
+google_plus_one: true
 google_plus_one_size: medium
 
 # Google Plus Profile
@@ -90,8 +90,8 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: please enter your name
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id:
@@ -100,3 +100,8 @@ google_analytics_tracking_id:
 facebook_user:
 # Facebook Like
 facebook_like: true
+
+# addthis
+addthis_button: true
+
+pinterest_pinit: true
