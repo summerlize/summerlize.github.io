@@ -28,7 +28,7 @@ anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這樣�
 
 ####作業系統：OS X 10.9
 
-###Step1 安裝GIT
+###Step1 安裝GIT11
 直接到網址下載安裝即可。
 
 <http://code.google.com/p/git-osx-installer>
