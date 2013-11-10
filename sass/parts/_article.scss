@@ -14,17 +14,27 @@ article{
 		font-weight: 300;
 		line-height: 35px;
 		margin-bottom: 20px;
+		color: $color-green01;//$color-gray01;//文章標題
 		a{
 			color: $color-gray01;
 		}
 	}
+	
 	.entry-content{
 		line-height: 2;
 		text-align: justify;
+		color: $color-gray03;//內文
 		a{
 			&:hover{
 				text-decoration: underline;
 			}
+			color: $color-main;//文章超連結
+		}
+		hr{//分隔線
+			margin-top: 20px;
+			border-color: #66FF35;
+			border-width: 1px;
+			border-style: solid;
 		}
 		.more-link{
 			display: block;

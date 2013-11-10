@@ -21,11 +21,13 @@ body{
 h1{
 	font-size: 1.8em;
 }
-h2{
+h2{//文章標題
 	font-size: 1.5em;
+	color: $color-gray03;
 }
-h3{
+h3{//####標題
 	font-size: 1.3em;
+	color: #4D79FF;
 }
 a{
 	text-decoration: none;

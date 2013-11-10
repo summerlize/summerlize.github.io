@@ -18,11 +18,11 @@ anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這樣�
 
 不但可以用來撰寫技術文章，還可以達到快速排版的效果，
 
-對於我這個懶惰蟲而言還蠻有吸引力。
+真的很吸引我這個懶惰蟲～
 
 可是～～～～～～～～～～～～～～～～～～～～～～～～～～
 
-對於一個剛接觸「指令操作」不久、對 git 完全不熟悉的新手真的會覺得有點恐懼，
+對一個剛接觸「指令操作」不久、git 完全不熟悉的新手而言真的會覺得有點恐懼，
 
 因此在這邊記錄我的安裝過程以及遇到的問題，希望能對跟我一樣困惑的小朋友有所幫助。:P
 
@@ -119,19 +119,89 @@ Ruby有兩種版本控管的工具，分別為 RVM 及 Rbenv ，**選擇一種�
 
 Repo 的命名必須遵照規則 **username.github.io** ，
 
-例如我帳號/組織代號為 **summerlize** ，Repo則需命名為 **summerlize**.github.io 。
+例如我帳號/組織代號為 **summerlize** ， Repo 則需命名為 **summerlize**.github.io 。
 
-輸入指令設定GitHub page。
+輸入指令設定 GitHub page 。
 
 	$ rake setup_github_pages
 
-接著會要求輸入 Repo 的 URL，ex：*git@github.com:summerlize/summerlize.github.io.git* ，
+接著會要求輸入 Repo 的 URL ，ex：*git@github.com:summerlize/summerlize.github.io.git* ，
 
-由於 SSH 對大小寫檢查非常敏感，這邊建議從 GitHub Repo 頁面中右下方的 SSH clone URL 直接複製貼上。
+####Error：repository not found. fatal: The remote end hung up…
+由於 GitHub SSH 對大小寫檢查非常敏感，若輸入錯誤則會遇到上方訊息，
 
-![GitHub: SSH clone URL](../../../../images/blog/github_ssh.png)
+建議從 Repo 頁面中右下方的 SSH clone URL 直接複製貼上。
 
+![GitHub: SSH clone URL](http://farm6.staticflickr.com/5494/10768727923_aecb64d43a_o.png)
 
+也可輸入 `git remote -v show` 檢查 URL 是否正確。
 
+編譯及發佈部落格。
 
+	$ rake generate
+	$ rake deploy
 
+---
+####Error：permission denied(publickey)
+在執行 deploy 時我遇到了 **permission denied(publickey)** 的錯誤訊息，
+
+原因是因為沒有 SSH 連結造成，若無此問題可跳過，
+
+參考官方解決方法 [GitHub：Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys) 。
+
+	$ cd ~/.ssh
+	$ ls
+
+檢視你的路徑下是否包含 `id_rsa.pub` 或 `id_dsa.pub` 檔案，
+
+如果沒有則需產生一組 SSH KEY ，如果有則可略過至下一步驟 `$ pbcopy < ~/.ssh/id_rsa.pub`。
+
+	$ ssh-keygen -t rsa -C "your_email@example.com"
+	# Creates a new ssh key, using the provided email as a label
+	# Generating public/private rsa key pair.
+	# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+	ssh-add id_rsa
+	
+系統會要求輸入一組密碼，注意千萬**不可空白**否則就要重做了ＸＤ。
+
+	Enter passphrase (empty for no passphrase): [Type a passphrase]
+	# Enter same passphrase again: [Type passphrase again]
+	
+我產生出的檔名為ssh-add id_rsa.pub，手動把檔名修改了繼續複製 SSH KEY 。
+
+	$ pbcopy < ~/.ssh/id_rsa.pub
+
+進入 GitHub 網頁中的 Account Setting ，選單中的 SSH Keys 按下新增，
+
+將複製的內容貼在Key的位置。
+
+鍵入以下指令。
+
+	$ ssh -T git@github.com
+
+收到以下訊息輸入 yes 。
+
+	The authenticity of host 'github.com (207.97.227.239)' can't be established.
+	# RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+	# Are you sure you want to continue connecting (yes/no)?
+
+看到以下訊息表示授權成功。
+
+	Hi username! You've successfully authenticated, but GitHub does not
+	# provide shell access.
+---
+
+重新 deploy ，第一次發佈會時間會比較長，
+
+以無耐心的時間感判斷大約等了十分鐘有 :P ，
+
+之後發佈也是不太一定，時快時慢的，所以要多重新整理幾次，
+
+發佈完成就把網址改成 GitHub 帳號就可以查看部落格拉～ **<http://username.github.com/>**
+
+最後要把 Octopress source 也上傳到 GitHub 喔～
+
+	$ git add .
+	$ git commit -m 'initial source commit'
+	$ git push origin source
+	

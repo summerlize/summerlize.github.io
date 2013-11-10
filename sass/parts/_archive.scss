@@ -40,6 +40,9 @@
 		}
 		.title{
 			margin-bottom: 0;
+			a{
+				@include link-colors( $color-main,$color-green01);//archive頁文章標題
+			}
 		}
 		.meta{
 			line-height: 2;
