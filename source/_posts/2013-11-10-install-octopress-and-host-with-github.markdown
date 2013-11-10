@@ -129,7 +129,7 @@ Repo 的命名必須遵照規則 **username.github.io** ，
 
 由於 SSH 對大小寫檢查非常敏感，這邊建議從 GitHub Repo 頁面中右下方的 SSH clone URL 直接複製貼上。
 
-![GitHub: SSH clone URL](../../../../images/blog/github_ssh)
+![GitHub: SSH clone URL](../../../../../images/blog/github_ssh)
 
 
 
