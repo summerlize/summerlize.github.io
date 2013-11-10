@@ -7,20 +7,22 @@
 		{% endif %}
 			{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
 	</h2>
-	<div class="addthis_toolbox addthis_default_style">
-    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
-	</div> 
 	<div class="entry-content">
+		<div class="addthis_toolbox addthis_default_style">
+    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
 		{{ content | excerpt }}
 		{% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
 		{% if excerpted == 'true' %}<a href="{{ root_url }}{{ post.url }}" class="more-link">{{ site.excerpt_link }}</a>{% endif %}
 	</div>
 {% else %}
 	<h2 class="title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h2>
-	<div class="addthis_toolbox addthis_default_style">
+
+	<div class="entry-content">{{ content }}
+		<div class="addthis_toolbox addthis_default_style">
     	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
-	</div> 
-	<div class="entry-content">{{ content }}</div>
+		</div> 
+	</div>
 {% endif %}
 
 <div class="meta">
