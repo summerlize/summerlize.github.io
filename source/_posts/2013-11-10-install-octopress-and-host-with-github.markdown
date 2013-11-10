@@ -14,7 +14,7 @@ categories: Octopress
 
 技術上長期沒什麼突破...(汗)
 
-anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這樣的好東西，
+anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這樣好東西，
 
 不但可以用來撰寫技術文章，還可以達到快速排版的效果，
 
