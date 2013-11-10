@@ -8,12 +8,12 @@
 	}
 	.meta{
 		position: absolute;
-		top: 50px;
+		bottom: 20px;
+		top: 20px;
 		line-height: 2;
 		font-size: 0.9em;
 		color: $color-gray02;
 		width: 170px;
-		bottom: 20px;
 		@media screen and (max-width: 800px){
 			margin-top: 15px;
 			position: static;
