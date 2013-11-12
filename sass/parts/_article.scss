@@ -23,7 +23,7 @@ article{
 	.entry-content{
 		line-height: 2;
 		text-align: justify;
-		color: $color-gray03;//內文
+		color: $color-gray01;//內文顏色
 		a{
 			&:hover{
 				text-decoration: underline;
@@ -68,7 +68,7 @@ article{
 			margin-top: 10px;	
 		}
 		h2{//Markdown ##標題
-			color: #FFFF00;
+			color: #808080;//#FFFF00;
 			font-weight: 600;//粗體
 			//border-bottom: 1px solid $color-gray04;
 			position: relative;
