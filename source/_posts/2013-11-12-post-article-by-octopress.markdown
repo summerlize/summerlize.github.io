@@ -6,7 +6,7 @@ comments: true
 categories: Octopress
 ---
 
-###Octopress Blog 基本設定
+##1. Octopress Blog 基本設定
 
 在 Octopress 資料夾中可以找到一個 `_config.yml` 的檔案，
 
@@ -19,12 +19,12 @@ categories: Octopress
 	author: SUMMERLIZE                          #作者名稱
 	simple_search: http://google.com/search     #搜尋引擎
 	description: 我是一個部落格                   #部落格描述
-	date_format: "ordinal"                      #日期格式*1
+	date_format: "ordinal"                      #日期格式*
 	subscribe_rss: /atom.xml                    #RSS服務
 	subscribe_email: summerlize@gmail.com       #Email
 	category_feeds: false                       #訂閱指定分類文章 預設為否
 	email: summerlize@gmail.com	                #在RSS中列出Email 	
-*1 日期格式可到 [Ruby API](http://www.ruby-doc.org/core-2.0.0/Time.html) 查詢
+* 日期格式可到 [Ruby API](http://www.ruby-doc.org/core-2.0.0/Time.html) 查詢
 
 有做過功課大概都會發現 Octopress 是利用 Jekyll 產生出靜態網頁的，
 
@@ -82,7 +82,7 @@ categories: Octopress
 	
 	default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 
-####按讚或分享部落格
+###按讚或分享部落格
 官方內建的第三方服務包含了幾個知名社群類型網站，像是 Twitter 、Google^+^ 、Facebook 等，
 
 另外也有 Google 統計分析工具之類的擴充。
@@ -93,12 +93,12 @@ categories: Octopress
 	github_repo_count: 0			#輸入GitHub Repo數
 	github_show_profile_link: true #顯示GitHub檔案連結，預設開啟。
 
-####COMMENTS功能
+###COMMENTS功能
 其中 disqus 的設定，是用來提供訪客留言的功能，大推～
 
 必須先到 [Disqus官方網站](https://disqus.com/) 申請帳號後設定即可。
 
-###Octopress Blog 新增/發佈文章
+##2. Octopress Blog 新增/發佈文章
 
 終於進入正題囉～首先使用 `rake -T` 可以查看 Octopress 的所有指令，
 
@@ -118,7 +118,7 @@ categories: Octopress
 
 再以 `rake deploy` 發佈就可以到你的網域檢視了。
 
-ps. 以我使用 GitHub 的經驗，大概需要 10 到 20 分鐘不等才會更新。
+ps. 以我使用 GitHub 的經驗，第一次會很快，第二次之後大概需要 10 到 20 分鐘不等才會更新。
 
 在發佈新文章之前，也可以使用 `rake preview` 來預覽你的部落格，
 

@@ -67,15 +67,16 @@ article{
 		p{
 			margin-top: 10px;	
 		}
-		h2{
-			font-weight: 300;
-			border-bottom: 1px solid $color-gray04;
+		h2{//Markdown ##標題
+			color: #FFFF00;
+			font-weight: 600;//粗體
+			//border-bottom: 1px solid $color-gray04;
 			position: relative;
 			&:before{
 				content: "";
 				position: absolute;
 				bottom: -2px;
-				border-bottom: 1px solid $color-gray05;
+				//border-bottom: 1px solid $color-gray05;
 				width: 100%;
 			}
 		}
