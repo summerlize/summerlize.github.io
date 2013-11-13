@@ -88,7 +88,6 @@ categories: Octopress
 另外也有 Google 統計分析工具之類的擴充。
 
 	第三方服務設定（社群服務等）：
-	
 	github_user:					#輸入GitHub帳號便會自動生成按鈕連結，其他以此類推。
 	github_repo_count: 0			#輸入GitHub Repo數
 	github_show_profile_link: true #顯示GitHub檔案連結，預設開啟。
@@ -102,7 +101,7 @@ categories: Octopress
 
 終於進入正題囉～首先使用 `rake -T` 可以查看 Octopress 的所有指令，
 
-新增文章使用 `rake new_post["title"]`，在title處輸入文章標題即可，
+新增文章使用 `rake new_post["title"]`，在 title 處輸入文章標題即可，
 
 有趣的是如果輸入的是中文，Octopress 會自動轉換成羅馬拼音的檔名，
 
