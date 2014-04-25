@@ -8,7 +8,7 @@
 	}
 	h2.title{
 		a{
-			@include link-colors( $color-main,$color-green01);//首頁文章標題
+			@include link-colors( $color-red01,$color-main);//首頁文章標題
 			@include transition(0.3s);
 		}
 	}

@@ -1,5 +1,5 @@
 article{
-	border-bottom: 1px solid $color-gray04;
+	border-bottom: 1px solid $color-gray06;
 	border-top: 1px solid $color-gray05;
 	padding: 30px 0;
 	position: relative;
@@ -14,7 +14,7 @@ article{
 		font-weight: 300;
 		line-height: 35px;
 		margin-bottom: 20px;
-		color: $color-green01;//$color-gray01;//文章標題
+		color: $color-main;//$color-gray01;//文章標題
 		a{
 			color: $color-gray01;
 		}
@@ -28,11 +28,11 @@ article{
 			&:hover{
 				text-decoration: underline;
 			}
-			color: $color-main;//文章超連結
+			color: $color-lightblue;//文章超連結
 		}
 		hr{//分隔線
 			margin-top: 20px;
-			border-color: #66FF35;
+			border-color: #ccc;
 			border-width: 1px;
 			border-style: solid;
 		}

@@ -197,7 +197,7 @@ Repo 的命名必須遵照規則 **username.github.io** ，
 
 之後發佈也是不太一定，時快時慢的，所以要多重新整理幾次，
 
-發佈完成把網址改成 GitHub 帳號就可以查看部落格拉～ **<http://username.github.com/>**
+發佈完成把網址改成 GitHub 帳號就可以查看部落格拉～ <http://username.github.com/>
 
 最後要把 Octopress source 也上傳到 GitHub 喔～
 

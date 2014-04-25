@@ -83,7 +83,7 @@ categories: Octopress
 	default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 
 ###按讚或分享部落格
-官方內建的第三方服務包含了幾個知名社群類型網站，像是 Twitter 、Google^+^ 、Facebook 等，
+官方內建的第三方服務包含了幾個知名社群類型網站，像是 Twitter 、Google+ 、Facebook 等，
 
 另外也有 Google 統計分析工具之類的擴充。
 

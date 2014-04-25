@@ -27,12 +27,12 @@ h2{//文章標題
 }
 h3{//####標題
 	font-size: 1.3em;
-	color: #6495ED;
+	color: #000000;
 }
 a{
 	text-decoration: none;
 	outline-width: 0;
-	color: $color-yellow01//底部連結文字
+	color: $color-main//底部連結文字
 }
 .alignleft{
 	float: left;

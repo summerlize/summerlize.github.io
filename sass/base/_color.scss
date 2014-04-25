@@ -1,3 +1,17 @@
+$color-background: #FCFCFC !default;
+$color-main: #258fb8 !default;
+$color-gray01: #666 !default;//深灰
+$color-gray02: #666 !default;//灰
+$color-gray03: #ccc !default;//灰
+$color-gray04: #F0F0F0 !default;
+$color-gray05: #fff !default;//白色 上勾縫
+$color-gray06: #ddd !default;//灰 下溝縫
+$color-yellow01: #FFF8D1 !default;
+$color-red01: #258fb8 !default;
+$color-black: #000000 !default;
+$color-lightblue: #0000CC !default;
+
+/* 暗紅
 $color-background: #800000 !default;
 $color-main: #FFED85 !default;
 $color-gray01: #dcdcdc !default;
@@ -7,15 +21,15 @@ $color-gray04: #660000 !default;//深紅溝縫
 $color-gray05: #B30000 !default;//淺紅溝縫
 $color-yellow01: #FFF8D1 !default;
 $color-deepgray01: #666 !default;//搜尋文字
-$color-green01: #CCFF33 !default;//文章標題
+$color-green01: #CCFF33 !default;//文章標題 綠色
 $color-lightblue: #0000CC !default;
-
-/*
+*/
+/* 原始灰
 $color-background: #eee !default;//背景底色
-$color-main: #258fb8 !default;//url連結
-$color-gray01: #666 !default;//文章標題 列表連結 搜尋輸入文字
+$color-main: #258fb8 !default;//url連結 //原始灰：藍 #258fb8
+$color-gray01: #666 !default;//內文顏色 列表連結 搜尋輸入文字 深灰
 $color-gray02: #999 !default;//文章分類
 $color-gray03: #ccc !default;//文章分類圖示 搜尋圖案
-$color-gray04: #ddd !default;//分隔線條上方陰影
+$color-gray04: #ddd !default;//分隔線條上方陰影 block區塊顏色
 $color-gray05: #fff !default;//分隔線條
 */

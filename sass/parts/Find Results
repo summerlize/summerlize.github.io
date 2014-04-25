@@ -1,0 +1,38 @@
+Searching 416 files for "color-red"
+
+/Users/pipi/pipi/summerlize.github.io/sass/base/_color.scss:
+    9  $color-deepgray01: #666 !default;//搜尋文字
+   10  $color-green01: #CCFF33 !default;//文章標題
+   11: $color-red01: #B30000 !default;
+   12  $color-black: #000000 !default;
+   13  $color-lightblue: #0000CC !default;
+
+/Users/pipi/pipi/summerlize.github.io/sass/parts/_archive.scss:
+   42  			margin-bottom: 0;
+   43  			a{
+   44: 				@include link-colors( $color-red01,$color-main);//archive頁文章標題
+   45  			}
+   46  		}
+
+/Users/pipi/pipi/summerlize.github.io/sass/parts/_article.scss:
+   15  		line-height: 35px;
+   16  		margin-bottom: 20px;
+   17: 		color: $color-red01;//$color-gray01;//文章標題
+   18  		a{
+   19  			color: $color-gray01;
+
+/Users/pipi/pipi/summerlize.github.io/sass/parts/_header.scss:
+   12  	}
+   13  	a{
+   14: 		color: $color-red01;//主Logo標題顏色 原始灰：$color-gray01;
+   15  		@include transition(color 0.3s);
+   16  		&:hover{
+
+/Users/pipi/pipi/summerlize.github.io/sass/parts/_post.scss:
+    9  	h2.title{
+   10  		a{
+   11: 			@include link-colors( $color-red01,$color-main);//首頁文章標題
+   12  			@include transition(0.3s);
+   13  		}
+
+5 matches across 5 files

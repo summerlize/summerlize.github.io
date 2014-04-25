@@ -3,7 +3,7 @@ $header-height: 30px;
 #header{
 	height: $header-height;
 	padding: 30px 0;
-	border-bottom: 1px solid $color-gray04;
+	border-bottom: 1px solid $color-gray06;
 	line-height: $header-height;
 	@media screen and (max-width: 1040px){
 		height: auto;
@@ -11,7 +11,7 @@ $header-height: 30px;
 		padding-bottom: 10px;
 	}
 	a{
-		color: $color-gray01;
+		color: $color-main;//主Logo標題顏色 原始灰：$color-gray01;
 		@include transition(color 0.3s);
 		&:hover{
 			color: $color-main;
@@ -275,7 +275,7 @@ $header-height: 30px;
 		}
 		&:before{
 			content: "\f002";
-			color: $color-deepgray01;//$color-gray03;//搜尋工具圖示顏色
+			color: $color-gray01;//$color-gray03;//搜尋工具圖示顏色
 			font: 18px $font-icon;
 			line-height: 30px;
 			position: absolute;
@@ -283,18 +283,18 @@ $header-height: 30px;
 			right: 125px;
 		}
 		input[type="text"]{
-			background: $color-gray01;//#f2f2f2;//搜尋工具底色
+			background: #f2f2f2;//搜尋工具底色
 			color: $color-gray02;
-			border: 1px solid $color-gray04;
+			border: 1px solid $color-gray06;
 			font: 13px $font-default;
 			padding: 6px 15px 6px 35px;
 			width: 100px;
 			@include transition(0.3s);
 			@include border-radius(15px);
 			&:focus, &:active{
-				background: $color-gray01;//#fff;//輸入文字時動態顏色
+				background: #fff;//輸入文字時動態顏色
 				//border-top: 1px solid $color-gray03;
-				color: $color-deepgray01;//$color-gray01;//搜尋輸入文字顏色
+				color: $color-gray01;//搜尋輸入文字顏色
 				outline: none;
 			}
 		}

@@ -6,7 +6,7 @@
 			position: absolute;
 			bottom: 0;
 			width: 200px;
-			border-top: 1px solid $color-gray04;
+			border-top: 1px solid $color-gray06;
 		}
 	}
 	.year{
@@ -21,7 +21,7 @@
 			position: absolute;
 			top: -2px;
 			width: 100%;
-			border-top: 1px solid $color-gray04;//2013年上方分隔線條陰影
+			border-top: 1px solid $color-gray06;//2013年上方分隔線條陰影
 		}
 		@media screen and (max-width: 600px){
 			position: relative;
@@ -41,7 +41,7 @@
 		.title{
 			margin-bottom: 0;
 			a{
-				@include link-colors( $color-main,$color-green01);//archive頁文章標題
+				@include link-colors( $color-red01,$color-main);//archive頁文章標題
 			}
 		}
 		.meta{
