@@ -3,7 +3,7 @@ layout: post
 title: "Ext JS store loadData() id 重複導致只顯示一筆資料"
 date: 2014-05-14 11:55
 comments: true
-categories: Ext JS
+categories: ExtJS
 ---
 Ext JS 版本: 4.2.x
 
