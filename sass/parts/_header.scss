@@ -4,6 +4,7 @@ $header-height: 30px;
 	height: $header-height;
 	padding: 30px 0;
 	border-bottom: 1px solid $color-gray06;
+	border-top: 1px solid $color-gray05;
 	line-height: $header-height;
 	@media screen and (max-width: 1040px){
 		height: auto;
@@ -14,7 +15,7 @@ $header-height: 30px;
 		color: $color-main;//主Logo標題顏色 原始灰：$color-gray01;
 		@include transition(color 0.3s);
 		&:hover{
-			color: $color-main;
+			color: darken($color-main, 10%);
 		}
 	}
 	h1{
@@ -50,7 +51,7 @@ $header-height: 30px;
 			}
 			&:hover{
 				>a{
-					color: $color-main;
+					color: lighten($color-main, 10%);
 				}
 			}
 			>a{

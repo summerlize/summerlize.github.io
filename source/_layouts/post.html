@@ -3,6 +3,14 @@ layout: default
 single: true
 ---
 
+<aside class="sidebar">
+  {% if site.blog_index_asides.size %}
+    {% include_array blog_index_asides %}
+  {% else %}
+    {% include_array default_asides %}
+  {% endif %}
+</aside>
+
 <article class="post">{% include article.html %}</article>
 {% unless page.sharing == false %}
 	{% include post/sharing.html %}

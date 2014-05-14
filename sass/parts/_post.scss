@@ -1,14 +1,15 @@
 //左列表：日期、分類、意見
 .post{
 	h2.title, .entry-content{
-		margin-left: 200px;
+		width: 700px;
+		margin-left: 170px;
 		@media screen and (max-width: 800px){
 			margin-left: 0;
 		}
 	}
 	h2.title{
 		a{
-			@include link-colors( $color-red01,$color-main);//首頁文章標題
+			@include link-colors( $color-red01,lighten($color-main, 10%));//首頁文章標題
 			@include transition(0.3s);
 		}
 	}

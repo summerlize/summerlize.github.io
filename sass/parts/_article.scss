@@ -27,8 +27,9 @@ article{
 		a{
 			&:hover{
 				text-decoration: underline;
+				color: lighten($color-main, 20%);
 			}
-			color: $color-lightblue;//文章超連結
+			color: $color-main;//文章超連結
 		}
 		hr{//分隔線
 			margin-top: 20px;
@@ -148,5 +149,7 @@ article{
 }
 .share{
 	padding: 15px 0;
-	@include border-shadow();
+	width: 1100px;
+	border-bottom: 1px solid $color-gray06;
+	border-top: 1px solid $color-gray05;
 }

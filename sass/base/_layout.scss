@@ -1,10 +1,11 @@
 //定義各種標籤中的字體大小及顏色
-$max-width: 1000px;
+$max-width: 900px;
 
 *{
 	margin: 0;
 	padding: 0;
 }
+
 body{
 	font-family: $font-default;
 	font-weight: 300;
@@ -43,10 +44,30 @@ a{
 .clearfix{
 	@include pie-clearfix;
 }
-.inner{
-	width: $max-width;
-	margin: 0 auto;
+.innerHeader{
+	width: 1100px;
+	margin: 0 100px;
 	@media screen and (max-width: 1040px){
 		width: 100%;
 	}
+}
+.inner{
+	width: $max-width;
+	margin: 0 100px;
+	@media screen and (max-width: 1040px){
+		width: 100%;
+	}
+}
+
+
+aside.sidebar {
+  //float: none;
+  padding: 30px 30px 1px;
+  /*border-top: 1px ;*/
+  position: absolute;
+  top: 180px;
+  left: 100%;
+  margin-left: -300px;
+  width: 250px;
+  float: right;
 }

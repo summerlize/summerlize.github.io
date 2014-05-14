@@ -5,6 +5,10 @@ date: 2014-04-26 02:59
 comments: true
 categories: [iReport, Grails]
 ---
+Grails 版本: 2.3.5
+
+iReport 版本: 5.5.1
+
 iReport 在產生 PDF 檔一直都有中文顯示異常的問題，
 
 此次要記錄的是在 Grails 中的解決辦法，
