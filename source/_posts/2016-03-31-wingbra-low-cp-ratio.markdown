@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "［感想］Wingbra CP值 小朋友掰掰了"
+title: "[感想] Wingbra CP值 小朋友掰掰了"
 date: 2016-03-31 06:04
 comments: true
 categories: [Uncatagorized Comment]
