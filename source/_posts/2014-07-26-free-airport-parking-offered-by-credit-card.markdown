@@ -3,7 +3,7 @@ layout: post
 title: "信用卡國際機場外圍免費停車-富邦數位生活卡"
 date: 2014-07-26 06:59
 comments: true
-categories: [Credit Card, Trip]
+categories: [Credit Card, Overseas Trip]
 ---
 
 ##富邦銀行

@@ -3,7 +3,7 @@ layout: post
 title: "峇里島 Day 1。印尼航空&好好海鮮餐館鹹蛋螃蟹"
 date: 2014-07-27 06:14
 comments: true
-categories: [Bali, Trip]
+categories: [Bali, Overseas Trip]
 ---
 
 拖了好久才開始動工的峇里島遊記～

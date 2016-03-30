@@ -3,7 +3,7 @@ layout: post
 title: "印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程"
 date: 2014-06-25 03:02
 comments: true
-categories: [Bali]
+categories: [Bali, Overseas Trip]
 ---
 印航今年推出了台北到峇里島的優惠票價，
 
