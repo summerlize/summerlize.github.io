@@ -29,7 +29,7 @@ categories: [Bali, Overseas Trip]
 
 在機上先填好，雅加達下飛機之後，很快就能看到 **VISA ON ARRIVAL** 指標，左右兩邊都有，
 
-![](https://farm4.staticflickr.com/3901/14556902110_30df81790f_n.jpg =300x200)
+![](https://farm4.staticflickr.com/3901/14556902110_4221dfde28_c.jpg =300x200)
 
 同行可以由一人代表排隊購買，出示護照、付錢之後會拿到簽證收據，
 
@@ -42,7 +42,7 @@ categories: [Bali, Overseas Trip]
 
 詢問了幾個機場人員後，原來**必須先入境**(後來了解是因為國際線轉國內線的緣故)，
 
-![](https://farm4.staticflickr.com/3917/14556928329_cce102c160_n.jpg =300x200)
+![](https://farm4.staticflickr.com/3917/14556928329_71d1c40a74_c.jpg =300x200)
 
 在 Foreigner 看板前排隊，需要出示護照、登機證、出入境卡，
 
@@ -70,7 +70,7 @@ categories: [Bali, Overseas Trip]
 
 看到 transfer 的指標後坐手扶梯上樓，發現跟先前被封鎖的入口是通往一樣的地方，
 
-![](https://farm6.staticflickr.com/5580/14743569735_2af0b732fd_n.jpg =300x200)
+![](https://farm6.staticflickr.com/5580/14743569735_14c6eb486b_c.jpg =300x200)
 
 上去很快就往登機門的方向繼續走，快到登機門前會再遇到一次檢查隨身行李的關卡，
 
