@@ -3,8 +3,18 @@ article{
 	border-top: 1px solid $color-gray05;
 	padding: 30px 0;
 	position: relative;
-	max-width:1000px;
+	max-width:1050px;
+	@media screen and (max-width: 1430px){
+		width: 75%;
+	}
+	@media screen and (max-width: 1150px){
+		width: 70%;
+	}
+	@media screen and (max-width: 967px){
+		width: 65%;
+	}
 	@media screen and (max-width: 800px){
+		width: 100%;
 		padding-bottom: 15px;
 	}
 	@media screen and (max-width: 600px){
@@ -150,7 +160,33 @@ article{
 }
 .share{
 	padding: 15px 0;
-	width: 1200px;
+	max-width: 1050px;
 	border-bottom: 1px solid $color-gray06;
 	border-top: 1px solid $color-gray05;
+
+	@media screen and (max-width: 1430px){
+		width: 75%;
+	}
+	@media screen and (max-width: 1150px){
+		width: 70%;
+	}
+	@media screen and (max-width: 967px){
+		width: 65%;
+	}
+	@media screen and (max-width: 800px){
+		width: 100%;
+	}
+
+}
+
+.shareHead{
+	padding: 15px 0;
+	max-width: 1300px;
+	border-bottom: 1px solid $color-gray06;
+	border-top: 1px solid $color-gray05;
+
+	@media screen and (max-width: 1300px){
+		width: 100%;
+	}
+
 }
