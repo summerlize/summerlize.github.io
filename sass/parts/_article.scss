@@ -190,3 +190,15 @@ article{
 	}
 
 }
+
+.outerContent{
+ 	max-width: $max-width;//1300px;
+	border-bottom: 1px solid $color-gray06;
+	border-top: 1px solid $color-gray05;
+	margin: 0 0;
+
+	@media screen and (max-width: $max-width){
+		width: 100%;
+	}
+}
+
