@@ -81,6 +81,13 @@ aside.sidebar {
   }
 }
 
+@media only screen and (max-width: 800px) {
+  aside.sidebar {
+    width:0;
+    height:0;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .toggle-sidebar {
     outline: none;

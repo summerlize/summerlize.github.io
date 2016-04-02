@@ -1,10 +1,29 @@
-//左列表：日期、分類、意見
+//body 左列表：日期、分類、意見，文章，右列表：最近發表、分類
 .post{
-	h2.title, .entry-content{
-		width: 750px;
+	h2.title, .entry-content{//內文
 		margin-left: 170px;
-		@media screen and (max-width: 800px){
+		margin-right: 0px;
+
+		/*@media screen and (max-width: 1300px){
+			margin-right: 150px;
+		}
+		@media screen and (max-width: 1230px){
+			margin-right: 200px;
+		}
+		@media screen and (max-width: 1180px){
+			margin-right: 250px;
+		}*/
+		@media screen and (max-width: 1150px){
+			margin-right: 10px;
+		}
+		/*@media screen and (max-width: 1080px){
+			margin-right: 350px;
+		}
+*/		@media screen and (max-width: 1040px){
 			margin-left: 0;
+		}
+		@media screen and (max-width: 800px){
+			margin-right: 0;
 		}
 	}
 	h2.title{
@@ -13,7 +32,7 @@
 			@include transition(0.3s);
 		}
 	}
-	.meta{
+	.meta{//左列表
 		position: absolute;
 		bottom: 20px;
 		top: 20px;
@@ -21,6 +40,11 @@
 		font-size: 0.9em;
 		color: $color-gray02;
 		width: 170px;
+		@media screen and (max-width: 1040px){
+			margin-top: 15px;
+			position: static;
+			width: auto;
+		}
 		@media screen and (max-width: 800px){
 			margin-top: 15px;
 			position: static;

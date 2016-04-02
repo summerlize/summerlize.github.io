@@ -1,5 +1,5 @@
 //定義各種標籤中的字體大小及顏色
-$max-width: 1200px;
+$max-width: 1300px;
 
 *{
 	margin: 0;
@@ -13,7 +13,7 @@ body{
 	background: $color-background;
 	color: $color-gray01;
 	@media screen and (max-width: 1040px){
-		margin: 0 20px;
+		margin: -30px 20px;
 	}
 	@media screen and (max-width: 600px){
 		font-size: 13px;
@@ -45,12 +45,24 @@ a{
 	@include pie-clearfix;
 }
 
+.innerHeader{
+	width: $max-width;
+	margin: 0 auto;
+	@media screen and (max-width: 1350px){
+		width: 95%;
+	}
+	
+}
+
 .inner{
 	width: $max-width;
-	margin: 0 100px;
-	@media screen and (max-width: 1040px){
-		width: 100%;
+	margin: 0 auto;
+	@media screen and (max-width: 1350px){
+		width: 95%;
 	}
+	/*@media screen and (max-width: 1040px){
+		width: 100%;
+	}*/
 }
 
 
@@ -61,7 +73,7 @@ aside.sidebar {
   position: absolute;
   top: 180px;
   left: 100%;
-  margin-left: -350px;
+  margin-left: -300px;
   width: 250px;
   float: right;
 }
