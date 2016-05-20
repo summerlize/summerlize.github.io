@@ -70,5 +70,10 @@ categories: [Uncatagorized Comment]
 ![](https://farm2.staticflickr.com/1539/26073425531_7edf6de987_c.jpg =480x270)
 
 
+ps. 後來我把台灣版剩下的醬拿來抹烤吐司，沒想到意外的美味，
+
+剛烤好的吐司抹上榛果可可醬一直飄出陣陣的金莎味～～
+
+maybe他只是不適合麥芽麵包棒這種豪邁吃法。
 
 
