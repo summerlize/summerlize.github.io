@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ext JS store loadData() id 重複導致只顯示一筆資料"
+title: "Ext JS: store loadData() id 重複導致只顯示一筆資料"
 date: 2014-05-14 11:55
 comments: true
 categories: ExtJS

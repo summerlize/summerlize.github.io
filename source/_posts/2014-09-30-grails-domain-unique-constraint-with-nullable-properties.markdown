@@ -36,31 +36,7 @@ class Book{
 
 此時可以自行加入判斷如下：
 
-	static constraints = {
-		name(unique:['author','publisher'],
-			validator: { name, book ->
-				def existingRecord = Book.withCriteria(){
-        		
-					if (book.id){
-						ne('id', book.id)
-					}
-                    
-					eq('author', book.author)
-                    
-					if (book.publisher){
-						eq('publisher', book.publisher)
-					}
-					else {
-						isNull('supplier')
-					}
-				}//end withCreiteria
-			}//end validator
-		)
-		publisher nullable:true  
-	}
-
-{% codeblock lang:groovy %}
-	mark:1,5-8
+{% codeblock lang:groovy start:8 %}
 	static constraints = {
 		name(unique:['author','publisher'],
 			validator: { name, book ->

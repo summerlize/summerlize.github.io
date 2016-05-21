@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Grails + iReport PDF 繁體中文無法顯示解決方法"
+title: "Grails + iReport: PDF 繁體中文無法顯示解決方法"
 date: 2014-04-26 02:59
 comments: true
 categories: [iReport, Grails]
