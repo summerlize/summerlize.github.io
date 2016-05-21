@@ -139,7 +139,7 @@ Gordon's Dry Gin 琴酒：零分 哈哈...
 
 [印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](http://summerlize.github.io/blog/2014/06/25/transfer-from-jakarta-to-bali/)
 
-[信用卡國際機場外圍免費停車](http://summerlize.github.io/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
+[2014信用卡國際機場外圍免費停車](http://summerlize.github.io/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
 
 
 

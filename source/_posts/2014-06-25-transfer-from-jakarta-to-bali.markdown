@@ -261,6 +261,13 @@ categories: [Bali, Overseas Trip]
 
 8.下飛機(桃園機場)領行李、檢查行李，下次再見摟。
 
+---
+
+相關文章：
+
+[印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](http://summerlize.github.io/blog/2014/06/25/transfer-from-jakarta-to-bali/)
+
+[2014信用卡國際機場外圍免費停車](http://summerlize.github.io/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
 
 
 
