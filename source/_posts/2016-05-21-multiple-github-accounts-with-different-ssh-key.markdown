@@ -31,7 +31,7 @@ categories: [Git, GitHub]
 	The key fingerprint is:
 	SHA256:RP68Sn3j79q8U2h80cpifw3WKNTDn7b6aw8YDLbJ9Uo personal@mail.com
 
-接著將 ``~/.ssh/id_rsa_personal.pub`` 中的金鑰複製起來，
+接著將 `~/.ssh/id_rsa_personal.pub` 中的金鑰複製起來，
 
 再到 GitHub 	點選右上角帳號圖像，選 Settings ， 進入 SSH and GPG Keys ，
 
@@ -40,7 +40,7 @@ categories: [Git, GitHub]
 並將剛才複製的金鑰貼在 key 的區塊，再按下 Add SSH Key 按鈕完成。
 
 
-再使用指令 ``ssh-keygen -t rsa -C "work@mail.com"`` 針對工作帳號 work 重複上面的步驟，
+再使用指令 `ssh-keygen -t rsa -C "work@mail.com"` 針對工作帳號 work 重複上面的步驟，
 
 ###Step2
 
@@ -70,23 +70,19 @@ categories: [Git, GitHub]
 	$ cd yourWorkProjectPath
 	$ git remote set-url origin git@github.com-work:work/workproject
 
+若此時仍是以原先帳號上傳，則可使用指令 `ssh-add -l` 查看目前ssh agent有在管控的key passphrase。
 
-http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits
+使用 `ssh-add -d` 把所有舊的 ssh agent 管控的 key passphrase 都清掉。
 
+也可使用 `ssh -T github.com-personal` 測試是否有以設定的 ssh 連線，
 
-若此時仍是以原先帳號上傳，則可使用指令 ``ssh-add -l`` 查看目前ssh agent有在管控的key passphrase。
+正確的話 username 會出現相應的名稱，例如**personal**。
 
-``ssh-add -d`` 把所有目前ssh agent管控的key passphrase都清掉。
-
-也可使用 ``ssh -T github.com-personal`` 測試是否有以設定的 ssh 連線，
-
-正確的話 username 會出現相應的名稱。
-
-Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+Hi **username**! You've successfully authenticated, but GitHub does not provide shell access.
 
 ---
 
 相關文章：
 
-[Git: 批量變更已commit的創作者(author)](http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits/)
+[Git: 批量變更已commit的創作者(author)及欲commit的創作者](http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits)
 
