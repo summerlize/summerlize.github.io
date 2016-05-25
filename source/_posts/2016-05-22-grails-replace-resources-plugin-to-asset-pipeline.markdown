@@ -1,21 +1,21 @@
 ---
 layout: post
-title: "Grails: 將resources plugin 替換為 asset-pipeline"
+title: "Grails: 將 resources plugin 替換為 asset-pipeline"
 date: 2016-05-22 02:16
 comments: true
 categories: [Grails]
 ---
-根據 Grails 官方 plugins 的介紹， Asset-Pipeline 是用來管理與處理靜態的資源，包含壓縮及打包 CSS 與 JS 檔，且支援編譯自訂的靜態語言，例如 CoffeeScript 。
+根據 Grails 官方 plugins 的介紹， Asset-Pipeline 是用來管理與處理靜態資源，包含壓縮及打包 CSS 與 JS 檔，且支援編譯自訂的靜態語言，例如：CoffeeScript 。
 
-Asset-Pipeline 是用來取代相同作用的 resources-plugin ，並提供更多效益及友善的開發架構。透過盡可能的最小化 JS 以降低靜態資源的大小。與 resources plugin 的差異有以下幾點：
+Asset-Pipeline 是用來取代相同作用的 resources-plugin ，並提供更有效益及友善的開發架構。透過最小化 JS 來降低靜態資源的大小。與 resources plugin 的差異如下：
 
 1. 動態處理，不需要因為檔案變更而重新載入資源。
-1. 在 war 產生時編譯資源，處理檔案時不影響 server 啟動的時間。
-1. 經由壓縮、最小化、建立緩存，減少檔案間的交互作用。
-1. 在 development 模式中，保持各別檔案分開(即不壓縮為一個檔案)，方便除錯。
-1. 使用簡易的 manifest 和 taglib 設計 (清單與標籤)來讀取資訊。
+1. 在 war 產生時編譯資源，不影響到 server 啟動的時間。
+1. 經由壓縮、最小化、建立緩存減少檔案間的交互作用。
+1. 在 development 模式中，保持各個檔案獨立 (不壓縮成一個檔案)，方便除錯。
+1. 使用簡易的 manifest 和 taglib 設計 (清單與標籤) 來讀取資訊。
 
-接下來就要進入怎麼將你現有的 resources plugin 專案 更換為 asset-pipeline 囉～
+接下來就要將現有專案中的 resources plugin 更換為 asset-pipeline 囉～
 
 ###step 1:
 
@@ -54,15 +54,15 @@ plugins {
 
 ###step 3:
 
-1.  在 *yourProjectPath*/grails-app/assets/**javascripts** 中新增一隻 js 檔，編輯 GSP 檔所需載入的 js。
+1.  參考原先 GSP 頁面所載入的 js 、 css ，
+	
+	在 *yourProjectPath*/grails-app/assets/**javascripts** 中新增一隻 js 檔，用來編輯 GSP 檔所需載入的 js。
 
-	在 *yourProjectPath*/grails-app/assets/**stylesheets** 中新增一隻 css 檔，編輯 GSP 檔所需載入的 css。
-
-	參考原先 GSP 頁面所載入的 js 、 css 。
+	在 *yourProjectPath*/grails-app/assets/**stylesheets** 中新增一隻 css 檔，用來編輯 GSP 檔所需載入的 css。
 	
 	*yourProjectPath*/grails-app/**views/myGspPage.gsp**
 		
-		<r:require modules="js, css"/> // 載入 jss 、 css module
+		<r:require modules="js, css"/> // 載入 js 、 css module
 
 	*yourProjectPath*/grails-app/**conf/ApplicationResources.groovy**
 		
@@ -116,7 +116,7 @@ plugins {
 
 	*yourProjectPath*/grails-app/views/**myGspPage.gsp**
 	
-		// 將以下兩行改寫
+		// 改寫以下兩行
 		<r:img uri="images/logo.png" width="100" height="50"/>
 		<r:img dir="images" file="logo.png" width="100" height="50"/>
 		
@@ -130,7 +130,7 @@ plugins {
 
 	*yourProjectPath*/grails-app/views/**myGspPage.gsp**
 
-		//將此類語法改寫
+		//改寫此類語法
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon" />
 		
 		//asset-pipeline 寫法
@@ -138,7 +138,7 @@ plugins {
 
 1.  將 GSP 頁面所有 <r:script> 標籤改為 <asset:script> 、 </r:script> 標籤改為 </asset:script> 。
 	
-	並在主要的 GSP 頁面中的 body 區塊加入 `<asset:deferredScripts/>` 指定輸出 <asset:script> 的位置，一般在段落的最末處。
+	並在主要的 GSP 頁面 body 區塊加入 `<asset:deferredScripts/>` ，用來指定輸出 <asset:script> 的位置，一般在段落的最末處。
 
 1.  將 GSP 頁面所有 <g:javascripts 標籤改為 <asset:script。
 

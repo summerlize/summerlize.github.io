@@ -15,7 +15,7 @@ categories: [Promo/Invitation Code]
 
 活動時間：2016年1月1日至2016年12月31日止
 
-詳細活動辦法可參考 [https://mk.ponta.com.tw/mgm/](https://mk.ponta.com.tw/mgm/)
+[點我查看詳細活動辦法](https://mk.ponta.com.tw/mgm/)
 
 **Ｑ：什麼是得易Ponta？**
 
@@ -23,7 +23,7 @@ categories: [Promo/Invitation Code]
 
 東森購物、森森購物、嘟嘟房、Agoda.com、順發3C、OK便利商店、萊爾富...等，虛擬通路、實體商店通通可以集點！
 
-可參考 [特約店家列表](https://www.ponta.com.tw/MerchantRanking.action?func=qryByView&title=%E5%BA%97%E5%AE%B6%E6%8E%92%E8%A1%8C)
+[點我查看特約店家列表](https://www.ponta.com.tw/MerchantRanking.action?func=qryByView&title=%E5%BA%97%E5%AE%B6%E6%8E%92%E8%A1%8C)
 
 
 最新活動可與一卡通綁定，嗶一卡通集Ponta點！

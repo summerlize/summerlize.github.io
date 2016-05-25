@@ -12,7 +12,7 @@ categories: Octopress
 
 雖然號稱小小程式設計者，但我的學習歷程一直著重在邏輯的處理，
 
-技術上長期沒什麼突破...(汗)
+技術上長期沒什麼突破... (汗)
 
 anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這樣好東西，
 
@@ -63,7 +63,7 @@ Ruby有兩種版本控管的工具，分別為 RVM 及 Rbenv ，**選擇一種�
 	
 然後～～～～
 
-我的第一次 Octopress 安裝就到這裡中斷了（掩面），
+我的第一次 Octopress 安裝就到這裡中斷了 (掩面)，
 
 當時假會的裝了新版的Ruby 2.0 ，
 
@@ -71,7 +71,7 @@ Ruby有兩種版本控管的工具，分別為 RVM 及 Rbenv ，**選擇一種�
 
 使用 Rbenv 降版幾次都失敗後，~~就被迫改以 RVM 重新安裝~~，
 
-~~畢竟工作時間就是金錢，老闆是不會等我 try N 次的(哭)~~，
+~~畢竟工作時間就是金錢，老闆是不會等我 try N 次的 (哭)~~，
 
 一樣乖乖地輸入完下面的指令就可以摟～
 
@@ -143,7 +143,7 @@ Repo 的命名必須遵照規則 **username.github.io** ，
 
 ---
 ####Error：permission denied(publickey)
-在執行 deploy 時我遇到了 **permission denied (publickey)** 的錯誤訊息，
+在執行 deploy 時我遇到了 **permission denied(publickey)** 的錯誤訊息，
 
 原因是因為沒有 SSH 連結造成，若無此問題可跳過，
 

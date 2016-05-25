@@ -38,7 +38,7 @@ categories: [Credit Card, Overseas Trip]
 
 地址：桃園縣大園鄉三民路二段69號 電話0800-022-999、(03)383-8888
 
-詳細可以參考 [富邦卡友權益](https://www.fubon.com/bank/creditcard/member_rights/001creditCard_100parking01.htm)
+[點我查看富邦卡友權益](https://www.fubon.com/bank/creditcard/member_rights/001creditCard_100parking01.htm)
 
 
 

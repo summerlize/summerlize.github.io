@@ -111,7 +111,7 @@ categories: Octopress
 
 找到剛才新增的檔案用文字編輯器打開後，
 
-便可使用 Markdown 編輯文章了（好用 Markdown 編輯器 [Mou](http://mouapp.com/) ）。
+便可使用 Markdown 編輯文章了（[下載好用的 Markdown 編輯器 Mou](http://mouapp.com/) ）。
 
 完成文章之後，以 `rake generate` 產生靜態部落格網頁，
 

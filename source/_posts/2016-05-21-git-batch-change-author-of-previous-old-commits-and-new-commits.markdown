@@ -45,11 +45,11 @@ fi
 
 輸入指令 `./gitFilterBranch.sh` 執行 shell 檔案
 
-此時就可以看到過去的 commit author  改變囉～
+此時就可以看到過去的 commit author 改變囉～
 
 如果發現有些 branch 還是舊的 author ，
 
-先將切換至該分支，再重新 run 一次 sh 就行了。
+先切換至該分支，再重新 run 一次 sh 就行了。
 
 ###變更未來欲 commit 的 author
 
