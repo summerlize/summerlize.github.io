@@ -57,4 +57,4 @@ fi
 
 	$ cd yourProjectPath
 	$ git config user.name "summerlize"
-	$ git config user.email summerlize@gmail.com
+	$ git config user.email "summerlize@gmail.com"
