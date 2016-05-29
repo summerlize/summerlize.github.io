@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "同時使用多個GitHub帳號與多個SSH認證金鑰之設定方式"
+title: "同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式"
 date: 2016-05-21 10:53
 comments: true
 categories: [Git, GitHub]
@@ -84,5 +84,5 @@ Hi **username**! You've successfully authenticated, but GitHub does not provide 
 
 相關文章：
 
-[Git: 批量變更已commit的創作者(author)及欲commit的創作者](http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits)
+[Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者](http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits)
 

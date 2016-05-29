@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[推薦碼0XLD6] 註冊得易Ponta會員輸入推薦碼送100點"
+title: "[推薦碼0XLD6] 註冊得易 Ponta 會員輸入推薦碼送100點"
 date: 2016-03-31 17:00
 comments: true
 categories: [Promo/Invitation Code]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用Octopress部落格發佈文章"
+title: "使用 Octopress 部落格發佈文章"
 date: 2013-11-12 02:38
 comments: true
 categories: Octopress

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Git: 批量變更已commit的創作者(author)及欲commit的創作者"
+title: "Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者"
 date: 2016-05-21 09:42
 comments: true
 categories: Git

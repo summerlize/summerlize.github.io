@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Octopress安裝+GitHub架設部落格筆記"
+title: "Octopress 安裝 + GitHub 架設部落格筆記"
 date: 2013-11-10 05:11
 comments: true
 categories: Octopress
