@@ -29,9 +29,9 @@ if(author){
 
 {% endcodeblock %}
 
-查了一下 Grials API 找到 [discard()](http://grails.org/doc/2.3.4/ref/Domain%20Classes/discard.html) 方法，**用來避免自動執行儲存**，
+查了一下 Grails API 找到 [discard()](http://grails.org/doc/2.3.4/ref/Domain%20Classes/discard.html) 方法，**用來避免自動執行儲存**，
 
-測試的程式碼如下，結果 book 仍然自動更新(暈)，
+測試的程式碼如下，結果 book 仍然自動更新 (暈) ，
 
 {% codeblock book update - test discard lang:groovy %}
 
@@ -46,9 +46,7 @@ book.discard()
 
 繼續 try 不同的組合後發現似乎是** findBy() 指令造成 book 自動儲存**，
 
-在此提供兩種解決方式，
-
-**第一種是在 mapping params 之前先執行完 findBy() **，
+在此提供兩種解決方式，**第一種是在 mapping params 之前先執行完 findBy() **，
 
 {% codeblock book update - solution 1 lang:groovy %}
 

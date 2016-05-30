@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者"
+title: "Git: 批量變更已 commit 的創作者 (author) 及欲 commit 的創作者"
 date: 2016-05-21 09:42
 comments: true
 categories: Git
@@ -8,7 +8,7 @@ categories: Git
 
 ###變更過去已 commit 的 author
 
-首先要在 project 中建立一個 sh 檔案，
+首先在 project 中建立一個 sh 檔案
 
 	$ cd yourProjectPath
 	$ touch gitFilterBranch.sh

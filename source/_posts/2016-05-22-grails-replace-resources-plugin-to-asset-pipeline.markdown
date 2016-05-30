@@ -12,7 +12,7 @@ Asset-Pipeline 是用來取代相同作用的 resources-plugin ，並提供更�
 1. 動態處理，不需要因為檔案變更而重新載入資源。
 1. 在 war 產生時編譯資源，不影響到 server 啟動的時間。
 1. 經由壓縮、最小化、建立緩存減少檔案間的交互作用。
-1. 在 development 模式中，保持各個檔案獨立 (不壓縮成一個檔案)，方便除錯。
+1. 在 development 模式中，保持各個檔案獨立 (不壓縮成一個檔案) ，方便除錯。
 1. 使用簡易的 manifest 和 taglib 設計 (清單與標籤) 來讀取資訊。
 
 接下來就要將現有專案中的 resources plugin 更換為 asset-pipeline 囉～
@@ -46,7 +46,7 @@ plugins {
 
    ps. 如沒有其他程式碼使用 web-app 中三個資源資料夾的內容，可自行決定是否將其刪除。
 
-1. 刪除 resources plugin 相關的 config 設定，搜尋 project 中 **grails.resources** 開頭的 config。
+1. 刪除 resources plugin 相關的 config 設定，搜尋 project 中 **grails.resources** 開頭的 config 。
 
    ex: grails.resources.debug=true
 
@@ -56,9 +56,9 @@ plugins {
 
 1.  參考原先 GSP 頁面所載入的 js 、 css ，
 	
-	在 *yourProjectPath*/grails-app/assets/**javascripts** 中新增一隻 js 檔，用來編輯 GSP 檔所需載入的 js。
+	在 *yourProjectPath*/grails-app/assets/**javascripts** 中新增一隻 js 檔，用來編輯 GSP 檔所需載入的 js 。
 
-	在 *yourProjectPath*/grails-app/assets/**stylesheets** 中新增一隻 css 檔，用來編輯 GSP 檔所需載入的 css。
+	在 *yourProjectPath*/grails-app/assets/**stylesheets** 中新增一隻 css 檔，用來編輯 GSP 檔所需載入的 css 。
 	
 	*yourProjectPath*/grails-app/**views/myGspPage.gsp**
 		
@@ -101,7 +101,7 @@ plugins {
 
 
 
-1.  將 GSP 頁面載入 js、css 的程式碼改為 asset-pipeline寫法。
+1.  將 GSP 頁面載入 js、css 的程式碼改為 asset-pipeline 寫法。
 
 	*yourProjectPath*/grails-app/**views/myGspPage.gsp**
 		
@@ -112,7 +112,7 @@ plugins {
 		<asset:stylesheet href="application.css"/>  // 加入剛才新增的 css 載入清單
 		</head>
 
-1.  將 GSP 頁面載入圖片的程式碼改為 asset-pipeline寫法。
+1.  將 GSP 頁面載入圖片的程式碼改為 asset-pipeline 寫法。
 
 	*yourProjectPath*/grails-app/views/**myGspPage.gsp**
 	
@@ -126,7 +126,7 @@ plugins {
 		<asset:link rel="shortcut icon" href="logo.png" width="100" height="50"/>
 		</head>
 		
-1.  將 GSP 頁面載入資源的程式碼改為 asset-pipeline寫法。
+1.  將 GSP 頁面載入資源的程式碼改為 asset-pipeline 寫法。
 
 	*yourProjectPath*/grails-app/views/**myGspPage.gsp**
 
@@ -140,7 +140,7 @@ plugins {
 	
 	並在主要的 GSP 頁面 body 區塊加入 `<asset:deferredScripts/>` ，用來指定輸出 <asset:script> 的位置，一般在段落的最末處。
 
-1.  將 GSP 頁面所有 <g:javascripts 標籤改為 <asset:script。
+1.  將 GSP 頁面所有 <g:javascripts 標籤改為 <asset:script 。
 
 1.  刪除 resources plugin 資源模組定義檔案 *yourProjectPath*/grails-app/conf/**ApplicationResources.groovy**
 

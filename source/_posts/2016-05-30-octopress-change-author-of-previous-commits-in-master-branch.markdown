@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Octopress: 變更 master 分支中 commit 的創作者(author)"
+title: "Octopress: 變更 master 分支中 commit 的創作者 (author)"
 date: 2016-05-30 04:46
 comments: true
 categories: [Octopress]
@@ -8,7 +8,7 @@ categories: [Octopress]
 
 使用 Octopress 基本上會有兩個分支 source 和 master ，
 
-其中 source 是由使用者自行管理 git，
+其中 source 是由使用者自行管理 git ，
 
 而 master 則是透過 rake deploy 自動管理，
 
@@ -40,7 +40,7 @@ rake deploy 會使用 global user 進行 commit 。
 
 使用指令 `git config --global user.name` 可以確認是否有設定過，
 
-如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user的設定，
+如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，
 
 {% codeblock Rakefile lang:rb %}
 cd "#{deploy_dir}" do
@@ -68,7 +68,7 @@ cd "#{deploy_dir}" do
 
 一般會有這樣的設定大部分是因為有一個以上的 github 帳號，
 
-因此在 `rake setup_github_pages` 的時候也需輸入正確的 url 才能使用對應的 ssh-key，
+因此在 `rake setup_github_pages` 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。
 
 	$ rake setup_github_pages
 	Enter the read/write url for your repository
@@ -77,7 +77,7 @@ cd "#{deploy_dir}" do
 	           
 	Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
 
-可參考此篇 [同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式](http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/) 。
+可參考此篇 [同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式](http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/)
 
 最後再run `rake_deploy` 就能看到 commit author 變成新的了～
 

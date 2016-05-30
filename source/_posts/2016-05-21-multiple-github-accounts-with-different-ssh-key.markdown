@@ -5,9 +5,10 @@ date: 2016-05-21 10:53
 comments: true
 categories: [Git, GitHub]
 ---
+
 現實中我們可能希望 GitHub 的私人與工作帳號能有所區分，
 
-假設私人帳號為 personal 、工作帳號為 work ，
+假設私人帳號為 personal 、工作帳號為 work ，步驟如下：
 
 ###Step1
 
@@ -44,7 +45,7 @@ categories: [Git, GitHub]
 
 ###Step2
 
-切換至ssh資料夾，並新增config檔案。
+切換至 ssh 資料夾，並新增 config 檔案。
 
 	$ cd ~/.ssh
 	$ touch ~/.ssh/config
@@ -70,13 +71,13 @@ categories: [Git, GitHub]
 	$ cd yourWorkProjectPath
 	$ git remote set-url origin git@github.com-work:work/workproject
 
-若此時仍是以原先帳號上傳，則可使用指令 `ssh-add -l` 查看目前ssh agent有在管控的key passphrase。
+若此時仍是以原先帳號上傳，則可使用指令 `ssh-add -l` 查看目前 ssh agent 有在管控的 key passphrase 。
 
 使用 `ssh-add -d` 把所有舊的 ssh agent 管控的 key passphrase 都清掉。
 
-也可使用 `ssh -T github.com-personal` 測試是否有以設定的 ssh 連線，
+也可使用 `ssh -T github.com-personal` 測試是否有已設定的 ssh 連線，
 
-正確的話 username 會出現相應的名稱，例如**personal**。
+正確的話 username 會出現相應的名稱，例如 **personal** 。
 
 Hi **username**! You've successfully authenticated, but GitHub does not provide shell access.
 

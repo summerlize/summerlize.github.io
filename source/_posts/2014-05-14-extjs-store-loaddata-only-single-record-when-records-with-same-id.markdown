@@ -20,7 +20,7 @@ Sencha Architect 版本: 2.2.3
 
 在執行 ``grid.getStore.loadData(record)`` 後卻只有顯示一筆資料，
 
-檢查後發現是由於 id 重複造成，
+檢查後發現是 id 重複造成，
 
 由於資料存於不同的資料表，因此後端 query 出預備載入的 record 便可能會有重複 id ，
 
@@ -43,10 +43,10 @@ proxy: {
     
 {% endcodeblock %}
 
-另外 API 也提到 ``store.loadData(record)`` 定義為預設資料已經處理為正確格式，
+另外 API 也提到 ``store.loadData(record)`` 定義為預設資料已經處理成正確格式，
 
-因此不會經過 reader 再次處理，
+因此不會經過 reader 二次處理，
 
-若希望使用 reader 處理，需改使用 ``store.loadRawData(record)``。
+若希望使用 reader 處理，需改為使用 ``store.loadRawData(record)``。
 
 

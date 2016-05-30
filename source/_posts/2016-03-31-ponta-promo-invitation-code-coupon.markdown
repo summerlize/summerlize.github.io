@@ -8,7 +8,7 @@ categories: [Promo/Invitation Code]
 
 
 <strong><font size="4px"> [註冊得易Ponta會員](https://www.ponta.com.tw/register/QuickCard.action?paChannelSource=3&paSaleCode=MP2015042701&paCampaignCode=DSMP2015111901&paShopCode=8881329000015&passRecmdPersonId=WT0wWExENk1G)
-<font color="#444444">立即獲得</font><font color="#CC0000">100點</font>
+<font color="#444444">立即獲得 </font><font color="#CC0000">100點</font>
 
 <font color="blue">推薦碼：0XLD6</font>
 </font></strong>

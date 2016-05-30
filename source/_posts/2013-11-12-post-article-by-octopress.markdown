@@ -26,9 +26,9 @@ categories: Octopress
 	email: summerlize@gmail.com	                #在RSS中列出Email 	
 * 日期格式可到 [Ruby API](http://www.ruby-doc.org/core-2.0.0/Time.html) 查詢
 
-有做過功課大概都會發現 Octopress 是利用 Jekyll 產生出靜態網頁的，
+有做過功課大多會發現 Octopress 是利用 Jekyll 產生出靜態網頁的，
 
-如果沒有特殊需求，大部份採用預設值即可。
+如果沒有特殊需求，採用預設值即可。
 
 	Jekyll靜態網頁產生器與附加元件設定：
 	
@@ -83,9 +83,10 @@ categories: Octopress
 	default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
 
 ###按讚或分享部落格
-官方內建的第三方服務包含了幾個知名社群類型網站，像是 Twitter 、Google+ 、Facebook 等，
 
-另外也有 Google 統計分析工具之類的擴充。
+官方內建的第三方服務包含了幾個知名社群類型網站，
+
+像是 Twitter 、 Google+ 、 Facebook 等，另外也有 Google 統計分析工具等擴充。
 
 	第三方服務設定（社群服務等）：
 	github_user:					#輸入GitHub帳號便會自動生成按鈕連結，其他以此類推。
@@ -93,9 +94,10 @@ categories: Octopress
 	github_show_profile_link: true #顯示GitHub檔案連結，預設開啟。
 
 ###COMMENTS功能
+
 其中 disqus 的設定，是用來提供訪客留言的功能，大推～
 
-必須先到 [Disqus官方網站](https://disqus.com/) 申請帳號後設定即可。
+到 [Disqus官方網站](https://disqus.com/) 申請帳號後設定即可。
 
 ##2. Octopress Blog 新增/發佈文章
 
@@ -109,19 +111,19 @@ categories: Octopress
 
 產生的文章會在 octopress/source/_post/ 底下，
 
-找到剛才新增的檔案用文字編輯器打開後，
+找到剛才新增的檔案後用文字編輯器打開，
 
-便可使用 Markdown 編輯文章了（[下載好用的 Markdown 編輯器 Mou](http://mouapp.com/) ）。
+就可以開始使用 Markdown 編輯文章了。 [下載好用的 Markdown 編輯器 Mou](http://mouapp.com/)
 
-完成文章之後，以 `rake generate` 產生靜態部落格網頁，
+編輯完成之後，以 `rake generate` 產生靜態部落格網頁，
 
-再以 `rake deploy` 發佈就可以到你的網域檢視了。
+再以 `rake deploy` 發佈就可以在網址中檢視了。
 
-ps. 以我使用 GitHub 的經驗，第一次會很快，第二次之後大概需要 10 到 20 分鐘不等才會更新。
+ps. 目前使用 GitHub 的經驗，第一次會很快，第二次之後大概需要 10 到 20 分鐘不等才會更新。
 
 在發佈新文章之前，也可以使用 `rake preview` 來預覽你的部落格，
 
-預設的預覽網址為 <http://localhost:4000/> 。
+預設的預覽網址為 <http://localhost:4000/>
 
 另外若要以 utf8 編碼在 generate 前需要設定，目前還沒有用過，記下來參考。
 
