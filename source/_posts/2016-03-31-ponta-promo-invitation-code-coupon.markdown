@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "[推薦碼0XLD6] 註冊得易 Ponta 會員輸入推薦碼送100點"
+title: "[推薦碼0XLD6] 註冊得易 Ponta 會員輸入推薦碼送 100 點"
 date: 2016-03-31 17:00
 comments: true
 categories: [Promo/Invitation Code]
 ---
 
 
-<strong><font size="4px"> [註冊得易Ponta會員](https://www.ponta.com.tw/register/QuickCard.action?paChannelSource=3&paSaleCode=MP2015042701&paCampaignCode=DSMP2015111901&paShopCode=8881329000015&passRecmdPersonId=WT0wWExENk1G)
+<strong><font size="4px"> [點此註冊得易Ponta會員](https://www.ponta.com.tw/register/QuickCard.action?paChannelSource=3&paSaleCode=MP2015042701&paCampaignCode=DSMP2015111901&paShopCode=8881329000015&passRecmdPersonId=WT0wWExENk1G)
 <font color="#444444">立即獲得 </font><font color="#CC0000">100點</font>
 
-<font color="blue">推薦碼：0XLD6</font>
+<p onclick="copyPromoCode()"><font color="blue">推薦碼：0XLD6</font></p>
 </font></strong>
 
 活動時間：2016年1月1日至2016年12月31日止
@@ -35,3 +35,13 @@ categories: [Promo/Invitation Code]
 
 完全免費喔～辦了也不吃虧！
 
+<input type="text" id="promoCode" onclick="copyPromoCode()" value="0XLD6">
+
+<script language="javascript">
+	function copyPromoCode(){
+	    var obj = document.getElementById("promoCode");
+ 		obj.select();
+		document.execCommand("Copy");
+		alert("已複製序號"+obj.value);
+	}
+</script>
