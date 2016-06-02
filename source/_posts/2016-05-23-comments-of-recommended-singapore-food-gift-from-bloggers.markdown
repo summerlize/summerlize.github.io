@@ -40,6 +40,18 @@ categories: [Singapore, Overseas Trip]
 	
 	女生一個人吃會很飽～～
 	
+	登登～補上夏天版豪華海鮮 laksa ，第一次是小狐狸煮的，所以夏天不知道調味包長怎樣，
+	
+	超大包的，一包滿滿的 laksa 醬，和一包滿滿的椰漿粉，
+	
+	我覺得 laksa 包聞起來有蝦醬的味道唷～～
+	
+	難怪湯頭超厲害拉～～不過為什麼可以放常溫呢～～疑惑 :P
+	
+	![](https://c3.staticflickr.com/8/7122/26842540314_f2a167a49f.jpg =400x400)
+	
+	有沒有有沒有！大師一出手便知有沒有 (自己說) ，哈哈，其實還有蛤蜊忘了撈起來拍了拉！
+	
 1.  ###**BENGAWANSOLO Pandan Chiffon 班蘭葉綠蛋糕    評論：推薦嚐鮮，可買可不買**
 
 	![](https://c3.staticflickr.com/8/7001/27144299242_aba50f602d.jpg =330x260)
@@ -94,7 +106,7 @@ categories: [Singapore, Overseas Trip]
 	
 	整體而言感想是人生中有吃過一次就 ok 的伴手禮。
 
-	<font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～</font>
+	<font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font>
 
 1.  ###**KOKA Laksa 星洲叻沙味快熟麵    評論：可買可不買**
 	

@@ -42,6 +42,8 @@ categories: [Uncatagorized Comments]
 
 真的好好吃喔～～～推推推推！
 
+註：夏天第二次回購時，感覺麵包比較不鹹，但是覺得鹹一些比較好吃捏～
+
 ![](https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg =400x300)
 ![](https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg =300x300)
 
@@ -77,6 +79,20 @@ categories: [Uncatagorized Comments]
 
 ![](https://c2.staticflickr.com/8/7533/27419227265_587fe996e5.jpg =300x300)
 ![](https://c6.staticflickr.com/8/7725/27419225565_02e35a4020.jpg =300x300)
+
+###可麗露
+
+夏天第一次去的時候就注意到這個可麗露，實在烤的太美拉～
+
+口感很好，表面酥脆內部濕潤，可是表皮的味道有點奇怪 ＠_＠...
+
+和夏天以前吃過某留法甜點師傅做得不太一樣，
+
+不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P
+
+![](https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg =300x300)
+![](https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg =300x300)
+![](https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg =300x300)
 
 [許燕斌手作烘焙粉絲團](https://www.facebook.com/許燕斌手作烘焙-549595445218233/)
 
