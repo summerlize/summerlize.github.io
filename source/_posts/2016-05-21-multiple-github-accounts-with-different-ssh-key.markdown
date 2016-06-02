@@ -85,5 +85,5 @@ Hi **username**! You've successfully authenticated, but GitHub does not provide 
 
 相關文章：
 
-[Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者](http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits)
+[Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者](/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits)
 

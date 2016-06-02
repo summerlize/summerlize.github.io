@@ -3,7 +3,7 @@ layout: post
 title: "[感想] Nutella 巧克力棒 台灣賣的味道不一樣！／能多益隨手杯"
 date: 2016-03-31 06:00
 comments: true
-categories: [Uncatagorized Comment]
+categories: [Uncatagorized Comments]
 ---
 
 話說好幾年前去英國的時候，

@@ -12,7 +12,7 @@ categories: [Bali, Overseas Trip]
 
 ~~(結果明明就驚慌失措嚇得半屎)~~
 
-關於我們嚇死人不償命的轉機大冒險可以參考這篇 [印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](http://summerlize.github.io/blog/2014/06/25/transfer-from-jakarta-to-bali/)
+關於我們嚇死人不償命的轉機大冒險可以參考這篇 [印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](/blog/2014/06/25/transfer-from-jakarta-to-bali/)
 
 第一天基本上就是在搭機中度過，先來一張台灣的海岸線～
 
@@ -137,9 +137,9 @@ Gordon's Dry Gin 琴酒：零分 哈...
 
 相關文章：
 
-[印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](http://summerlize.github.io/blog/2014/06/25/transfer-from-jakarta-to-bali/)
+[印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](/blog/2014/06/25/transfer-from-jakarta-to-bali/)
 
-[2014 信用卡國際機場外圍免費停車](http://summerlize.github.io/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
+[2014 信用卡國際機場外圍免費停車](/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
 
 
 

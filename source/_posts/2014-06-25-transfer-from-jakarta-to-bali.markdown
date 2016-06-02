@@ -268,9 +268,9 @@ categories: [Bali, Overseas Trip]
 
 相關文章：
 
-[印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程](http://summerlize.github.io/blog/2014/06/25/transfer-from-jakarta-to-bali/)
+[峇里島 Day 1。印尼航空&好好海鮮餐館鹹蛋螃蟹](/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/)
 
-[2014 信用卡國際機場外圍免費停車](http://summerlize.github.io/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
+[2014 信用卡國際機場外圍免費停車](/blog/2014/07/26/free-airport-parking-offered-by-credit-card/)
 
 
 

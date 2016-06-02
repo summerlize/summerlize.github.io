@@ -16,9 +16,9 @@ categories: [Promo/Invitation Code]
 
 <p onclick="copyPromoCode()">輸入序號 <b>2na28dkvue</b></p>
 
-<img src="https://c7.staticflickr.com/8/7088/27289188422_63ea4a025e.jpg" width="230" height="350">
-<img src="https://c4.staticflickr.com/8/7436/27316255931_1823e2170a.jpg" width="230" height="350">
-<img src="https://c5.staticflickr.com/8/7221/27289189692_e0ca5c2af1.jpg" width="230" height="350">
+![](https://c7.staticflickr.com/8/7088/27289188422_63ea4a025e.jpg =230x350)
+![](https://c4.staticflickr.com/8/7436/27316255931_1823e2170a.jpg =230x350)
+![](https://c5.staticflickr.com/8/7221/27289189692_e0ca5c2af1.jpg =230x350)
 
 ###如何搭乘 UBER
 
@@ -50,9 +50,11 @@ categories: [Promo/Invitation Code]
 
 原本打算去魚尾獅公園看燈光秀，
 
-但是司機迷路了，一直在飯店附近的某巷子繞圈圈，
+但是司機迷路了，一直在飯店附近的巷子繞圈圈，
 
-由於時間太趕怕來不及，只好 cancel 掉改搭路邊計程車，沒有搭乘成功。
+由於在國外手機也沒辦法聯絡，加上時間太趕怕來不及，
+
+只好 cancel 掉改搭路邊計程車，沒有搭乘成功。
 
 後來要去機場時又再試了試，這次很順利的搭上車了，
 

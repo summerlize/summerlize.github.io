@@ -208,4 +208,9 @@ Repo 的命名必須遵照規則 **username.github.io** ，
 	$ git add .
 	$ git commit -m 'initial source commit'
 	$ git push origin source
-	
+
+---
+
+相關文章：
+
+[使用 Octopress 部落格發佈文章](/blog/2013/11/12/post-article-by-octopress/)

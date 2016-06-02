@@ -129,3 +129,9 @@ ps. 目前使用 GitHub 的經驗，第一次會很快，第二次之後大概�
 
 	set LC_ALL=zh_TW.UTF-8
 	set LANG=zh_TW.UTF-8
+
+---
+
+相關文章：
+
+[Octopress 安裝 + GitHub 架設部落格筆記](/blog/2013/11/10/install-octopress-and-host-with-github/)
