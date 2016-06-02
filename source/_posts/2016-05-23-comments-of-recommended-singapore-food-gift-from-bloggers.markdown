@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[分享]部落客推薦之新加坡必買伴手禮食用心得"
+title: "[分享] 部落客推薦之新加坡必買伴手禮食用心得"
 date: 2016-05-23 23:00
 comments: true
 categories: [Singapore, Overseas Trip]
