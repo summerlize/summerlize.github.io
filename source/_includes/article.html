@@ -17,20 +17,20 @@
 
 		<!-- AddThis Button -->
 		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
 		</div> 
 		<p style="padding : 1px"></p>
 		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
 		<a class="addthis_button_preferred_1"></a>
 		<a class="addthis_button_preferred_2"></a>
 		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
 		<a class="addthis_button_google_plusone_share"></a>
 		<a class="addthis_button_plurk"></a>
 		<a class="addthis_button_linkedin"></a>
 		<a class="addthis_button_blogger"></a>
 		<a class="addthis_button_sinaweibo"></a>
 		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_preferred_4"></a>
 		<a class="addthis_button_compact"></a>
 		<a class="addthis_counter addthis_bubble_style"></a>
 		</div>
@@ -50,13 +50,13 @@
 		<a class="addthis_button_preferred_1"></a>
 		<a class="addthis_button_preferred_2"></a>
 		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
 		<a class="addthis_button_google_plusone_share"></a>
 		<a class="addthis_button_plurk"></a>
 		<a class="addthis_button_linkedin"></a>
 		<a class="addthis_button_blogger"></a>
 		<a class="addthis_button_sinaweibo"></a>
 		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_preferred_4"></a>
 		<a class="addthis_button_compact"></a>
 		<a class="addthis_counter addthis_bubble_style"></a>
 		</div>
@@ -73,5 +73,6 @@
 	{% if site.disqus_short_name and site.disqus_show_comment_count == true %}
 	<div class="comments"><a href="{{ root_url }}{% if index %}{{ post.url }}{% endif %}#disqus_thread">Comments</a></div>
 	{% endif %}
+	{% include custom/googleAd.html %}
 </div>
 
