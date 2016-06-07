@@ -102,7 +102,7 @@ categories: [Singapore, Overseas Trip]
 	
 	![](https://c1.staticflickr.com/8/7676/27215197816_e71a7b68ac.jpg =200x200)
 	
-	蠻好吃的，不過兩人分食比較不會膩。
+	蠻好吃的，兩人分食比較不會膩。
 	
 	整體而言感想是人生中有吃過一次就 ok 的伴手禮。
 

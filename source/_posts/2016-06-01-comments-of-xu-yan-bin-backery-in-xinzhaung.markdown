@@ -42,7 +42,7 @@ categories: [Uncatagorized Comments]
 
 真的好好吃喔～～～推推推推！
 
-註：夏天第二次回購時，感覺麵包比較不鹹，但是覺得鹹一些比較好吃捏～
+註：夏天第二次回購時，麵包比較不鹹，但是鹹一些比較好吃捏～
 
 ![](https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg =400x300)
 ![](https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg =300x300)
@@ -53,7 +53,7 @@ categories: [Uncatagorized Comments]
 
 脆皮泡芙的內餡是鮮奶油，不是卡士達醬路線，應該是香草牛奶口味？
 
-我自己是覺得還好～～表現中等 XD
+我自己是覺得還好～～表現一般 XD
 
 倒是包裝超級可愛～～很療癒：）
 
@@ -90,9 +90,35 @@ categories: [Uncatagorized Comments]
 
 不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P
 
-![](https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg =300x300)
-![](https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg =300x300)
-![](https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg =300x300)
+![](https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg =250x250)
+![](https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg =250x250)
+![](https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg =250x250)
+
+###伯爵美人
+
+伯爵茶的香氣實在太吸引夏天了～麵包本身的伯爵茶味很出色，超有下午茶的感覺～
+
+中間搭配奶酥我覺得蠻妙，很好吃～不過有奶酥的時候似乎掩蓋了伯爵茶味，
+
+有一好沒兩好的概念 XDD
+
+![](https://c1.staticflickr.com/8/7298/27420815152_f3552477d8.jpg =250x250)
+![](https://c7.staticflickr.com/8/7298/27420812422_5b1f5ab453.jpg =250x250)
+![](https://c2.staticflickr.com/8/7356/26911467753_49bbd02d5d.jpg =250x250)
+
+###白燒芋頭
+
+白燒芋頭走人如其名的路線～((覺得貼切 XD))
+
+咬下一口的時候想說：ㄟˊㄟˊ我的芋頭呢？
+
+原來芋頭在底部，蠻有趣的！試吃感想口味中規中矩 :)
+
+不甜不膩是蠻值得讚賞的一點，而且可以吃到完整的塊狀芋頭耶～不是只有芋泥喔！
+
+![](https://c4.staticflickr.com/8/7400/26911466483_4e75df8a52.jpg =250x250)
+![](https://c5.staticflickr.com/8/7391/27243092060_2a1c2356f5.jpg =250x250)
+![](https://c6.staticflickr.com/8/7541/26911465133_1f9067e813.jpg =250x250)
 
 [許燕斌手作烘焙粉絲團](https://www.facebook.com/許燕斌手作烘焙-549595445218233/)
 
