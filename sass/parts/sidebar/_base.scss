@@ -22,17 +22,18 @@ $sidebar-link-color-subdued-hover: $sidebar-link-color-hover !default;
 .side-shadow-border {
   @include box-shadow(lighten($sidebar-bg, 5) 0 1px);
 }
+//右列表
 aside.sidebar {
   overflow: hidden;
   /*color: $sidebar-color;//顏色較深*/
-  text-shadow: lighten($sidebar-bg, 8) 0 1px;//無變化
+  text-shadow: lighten($sidebar-bg, 8) 0 1px;//右列表標題陰影
   /*a { @extend .force-wrap; }*/
   
   section {
     /*@extend .sans;*/
     font-size: 1em;//字體大小
     line-height: 2.2em;//每行間距
-    margin-bottom: 1.5em;//標題間距
+    margin-bottom: 1.0em;//標題間距
     h1 {//標題
       width:170px;
       margin: 0 0 0;
