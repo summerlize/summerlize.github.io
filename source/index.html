@@ -6,7 +6,12 @@ layout: default
 {% include post/sharingHead.html %}
 {% for post in paginator.posts %}
 {% assign content = post.content %}
+
+  {% if forloop.index == paginator.posts.size %}
+    <lastarticle class="post">{% include article.html %}</lastarticle>
+  {% else %}
     <article class="post">{% include article.html %}</article>
+  {% endif %}
 {% endfor %}
 
 <aside class="sidebar">
