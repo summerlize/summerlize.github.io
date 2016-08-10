@@ -140,6 +140,40 @@ categories: [Singapore, Overseas Trip]
 
 	<font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font>
 
+1.  ###**NISSIN Chilli Crab 日清辣椒蟹/黑胡椒蟹杯麵 評論：推薦，可買可不買**
+
+	![](https://c6.staticflickr.com/8/7216/26605428133_ac74a0c24a_b.jpg =350x250)
+	
+	<font color="blue">**購買地點：fair price 超市**</font>
+	
+	這是因為當時鬼打牆找不到 SUPER CUP 而買的日清螃蟹杯麵，
+	
+	打開後看到調味粉已經直接灑在麵體上，只有另外一包辣醬是有包裝的，
+	
+	這次吃的是**辣椒蟹**杯麵，醬包全加～因為夏天很愛吃辣～～
+	
+	泡好的時候浮現滿滿的蟹肉條整個讓人心花怒放耶～哈
+	
+	![](https://c5.staticflickr.com/9/8242/28602280020_771bf0f6fd_k.jpg =250x250)
+	![](https://c6.staticflickr.com/8/7736/28886825885_4254b0fd17_k.jpg =250x250)
+	![](https://c7.staticflickr.com/9/8075/28269690334_42b1bf1005_k.jpg =250x250)
+	
+	吃前三口的時候還可以稍微感受到辣味～之後就完全無感了拉～～～不辣不辣
+	
+	麵條是細麵條，口感很不錯很適中，我真的很害怕軟爛的麵條～～～
+	
+	湯頭喝起來倒是沒覺得有什麼特別，別看他顏色很深，喝起來還算是清湯的感覺(就是調味料重的清湯)
+	
+	不知道有沒有人懂我在說什麼耶 哈哈
+	
+	因為他的麵條很棒，所以夏天覺得蠻值得一買的～
+	
+	但若要針對是否很有「新加坡特色」，倒是還好囉～～～
+	
+	如果行李已經沒有空間就不用勉強這樣＾＾
+	
+	黑胡椒蟹下回見囉！
+
 1.  ###**KOKA Laksa 星洲叻沙味快熟麵    評論：可買可不買**
 	
 	![](https://c8.staticflickr.com/8/7270/26605424223_2c7f4a59b2_b.jpg =300x280)
@@ -259,12 +293,6 @@ categories: [Singapore, Overseas Trip]
 	味道也蠻難描述的，大概就是醬油之類的，做了些新加坡變種吧，then 完全沒有胡椒味 = =
 	
 	千萬不要跟夏天一樣「堅持」～～ XDD
-	
-1.  ###**NISSIN Chilli Crab 日清辣椒蟹杯麵 (尚未食用)**
-
-	![](https://c6.staticflickr.com/8/7216/26605428133_ac74a0c24a_b.jpg =350x250)
-	
-	<font color="blue">**購買地點：fair price 超市**</font>
 
 1.  ###**PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹拉麵 (尚未食用)**
 

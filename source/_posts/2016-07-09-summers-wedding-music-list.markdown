@@ -127,4 +127,4 @@ ps. 由於演奏曲的版本甚多，演奏的速度、樂器不同，帶給人�
 
 大家可以多去聽聽自己想要的是什麼版本，而夏天這邊找的有些也不確定採用的版本演奏者為何，所以就沒註記了，
 
-如果有需要的話夏天的版本可以 email [summerlize@gmail.com](mailto:summerlize@gmail.com)。
+如果有需要夏天的版本可以 email 至 [summerlize@gmail.com](mailto:summerlize@gmail.com)。
