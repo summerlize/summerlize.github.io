@@ -14,7 +14,7 @@ categories: [Singapore, Overseas Trip]
 
 這邊會依照推薦購買的指數排序，還沒有吃過的會先隨機排，陸續再調整更新。
 
-1.  ###**PRIMA TASTE Laksa 百勝廚叻沙拉麵    評論：推薦必買**
+1.  ###**PRIMA TASTE Laksa LaMian 百勝廚叻沙拉麵    評論：推薦必買**
 	
 	![](https://c4.staticflickr.com/8/7381/26605423323_b861218bfe_b.jpg =350x280)
 	
@@ -52,6 +52,27 @@ categories: [Singapore, Overseas Trip]
 	
 	有沒有有沒有！大師一出手便知有沒有 (自己說) ，哈哈，其實還有蛤蜊忘了撈起來拍了拉！
 
+1.  ###**PRIMA TASTE Chilli Crab LaMian 百勝廚辣椒螃蟹拉麵    評論：推薦**
+	![](https://c6.staticflickr.com/8/7496/26605425453_026ed49a0a_b.jpg =350x280)
+	
+	<font color="blue">**購買地點：fair price 超市**</font>
+	
+	一樣是百勝廚的另一款辣椒螃蟹拉麵，麵體跟 laksa 拉麵是一樣的，
+	
+	因為辣椒螃蟹也是新加坡的名產之一，於是我們也跟著手滑下去 XD
+	
+	這包是煮成乾麵的，麵條一樣好 Q 好好吃，
+	
+	醬的份量恰到好處，每一根麵條都能附著到醬汁，
+	
+	醬汁有辣先加分，是吃起來不會不舒服的那種辣～
+	
+	該不會百勝廚的系列都很值得買吧！？ 前兩名已被攻佔 XDD
+	
+	![](https://c6.staticflickr.com/9/8438/29588085621_dcff7c071e_k.jpg =340x300)
+	
+	好的，因為這不是我煮的 XD 所以醜醜的請見諒(我就是等著吃啊) 哈哈
+	
 1.  ###**黃亞細正宗潮州肉骨茶包    評論：推薦**
 
 	![](https://c8.staticflickr.com/8/7799/26605431223_e0e9b64083_b.jpg =350x250)
@@ -162,7 +183,7 @@ categories: [Singapore, Overseas Trip]
 	
 	麵條是細麵條，口感很不錯很適中，我真的很害怕軟爛的麵條～～～
 	
-	湯頭喝起來倒是沒覺得有什麼特別，別看他顏色很深，喝起來還算是清湯的感覺(就是調味料重的清湯)
+	湯頭喝起來倒是沒覺得有什麼特別，別看他顏色很深，喝起來還算是清湯的感覺(就是調味粉重的清湯)
 	
 	不知道有沒有人懂我在說什麼耶 哈哈
 	
@@ -180,7 +201,7 @@ categories: [Singapore, Overseas Trip]
 	
 	<font color="blue">**購買地點：fair price 超市**</font>
 
-	一樣是 laksa 口味的泡麵，不得不說跟百勝廚的真的大勝，
+	一樣是 laksa 口味的泡麵，不得不說相較之下百勝廚真的大勝，
 	
 	雖然也是會驚嘆一下靠著幾包粉末就能煮出濃濃的湯汁，
 	
@@ -293,13 +314,6 @@ categories: [Singapore, Overseas Trip]
 	味道也蠻難描述的，大概就是醬油之類的，做了些新加坡變種吧，then 完全沒有胡椒味 = =
 	
 	千萬不要跟夏天一樣「堅持」～～ XDD
-
-1.  ###**PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹拉麵 (尚未食用)**
-
-	![](https://c6.staticflickr.com/8/7496/26605425453_026ed49a0a_b.jpg =350x280)
-	
-	<font color="blue">**購買地點：fair price 超市**</font>
-
 
 1.  ###**PRIMA TASTE Laksa 百勝廚叻沙調味包 (尚未食用)**
 
