@@ -26,7 +26,7 @@ categories: [Uncatagorized Comments]
 
 這對厚片人無疑是雪上加霜阿～壯上加壯呀～
 
-不死心的瘋狂 google 後找到了台灣之光 wingbra 的文章，
+不死心的瘋狂 google 後找到了台灣之光 wingbra 的介紹，
 
 該文章還說明此產品是大胸女孩兒的救星，
 
@@ -60,9 +60,21 @@ categories: [Uncatagorized Comments]
 
 期許未來能改善更加進步囉～～
 
+附上和 wingbra 的道別照，因為太貴貴夏天一直捨不得丟，
+
+但是真的完全無法黏了，留著也是佔空間，掰掰了三張小捧油～
+
+可以看出兩邊的翅膀連塑膠片都黏不住了。
+
+![](https://c6.staticflickr.com/6/5784/30442029453_a62d78c4fc_b.jpg =500x310)
+
+![](https://c8.staticflickr.com/6/5450/30442030423_74141e2e87_b.jpg =500x310)
+
 ps. 現在已經能找到大 cup 且薄的 nu bra 嚕，真是相見恨晚啊～
 
-註：以上分享純屬個人主觀感受，僅供參考。
+參考 [[感想] 豐滿女孩的 nubra 尋找之旅](/blog/2016/11/27/nubra-for-plump-girls/)
+
+註：以上分享純屬個人主觀感受，不代表適用所有人唷～
 
 
 
