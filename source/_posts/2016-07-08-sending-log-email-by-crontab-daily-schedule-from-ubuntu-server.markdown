@@ -59,6 +59,8 @@ note: Subject 之後一定要空行
 
 完成後使用 ``ctrl+d`` 跳出，至信箱檢查 email。
 
+也可使用指令 ``echo "Hello world mail content" | mail -s "Hello world Subject" yourusername@gmail.com`` 測試寄信。
+
 ### 若顯示錯誤訊息 Authorization failed (534 5.7.14 https://support.google.com/mail/answer/78754 tm1sm6036157pac.23 - gsmtp
 
 首先到 [https://www.google.com/settings/u/1/security/lesssecureapps](https://www.google.com/settings/u/1/security/lesssecureapps) 將 ``安全性較低的應用程式存取權限`` 設為 ``開啟``
