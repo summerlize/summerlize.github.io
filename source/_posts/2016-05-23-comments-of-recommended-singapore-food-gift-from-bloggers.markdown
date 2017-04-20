@@ -134,6 +134,8 @@ categories: [Singapore, Overseas Trip]
 	
 	因為我一開始沒有注意時間的部分，喝了一口，還想說也太"淡"奶味了吧！ XD
 	
+	後來我又回沖兩三次，喝起來還是蠻 ok 的～～
+	
 1.  ###**BENGAWANSOLO Pandan Chiffon 班蘭葉綠蛋糕    評論：推薦嚐鮮，可買可不買**
 
 	<font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font>

@@ -7,11 +7,15 @@ categories: [Promo/Invitation Code]
 ---
 GOMAJI 推出行動支付服務【GOMAJI Pay】
 
-<p onclick="copyPromoCode()">輸入夏天的
-<font color="#4590a3" size="5px">優惠碼</font>
-<font color="darkred" size="5px"><strong>NNQT9</strong></font>，</p>
-就可以獲得
+輸入優惠碼 NNQT9 就可以獲得
 <font color="darkred" size="5px"><strong>NT$100</strong></font> 抵用金！
+<p onclick="copyPromoCode()">
+<font color="#4590a3" size="5px">複製優惠碼</font>
+<font color="darkred" size="5px"><strong>NNQT9</strong></font>，</p>
+
+由於 GOMAJI 活動調整，推薦人並不會得到任何獎勵喔～
+
+但您還是可以輸入夏天的優惠碼取得 100 元抵用金。
 
 ![Step1](https://farm2.staticflickr.com/1520/26018602092_91638022d7_c.jpg =230x350)
 
