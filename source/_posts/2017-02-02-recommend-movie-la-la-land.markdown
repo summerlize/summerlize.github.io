@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[電影推薦] 樂來越愛你 La La Land - 愛情與夢想的抉擇，音樂太好聽先加1000分！！"
+title: "[電影推薦] 樂來越愛你 La La Land - 愛情與夢想的抉擇，音樂太好聽先給1000分！！"
 date: 2017-02-02 20:00
 comments: true
 categories: [Movie]
