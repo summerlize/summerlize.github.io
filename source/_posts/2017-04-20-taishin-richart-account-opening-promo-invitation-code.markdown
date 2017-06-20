@@ -1,17 +1,18 @@
 ---
 layout: post
-title: "[推薦碼TINCH] 台新 Richart 網銀開戶填推薦人代碼領 $500"
+title: "[綁定好友推薦] 台新 Richart 網銀開戶送 $500 優惠金"
 date: 2017-04-20 13:00
 comments: true
 categories: [Promo/Invitation Code]
 ---
 
+6/20修正：經網友李先生反應直接填寫 Source Code 無法獲得回饋，在此另外提供綁定連結方式。
 
-<strong><font size="4px"> [點此連結至台新 Richart 官網開戶](https://richart.tw/TSDIB_RichartWeb/static/event/school/guide/pc.html)
-<font color="#444444"> 於 Source Code 填 TINCH 獲得 </font><font color="#CC0000">$500元現金</font>
+<strong><font size="4px">Step 1: [點此連結綁定優惠碼](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53)
+<font color="#444444">  ricahrt 開戶獲得 </font><font color="#CC0000">$500元現金</font>
 
-<p onclick="copyPromoCode()"><font color="blue">複製推薦人代碼：TINCH</font></p>
-</font></strong>
+<strong><font size="4px">Step 2: [點此連結至台新 Richart 官網開戶](https://richart.tw/TSDIB_RichartWeb/static/event/school/guide/pc.html)
+<font color="#444444">
 
 火紅了好一陣子的 richart 網銀戶頭，主打高利活儲，不僅能開心領利息，又保有資金彈性的靈活度，
 
@@ -45,21 +46,25 @@ categories: [Promo/Invitation Code]
 
 所以這部分也可以考慮開戶跟信用卡申辦分開進行。
 
-<p onclick="copyPromoCode()"> 最後當然就是填寫  夏天的推薦碼 TINCH 可以得到 $500拉，推薦人也會得到 $100 ，</p>
+最後當然就是使用  [夏天的推薦連結](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53) 就可以得到 $500拉，推薦人也會得到 $100 。
 
-當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～
+~~當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～~~
 
-電腦版與 APP 版填寫處，如下圖～
+在修改文章的同時我已經找不到這組優惠碼的資訊，
 
-![](https://c1.staticflickr.com/3/2810/34022684781_3064fbcd68_b.jpg =583x320) ![](https://c1.staticflickr.com/4/3937/33768545240_cb0b587399_b.jpg =178x320)
+改提供 台新x蝦皮 的最新活動，7/31 前填蝦皮的優惠碼一樣可以拿 500 喔。
 
-<input type="text" id="promoCode" onclick="copyPromoCode()" value="TINCH">
+蝦皮活動請參考網址 [https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html](https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html)
 
-<script language="javascript">
-	function copyPromoCode(){
-	    var obj = document.getElementById("promoCode");
- 		obj.select();
-		document.execCommand("Copy");
-		alert("已複製序號"+obj.value);
-	}
-</script>
+夏天的推薦連結 [https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53)
+
+<br />
+
+聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：
+
+請各位小讀者們務必自行再次確認核對官方最新說明與規則。
+
+請各位小讀者們務必自行再次確認核對官方最新說明與規則。
+
+請各位小讀者們務必自行再次確認核對官方最新說明與規則。
+
