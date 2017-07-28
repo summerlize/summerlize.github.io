@@ -8,7 +8,7 @@ categories: [Promo/Invitation Code]
 
 6/20修正：經網友李先生反應直接填寫 Source Code 無法獲得回饋，在此另外提供綁定連結方式。
 
-<strong><font size="4px">Step 1: [點此連結綁定優惠碼](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53)
+<strong><font size="4px">Step 1: [點此連結綁定優惠碼](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY)
 <font color="#444444">  ricahrt 開戶獲得 </font><font color="#CC0000">$500元現金</font>
 
 <strong><font size="4px">Step 2: [點此連結至台新 Richart 官網開戶](https://richart.tw/TSDIB_RichartWeb/static/event/school/guide/pc.html)
@@ -46,7 +46,7 @@ categories: [Promo/Invitation Code]
 
 所以這部分也可以考慮開戶跟信用卡申辦分開進行。
 
-最後當然就是使用  [夏天的推薦連結](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53) 就可以得到 $500拉，推薦人也會得到 $100 。
+最後當然就是使用  [夏天的推薦連結](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY) 就可以得到 $500拉，推薦人也會得到 $100 。
 
 ~~當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～~~
 
@@ -56,7 +56,7 @@ categories: [Promo/Invitation Code]
 
 蝦皮活動請參考網址 [https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html](https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html)
 
-夏天的推薦連結 [https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53)
+夏天的推薦連結 [https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY)
 
 <br />
 
