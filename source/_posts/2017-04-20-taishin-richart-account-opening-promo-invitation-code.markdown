@@ -50,11 +50,11 @@ categories: [Promo/Invitation Code]
 
 ~~當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～~~
 
-在修改文章的同時我已經找不到這組優惠碼的資訊，
+~~在修改文章的同時我已經找不到這組優惠碼的資訊，~~
 
-改提供 台新x蝦皮 的最新活動，7/31 前填蝦皮的優惠碼一樣可以拿 500 喔。
+~~改提供 台新x蝦皮 的最新活動，7/31 前填蝦皮的優惠碼一樣可以拿 500 喔。~~
 
-蝦皮活動請參考網址 [https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html](https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html)
+~~蝦皮活動請參考網址 [https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html](https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html)~~
 
 夏天的推薦連結 [https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY](https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY)
 
