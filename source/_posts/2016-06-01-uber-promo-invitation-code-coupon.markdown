@@ -7,7 +7,7 @@ categories: [Promo/Invitation Code]
 ---
 
 <strong><font size="4px"> [點此註冊 UBER 會員](https://get.uber.com/invite/2na28dkvue)
-立即獲得 <font color="darkred">NT$100</font> 乘車優惠折扣
+立即獲得 <font color="darkred">4次乘車每次NT$50</font> 優惠折扣(2017/8/18更新)
 
 <font color="blue" onclick="copyPromoCode()">優惠序號 / 代碼：2na28dkvue</font>
 </font></strong>

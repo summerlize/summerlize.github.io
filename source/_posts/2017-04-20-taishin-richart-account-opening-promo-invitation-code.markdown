@@ -52,7 +52,7 @@ categories: [Promo/Invitation Code]
 
 ~~在修改文章的同時我已經找不到這組優惠碼的資訊，~~
 
-~~改提供 台新x蝦皮 的最新活動，7/31 前填蝦皮的優惠碼一樣可以拿 500 喔。~~
+改提供 台新x蝦皮 的活動，填優惠碼一樣可以拿 500 喔，已加碼延長到 2017/12/31。
 
 ~~蝦皮活動請參考網址 [https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html](https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html)~~
 
