@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GitHub | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2017-10-31T17:25:48+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式]]></title>
+    <link href="http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/"/>
+    <updated>2016-05-21T10:53:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key</id>
+    <content type="html"><![CDATA[<p>現實中我們可能希望 GitHub 的私人與工作帳號能有所區分，</p>
+
+<p>假設私人帳號為 personal 、工作帳號為 work ，步驟如下：</p>
+
+<h3>Step1</h3>
+
+<p>需產生兩組不同的 ssh ，如原先已設定好 ssh 則可跳過此步驟。</p>
+
+<p>首先產生私人帳號 personal 的金鑰，</p>
+
+<pre><code>$ ssh-keygen -t rsa -C "personal@mail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): 
+</code></pre>
+
+<p><font color="#1E90FF">~/.ssh/id_rsa_personal</font></p>
+
+<pre><code>Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+
+<p><font color="#1E90FF">輸入密碼</font></p>
+
+<pre><code>Your identification has been saved in ~/.ssh/id_rsa_personal.
+Your public key has been saved in ~/.ssh/id_rsa_personal.pub.
+The key fingerprint is:
+SHA256:RP68Sn3j79q8U2h80cpifw3WKNTDn7b6aw8YDLbJ9Uo personal@mail.com
+</code></pre>
+
+<p>接著將 <code>~/.ssh/id_rsa_personal.pub</code> 中的金鑰複製起來，</p>
+
+<p>再到 GitHub   點選右上角帳號圖像，選 Settings ， 進入 SSH and GPG Keys ，</p>
+
+<p>點選 New SSH Key ，在 title 輸入方便自己辨識的名稱，例如 homeComputer-personal ssh ，</p>
+
+<p>並將剛才複製的金鑰貼在 key 的區塊，再按下 Add SSH Key 按鈕完成。</p>
+
+<p>再使用指令 <code>ssh-keygen -t rsa -C "work@mail.com"</code> 針對工作帳號 work 重複上面的步驟，</p>
+
+<h3>Step2</h3>
+
+<p>切換至 ssh 資料夾，並新增 config 檔案。</p>
+
+<pre><code>$ cd ~/.ssh
+$ touch ~/.ssh/config
+</code></pre>
+
+<p>將下方 code 複製到 config 檔案中</p>
+
+<pre><code>Host github.com-personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_personal
+
+Host github.com-work
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_work
+</code></pre>
+
+<p>接下來將 project 的 remote url 設為 config 中的 host 名稱。</p>
+
+<p>例如原本是 git@<font color="red">github.com</font>:personal/personalproject.git 更新為 git@<font color="red">github.com-personal</font>:personal/personalproject.git</p>
+
+<pre><code>$ cd yourPersonalProjectPath
+$ git remote set-url origin git@github.com-personal:personal/personalproject
+$ cd yourWorkProjectPath
+$ git remote set-url origin git@github.com-work:work/workproject
+</code></pre>
+
+<p>若此時仍是以原先帳號上傳，則可使用指令 <code>ssh-add -l</code> 查看目前 ssh agent 有在管控的 key passphrase 。</p>
+
+<p>使用 <code>ssh-add -d</code> 把所有舊的 ssh agent 管控的 key passphrase 都清掉。</p>
+
+<p>也可使用 <code>ssh -T github.com-personal</code> 測試是否有已設定的 ssh 連線，</p>
+
+<p>正確的話 username 會出現相應的名稱，例如 <strong>personal</strong> 。</p>
+
+<p>Hi <strong>username</strong>! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access.</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a></p>
+]]></content>
+  </entry>
+  
+</feed>

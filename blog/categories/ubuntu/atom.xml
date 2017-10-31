@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubuntu | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2017-10-31T17:25:48+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[自動將 Ubuntu server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理]]></title>
+    <link href="http://summerlize.github.io/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/"/>
+    <updated>2016-07-08T01:42:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server</id>
+    <content type="html"><![CDATA[<h3>step1: 下載 ssmtp</h3>
+
+<p><code>$ sudo apt-get update &amp;&amp; echo y | sudo apt-get install ssmtp mailutils</code></p>
+
+<h3>step2: 編輯 ssmtp.conf 檔</h3>
+
+<p><code>$ sudo rm /etc/ssmtp/ssmtp.conf &amp;&amp; sudo nano /etc/ssmtp/ssmtp.conf</code></p>
+
+<p>將下方內容貼至 ssmtp.conf 檔案中</p>
+
+<pre><code># Config file for sSMTP sendmail
+# DONT CHANGE BELOW FOR @GMAIL.COM
+mailhub=smtp.gmail.com:587
+rewriteDomain=gmail.com
+hostname=localhost
+FromLineOverride=YES
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# CHANGE NEXT 3 OPTIONS 將下方三行改為自己的帳號密碼
+# Username/Password (NO @Gmail)
+root=yourusername@gmail.com
+AuthUser=yourusername
+AuthPass=yourpassword
+</code></pre>
+
+<h3>step3: 編輯 revaliases 檔</h3>
+
+<p><code>$ sudo nano /etc/ssmtp/revaliases</code></p>
+
+<p>將下方內容貼至 revaliases 檔案中</p>
+
+<pre><code># sSMTP aliases
+# linux user:mail:stmp port
+# 將 ubuntu 中的使用者 (user) 對應其 email
+root:yourusername@gmail.com:smtp.gmail.com:587
+guest:somebody@gmail.com:smtp.gmail.com:587
+</code></pre>
+
+<h3>step4: 測試是否可寄送 email</h3>
+
+<p><code>$ ssmtp yourusername@gmail.com</code></p>
+
+<p>輸入上方指令按下 enter，貼上下方段落 email 內容。</p>
+
+<p>note: Subject 之後一定要空行</p>
+
+<pre><code>To: yourusername@gmail.com
+From: yourusername@gmail.com
+Subject: test
+
+Hello World!
+</code></pre>
+
+<p>完成後使用 <code>ctrl+d</code> 跳出，至信箱檢查 email。</p>
+
+<p>也可使用指令 <code>echo "Hello world mail content" | mail -s "Hello world Subject" yourusername@gmail.com</code> 測試寄信。</p>
+
+<h3>若顯示錯誤訊息 Authorization failed (534 5.7.14 <a href="https://support.google.com/mail/answer/78754">https://support.google.com/mail/answer/78754</a> tm1sm6036157pac.23 &ndash; gsmtp</h3>
+
+<p>首先到 <a href="https://www.google.com/settings/u/1/security/lesssecureapps">https://www.google.com/settings/u/1/security/lesssecureapps</a> 將 <code>安全性較低的應用程式存取權限</code> 設為 <code>開啟</code></p>
+
+<p>再試試 step4 ，若還是一樣顯示錯誤，則可試第二種方法，</p>
+
+<p>下載文字瀏覽器 w3m，</p>
+
+<p><code>$ sudo apt-get install w3m w3m-img</code></p>
+
+<p>連結至 gmail 頁面，並輸入帳號密碼登入，</p>
+
+<p><code>$ w3m mail.google.com</code></p>
+
+<p>初次登入 gmail 會要求輸入備援電話號碼之驗證碼或備援電子信箱，</p>
+
+<p>登入成功後再重新試 step4。</p>
+
+<h3>step5: 使日常排程將 log 自動發送至 email</h3>
+
+<p>前面測試寄送 email 成功後，使用指令編輯 crontab，</p>
+
+<p><code>$sudo vi /etc/crontab</code></p>
+
+<p>在 crontab 中 PATH 下一行加入</p>
+
+<pre><code>MAILTO=yourusername@gmail.com
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[於 Ubuntu Server 使用 crontab 定時自動備份 mysql 資料庫]]></title>
+    <link href="http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server/"/>
+    <updated>2016-07-08T01:02:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server</id>
+    <content type="html"><![CDATA[<p>使用指令 <code>sudo vi /etc/crontab</code> 編輯檔案</p>
+
+<p>加入備份指令如下</p>
+
+<pre><code># 分 時 日 月 週 使用者 指令
+# 表示於每日12點整，以 root 身份備份 mysql 所有資料庫並存放到 /home/user/mysqldump/ 資料夾中
+0 0 * * * root mysqldump -u root -proot --all-databases &gt; /home/user/mysqldump/database_`date '+\%Y-\%m-\%d'`.sql
+# 只備份指定的資料庫 somedb
+0 0 * * * root mysqldump -u root -proot somedb &gt; /home/user/mysqldump/somedb_`date '+\%Y-\%m-\%d'`.sql
+</code></pre>
+
+<p>使用指令 <code>sudo service cron restart</code> 重啟 crontab 服務</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/">自動將 Ubuntu Server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理</a></p>
+]]></content>
+  </entry>
+  
+</feed>

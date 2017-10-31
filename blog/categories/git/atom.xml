@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Git | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2017-10-31T17:25:48+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式]]></title>
+    <link href="http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/"/>
+    <updated>2016-05-21T10:53:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key</id>
+    <content type="html"><![CDATA[<p>現實中我們可能希望 GitHub 的私人與工作帳號能有所區分，</p>
+
+<p>假設私人帳號為 personal 、工作帳號為 work ，步驟如下：</p>
+
+<h3>Step1</h3>
+
+<p>需產生兩組不同的 ssh ，如原先已設定好 ssh 則可跳過此步驟。</p>
+
+<p>首先產生私人帳號 personal 的金鑰，</p>
+
+<pre><code>$ ssh-keygen -t rsa -C "personal@mail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): 
+</code></pre>
+
+<p><font color="#1E90FF">~/.ssh/id_rsa_personal</font></p>
+
+<pre><code>Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+
+<p><font color="#1E90FF">輸入密碼</font></p>
+
+<pre><code>Your identification has been saved in ~/.ssh/id_rsa_personal.
+Your public key has been saved in ~/.ssh/id_rsa_personal.pub.
+The key fingerprint is:
+SHA256:RP68Sn3j79q8U2h80cpifw3WKNTDn7b6aw8YDLbJ9Uo personal@mail.com
+</code></pre>
+
+<p>接著將 <code>~/.ssh/id_rsa_personal.pub</code> 中的金鑰複製起來，</p>
+
+<p>再到 GitHub   點選右上角帳號圖像，選 Settings ， 進入 SSH and GPG Keys ，</p>
+
+<p>點選 New SSH Key ，在 title 輸入方便自己辨識的名稱，例如 homeComputer-personal ssh ，</p>
+
+<p>並將剛才複製的金鑰貼在 key 的區塊，再按下 Add SSH Key 按鈕完成。</p>
+
+<p>再使用指令 <code>ssh-keygen -t rsa -C "work@mail.com"</code> 針對工作帳號 work 重複上面的步驟，</p>
+
+<h3>Step2</h3>
+
+<p>切換至 ssh 資料夾，並新增 config 檔案。</p>
+
+<pre><code>$ cd ~/.ssh
+$ touch ~/.ssh/config
+</code></pre>
+
+<p>將下方 code 複製到 config 檔案中</p>
+
+<pre><code>Host github.com-personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_personal
+
+Host github.com-work
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_work
+</code></pre>
+
+<p>接下來將 project 的 remote url 設為 config 中的 host 名稱。</p>
+
+<p>例如原本是 git@<font color="red">github.com</font>:personal/personalproject.git 更新為 git@<font color="red">github.com-personal</font>:personal/personalproject.git</p>
+
+<pre><code>$ cd yourPersonalProjectPath
+$ git remote set-url origin git@github.com-personal:personal/personalproject
+$ cd yourWorkProjectPath
+$ git remote set-url origin git@github.com-work:work/workproject
+</code></pre>
+
+<p>若此時仍是以原先帳號上傳，則可使用指令 <code>ssh-add -l</code> 查看目前 ssh agent 有在管控的 key passphrase 。</p>
+
+<p>使用 <code>ssh-add -d</code> 把所有舊的 ssh agent 管控的 key passphrase 都清掉。</p>
+
+<p>也可使用 <code>ssh -T github.com-personal</code> 測試是否有已設定的 ssh 連線，</p>
+
+<p>正確的話 username 會出現相應的名稱，例如 <strong>personal</strong> 。</p>
+
+<p>Hi <strong>username</strong>! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access.</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Git: 批量變更已 commit 的創作者 (author) 及欲 commit 的創作者]]></title>
+    <link href="http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits/"/>
+    <updated>2016-05-21T09:42:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits</id>
+    <content type="html"><![CDATA[<h3>變更過去已 commit 的 author</h3>
+
+<p>首先在 project 中建立一個 sh 檔案</p>
+
+<pre><code>$ cd yourProjectPath
+$ touch gitFilterBranch.sh
+</code></pre>
+
+<p>接著將下方語法複製到檔案中，並且修正</p>
+
+<p><code>OLD_EMAIL</code> 為欲取代的舊的作者信箱、</p>
+
+<p><code>NEW_NAME</code> 為欲變更的新的作者名、</p>
+
+<p><code>NEW_EMAIL</code> 為欲變更的新的作者信箱。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>git filter branch &ndash; gitFilterBranch.sh </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;git filter-branch -f &amp;mdash;env-filter &amp;lsquo;
+</span><span class='line'><span class="nv">OLD_EMAIL</span><span class="o">=</span>&amp;ldquo;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#97;&amp;#105;&amp;#108;&amp;#x74;&amp;#111;&amp;#58;&amp;#111;&amp;#x6c;&amp;#100;&amp;#x40;&amp;#109;&amp;#x61;&amp;#105;&amp;#x6c;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#109;&quot;</span>&gt;&amp;#111;&amp;#x6c;&amp;#100;&amp;#64;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&amp;rdquo;
+</span><span class='line'><span class="nv">NEW_NAME</span><span class="o">=</span>&amp;ldquo;newUser&amp;rdquo;
+</span><span class='line'><span class="nv">NEW_EMAIL</span><span class="o">=</span>&amp;ldquo;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#x3a;&amp;#110;&amp;#101;&amp;#x77;&amp;#x40;&amp;#109;&amp;#97;&amp;#x69;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;</span>&gt;&amp;#x6e;&amp;#x65;&amp;#119;&amp;#x40;&amp;#x6d;&amp;#97;&amp;#x69;&amp;#x6c;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&amp;rdquo;
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> &amp;ldquo;<span class="nv">$GIT_COMMITTER_EMAIL</span>&amp;rdquo; <span class="o">=</span> &amp;ldquo;<span class="nv">$OLD_EMAIL</span>&amp;rdquo; <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;export <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s2">&quot;$NEW_NAME&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s2">&quot;$NEW_EMAIL&quot;</span>
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;fi
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> &amp;ldquo;<span class="nv">$GIT_AUTHOR_EMAIL</span>&amp;rdquo; <span class="o">=</span> &amp;ldquo;<span class="nv">$OLD_EMAIL</span>&amp;rdquo; <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;export <span class="nv">GIT_AUTHOR_NAME</span><span class="o">=</span><span class="s2">&quot;$NEW_NAME&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GIT_AUTHOR_EMAIL</span><span class="o">=</span><span class="s2">&quot;$NEW_EMAIL&quot;</span>
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;fi
+</span><span class='line'>&amp;lsquo; &amp;mdash;tag-name-filter cat &amp;mdash; &amp;mdash;branches &amp;mdash;tags&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>輸入指令 <code>chmod +x gitFilterBranch.sh</code> 將檔案變更為可執行檔</p>
+
+<p>輸入指令 <code>./gitFilterBranch.sh</code> 執行 shell 檔案</p>
+
+<p>此時就可以看到過去的 commit author 改變囉～</p>
+
+<p>如果發現有些 branch 還是舊的 author ，</p>
+
+<p>先切換至該分支，再重新 run 一次 sh 就行了。</p>
+
+<h3>變更未來欲 commit 的 author</h3>
+
+<p>在 project 中使用以下指令變更</p>
+
+<pre><code>$ cd yourProjectPath
+$ git config user.name "summerlize"
+$ git config user.email "summerlize@gmail.com"
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

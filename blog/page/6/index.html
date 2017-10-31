@@ -1,0 +1,1247 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>這個夏天。</title>
+	<meta name="author" content="SUMMERLIZE">
+
+	
+	<meta name="description" content="Grails 版本: 2.3.11 當 domain 中 unique 條件關聯的屬性包含了 nullable 類型， grails 會忽視 unique 限制導致誤判， 根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。 假設 Domain &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="這個夏天。" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1790808934333010",
+    enable_page_level_ads: true
+  });
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="innerHeader" role="banner"><h1><a href="/">這個夏天。</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:summerlize.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:summerlize.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+<div class="shareHead">
+<!--
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		
+		
+		<a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+		
+		
+		<a class="addthis_counter addthis_pill_style"></a>
+		
+	</div>
+	
+
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+	
+&#8211;>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+     <a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+</div> 
+
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_plurk"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_blogger"></a>
+<a class="addthis_button_sinaweibo"></a>
+<a class="addthis_button_wordpress"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52836c2b4360f9e8"></script>
+<!-- AddThis Button END -->
+<!-- AddThis Button END -->
+
+</div>
+
+
+
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/">
+		
+			Grails: Nullable 屬性導致 Unique 限制式失效</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 版本: 2.3.11</p>
+
+<p>當 domain 中 unique 條件關聯的屬性包含了 nullable 類型，</p>
+
+<p>grails 會忽視 unique 限制導致誤判，</p>
+
+<p>根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。</p>
+
+<p>假設 Domain 定義如下：</p>
+
+<figure class='code'><figcaption><span>Book.groovy </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kd">class</span> <span class="nc">Book</span><span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">String</span> <span class="n">name</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">title</span>
+</span><span class='line'>  <span class="n">Author</span> <span class="n">author</span>
+</span><span class='line'>  <span class="n">Publisher</span> <span class="n">publisher</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">])</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由於 publisher 允許為 null，造成 <code>name(unique:['author','publisher']</code> 沒有正確判斷，</p>
+
+<p>此時可以自行加入判斷如下：</p>
+
+<figure class='code'><figcaption><span>start:8 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>   <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">],</span>
+</span><span class='line'>          <span class="nl">validator:</span> <span class="o">{</span> <span class="n">name</span><span class="o">,</span> <span class="n">book</span> <span class="o">-&gt;</span>
+</span><span class='line'>              <span class="kt">def</span> <span class="n">existingRecord</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">withCriteria</span><span class="o">(){</span>
+</span><span class='line'>              
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">ne</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;author&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">author</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;publisher&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>                  <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">isNull</span><span class="o">(</span><span class="s1">&#39;supplier&#39;</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span><span class="c1">//end withCreiteria</span>
+</span><span class='line'>          <span class="o">}</span><span class="c1">//end validator</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完成後就可以正確判斷 unique 摟～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-30T01:39:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/">
+		
+			峇里島 Day 1。印尼航空&好好海鮮餐館鹹蛋螃蟹</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>拖了好久才開始動工的峇里島遊記～</p>
+
+<p>選擇了印尼航空的轉機行程，除了省錢之外也希望可以增加一些搭機的經驗，</p>
+
+<p><del>(結果明明就驚慌失措嚇得半屎)</del></p>
+
+<p>關於我們嚇死人不償命的轉機大冒險可以參考這篇 <a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/">印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程</a></p>
+
+<p>第一天基本上就是在搭機中度過，先來一張台灣的海岸線～</p>
+
+<p><img src="https://farm6.staticflickr.com/5577/14749697444_4bb361fae8_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>印航不時會提供一些小點心，早上有一包辣辣的果仁零食，下午還有糖果、飲料、 Häagen-Dazs 冰淇淋～</p>
+
+<p><del>(拿相機對著空姐真的需要臉皮很厚)</del></p>
+
+<p><img src="https://farm3.staticflickr.com/2905/14749698384_0cdda3e225_n.jpg" height="250" width="200" alt="" />
+<img src="https://farm6.staticflickr.com/5570/14752548542_29e3c4bb9c_n.jpg" height="250" width="200" alt="" /></p>
+
+<p>台灣-雅加達的班機會提供餐點 menu ，雅加達-峇里島則沒有，但兩段航程都有提供飛機餐喔。</p>
+
+<p>只有拍去程的，回程的部分看了我的轉機奇遇記之後就可以理解我根本沒力氣拍阿!! XDD</p>
+
+<p><img src="https://farm4.staticflickr.com/3918/14729039076_ce94f9dafb_n.jpg" height="280" width="250" alt="" /></p>
+
+<p>有中式口味和印尼口味，印象中都是印尼口味比較好吃，</p>
+
+<p>印尼餐點的神奇在於本來不好吃的東西只要加了ABC辣醬味道都超合 (個人覺得) ，算是走重口味路線。</p>
+
+<p>飲品的部分選擇也蠻多的，去回總共吃了四次的飛機餐，我和小狐狸每次都點不同的嚐鮮，</p>
+
+<p>Guava Juice 紅芭樂汁：五顆星</p>
+
+<p>Bintang 印尼啤酒：四顆星</p>
+
+<p>少一顆的原因是因為&hellip; 大家到了國外常會說當地的啤酒多好喝好喝，</p>
+
+<p>可是我個人挑戰完的心得是只要新鮮又冰的啤酒都很好喝～ :P</p>
+
+<p>日本、大陸、印尼的啤酒都偏淡，是覺得好喝但沒有特別驚豔 XD</p>
+
+<p>Santa Carolina 紅酒：四顆星 以飛機上的紅酒來說很值得喝一下～</p>
+
+<p>Gordon&rsquo;s Dry Gin 琴酒：零分 哈&hellip;</p>
+
+<p>好奇心驅使點來喝，空姐有問要不要加其他東西 (琴酒適合做基酒) ，</p>
+
+<p>但我想喝喝看琴酒本身的味道便拒絕了，結果真的是超.難.喝 <del>(空姐我錯了)</del> ，</p>
+
+<p>有一種薑味混合藥草的感覺。</p>
+
+<hr />
+
+<p>雅加達海岸線，那一大坨的灰蒙蒙的土是正在進行的填海工程。</p>
+
+<p><img src="https://farm4.staticflickr.com/3919/14748884541_6d1472365b_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>走進雅機達機場立馬看到傳統雕刻藝術～ (峇里島機場更誇張外觀跟廟差不多)</p>
+
+<p><img src="https://farm4.staticflickr.com/3880/14771916753_06882afae4_n.jpg" height="220" width="300" alt="" />
+<img src="https://farm3.staticflickr.com/2938/14751738422_3daa9bb165_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>印尼是個宗教國家，宗教與政治關係密不可分，正好可以從公共建築形式印證，</p>
+
+<p>導遊還跟我們說當地總統候選人一定得是回教徒， (雖然我上網查好像沒有一定拉，只是因為印尼伊斯蘭教佔大宗)</p>
+
+<p>在機場也可以看到超多伊斯蘭教徒，想像一下這時候暑假大熱天的，</p>
+
+<p>伊斯蘭教女人卻要全身包緊緊的，真的很辛苦～而且裡面還有穿便服，我都要替他流汗了～～ orz</p>
+
+<p><del>(話說我偷拍北鼻大姐怎麼看鏡頭呢)</del></p>
+
+<p><img src="https://farm4.staticflickr.com/3871/14771918703_19054df4f2_n.jpg" height="250" width="200" alt="" /></p>
+
+<p>由於一夫多妻制，在機場排隊時也常看到一個先生後面站了好幾個太太的有趣畫面，</p>
+
+<p>老公穿的一身帥氣，老婆卻只能烏漆麻黑!! (淚)</p>
+
+<p>過海關時只要先生代表就可以通關，一個人拿五本護照<del>好像很帥氣!!</del></p>
+
+<p>不過在回程時也有看到海關要求太太過去露臉的，</p>
+
+<p>太太看起來很痛苦緩慢的移動面罩，先生則很心疼一手撫著太太的頭避免被海關以外的人看見，</p>
+
+<p>面罩拉了一半左右海關便立馬揮揮手示意可以了，</p>
+
+<p>真是有趣的人生觀察。</p>
+
+<p>到峇里島摟～偷拍了有點正但好像不太開心的空姐～晚上的飛機好像也有點漂亮，嘻嘻 :D</p>
+
+<p><img src="https://farm4.staticflickr.com/3858/14565371800_edd3be9a51_n.jpg" height="250" width="175" alt="" />
+<img src="https://farm6.staticflickr.com/5570/14565408198_4c8df1d10f_n.jpg" height="250" width="350" alt="" /></p>
+
+<hr />
+
+<p>出機場之後已經快九點多了，第一天的行程就只有晚餐而已，</p>
+
+<p>本來安排的是 hard rock 的 buffet ，但是我們才在飛機上吃過晚餐欸欸欸～</p>
+
+<p>後來導遊說因為太晚了 hard rock 已經打烊，因此改吃螃蟹餐，</p>
+
+<p>我們還暗暗竊喜了一下，想說這樣分量應該不會太多，沒想到根本大錯特錯，</p>
+
+<p>而且這一餐也是整個行程下來吃最好的一餐 &ndash;_______&ndash;</p>
+
+<p>餐廳的招牌寫著大大的中文字：好好海鮮餐館，</p>
+
+<p>在毫無心理準備的情況下，服務生上菜有如滔滔江水綿延不絕～</p>
+
+<p>菜色如下：</p>
+
+<p>玉米濃湯、鹹蛋螃蟹、辣醬蝦、炸魚、燴豆腐、辣醬空心菜、蒜炒油菜、白飯、茶、水果</p>
+
+<p><img src="https://farm4.staticflickr.com/3915/14565445239_603f5a94e7_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3923/14565441028_2b28fd8563_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3896/14751779422_f74a7fb38e_n.jpg" height="120" width="180" alt="" /></p>
+
+<p><img src="https://farm3.staticflickr.com/2938/14565444289_a6a70a335b_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3864/14565442098_fdd6701689_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3870/14771962043_bd2d3aac3c_n.jpg" height="120" width="180" alt="" /></p>
+
+<p>看看我們<strong>兩個人</strong>要吃完誇張的整桌菜，而且還吃過晚餐，<del>是豬逆</del>，</p>
+
+<p>最後還是棄械投降請導遊和司機一起幫忙解決。</p>
+
+<p><img src="https://farm3.staticflickr.com/2911/14565411268_6ea5f1664c_c.jpg" height="300" width="450" alt="" /></p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/">印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程</a></p>
+
+<p><a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/">2014 信用卡國際機場外圍免費停車</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-27T06:14:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bali/'>Bali</a>, <a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/">
+		
+			2014 信用卡國際機場外圍免費停車-富邦數位生活卡</a>
+	</h2>
+	
+	<div class="entry-content">
+		<h2>富邦銀行</h2>
+
+<h3>數位生活卡</h3>
+
+<p>刷卡支付當次出國航程全額機票或80％，</p>
+
+<p><strong>鈦金卡</strong>可享<strong>每年不限次數、每次7天之免費停車優惠</strong></p>
+
+<p><strong>白金卡</strong>可享<strong>每年2次、每次7天之免費停車優惠</strong></p>
+
+<p>我和小狐狸都是 MasterCard ，但一張是綠色一張是藍色，</p>
+
+<p>綠色的是鈦金卡，藍色則是白金卡，(額度的差別)</p>
+
+<p>這次我們刷的是白金卡，配合的是東航國際機場專屬停車場，距離機場大約5分鐘車程，</p>
+
+<p>場地看起來有點舊舊的，車子停好後填寫信用卡資料就可以了～會有 24hr 接駁車去回接送。</p>
+
+<p>回國領完行李就可以打電話請接駁車過來，出發跟回程幾乎都沒什麼等就上車了，整體來說很滿意～</p>
+
+<p>接送司機的服務態度意外的很不錯 (給一個大拇哥) 。</p>
+
+<p>機場接駁上下車在同一個地方，</p>
+
+<p><del>但我自己覺得路線還蠻不好記又沒有明顯指標，還特地拍了一張照避免回程找不到，哈哈。</del></p>
+
+<p><img src="https://farm4.staticflickr.com/3869/14557531928_08bda2ab4d_n.jpg" height="200" width="300" alt="" /></p>
+
+<p>東航國際機場專屬停車場</p>
+
+<p>地址：桃園縣大園鄉三民路二段69號</p>
+
+<p>電話：<a href="tel:0800022999">0800-022-999</a>、<a href="tel:033838888">(03)383-8888</a></p>
+
+<p><a href="https://www.fubon.com/bank/creditcard/member_rights/001creditCard_100parking01.htm">點我查看富邦卡友權益</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T06:59:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/credit-card/'>Credit Card</a>, <a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/">
+		
+			印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p><font color="hotpink">[貼心小提醒] 如果沒有時間看夏天落落長歷險記的話 :P <a href="#concise%20guide">可點此觀看流程精簡版</a></font></p>
+
+<p>印航今年推出了台北到峇里島的優惠票價，</p>
+
+<p>代價就是需要在雅加達轉機，含轉機等候至少會比直飛多花四小時的時間，</p>
+
+<p>因為過去也有不少搭飛機的經驗，心想應該不會太困難，</p>
+
+<p>我原先訂的團體行程沒有成行，導致後面改訂 mini tour 的時間很緊湊，</p>
+
+<p>與旅行社只透過網路及電話聯絡，對方也沒有交代什麼需要注意的細節，</p>
+
+<p>由於 mini tour 兩人就能成行所以台灣不會派領隊，</p>
+
+<p>我們的團費包含來回機場稅及離境稅<strong>RP.15萬/人</strong>，但不含<strong>落地簽USD.25/人</strong>，</p>
+
+<h3>去程</h3>
+
+<p>到了桃園機場先去印航掛行李的櫃檯，將電子機票交給櫃檯地勤領取登機證，並交代行李直掛峇里島。</p>
+
+<p>然後就可以開開心心上飛機摟～</p>
+
+<p>抵達前一小時左右空姐會發三聯式的<strong>出入境卡(ARRIVAL-DEPARTURE CARD)</strong>跟<strong>海關申報單(CUSTOMS DECLARATION)</strong>，</p>
+
+<p>在機上先填好，雅加達下飛機之後，很快就能看到 <strong>VISA ON ARRIVAL</strong> 指標，左右兩邊都有，</p>
+
+<p><img src="https://farm4.staticflickr.com/3901/14556902110_4221dfde28_c.jpg" height="200" width="300" alt="" /></p>
+
+<p>同行可以由一人代表排隊購買，出示護照、付錢之後會拿到簽證收據，</p>
+
+<p><img src="https://farm3.staticflickr.com/2931/14557107857_a67443b23b_n.jpg" height="150" width="250" alt="" />
+<img src="https://farm4.staticflickr.com/3917/14556990559_67df9672df_n.jpg" height="150" width="250" alt="" /></p>
+
+<p><del>我們以為轉機不用入境，所以一直尋找轉機的指標，</del></p>
+
+<p>但轉機入口都被封鎖，只剩下海關通道可以走，</p>
+
+<p>詢問了幾個機場人員後，原來<strong>必須先入境</strong> (後來了解是因為國際線轉國內線的緣故)，</p>
+
+<p><img src="https://farm4.staticflickr.com/3917/14556928329_71d1c40a74_c.jpg" height="200" width="300" alt="" /></p>
+
+<p>在 Foreigner 看板前排隊，需要出示護照、登機證、出入境卡，</p>
+
+<p>海關檢查蓋章後會退還第三聯<code>出境卡(Departure Card)</code>，<strong>這張卡要保留到回程離境時使用，</strong></p>
+
+<p><del>我在峇里島時還有想把他丟掉的念頭 (汗&hellip;)</del>，</p>
+
+<p>過海關後印象中沒有什麼明顯的指標，要先往左邊走，</p>
+
+<p>我們又開始東張西望尋找轉機的字樣，</p>
+
+<p>大概是不時流露出疑惑的表情，有幾個身上穿著像清潔工制服寫著 XXX Service 的人經過我們身邊時會對我們說一些聽不懂的話，</p>
+
+<p>我們沒搭理繼續往前走，走到底便看到一個 check 隨身行李的通道，</p>
+
+<p>正當我們猶豫著是否要進去時，又有一個一樣是 XXX Service 的直接過來拿了我的護照跟機票，</p>
+
+<p>一路帶我們快速通關，先是通過隨身行李檢查，接著再到另一個入口檢查登機證 (印象中也是往左邊走有個小小的門)，</p>
+
+<p>到這邊 Service 先生突然開口和我要小費並且手舉高高的拿著我們的機票，</p>
+
+<p>我當下整個愣住幾秒，跟他說我還沒有換錢，<del>心裡超害怕他沒收我的機票</del> XDD</p>
+
+<p>隨後他面無表情把機票還我走人，真是老天保佑！ T___T</p>
+
+<p>看到 transfer 的指標後坐手扶梯上樓，發現跟先前被封鎖的入口是通往一樣的地方，</p>
+
+<p><img src="https://farm6.staticflickr.com/5580/14743569735_14c6eb486b_c.jpg" height="200" width="300" alt="" /></p>
+
+<p>上去很快就往登機門的方向繼續走，快到登機門前會再遇到一次檢查隨身行李的關卡，</p>
+
+<p>想尿尿記得先去！因為過關卡後就沒有洗手間了～囧</p>
+
+<p><del>我們傻傻的進去之後等一個多小時還不能尿尿啊～～～(吶喊)</del></p>
+
+<p>再次搭上前往峇里島的飛機，領完行李莫名就走到出口直接看到導遊～～</p>
+
+<h3>回程</h3>
+
+<p>前面提到團費已經包含離境稅，於是我們<del>天真的</del>以為包含離境稅是指旅行社會處理好的意思，</p>
+
+<p><del>就完全沒理會也沒做功課</del>，回程這天旅行社派了個小弟在機場帶我們，</p>
+
+<p>導遊塞了一把錢給他之後，我們就跟著他去領登機證、掛行李，之前會先經過一次隨身行李檢查，</p>
+
+<p>處理好之後他指示我們進入另一道隨身行李檢查便跟我們道別，</p>
+
+<p>此時我有點疑惑落地簽有收據那麼離境稅怎麼沒有？</p>
+
+<p><del>但秉持著我們要相信專業的精神便不疑有他繼續走下去，(其實是因為小弟中英文都很爛阿!!)</del></p>
+
+<p>接著一路依照登機門指標順利上了飛機，</p>
+
+<p>抵達雅加達後就跟著 transfer 的指標走，我們的登機門是 E4，先遇到了 F 系列登機門，</p>
+
+<p>好不容易才看到一個E系列指標，經過一連串的貴賓休息室，竟然就走到底了？</p>
+
+<p>剩下左邊有一個小小的路可以走，接著右轉，會看到蠻多航空公司的櫃檯，</p>
+
+<p>不過完全沒有登機門的指標就是，鼓起勇氣繼續往前走下去，</p>
+
+<p>走到底發現海關檢查處，看到E指標就在海關後面，表示應該是需要先出境，</p>
+
+<p>排隊輪到我時，海關拿出一張卡在我面前晃了一下，示意要我交給他，當下一時慌張以為是需要離境稅收據，</p>
+
+<p>轉頭向小狐狸求救，小狐狸從他的護照抽出來一張一樣的，我才發現是離境卡 (Departure Card)，</p>
+
+<p>因為海關當時翻的是背面給我看導致我大誤會 <del>(恥)</del> ，趕緊把卡交出去就通過了，<del>這可是我差點想丟掉的卡啊啊啊～好恐怖噢！</del></p>
+
+<p>由於距離登機時間還有一個小時左右，加上去程的經驗只要過了隨身行李檢查關卡就<del>不能尿尿了</del>，</p>
+
+<p>我又很倒霉的遇到生理期，身上的<del>好自在</del>有限，因此拖到最後一刻去完廁所才進去，</p>
+
+<p>登機時間是 13:50 ，起飛時間是 14:10 ，</p>
+
+<p>這邊除了經過隨身行李檢查關卡外，會有警衛二次檢查，需要把包包打開給他看，</p>
+
+<p>我看別人跟小狐狸都有被翻包包，但是我的包包一打開就是<del>好自在</del>啊～，</p>
+
+<p>警衛好像不好意思翻，就直接整個拿著東張西瞧了一段時間才讓我進去，</p>
+
+<p>印航地勤檢查機票之後，指示我們到櫃檯去，此時一個會說中文的漂亮地勤告訴我們需要付離境稅，</p>
+
+<p>我們當下都傻住，告訴她說離境稅應該是導遊幫我們付了，</p>
+
+<p>她讓我們請導遊過來櫃檯，可是導遊在峇里島啊啊！！ XDD</p>
+
+<p>她告訴我們離境稅是在雅加達機場才付的，導遊應該要給我們錢，</p>
+
+<p>我只好拿出導遊的電話號碼請她幫我聯絡，美女地勤人超 nice 立馬就打了電話，</p>
+
+<p>導遊說他要打去公司詢問一下機場小弟狀況，我可是等到最後的登機時間才進入，剩下不到十分鐘啊！</p>
+
+<p>美女地勤問我們如果來不及該怎麼辦，我們告訴她我們身上完全沒有現金只有信用卡，大家都囧了&hellip;</p>
+
+<p>因為我們錯估此行花費，換的錢太少，盧比不夠連台幣都拿出來花了還刷卡，</p>
+
+<p>於是她又再次打給導遊，導遊詢問地勤是否可以先支付我們的稅金再匯款還她，</p>
+
+<p>但她跟我們說她忘記她的密碼，雖然聽起來很扯，但我總覺得她很誠懇，</p>
+
+<p>一方面我們只是過路客，對他來說很為難也是理所當然，</p>
+
+<p>於是我們決定先到提款機領錢看看，還回到海關詢問哪邊可以繳離境稅，</p>
+
+<p>結果竟然是在登機門地勤那邊繳就可以了 (為了怕有人事先忘記繳，<del>例如我們？</del>)。</p>
+
+<p>試了好幾張卡竟然都無法領，小狐狸決定再回到登機門詢問狀況，</p>
+
+<p>我則繼續試剩餘的卡，仍然徒勞無功，所以我也回到登機門去，</p>
+
+<p>經過檢查機票人員時看到一位穿紅色襯衫的先生，衣服有種印尼傳統服飾融合夏威夷風格，</p>
+
+<p>當下覺得他是機場相關人士或是旅行社之類的人物，以為他可能在幫忙溝通我們的狀況之類的或是湊熱鬧？，</p>
+
+<p>走到櫃檯時小狐狸說好了沒事了，我問怎麼突然可以了？</p>
+
+<p>然後美女地勤說了一些某某人搞錯之類的話，我：好險，卡全部都領不出錢。</p>
+
+<p>此時美女地勤嚇到，原來她是以為我帶著錢回去才說好了，</p>
+
+<p>於是我們大家又開始陷入一陣慌張，幸運的是班機延誤還沒開始登機，不然我們可能直接被遺棄在雅加達，</p>
+
+<p>美女地勤一直表露出想幫助我們的感覺，<del>但又不能置自己於風險中？XD</del></p>
+
+<p>我可以體會她的心情，但眼下也想不出其他辦法，於是我問她是否可以請她先幫我們付，如果導遊沒有匯給他我再補匯，</p>
+
+<p>(話說這是因為當下大家都認為一定是導遊A走我們的離境稅XDD，但是我感覺我們導遊不是那種人～)</p>
+
+<p>但她還是說忘記密碼之類的＠＠，現在回想應該是想表達忘記銀行帳號所以無法給我，也無法給導遊，(畢竟不是中文不是她的母語)</p>
+
+<p>後來她建議我們是不是可以跟同班機的台灣旅客借錢，</p>
+
+<p>嗯，的確是個辦法，但是要和素不相識的陌生人要開口借錢真的是需要恥力滿點！！！ >&ldquo;&lt;</p>
+
+<p>同班機有個女導遊，小狐狸覺得可以先跟她借看看，</p>
+
+<p>女導遊表現出尷尬，說她沒有那麼多錢 (RP$300,000)，其實折合台幣大概是 800 到 1000 而已，</p>
+
+<p>之後又說她身上有錢，但那是要交回公司的，</p>
+
+<p>當下我們真的非常無助，她雖然不想借但看得出有點掙扎，</p>
+
+<p>然後紅色襯衫先生突然出現了說他願意跟我換盧比，要我給他台幣 800，</p>
+
+<p>我說我身上只剩下 300 台幣，於是又問女導遊說是否可以借我們 500，</p>
+
+<p>(因為我們以為紅色襯衫先生是機場相關的人要還錢給他比較不方便)</p>
+
+<p>女導遊卻說為什麼要這麼麻煩，你們彼此之間處理就好了啊，</p>
+
+<p>同時竟然落井下石的質問地勤為什麼飛機 delay 這麼久，不斷問她還要多久才能飛，</p>
+
+<p>當下我跟小狐狸非常傻眼尷尬，是想讓我們回不了家逆！</p>
+
+<p>後來紅色襯衫先生才發現我們身上沒錢，他說沒關係之後再還就先幫我們付了，</p>
+
+<p>是不是該掉個兩滴淚！</p>
+
+<p>一問之下才知道原來他是印尼人要去台灣旅遊，我們立刻表示一下飛機就可以領錢還他，真的大大感恩！</p>
+
+<p>整個心情非常複雜，很難過想哭也很感動，</p>
+
+<p>難過的是為什麼台灣人不能互相幫助，我相信 500 元對一個成年人來說是可以負擔的，</p>
+
+<p>也感動素昧平生的外國人願意相助，而且還是生活在社會較不安定的印尼人，</p>
+
+<p>登機前導遊再次來電詢問我們狀況，可以聽得出來他非常緊張一直跟我說對不起，</p>
+
+<p>我告訴他有人借我們錢了，請他不要擔心，他表示是機場小弟忘了給我們錢，之後會把離境稅補匯給我們，</p>
+
+<p>就這樣帶著緊繃的心情平安回到家。</p>
+
+<p>後記：導遊真的有把錢匯還給我們～不過他用當地匯率算，所以只有匯來720台幣，</p>
+
+<p>由於是用較快速西聯匯款，他還要負擔手續費也蠻貴的，所以就算摟～</p>
+
+<h2 id="concise guide" >去回轉機流程精簡版</h2>
+
+
+<h3>台北-雅加達-峇里島</h3>
+
+<ol>
+<li><p>(桃園機場) 帶電子機票到印航櫃檯領登機證及掛行李，並告知直掛峇里島。</p></li>
+<li><p>飛機上索取並填寫出<strong>入境卡(ARRIVAL-DEPARTURE CARD)</strong>及<strong>海關申報單(CUSTOMS DECLARATION)</strong>，正常是空姐會發。</p></li>
+<li><p>下飛機 (雅加達機場) 依 <strong>VISA ON ARRIVAL</strong> 指標到櫃檯買<strong>落地簽USD.25/人</strong>，需準備護照。</p></li>
+<li><p>過海關入境，需準備護照、登機證、出入境卡、海關申報單、簽證收據，海關退還的離境卡 (Departure Card) 要留到回國那天使用。</p></li>
+<li><p>往左邊直走到底，在右邊通過隨身行李檢查。</p></li>
+<li><p>往左邊走到一個小門之類的？要檢查登機證。</p></li>
+<li><p>跟著transfer指標走到登機門。</p></li>
+<li><p>下飛機 (峇里島機場) 領完行李直接走出去。</p></li>
+</ol>
+
+
+<h3>峇里島-雅加達-台北</h3>
+
+<ol>
+<li><p>旅行社小弟帶我們進入機場，需檢查護照，看其他網友自助的經驗是要出示電子機票開票證明。</p></li>
+<li><p>到印航櫃檯領機票、掛行李。</p></li>
+<li><p>經過隨身行李檢查處。</p></li>
+<li><p>下飛機 (雅加達機場) 後到印航櫃檯購買<strong>離境稅RP.150,000/人</strong>。(這邊實際路線我就無法描述摟～)</p></li>
+<li><p>跟著 transfer 指標走，接著到海關出境，但沒有明確指標，需出示護照、登機證、離境卡 (Departure Card)。</p></li>
+<li><p>過了海關跟著指標走到登機門，會經過一處隨身行李檢查，再經過一處警衛檢查，需出示護照。</p></li>
+<li><p>將機票交給地勤人員檢查，忘記買離境稅可以在登機門的櫃檯買。</p></li>
+<li><p>下飛機 (桃園機場) 領行李、檢查行李，下次再見摟。</p></li>
+</ol>
+
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/">峇里島 Day 1。印尼航空&amp;好好海鮮餐館鹹蛋螃蟹</a></p>
+
+<p><a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/">2014 信用卡國際機場外圍免費停車</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-25T03:02:00+08:00" pubdate data-updated="true">Jun 25<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bali/'>Bali</a>, <a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <lastarticle class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/">
+		
+			Ext JS: Store loadData() Id 重複導致只顯示一筆資料</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Ext JS 版本: 4.2.x</p>
+
+<p>Sencha Architect 版本: 2.2.3</p>
+
+<p>此處希望建立一個共用的 grid 來顯示不同 table 的資料，</p>
+
+<p>如下 Json Data 所示：</p>
+
+<pre><code>Json Data
+[{"id":1, "name": "Java Programming", "title": "Java 程式設計"},
+ {"id":1, "name": "Fashion Magazine", "title": "時尚雜誌"}]
+</code></pre>
+
+<p>在執行 <code>grid.getStore.loadData(record)</code> 後卻只有顯示一筆資料，</p>
+
+<p>檢查後發現是 id 重複造成，</p>
+
+<p>由於資料存於不同的資料表，因此後端 query 出預備載入的 record 便可能會有重複 id ，</p>
+
+<p>API 說明 proxy 中 reader 的 idProperty 設定，是用該欄位作為 record 的唯一識別值，預設為 id 欄位，</p>
+
+<p>因此我們可以將 idProperty 定義為實際的唯一識別欄位，避免相同 id 的資料被覆蓋，</p>
+
+<p>由於我的 record 並沒有唯一識別值，暫時設置為 undefined。</p>
+
+<figure class='code'><figcaption><span>book update </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="nl">proxy:</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nl">type:</span> <span class="s1">&#39;memory&#39;</span><span class="o">,</span>
+</span><span class='line'>  <span class="nl">reader:</span> <span class="o">{</span>
+</span><span class='line'>      <span class="nl">type:</span> <span class="s1">&#39;json&#39;</span><span class="o">,</span>
+</span><span class='line'>      <span class="nl">idProperty:</span> <span class="s1">&#39;undefined&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>另外 API 也提到 <code>store.loadData(record)</code> 定義為預設資料已經處理成正確格式，</p>
+
+<p>因此不會經過 reader 二次處理，</p>
+
+<p>若希望使用 reader 處理，需改為使用 <code>store.loadRawData(record)</code>。</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-14T11:55:00+08:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/extjs/'>ExtJS</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</lastarticle>
+  
+
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/">[推薦碼0125005366] 台新卡得利 Cardaily - 信用卡專屬 APP 輸入推薦碼送 $50 刷卡金</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code/">[綁定好友推薦] 台新 Richart 網銀開戶送 $500 優惠金</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/07/complaint-of-clarisonic-facial-cleansing-brushes/">[抱怨] Clarisonic 科萊麗洗臉機 Mia2，洗得很乾淨，也壞得很乾脆。</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/02/02/recommend-movie-la-la-land/">[電影推薦] 樂來越愛你 La La Land - 愛情與夢想的抉擇，音樂太好聽先給1000分！！</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/19/truly-recommend-mefen-fc-tablets-for-menstrual-pain/">[真心推薦] 拯救經痛人生的神奇止痛藥-井田莫炎膜衣錠</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
+<li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (2)</a></li>
+<li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
+<li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
+<li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
+<li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
+<li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (5)</a></li>
+<li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (2)</a></li>
+<li class='category'><a href='/blog/categories/uncatagorized-comments/'>Uncatagorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+
+  </ul>
+</section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4414414286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+  
+</aside>
+
+<div class="fakeplace"></div>
+
+<nav id="pagenavi" role="navigation">
+    
+        <a href="/blog/page/5/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/7/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+
+</div>
+	<footer id="footer" class="inner" role="contentinfo">Copyright &copy; 2017
+
+    SUMMERLIZE
+
+<p>-</p>
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'summerlize';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-78711361-1', 'auto');
+  		ga('send', 'pageview');
+
+	</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '569493293211047',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+</body>
+</html>

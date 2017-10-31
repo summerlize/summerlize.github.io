@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2017-10-31T17:25:48+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook 按鈕造成 The domain of this URL isn't included in the app's domains... 錯誤 如:讚(like)、分享(share)、登入(login)...等]]></title>
+    <link href="http://summerlize.github.io/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/"/>
+    <updated>2016-06-03T07:06:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains</id>
+    <content type="html"><![CDATA[<p>最近發現網頁出現錯誤訊息：</p>
+
+<p><font color="red">無法載入網址: The domain of this URL isn&rsquo;t included in the app&rsquo;s domains. To be able to load this URL, add all domains and subdomains of your app to the App Domains field in your app settings.</font></p>
+
+<p>檢查後發現是 facebook 按鈕造成的，</p>
+
+<p>查了相關資料應該是要將網頁與 facebook 的開發管理網站連結，</p>
+
+<p>其實不做的話按鈕還是可以正常使用，只是夏天有潔癖看了不開心 XDD</p>
+
+<p>首先登入 <a href="https://developers.facebook.com">Facebook 開發者網站</a> ，</p>
+
+<p>接著新增一個應用程式，在左邊選單點選<strong>設定</strong>選項，</p>
+
+<p>在右邊畫面下方可以找到<strong>+新增平台</strong>按鈕，點下後選取網頁類型並輸入網站網址，</p>
+
+<p>完成後按下<strong>立即開始</strong>，將程式碼加入網頁中的 body 區塊即可。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress: 變更 master 分支中 commit 的創作者 (author)]]></title>
+    <link href="http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/"/>
+    <updated>2016-05-30T04:46:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch</id>
+    <content type="html"><![CDATA[<p>使用 Octopress 基本上會有兩個分支 source 和 master ，</p>
+
+<p>其中 source 是由使用者自行管理 git ，</p>
+
+<p>而 master 則是透過 rake deploy 自動管理，</p>
+
+<p>想要變更 source 分支的 commitments author ，</p>
+
+<p>可以參考這篇 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a> ，</p>
+
+<p>變更之後再將 origin source 刪除重新 push 即可，</p>
+
+<p>但如果是 master 分支照做之後，下次 rake deploy 時又會以舊的作者重新 commit ，</p>
+
+<p>並顯示錯誤訊息：</p>
+
+<pre><code>error: failed to push some refs to 'git@github.com-xxxxxxxx'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+
+<p>此時照著訊息做是無效的，</p>
+
+<p>必須用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，如此舊作者的 commit 紀錄才會被刪除。</p>
+
+<p>ps. 在這之前還是需要先把 octopress 的 git user 變更設定為新作者的喔，請參考 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">前面提到的文章</a> 。</p>
+
+<p>一般應該是做到這邊就能完成，但如果有設定過 git global user 則會無法成功，</p>
+
+<p>rake deploy 會使用 global user 進行 commit 。</p>
+
+<p>使用指令 <code>git config --global user.name</code> 可以確認是否有設定過，</p>
+
+<p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="c1">#{deploy_dir}&amp;rdquo; do&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;amp;hellip;&#39; &amp;gt; index.html&quot;</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
+</span><span class='line'><span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
+
+<p>一般會有這樣的設定大部分是因為有一個以上的 github 帳號，</p>
+
+<p>因此在 <code>rake setup_github_pages</code> 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。</p>
+
+<pre><code>$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, 'git@github.com:your_username/your_username.github.io.git)
+           or 'https://github.com/your_username/your_username.github.io')
+
+Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
+</code></pre>
+
+<p>可參考此篇 <a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a></p>
+
+<p>最後再run <code>rake_deploy</code> 就能看到 commit author 變成新的了～</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Octopress 部落格發佈文章]]></title>
+    <link href="http://summerlize.github.io/blog/2013/11/12/post-article-by-octopress/"/>
+    <updated>2013-11-12T02:38:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2013/11/12/post-article-by-octopress</id>
+    <content type="html"><![CDATA[<h2>1. Octopress Blog 基本設定</h2>
+
+<p>在 Octopress 資料夾中可以找到一個 <code>_config.yml</code> 的檔案，</p>
+
+<p>是用來設定部落格產生時讀取的預設資料，可以分為以下幾個部分：</p>
+
+<pre><code>基本預設資料：   
+url: http://summerlize.github.io            #部落格網址
+title: 這個夏天。                             #部落格標題
+subtitle: 小小筆記本                          #部落格副標題
+author: SUMMERLIZE                          #作者名稱
+simple_search: http://google.com/search     #搜尋引擎
+description: 我是一個部落格                   #部落格描述
+date_format: "ordinal"                      #日期格式*
+subscribe_rss: /atom.xml                    #RSS服務
+subscribe_email: summerlize@gmail.com       #Email
+category_feeds: false                       #訂閱指定分類文章 預設為否
+email: summerlize@gmail.com                 #在RSS中列出Email   
+</code></pre>
+
+<ul>
+<li>日期格式可到 <a href="http://www.ruby-doc.org/core-2.0.0/Time.html">Ruby API</a> 查詢</li>
+</ul>
+
+
+<p>有做過功課大多會發現 Octopress 是利用 Jekyll 產生出靜態網頁的，</p>
+
+<p>如果沒有特殊需求，採用預設值即可。</p>
+
+<pre><code>Jekyll靜態網頁產生器與附加元件設定：
+
+#直接部署的octopress專案通常不需要修改root，除非有另外包資料夾，
+#最簡單的方式是觀察網址，假如首頁為http://summerlize.github.io/project，那麼root便是/project
+
+root: /
+
+#此處為部落格文章的預設路徑，預設為/blog/年/月/日/文章標題
+
+permalink: /blog/:year/:month/:day/:title/
+
+#原始碼資料路徑，預設為source，同上面的例子則為/project/source
+
+source: source
+
+#預設編譯的資料夾路徑，預設為public，同上面的例子則為/project/public
+
+destination: public
+
+#預設附加元件路徑，預設為plugins，同上面的例子則為/project/plugins
+
+plugins: plugins
+
+code_dir: downloads/code
+
+#編譯後的部落格分類路徑
+category_dir: blog/categories
+
+
+markdown: rdiscount
+rdiscount:
+    extensions:
+        - autolink
+        - footnotes
+        - smart
+
+pygments: false # default python pygments have been replaced by pygments.rb
+
+paginate: 10          #首頁顯示的文章數
+
+pagination_dir: blog  #Directory base for pagination URLs eg. /blog/page/2/
+
+recent_posts: 5       #最近發表的文章顯示篇數
+
+excerpt_link: "Read on &amp;rarr;"  #文章末處提示繼續閱讀全文連結字樣
+
+titlecase: true       # Converts page and post titles to titlecase
+
+#側邊列表顯示的內容，預設為最近發表文章、github、delicious、pinboard、googleplus等。
+
+default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</code></pre>
+
+<h3>按讚或分享部落格</h3>
+
+<p>官方內建的第三方服務包含了幾個知名社群類型網站，</p>
+
+<p>像是 Twitter 、 Google+ 、 Facebook 等，另外也有 Google 統計分析工具等擴充。</p>
+
+<pre><code>第三方服務設定（社群服務等）：
+github_user:                    #輸入GitHub帳號便會自動生成按鈕連結，其他以此類推。
+github_repo_count: 0            #輸入GitHub Repo數
+github_show_profile_link: true #顯示GitHub檔案連結，預設開啟。
+</code></pre>
+
+<h3>COMMENTS功能</h3>
+
+<p>其中 disqus 的設定，是用來提供訪客留言的功能，大推～</p>
+
+<p>到 <a href="https://disqus.com/">Disqus官方網站</a> 申請帳號後設定即可。</p>
+
+<h2>2. Octopress Blog 新增/發佈文章</h2>
+
+<p>終於進入正題囉～首先使用 <code>rake -T</code> 可以查看 Octopress 的所有指令，</p>
+
+<p>新增文章使用 <code>rake new_post["title"]</code>，在 title 處輸入文章標題即可，</p>
+
+<p>有趣的是如果輸入的是中文，Octopress 會自動轉換成羅馬拼音的檔名，</p>
+
+<p>因此建議還是輸入有意義的英文標題，撰寫文章時再改成中文標題摟～</p>
+
+<p>產生的文章會在 octopress/source/_post/ 底下，</p>
+
+<p>找到剛才新增的檔案後用文字編輯器打開，</p>
+
+<p>就可以開始使用 Markdown 編輯文章了。 <a href="http://mouapp.com/">下載好用的 Markdown 編輯器 Mou</a></p>
+
+<p>編輯完成之後，以 <code>rake generate</code> 產生靜態部落格網頁，</p>
+
+<p>再以 <code>rake deploy</code> 發佈就可以在網址中檢視了。</p>
+
+<p>ps. 目前使用 GitHub 的經驗，第一次會很快，第二次之後大概需要 10 到 20 分鐘不等才會更新。</p>
+
+<p>在發佈新文章之前，也可以使用 <code>rake preview</code> 來預覽你的部落格，</p>
+
+<p>預設的預覽網址為 <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+
+<p>另外若要以 utf8 編碼在 generate 前需要設定，目前還沒有用過，記下來參考。</p>
+
+<pre><code>set LC_ALL=zh_TW.UTF-8
+set LANG=zh_TW.UTF-8
+</code></pre>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2013/11/10/install-octopress-and-host-with-github/">Octopress 安裝 + GitHub 架設部落格筆記</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 安裝 + GitHub 架設部落格筆記]]></title>
+    <link href="http://summerlize.github.io/blog/2013/11/10/install-octopress-and-host-with-github/"/>
+    <updated>2013-11-10T05:11:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2013/11/10/install-octopress-and-host-with-github</id>
+    <content type="html"><![CDATA[<p>終於在奮戰了幾天之後，架好了我的 Octopress >__&lt;</p>
+
+<p>還記得小時候 (?) 一直都有寫 blog 的習慣，反而因為變成大人 (?) 之後荒廢了，</p>
+
+<p>雖然號稱小小程式設計者，但我的學習歷程一直著重在邏輯的處理，</p>
+
+<p>技術上長期沒什麼突破&hellip; (汗)</p>
+
+<p>anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這個好東西，</p>
+
+<p>不但可以用來撰寫技術文章，還可以達到快速排版的效果，</p>
+
+<p>真的很吸引我這個懶惰蟲～</p>
+
+<p>可是～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
+
+<p>對一個剛接觸「指令操作」不久、git 完全不熟悉的新手而言真的會覺得有點恐懼，</p>
+
+<p>因此在這邊記錄我的安裝過程以及遇到的問題，希望能對跟我一樣困惑的小朋友有所幫助 :P</p>
+
+<h4>作業系統：OS X 10.9</h4>
+
+<h3>Step1 安裝GIT</h3>
+
+<p>直接到網址下載安裝即可。</p>
+
+<p><a href="http://code.google.com/p/git-osx-installer">http://code.google.com/p/git-osx-installer</a></p>
+
+<p>或者參考官網安裝方式。</p>
+
+<p><a href="http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit">http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit</a></p>
+
+<h3>Step2 安裝Ruby</h3>
+
+<p>Ruby 有兩種版本控管工具，分別是 RVM 及 Rbenv ，<strong>選擇一種安裝即可</strong>。</p>
+
+<p>一開始我照著官網安裝 RVM 失敗了，所以當時改以 Rbenv 來安裝。</p>
+
+<p>但因為歷史久遠我已經忘記拉～所以這邊先依照官網的說明貼上 XD</p>
+
+<p>以下是 Mac 的建議安裝方法，先使用 Homebrew 套件管理工具來安裝 Rbenv ，</p>
+
+<p>由於 Rbenv 只對 Ruby 進行版本控管，並沒有安裝的功能，因此必須另外安裝 ruby-build 才能進行安裝。</p>
+
+<h4>Rbenv</h4>
+
+<pre><code>$ brew update
+$ brew install rbenv
+$ brew install ruby-build
+</code></pre>
+
+<p>安裝完 Rbenv 及 ruby-build 後便可以開始安裝 ruby 囉！</p>
+
+<p>最後必須執行 rehash 來進行版本重置。</p>
+
+<pre><code>$ rbenv install 1.9.3-p0
+$ rbenv rehash
+</code></pre>
+
+<p>然後～～～～</p>
+
+<p>我的第一次 Octopress 安裝就到這裡中斷了 (掩面) ，</p>
+
+<p>當時假會的裝了新版的 Ruby 2.0 ，</p>
+
+<p>後來竟然和我的工作環境衝突，只好進行降版，</p>
+
+<p>使用 Rbenv 降版幾次都失敗後，<del>就被迫改以 RVM 重新安裝</del>，</p>
+
+<p><del>畢竟工作時間就是金錢，老闆是不會等我 try N 次的 (哭)</del>，</p>
+
+<p>一樣乖乖地輸入完下面的指令就可以摟～</p>
+
+<h4>RVM</h4>
+
+<pre><code>$ \curl -L https://get.rvm.io | bash
+$ \curl -L https://get.rvm.io | bash -s -- --autolibs=read-fail
+$ \curl -L https://get.rvm.io | bash -s stable --ruby
+
+// 舊版 rvm 指令
+// $ rvm install 1.9.3p327
+// 新版 rvm 1.29.3 ，版本命名方式有調整喔
+$ rvm install ruby-1.9.3-p327
+</code></pre>
+
+<p>完成後可以輸入 <code>ruby --version</code> 來檢視是否安裝成功，</p>
+
+<p>輸出訊息如： <em>ruby 1.9.3p327 (2012-11-10 revision 37606) [x86_64-darwin13.0.0]</em>。</p>
+
+<p>準備好 Octopress 的前置工作終於可以進入正題了！</p>
+
+<h3>Step3 安裝Octopress</h3>
+
+<p>先將 Octopress 的 source code 複製到本機，</p>
+
+<p>指令的最後指的是你希望存放的資料夾名稱，如果參考官網預設是使用 <code>octopress</code> 。</p>
+
+<pre><code>$ git clone git://github.com/imathis/octopress.git yourProjectName
+$ cd yourProjectName
+</code></pre>
+
+<p>接著安裝 bundler</p>
+
+<pre><code>$ gem install bundler
+$ rbenv rehash    #使用Rbenv套件者才需執行
+$ bundle install
+</code></pre>
+
+<p>最後安裝 Octopress 預設的布景主題</p>
+
+<pre><code>$ rake install
+</code></pre>
+
+<p>基本上到這邊算是完成了 Octopress 的安裝，可以輸入以下指令來檢視是否安裝成功。</p>
+
+<pre><code>$ rake generate
+$ rake preview
+</code></pre>
+
+<p>執行 <code>rake preview</code> 啓動 server 後，可以在 <a href="http://localhost:4000">http://localhost:4000</a> 檢視部落格。</p>
+
+<h3>Step4 部署GitHub</h3>
+
+<p>首先必須申請 <a href="https://github.com/">GitHub</a> 帳號，並且建立一個用來存放部落格代碼的程式庫 (Repository) 。</p>
+
+<p>Repo 的命名必須遵照規則 <strong>username.github.io</strong> ，</p>
+
+<p>例如我帳號/組織代號為 <strong>summerlize</strong> ， Repo 則需命名為 <strong>summerlize</strong>.github.io 。</p>
+
+<p>輸入指令設定 GitHub page</p>
+
+<pre><code>$ rake setup_github_pages
+</code></pre>
+
+<p>接著會要求輸入 Repo 的 URL ， ex: <em>git@github.com:summerlize/summerlize.github.io.git</em></p>
+
+<h4>Error：repository not found. fatal: The remote end hung up…</h4>
+
+<p>由於 GitHub SSH 對大小寫檢查非常敏感，若輸入錯誤則會遇到上方訊息，</p>
+
+<p>建議從 Repo 頁面中右下方的 SSH clone URL 直接複製貼上，也可輸入 <code>git remote -v show</code> 檢查 URL 是否正確。</p>
+
+<p><img src="http://farm6.staticflickr.com/5494/10768727923_aecb64d43a_o.png" alt="GitHub: SSH clone URL" /></p>
+
+<p>編譯及發佈部落格</p>
+
+<pre><code>$ rake generate
+$ rake deploy
+</code></pre>
+
+<hr />
+
+<h4>Error：permission denied(publickey)</h4>
+
+<p>在執行 deploy 時我遇到了 <strong>permission denied(publickey)</strong> 的錯誤訊息，</p>
+
+<p>原因是因為沒有 SSH 連結造成，若無此問題可跳過，</p>
+
+<p>參考官方解決方法 <a href="https://help.github.com/articles/generating-ssh-keys">GitHub：Generating SSH Keys</a></p>
+
+<pre><code>$ cd ~/.ssh
+$ ls
+</code></pre>
+
+<p>檢視路徑中是否存在 <code>id_rsa.pub</code> 或 <code>id_dsa.pub</code> 檔案，</p>
+
+<p>如果沒有則需產生一組 SSH KEY ，如果有則可略過至<a href="#next">下一步驟</a>。</p>
+
+<pre><code>$ ssh-keygen -t rsa -C "your_email@example.com"
+# Creates a new ssh key, using the provided email as a label
+# Generating public/private rsa key pair.
+# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+這邊直接按 enter
+</code></pre>
+
+<p>系統會要求輸入一組密碼，注意千萬<strong>不可空白</strong>否則就要重做了。</p>
+
+<pre><code>Enter passphrase (empty for no passphrase): [Type a passphrase]
+# Enter same passphrase again: [Type passphrase again]
+</code></pre>
+
+<p id="next"></p>
+
+
+<p>產生出的檔名為 id_rsa.pub ，接著複製 SSH KEY 。</p>
+
+<pre><code>$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</code></pre>
+
+<p>進入 GitHub 網頁中的 Account Setting ，選單中的 SSH Keys 按下新增，</p>
+
+<p>將複製的內容貼在Key的位置，回到 terminal 輸入以下指令，</p>
+
+<pre><code>$ ssh -T git@github.com
+</code></pre>
+
+<p>收到以下訊息輸入 yes</p>
+
+<pre><code>The authenticity of host 'github.com (207.97.227.239)' can't be established.
+# RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+# Are you sure you want to continue connecting (yes/no)?
+yes
+</code></pre>
+
+<p>看到以下訊息表示授權成功</p>
+
+<pre><code>Hi username! You've successfully authenticated, but GitHub does not
+# provide shell access.
+</code></pre>
+
+<hr />
+
+<p>重新 deploy ，第一次發佈會時間會比較長，</p>
+
+<p>沒耐心的時間感判斷大約等了十分鐘有，</p>
+
+<p>之後發佈也是不太一定，時快時慢的，所以要多重新整理幾次。</p>
+
+<p>發佈完成把網址改成 GitHub 帳號就可以查看部落格囉～ <a href="http://username.github.com/">http://username.github.com/</a></p>
+
+<p>最後記得要把 Octopress source 也上傳到 GitHub</p>
+
+<pre><code>$ git add .
+$ git commit -m 'initial source commit'
+$ git push origin source
+</code></pre>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2013/11/12/post-article-by-octopress/">使用 Octopress 部落格發佈文章</a></p>
+]]></content>
+  </entry>
+  
+</feed>
