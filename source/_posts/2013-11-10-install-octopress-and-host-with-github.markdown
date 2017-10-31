@@ -83,8 +83,10 @@ Ruby 有兩種版本控管工具，分別是 RVM 及 Rbenv ，**選擇一種安�
 	$ \curl -L https://get.rvm.io | bash -s -- --autolibs=read-fail
 	$ \curl -L https://get.rvm.io | bash -s stable --ruby
 	
-	$ rvm install 1.9.3p327
-
+	// 舊版 rvm 指令
+	// $ rvm install 1.9.3p327
+	// 新版 rvm 1.29.3 ，版本命名方式有調整喔
+	$ rvm install ruby-1.9.3-p327
 完成後可以輸入 `ruby --version` 來檢視是否安裝成功，
 
 輸出訊息如： *ruby 1.9.3p327 (2012-11-10 revision 37606) [x86_64-darwin13.0.0]*。
