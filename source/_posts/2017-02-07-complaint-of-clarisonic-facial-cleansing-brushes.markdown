@@ -3,7 +3,7 @@ layout: post
 title: "[抱怨] Clarisonic 科萊麗洗臉機 Mia2，洗得很乾淨，也壞得很乾脆。"
 date: 2017-02-07 20:30
 comments: true
-categories: [Uncatagorized Comments]
+categories: [Uncategorized Comments]
 ---
 
 如題這是我個人小小的抱怨文，

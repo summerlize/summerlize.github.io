@@ -3,7 +3,7 @@ layout: post
 title: "[感想] 豐滿女孩的 nubra 尋找之旅"
 date: 2016-11-27 10:00
 comments: true
-categories: [Uncatagorized Comments]
+categories: [Uncategorized Comments]
 ---
 
 以下為夏天個人的使用心得，不代表適用所有人唷～

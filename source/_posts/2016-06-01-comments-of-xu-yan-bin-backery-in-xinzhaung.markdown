@@ -3,7 +3,7 @@ layout: post
 title: "[分享][新莊] 許燕斌手作烘焙"
 date: 2016-06-01 23:00
 comments: true
-categories: [Uncatagorized Comments]
+categories: [Uncategorized Comments]
 ---
 
 超愛吃麵包的夏天，從許燕斌手作烘焙開店前裝潢就注意到他了～
