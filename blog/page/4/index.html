@@ -7,8 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="點此註冊 UBER 會員
-立即獲得 4次乘車每次折抵 NT$50 (2017/8/31更新) 優惠序號 / 代碼：2na28dkvue 如果已經註冊會員，還是可以輸入優惠序號，但是必需是首次搭乘喔～ 輸入序號 2na28dkvue 如何搭乘 UBER 在 App 的主畫面中，輸入乘車地點及目的地 &hellip;">
+	<meta name="description" content="Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出， 這是由於 cookie 名稱相同所造成， 解決方式： 先安裝 templates $grails install-templates， 在 src/templates/war/web.xml 中新增自訂的名稱即可 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -135,6 +134,399 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/">
+		
+			Grails: 更改 Cookie 名稱以解決多專案無法同時登入問題</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出，</p>
+
+<p>這是由於 cookie 名稱相同所造成，</p>
+
+<p>解決方式：</p>
+
+<p>先安裝 templates <code>$grails install-templates</code>，</p>
+
+<p>在 src/templates/war/web.xml 中新增自訂的名稱即可。</p>
+
+<pre><code>&lt;session-config&gt;
+    &lt;cookie-config&gt;
+        &lt;name&gt;MY_SESSION_NAME&lt;/name&gt;
+    &lt;/cookie-config&gt;
+&lt;/session-config&gt;
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-07T22:15:00+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/">
+		
+			Facebook 按鈕造成 the Domain of This URL Isn&#8217;t Included in the App&#8217;s Domains&#8230; 錯誤 如:讚(like)、分享(share)、登入(login)&#8230;等</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>最近發現網頁出現錯誤訊息：</p>
+
+<p><font color="red">無法載入網址: The domain of this URL isn&rsquo;t included in the app&rsquo;s domains. To be able to load this URL, add all domains and subdomains of your app to the App Domains field in your app settings.</font></p>
+
+<p>檢查後發現是 facebook 按鈕造成的，</p>
+
+<p>查了相關資料應該是要將網頁與 facebook 的開發管理網站連結，</p>
+
+<p>其實不做的話按鈕還是可以正常使用，只是夏天有潔癖看了不開心 XDD</p>
+
+<p>首先登入 <a href="https://developers.facebook.com">Facebook 開發者網站</a> ，</p>
+
+<p>接著新增一個應用程式，在左邊選單點選<strong>設定</strong>選項，</p>
+
+<p>在右邊畫面下方可以找到<strong>+新增平台</strong>按鈕，點下後選取網頁類型並輸入網站網址，</p>
+
+<p>完成後按下<strong>立即開始</strong>，將程式碼加入網頁中的 body 區塊即可。</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-03T07:06:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/facebook/'>Facebook</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/">
+		
+			[分享][新莊] 許燕斌手作烘焙</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>超愛吃麵包的夏天，從許燕斌手作烘焙開店前裝潢就注意到他了～</p>
+
+<p>夏天喜歡歐式麵包，尤其法國麵包更是大愛～～</p>
+
+<p>所以平常買的麵包價格也都比傳統麵包高一點。</p>
+
+<p>記得許燕斌剛開幕前幾天我就去了，沒想到價錢真的有點嚇到我，</p>
+
+<p>夏天也不是沒買過一百元以上的麵包，但還是會看一下麵包大小份量是否值得，</p>
+
+<p>當天兩手空空的離開，基本上我從麵包店空手離開的機率是 0 耶耶～ (實在有點太震驚)</p>
+
+<p>幾個月後我娘說看到有人推薦，價錢也沒有我說的那麼誇張，(我第一次去的時候沒有找到低於60元的麵包)</p>
+
+<p>於是又燃起我再次挑戰的決心～～</p>
+
+<p>這次是下午去所以麵包還很多，</p>
+
+<p>現在很多麵包店都會提供質感很好的紙袋，要記得重複使用比較環保喔～～</p>
+
+<p><img src="https://c1.staticflickr.com/8/7695/26810605384_21209be8dd.jpg" height="350" width="350" alt="" /></p>
+
+<h3>蔥仔胖</h3>
+
+<p>首先是我娘看到別人大推的蔥麵包，其實他外觀沒有很吸引我 XDD</p>
+
+<p>因為我個人很討厭美乃滋 (很多台灣店家氾濫使用廉價美乃滋阿)，所以只要看到有美乃滋的產品多是敬謝不敏，</p>
+
+<p>但這次來就是抱著實驗的精神，加上已經有人掛保證，一定要買一個試一下的，</p>
+
+<p>這一試真是驚為天人阿～～蔥麵包的鹹度很剛好，加上少許的美乃滋不會過甜也不會膩，</p>
+
+<p>形成絕妙的搭配，而且也不會像一般蔥麵包過油的感覺，</p>
+
+<p>真的好好吃喔～～～推推推推！</p>
+
+<p>註：夏天第二次回購時，麵包比較不鹹，但是鹹一些比較好吃捏～</p>
+
+<p><img src="https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg" height="300" width="400" alt="" />
+<img src="https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg" height="300" width="300" alt="" /></p>
+
+<h3>原味脆皮泡芙</h3>
+
+<p>前幾天食尚玩家正好在介紹高雄有名的泡芙，勾起夏天滿滿的泡芙慾～手刀買一個</p>
+
+<p>脆皮泡芙的內餡是鮮奶油，不是卡士達醬路線，應該是香草牛奶口味？</p>
+
+<p>我自己是覺得還好～～表現一般 XD</p>
+
+<p>倒是包裝超級可愛～～很療癒：）</p>
+
+<p><img src="https://c3.staticflickr.com/8/7286/27385219506_26a6963863.jpg" height="220" width="220" alt="" />
+<img src="https://c3.staticflickr.com/8/7401/27385216826_8623a7842d.jpg" height="220" width="220" alt="" />
+<img src="https://c6.staticflickr.com/8/7725/27419224125_31b2a6bcbc.jpg" height="220" width="220" alt="" /></p>
+
+<h3>小腹胖胖</h3>
+
+<p>取這個名字是否會讓很多少女卻步呢 XDD</p>
+
+<p>還好夏天是不會為了身材跟美食 say no 的 XDD</p>
+
+<p>這個巧克力麵包其實蠻多歐式麵包店都有出，通常表現也不會太差，</p>
+
+<p>不過許燕斌的夏天給 95 分喔喔喔～～</p>
+
+<p>他的內餡甜度適中，還能吃到巧克力豆！是個堪稱完美比例的巧克力內餡。</p>
+
+<p>扣五分是因為醬蠻集中在一個區域的，我跟小狐狸一人剝一半吃，有些地方沒有醬拉拉～～</p>
+
+<p>夏天吃過蠻多麵包店做的同款～許燕斌的很好吃了～～推薦！</p>
+
+<p><img src="https://c2.staticflickr.com/8/7533/27419227265_587fe996e5.jpg" height="300" width="300" alt="" />
+<img src="https://c6.staticflickr.com/8/7725/27419225565_02e35a4020.jpg" height="300" width="300" alt="" /></p>
+
+<h3>可麗露</h3>
+
+<p>夏天第一次去的時候就注意到這個可麗露，實在烤的太美拉～</p>
+
+<p>口感很好，表面酥脆內部濕潤，可是表皮的味道有點奇怪 ＠_＠&hellip;</p>
+
+<p>和夏天以前吃過某留法甜點師傅做得不太一樣，</p>
+
+<p>不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P</p>
+
+<p><img src="https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg" height="250" width="250" alt="" />
+<img src="https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg" height="250" width="250" alt="" />
+<img src="https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg" height="250" width="250" alt="" /></p>
+
+<h3>伯爵美人</h3>
+
+<p>伯爵茶的香氣實在太吸引夏天了～麵包本身的伯爵茶味很出色，超有下午茶的感覺～</p>
+
+<p>中間搭配奶酥我覺得蠻妙，很好吃～不過有奶酥的時候似乎掩蓋了伯爵茶味，</p>
+
+<p>有一好沒兩好的概念 XDD</p>
+
+<p><img src="https://c1.staticflickr.com/8/7298/27420815152_f3552477d8.jpg" height="250" width="250" alt="" />
+<img src="https://c7.staticflickr.com/8/7298/27420812422_5b1f5ab453.jpg" height="250" width="250" alt="" />
+<img src="https://c2.staticflickr.com/8/7356/26911467753_49bbd02d5d.jpg" height="250" width="250" alt="" /></p>
+
+<h3>白燒芋頭</h3>
+
+<p>白燒芋頭走人如其名的路線～((覺得貼切 XD))</p>
+
+<p>咬下一口的時候想說：ㄟˊㄟˊ我的芋頭呢？</p>
+
+<p>原來芋頭在底部，蠻有趣的！試吃感想口味中規中矩 :)</p>
+
+<p>不甜不膩是蠻值得讚賞的一點，而且可以吃到完整的塊狀芋頭耶～不是只有芋泥喔！</p>
+
+<p><img src="https://c4.staticflickr.com/8/7400/26911466483_4e75df8a52.jpg" height="250" width="250" alt="" />
+<img src="https://c5.staticflickr.com/8/7391/27243092060_2a1c2356f5.jpg" height="250" width="250" alt="" />
+<img src="https://c6.staticflickr.com/8/7541/26911465133_1f9067e813.jpg" height="250" width="250" alt="" /></p>
+
+<p><a href="https://www.facebook.com/%E8%A8%B1%E7%87%95%E6%96%8C%E6%89%8B%E4%BD%9C%E7%83%98%E7%84%99-549595445218233/">許燕斌手作烘焙粉絲團</a></p>
+
+<p>營業時間：11:00 &ndash; 21:00 (2016 / 6月資訊)</p>
+
+<p>地址：新北市新莊區中平路274號</p>
+
+<p>電話：<a href="tel:0223939889">(02)8991-5828</a></p>
+
+<p>偷偷許願老闆售價可以再可愛一點嗎 >///&lt; 夏天會常常光顧的～～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-01T23:00:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/uncategorized-comments/'>Uncategorized Comments</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -306,7 +698,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/">
@@ -473,928 +865,6 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/05/23/comments-of-recommended-singapore-food-gift-from-bloggers/">
-		
-			[分享] 部落客推薦之新加坡必買伴手禮食用心得</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>此次完全就是跟風部落客推薦的伴手禮來進行採買，</p>
-
-<p>而食物以外必買的 CHARLES &amp; KEITH &lt;&lt; 真心大推，</p>
-
-<p>考慮到在網路上已有很多分享資訊，之後有時間再來聊聊它。</p>
-
-<p>這邊會依照推薦購買的指數排序，還沒有吃過的會先隨機排，陸續再調整更新。</p>
-
-<ol>
-<li><h3><strong>PRIMA TASTE Laksa LaMian 百勝廚叻沙拉麵    評論：推薦必買</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7381/26605423323_b861218bfe_b.jpg" height="280" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>得過世界泡麵評比的第二名及第三名、部落客評比第一名，</p>
-
-<p>烹調方式標示要煮 7 分鐘，但實際上應該是接近 7 分鐘就行了，</p>
-
-<p>不要超過喔，麵條才會 QQQ ～～～</p>
-
-<p>如果本身不排斥南洋風味料理，這款真的大推，</p>
-
-<p>濃郁的湯頭很難想像竟然是靠幾包調味料煮出來的～～</p>
-
-<p>椰奶的味道好香好濃～～加上夏天本身又愛吃辣，完全命中～～</p>
-
-<p>吃的時候忘了拍照，等下次煮再補上，到時候一定要去買一些海鮮加加 (大心)</p>
-
-<p>在寫這篇的時候發現同品牌的咖哩口味也是有得名的，竟然沒買回來！(驚)</p>
-
-<p>這款泡麵蠻大包的，相對體積也大，所以行李箱要很～大～咖才能多帶幾包，</p>
-
-<p>女生一個人吃會很飽～～</p>
-
-<p>登登～補上夏天版豪華海鮮 laksa ，第一次是小狐狸煮的，所以夏天不知道調味包長怎樣，</p>
-
-<p>見到本人發現它超大包的，一包滿滿的 laksa 醬，和一包滿滿的椰漿粉，</p>
-
-<p>我覺得 laksa 包聞起來有蝦醬的味道唷～～</p>
-
-<p>難怪湯頭超厲害拉～～不過為什麼可以放常溫呢～～疑惑 :P</p>
-
-<p><img src="https://c3.staticflickr.com/8/7122/26842540314_f2a167a49f.jpg" height="400" width="400" alt="" /></p>
-
-<p>有沒有有沒有！大師一出手便知有沒有 (自己說) ，哈哈，其實還有蛤蜊忘了撈起來拍了拉！</p></li>
-<li><h3><strong>PRIMA TASTE Chilli Crab LaMian 百勝廚辣椒螃蟹拉麵    評論：推薦</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7496/26605425453_026ed49a0a_b.jpg" height="280" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>一樣是百勝廚的另一款辣椒螃蟹拉麵，麵體跟 laksa 拉麵是一樣的，</p>
-
-<p>因為辣椒螃蟹也是新加坡的名產之一，於是我們也跟著手滑下去 XD</p>
-
-<p>這包是煮成乾麵的，麵條一樣好 Q 好好吃，</p>
-
-<p>醬包的份量恰到好處，每一根麵條都能附著到醬汁，</p>
-
-<p>吃起來像是泰式風味，醬汁小小辣也加分，吃起來不會不舒服的那種～</p>
-
-<p>該不會百勝廚的系列都很值得買吧！？ 前兩名已被攻佔 XDD</p>
-
-<p><img src="https://c6.staticflickr.com/9/8438/29588085621_dcff7c071e_k.jpg" height="300" width="340" alt="" /></p>
-
-<p>好的，因為這不是我煮的 XD 所以醜醜的請見諒(我就是等著吃啊) 哈哈</p></li>
-<li><h3><strong>黃亞細正宗潮州肉骨茶包    評論：推薦</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7799/26605431223_e0e9b64083_b.jpg" height="250" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：黃亞細肉骨茶 醉花林俱樂部分店</strong></font></p>
-
-<p>分店資訊：<a href="http://www.ngahsio.com/tc/chui-huay-lim-club">http://www.ngahsio.com/tc/chui-huay-lim-club</a></p>
-
-<p>有上網做過功課的孩子們應該都會知道，大多部落客比較推薦的是松發肉骨茶，</p>
-
-<p>對黃亞細的評語都是根本在喝胡椒湯之類的，</p>
-
-<p>而我和小狐狸是熱愛胡椒又嗜辣之人，想說可以挑戰一下，</p>
-
-<p>一喝下去立馬愛上那胡椒的香濃及辣舌的口感～～ (大心)(真心沒覺得是單純的胡椒湯呀)</p>
-
-<p>不過如果不特別偏好胡椒又不敢吃辣就略過它吧！</p>
-
-<p>因為太好喝了我們決定直接買它的肉骨茶包送禮，</p>
-
-<p><img src="https://c8.staticflickr.com/8/7609/28075089391_58255fd765_k.jpg" height="300" width="300" alt="" /></p>
-
-<p>可惜煮出來的湯頭還是跟店裡喝到的差很大，</p>
-
-<p>自己煮出來的是清湯路線，不濃也不辣帶些白胡椒香，</p>
-
-<p>店裡的有加整顆黑胡椒粒下去熬，喝完碗底還看的到一堆黑胡椒籽，</p>
-
-<p>不過這個肉骨茶包還是得到了我家母親大人的好評～</p>
-
-<p>anyway 買不買這個牌子是其次，但是夏天覺得肉骨茶包絕對是非常有代表性的新加坡伴手禮～～</p></li>
-<li><h3><strong>OWL Roast &amp; Ground Coffee 濾袋式沖泡研磨咖啡 含奶精    評論：推薦</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7460/27237168975_9954cb8050_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>在新加坡點茶或咖啡時， O 表示加糖， C 表示加奶加糖， Kosong 表示不加糖 &amp; 奶，</p>
-
-<p>那麼 Kopi-C Kosong 呢？加糖加奶又不加糖不加奶是怎樣 XD</p>
-
-<p>好拉～看到包裝上寫是的淡奶味咖啡，聰明的大家應該猜到了是無糖有奶咖啡了吧～</p>
-
-<p>雖然說是淡奶味咖啡，但下方的奶含量指標可是有四顆星呢！</p>
-
-<p>甜度也有半顆，實在不太明白新加坡捧油們的邏輯～～ :P</p>
-
-<p><img src="https://c1.staticflickr.com/1/523/31975360194_3ef09c78e7.jpg" height="199" width="150" alt="" />
-<img src="https://c1.staticflickr.com/3/2525/32777506146_12eeb54c95.jpg" height="199" width="139" alt="" />
-<img src="https://c1.staticflickr.com/1/359/32694929931_067e97e635.jpg" height="199" width="150" alt="" /></p>
-
-<p>裡面的小包裝和外袋幾乎一模模一樣樣，夏天自己覺得蠻可愛的有種復古感，</p>
-
-<p>而內包裝人如其名就是濾袋，夏天平時並不算常喝咖啡，但要喝一定要加奶不加糖的，</p>
-
-<p>和我喜好一樣的話我覺得蠻推薦的，咖啡濃郁，奶味香醇，且不苦不酸不澀，兩著搭配得非常平衡。</p>
-
-<p>沖泡方式完全照說明即可，水量 200-250 cc 不要多，然後時間一定要 3 分鐘以上，</p>
-
-<p>因為我一開始沒有注意時間的部分，喝了一口，還想說也太&#8221;淡&#8221;奶味了吧！ XD</p>
-
-<p>三分鐘後整個醇濃香都出來了呀～後來還回沖兩三次，喝起來還是「很可以」喔！～～</p></li>
-<li><h3><strong>BENGAWANSOLO Pandan Chiffon 班蘭葉綠蛋糕    評論：推薦嚐鮮，可買可不買</strong></h3>
-
-<p><font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font></p>
-
-<p><img src="https://c3.staticflickr.com/8/7001/27144299242_aba50f602d.jpg" height="260" width="330" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 BENGAWAN SOLO (近C登機門)</strong></font></p>
-
-<p>這是繼黑胡椒蟹外讓夏天奔波吐血的另一個伴手禮，忘記拍照只好抓官網圖了，</p>
-
-<p>由於我們是在第三航廈轉機，但先抵達第二航廈，於是就打算登機前再買才不會大包小包，</p>
-
-<p>在受某某長輩之託的尋找 Gucci 包之旅中，</p>
-
-<p>已從第二航廈 > 第三航廈 > 第一航廈 > 第二航廈 > 第三航廈 進入萬劫不復的循環中，</p>
-
-<p>轉機時間四小時就這麼快速的流逝了，沒錯，就是四小時。</p>
-
-<p>正逢準備登機前，帶著愉悅的心情去買綠蛋糕之際，</p>
-
-<p>登愣～可愛的蛋糕、人人推薦必買的蛋糕竟然位於 Check-in 大廳，也就是轉機無法進入的 Check-in 大廳，</p>
-
-<p>於是我們摸摸鼻子又往第二航廈前進，長途跋涉腳已快斷竟然沒有整顆的班蘭葉蛋糕，只有零散的小塊裝，</p>
-
-<p>詢問了店員表示要中午 12 點才會有，究竟究竟究竟？</p>
-
-<p>考慮到要送人散裝實在不太合適，可是我們 11 點半就最後登機了耶耶，</p>
-
-<p>不死心再問其他航廈會有嗎，店員說都一樣要等 12 點，</p>
-
-<p>就在我內心天人交戰決定要不要相信他，還是就這麼放棄之時，</p>
-
-<p>小狐狸用為難的臉對我說：不然就去另一家看看吧 (看我一臉沒買到很痛苦的樣子) ，</p>
-
-<p>剩沒多少時間的情況下，我們又手刀飛奔到了第一航廈，</p>
-
-<p>結果現場超多完整的班蘭蛋糕，一堆人在排隊耶！(不由得 mur mur 二航的店員一番)</p>
-
-<p>盒裝的體積還蠻大的，是很難買多的類型，</p>
-
-<p>外觀看起來像綠色的古早味蛋糕 XD</p>
-
-<p>班蘭葉的香氣非常濃厚，不過有種聞得到吃不到的感覺，</p>
-
-<p>海綿蛋糕本體則是非常的濕軟綿密，經實測冷藏大約可保存一個禮拜，</p>
-
-<p>店員是說兩三天就要吃完拉～個人經驗供大家參考。</p>
-
-<p>另外我們還有買一小塊 Pandan Cheese Roll 來試吃，是瑞士卷型態的班蘭蛋糕中間夾鹹起司，</p>
-
-<p><img src="https://c1.staticflickr.com/8/7676/27215197816_e71a7b68ac.jpg" height="200" width="200" alt="" /></p>
-
-<p>蠻好吃的，兩人分食比較不會膩。</p>
-
-<p>整體而言感想是人生中有吃過一次就 ok 的伴手禮。</p></li>
-<li><h3><strong>NISSIN Chilli Crab 日清辣椒蟹/<del>黑胡椒蟹杯麵</del> 評論：推薦，可買可不買</strong></h3>
-
-<p><font color="pink" size="+2">推薦的是辣椒蟹口味喔！</font></p>
-
-<p><img src="https://c6.staticflickr.com/8/7216/26605428133_ac74a0c24a_b.jpg" height="250" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這是因為當時鬼打牆找不到 SUPER CUP 而買的日清螃蟹杯麵，</p>
-
-<p>打開後看到調味粉已經灑在麵體上，只有一包辣醬是有包裝的，</p>
-
-<p>這次吃的是<strong>辣椒蟹</strong>杯麵，醬包全加～因為夏天很愛吃辣～～</p>
-
-<p>泡好的時候浮現滿滿的蟹肉條整個讓人心花怒放耶～哈</p>
-
-<p><img src="https://c5.staticflickr.com/9/8242/28602280020_771bf0f6fd_k.jpg" height="250" width="250" alt="" />
-<img src="https://c6.staticflickr.com/8/7736/28886825885_4254b0fd17_k.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/9/8075/28269690334_42b1bf1005_k.jpg" height="250" width="250" alt="" /></p>
-
-<p>吃前三口的時候還可以稍微感受到辣味～之後就完全無感了拉～～～不辣不辣</p>
-
-<p>麵條是細麵條，口感很不錯很適中，我真的很害怕軟爛的麵條～～～</p>
-
-<p>湯頭喝起來倒是沒覺得有什麼特別，別看它顏色很深，喝起來還算是清湯的感覺(就是調味粉重的清湯)</p>
-
-<p>不知道有沒有人懂我在說什麼耶 哈哈</p>
-
-<p>因為它的麵條很棒，所以夏天覺得蠻值得一買的～</p>
-
-<p>但若要針對是否很有「新加坡特色」，倒是還好囉～～～</p>
-
-<p>如果行李已經沒有空間就不用勉強這樣＾＾</p>
-
-<hr />
-
-<p>好der，終於來到了<strong>黑胡椒蟹</strong>的部分，</p>
-
-<p>調味模式和辣椒蟹口味是差不多的，只是辣椒蟹的醬包蠻大包，</p>
-
-<p>黑胡椒蟹則只有一小小的油包，麵條一樣是好棒棒，</p>
-
-<p>不過蟹肉少很多只有兩三塊，另外有不少的乾燥蛋，</p>
-
-<p>原本以為同品牌不同口味應該是不會差太多，所以歸類在一起，</p>
-
-<p>沒想到這湯的味道跟 SUPER CUP 有點像耶～暈</p>
-
-<p>對夏天來說太重鹹了，雖然可以看到黑胡椒粒但沒什麼黑胡椒味道，</p>
-
-<p>因為沒注意到黑胡椒醬都在底部，所以沒有攪拌的很均勻，</p>
-
-<p>吃到一半才發現下面有一大坨，趕緊攪一攪又變得更重口味了＠＠</p>
-
-<p>很像超市一種現成的黑胡椒牛排醬，太白粉勾芡口感，</p>
-
-<p>所以這款是絕對不推薦的 T_T</p>
-
-<p>也許這就是新加坡的黑胡椒口味，但不是夏天的菜～～</p>
-
-<p>ps. 因為趕著出門所以照片拍得不太好，請各位看倌見諒 >__&lt;</p>
-
-<p><img src="https://c6.staticflickr.com/6/5772/30008845021_8c602fbd55_k.jpg" height="250" width="250" alt="" />
-<img src="https://c8.staticflickr.com/6/5634/29464695463_d12a88353c_k.jpg" height="250" width="250" alt="" />
-<img src="https://c3.staticflickr.com/6/5655/30057850306_9ed6a34de7_k.jpg" height="250" width="250" alt="" /></p></li>
-<li><h3><strong>KOKA Laksa 星洲叻沙味快熟麵    評論：可買可不買</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7270/26605424223_2c7f4a59b2_b.jpg" height="280" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>一樣是 laksa 口味的泡麵，不得不說相較之下百勝廚真的大勝，</p>
-
-<p>雖然也是會驚嘆一下靠著幾包粉末就能煮出濃濃的湯汁，</p>
-
-<p>但是椰奶的滑順香濃口感還是略遜一籌，</p>
-
-<p>這款標示只要煮兩分鐘，真的只要兩分鐘，</p>
-
-<p>我請母親大人幫我煮，只是不小心煮了兩分鐘多一點吃起來就不 Q 了，</p>
-
-<p>然後湯喝起來有蠻重的薑味，個人不喜番 >__&lt;</p>
-
-<p>如果不排斥薑味的話應該也算值得一買，畢竟價錢也比百勝廚便宜很多，</p>
-
-<p>單包份量也較小，適合沒有很餓的時候吃～～</p></li>
-<li><h3><strong>GOLD KILI Double Shot White Milk Tea 特濃白奶茶    評論：可買可不買</strong></h3>
-
-<p><img src="https://c3.staticflickr.com/8/7503/27140097482_1732e005f2_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>在土司工坊吃早餐的時候，一個被新加坡奶茶驚豔到的 move ～</p>
-
-<p>雖然糖度還是有點偏甜，但是茶和奶的濃淡比例卻是恰到好處，且喝起來很柔順，</p>
-
-<p>平常愛喝奶茶的小狐狸和我看到奶茶粉馬上就決定要買，事先沒有做功課的概念 XDD</p>
-
-<p>夏天覺得喝起來像不甜的印尼拉茶美詩 (Max Tea Tarikk) 還不錯，雖然跟土司工坊喝到的還是很不一樣～</p>
-
-<p>一般我都會加比較多的水去泡喔～ &lt;&mdash;&mdash;很怕死甜的人</p></li>
-<li><h3><strong>TWG 馬卡龍    評論：可買可不買</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7306/27251162685_6d965eb8db.jpg" height="200" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 TWG Tea Boutique</strong></font></p>
-
-<p>以新加坡的物價來說，TWG 的馬卡龍應該算是超便宜的，一顆約莫 50 元左右，</p>
-
-<p>台灣很多糟糕的馬卡龍都還賣一顆 $100，</p>
-
-<p>因為在機場秒吃完&hellip;&hellip;，所以又忘記拍照了 T_T</p>
-
-<p>夏天買了四種口味，</p>
-
-<p>分別是伯爵巧克力(Earl Grey Fortune &amp; Chocolate)、抹茶(Matcha)、玫瑰(Bain de Rose Tea) 及限定口味櫻花(Sakura! Sakura! Tea)，</p>
-
-<p>雖然比起很多甜死人不償命的馬卡龍已經好很多，但還是偏甜，吃多會膩，</p>
-
-<p>不同口味吃起來的差異性並不是很明顯，所以還是無法超越目前在我心中第一名的 Ladurée ，</p>
-
-<p>但外殼的酥脆度表現不錯，整體仍然有 70 &ndash; 80 分的水準。</p></li>
-<li><h3><strong>GOLD KILI Matcha Latte 即溶抹茶拿鐵    評論：不推薦</strong></h3>
-
-<p><img src="https://c1.staticflickr.com/8/7387/27140096472_eee2bedf61_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>自從喝過國產品牌泰山推出的抹茶拿鐵即溶茶粉～就一直讓我念念不忘，</p>
-
-<p>很喜歡它帶有微苦的香氣，可惜後來都找不到哪裡還有在賣，</p>
-
-<p>夏天不喜歡太奶和太甜，偏好口感清爽的飲品，</p>
-
-<p>看到這個包裝好像很清爽的樣子 (？)，就默默的被吸引了，</p>
-
-<p>實際泡起來很甜很濃，還多了一個說不上來奇特茶味，有點拉茶的厚度，</p>
-
-<p>不是我的愛哈。</p></li>
-<li><h3><strong>SUPER CUP Black Pepper Crab 黑胡椒蟹麵    評論：不推薦</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7067/27141881051_4e71c60973_b.jpg" height="250" width="200" alt="" />
-<img src="https://c6.staticflickr.com/8/7263/27141887261_2f235056f8_b.jpg" height="250" width="240" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這款完全是被某 Blog 燒到，格主表示自己買了整箱，還很怕以後吃不到該怎麼辦的感覺～</p>
-
-<p>加上夏天熱愛胡椒口味的食物，出發前立志什麼都沒買也要買到它，</p>
-
-<p>但是沒想到它竟然偷偷換了包裝，而我也因為對自己過人的眼力太有信心，</p>
-
-<p>覺得我看到包裝一眼就能認出它，就沒注意是什麼品牌，</p>
-
-<p>就這樣害我跑了一家、兩家、三家&hellip;&hellip; fair price ，四家、五家、六家&hellip;&hellip;便利商店，</p>
-
-<p>希望大家不要學夏天當時鬼附身的執著，一整個後悔哈哈，</p>
-
-<p>在進了前兩家超市都沒找到之後，當機立斷決定其他牌子各買個兩杯吃看看，</p>
-
-<p>其中一個是日清，沒想到另一個「其他牌子」就是我尋尋覓覓的 SUPER CUP ， 囧</p>
-
-<p>直到晚上回飯店有了 wifi 才真相大白，可是隔天一早就要直奔機場沒有時間再去買，</p>
-
-<p>沒想到我竟然瘋狂到進入機場也要去機場超市看看能不能再多買一些帶回台灣，</p>
-
-<p>可惜老天爺並沒有讓我如願～～</p>
-
-<p>吃完之後的感想竟然是：感謝上蒼沒讓我多買幾杯回家 =.=</p>
-
-<p>一杯的量明明少少，但是因為不合我跟小狐狸的胃口，</p>
-
-<p>到最後兩人竟然在互推誰把剩下幾口吃掉，</p>
-
-<p>總而言之這款對夏天來說已經是比普通還糟的等級，</p>
-
-<p>味道也蠻難描述的，大概就是醬油之類的，做了些新加坡變種吧，then 完全沒有胡椒味 = =</p>
-
-<p>千萬不要跟夏天一樣「堅持」～～ XDD</p></li>
-<li><h3><strong>PRIMA TASTE Laksa 百勝廚叻沙調味包    評論：推薦</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7698/26605422373_6e6f4202be_b.jpg" height="250" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這次我有非常認真記得要拍照紀錄，內容物是一張說明書與三個料包，</p>
-
-<p><img src="https://c3.staticflickr.com/6/5654/31087330642_59e517ffe4_k.jpg" height="290" width="220" alt="" />
-<img src="https://c5.staticflickr.com/6/5723/31195701756_6bfc0cc47e_k.jpg" height="293" width="293" alt="" /></p></li>
-</ol>
-
-
-<p>下面是此次準備的食材，蝦子數隻與松阪豬一片，麵條挑拉麵或黃麵類的會比較適合喔～</p>
-
-<p><img src="https://c3.staticflickr.com/6/5344/31195695426_f511541d5f_k.jpg" height="200" width="350" alt="" /></p>
-
-<p>裡頭的醬包分別長這樣，A包就是椰漿粉，</p>
-
-<p><img src="https://c1.staticflickr.com/6/5330/31195702696_2f5a2b5f20_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>B包是叻沙糊，也就是有蝦醬味道的那包，</p>
-
-<p><img src="https://c7.staticflickr.com/6/5761/31195699086_9fdadd3f7f_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>C包是叁峇辣椒醬，說明書上有寫可依個人口味酌量加入，</p>
-
-<p>但是因為夏天一開始沒認真看就直接加整包啦～ 還好我們不怕辣 XDD</p>
-
-<p><img src="https://c7.staticflickr.com/6/5346/31195697646_8f75c65781_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>最後附上料理完成照一張。</p>
-
-<p><img src="https://c5.staticflickr.com/6/5725/31195700596_71341f377f_k.jpg" height="300" width="300" alt="" /></p>
-
-<p>好的，接下來要說說為什麼推薦他，卻又把他擺在後面呢～～</p>
-
-<p>因為夏天覺得味道吃起來跟第一名叻沙拉麵 (泡麵) 是完全一樣的，價格換算起來也差不多，</p>
-
-<p>有附麵條的拉麵會比較方便～ 且跟叻沙的契合度也會更好，</p>
-
-<p>如果純粹需要叻沙口味但不做成湯麵的捧油，這款仍然大大推薦唷！</p>
-
-<ol>
-<li><h3><strong>PRIMA TASTE Singapore Curry 百勝廚新加坡咖哩調味包 (尚未食用)</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7706/26605419643_6eec47d44f_b.jpg" height="240" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p></li>
-<li><h3><strong>PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹調味包 (尚未食用)</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7375/26605420973_8d1cb769dc_b.jpg" height="260" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p></li>
-<li><h3><strong>TWG White Sky Tea (尚未食用)</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7134/27237167765_eec071e096_b.jpg" height="200" width="450" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 TWG Tea Boutique</strong></font></p>
-
-<p>這間也是在三個航廈都有點，在第一航廈看到覺得蠻大間就先進去逛了，</p>
-
-<p>熱愛英國茶、花茶的夏天免不了要買一下，</p>
-
-<p>TWG 每一種茶旁邊都會有試聞的茶葉罐，且種類算是很豐富的，</p>
-
-<p>每一種味道都很分明，不會聞了之後嗅覺錯亂挑不出來這樣，</p>
-
-<p>印象中我挑的 white sky tea 試聞時帶有柚子香氣～～</p></li>
-</ol>
-
-
-<hr />
-
-<p>樟宜機場變化蠻快的，商店裝修、變更地點等等，</p>
-
-<p>所以建議大家下載樟宜機場 APP ，方便查詢各航廈最新的商店資訊及位置喔～～</p>
-
-<p>樟宜機場 APP下載 > <a href="http://www.changiairport.com/en/download-app.html">iChangi App</a></p>
-
-<p><a href="http://www.fairprice.com.sg/webapp/wcs/stores/servlet/AjaxStoreLocatorDisplayView?storeId=10001">點我查看 Fair Price 分店資訊及營業時間</a></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-23T23:00:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>, <a class='category' href='/blog/categories/singapore/'>Singapore</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/05/23/comments-of-recommended-singapore-food-gift-from-bloggers/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/05/22/grails-replace-resources-plugin-to-asset-pipeline/">
-		
-			Grails: 將 Resources Plugin 替換為 Asset-pipeline</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>根據 Grails 官方 plugins 的介紹， Asset-Pipeline 是用來管理與處理靜態資源，包含壓縮及打包 CSS 與 JS 檔，且支援編譯自訂的靜態語言，例如：CoffeeScript 。</p>
-
-<p>Asset-Pipeline 是用來取代相同作用的 resources-plugin ，並提供更有效益及友善的開發架構。透過最小化 JS 來降低靜態資源的大小。與 resources plugin 的差異如下：</p>
-
-<ol>
-<li>動態處理，不需要因為檔案變更而重新載入資源。</li>
-<li>在 war 產生時編譯資源，不影響到 server 啟動的時間。</li>
-<li>經由壓縮、最小化、建立緩存減少檔案間的交互作用。</li>
-<li>在 development 模式中，保持各個檔案獨立 (不壓縮成一個檔案) ，方便除錯。</li>
-<li>使用簡易的 manifest 和 taglib 設計 (清單與標籤) 來讀取資訊。</li>
-</ol>
-
-
-<p>接下來就要將現有專案中的 resources plugin 更換為 asset-pipeline 囉～</p>
-
-<h3>step 1:</h3>
-
-<p>將<em>yourProjectPath</em>/grails-app/conf/<strong>buildConfig.groovy</strong> 中 <code>runtime ':resources:1.n.n'</code> 替換為 <code>org.grails.plugins:asset-pipeline:2.n.n</code></p>
-
-<figure class='code'><figcaption><span>grails-app/conf/buildConfig.groovy </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">plugins</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">build</span> <span class="s1">&#39;:tomcat:7.0.54&#39;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">runtime</span> <span class="s1">&#39;:hibernate4:4.3.5.2&#39;</span>
-</span><span class='line'>        <span class="n">runtime</span> <span class="s1">&#39;:database-migration:1.4.0&#39;</span>
-</span><span class='line'>        <span class="n">compile</span> <span class="s2">&quot;:jquery:1.11.1&quot;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">runtime</span> <span class="s1">&#39;:resources:1.2.14&#39;</span> <span class="c1">//刪除此行</span>
-</span><span class='line'>        <span class="n">compile</span> <span class="s2">&quot;org.grails.plugins:asset-pipeline:2.8.0&quot;</span> <span class="c1">//新增此行</span>
-</span><span class='line'> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>啟動 grails 會發現 <em>yourProjectPath</em>/grails-app 底下多了 <strong>assets</strong> 資料夾</p>
-
-<h3>step 2:</h3>
-
-<ol>
-<li>將 <em>yourProjectPath</em>/web-app/<strong>js</strong> 中的檔案複製至 <em>yourProjectPath</em>/grails-app/assets/<strong>javascripts</strong></li>
-<li>將 <em>yourProjectPath</em>/web-app/<strong>css</strong> 中的檔案複製至 <em>yourProjectPath</em>/grails-app/assets/<strong>stylesheets</strong></li>
-<li><p>將 <em>yourProjectPath</em>/web-app/<strong>images</strong> 中的檔案複製至 <em>yourProjectPath</em>/grails-app/assets/<strong>images</strong></p>
-
-<p>ps. 如沒有其他程式碼使用 web-app 中三個資源資料夾的內容，可自行決定是否將其刪除。</p></li>
-<li><p>刪除 resources plugin 相關的 config 設定，搜尋 project 中 <strong>grails.resources</strong> 開頭的 config 。</p>
-
-<p>ex: grails.resources.debug=true</p>
-
-<p>ex: grails.resources.adhoc.patterns = [&lsquo;/images/<em>&rsquo;, &lsquo;/css/</em>&rsquo;, &lsquo;/js/<em>&rsquo;, &lsquo;/plugins/</em>&rsquo;]</p></li>
-</ol>
-
-
-<h3>step 3:</h3>
-
-<ol>
-<li><p>參考原先 GSP 頁面所載入的 js 、 css ，</p>
-
-<p>在 <em>yourProjectPath</em>/grails-app/assets/<strong>javascripts</strong> 中新增一隻 js 檔，用來編輯 GSP 檔所需載入的 js 。</p>
-
-<p>在 <em>yourProjectPath</em>/grails-app/assets/<strong>stylesheets</strong> 中新增一隻 css 檔，用來編輯 GSP 檔所需載入的 css 。</p>
-
-<p><em>yourProjectPath</em>/grails-app/<strong>views/myGspPage.gsp</strong></p>
-
-<pre><code>&lt;r:require modules="js, css"/&gt; // 載入 js 、 css module
-</code></pre>
-
-<p><em>yourProjectPath</em>/grails-app/<strong>conf/ApplicationResources.groovy</strong></p>
-
-<pre><code>modules = {
-    js { // js module
-        resource url: 'js/bootstrap.js'
-        resource url: 'js/magnific-popup.js'
-        resource url: 'js/app/models.js'
-    }
-    css { // css module
-        resource url: 'css/bootstrap.css'
-        resource url: 'css/magnific-popup.css'
-        resource url: 'css/layout.css'
-        resource url: 'css/style.css'
-    }
-}
-</code></pre>
-
-<p>在新的 js 檔中編寫要載入的 js 檔，以 <code>//=</code> 開頭。</p>
-
-<p><em>yourProjectPath</em>/grails-app/assets/<strong>stylesheets/application.js</strong></p>
-
-<pre><code>//= require app/models.js
-//= require bootstrap
-//= require magnific-popup
-</code></pre>
-
-<p>在新的 css 檔中編寫要載入的 css 檔，以 <code>*=</code> 開頭。</p>
-
-<p><em>yourProjectPath</em>/grails-app/assets/<strong>stylesheets/application.css</strong></p>
-
-<pre><code>/*
-*= require bootstrap
-*= require magnific-popup
-*= require layout
-*= require style
-*/
-</code></pre></li>
-<li><p>將 GSP 頁面載入 js、css 的程式碼改為 asset-pipeline 寫法。</p>
-
-<p><em>yourProjectPath</em>/grails-app/<strong>views/myGspPage.gsp</strong></p>
-
-<pre><code>&lt;r:require modules="js, css"/&gt;              // 改寫此行
-
-&lt;head&gt;
-&lt;asset:javascript src="application.js"/&gt;    // 加入剛才新增的 js 載入清單
-&lt;asset:stylesheet href="application.css"/&gt;  // 加入剛才新增的 css 載入清單
-&lt;/head&gt;
-</code></pre></li>
-<li><p>將 GSP 頁面載入圖片的程式碼改為 asset-pipeline 寫法。</p>
-
-<p><em>yourProjectPath</em>/grails-app/views/<strong>myGspPage.gsp</strong></p>
-
-<pre><code>// 改寫以下兩行
-&lt;r:img uri="images/logo.png" width="100" height="50"/&gt;
-&lt;r:img dir="images" file="logo.png" width="100" height="50"/&gt;
-
-// asset-pipeline 載入圖片寫法
-&lt;head&gt;
-&lt;asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/&gt;
-&lt;asset:link rel="shortcut icon" href="logo.png" width="100" height="50"/&gt;
-&lt;/head&gt;
-</code></pre></li>
-<li><p>將 GSP 頁面載入資源的程式碼改為 asset-pipeline 寫法。</p>
-
-<p><em>yourProjectPath</em>/grails-app/views/<strong>myGspPage.gsp</strong></p>
-
-<pre><code>//改寫此類語法
-&lt;link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon" /&gt;
-
-//asset-pipeline 寫法
-&lt;link rel="shortcut icon" href="${assetPath(src: 'images/favicon.ico')}" type="image/x-icon" /&gt;
-</code></pre></li>
-<li><p>將 GSP 頁面所有 &lt;r:script> 標籤改為 &lt;asset:script> 、 &lt;/r:script> 標籤改為 &lt;/asset:script> 。</p>
-
-<p>並在主要的 GSP 頁面 body 區塊加入 <code>&lt;asset:deferredScripts/&gt;</code> ，用來指定輸出 &lt;asset:script> 的位置，一般在段落的最末處。</p></li>
-<li><p>將 GSP 頁面所有 &lt;g:javascripts 標籤改為 &lt;asset:script 。</p></li>
-<li><p>刪除 resources plugin 資源模組定義檔案 <em>yourProjectPath</em>/grails-app/conf/<strong>ApplicationResources.groovy</strong></p></li>
-<li><p>刪除 GSP 頁面中所有 <code>&lt;r:layoutResources/&gt;</code> 標籤。</p></li>
-<li><p>確認所有 GSP 頁面中沒有 <code>&lt;r:</code> 開頭的標籤</p></li>
-</ol>
-
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-22T02:16:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/grails/'>Grails</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/05/22/grails-replace-resources-plugin-to-asset-pipeline/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">
-		
-			同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>現實中我們可能希望 GitHub 的私人與工作帳號能有所區分，</p>
-
-<p>假設私人帳號為 personal 、工作帳號為 work ，步驟如下：</p>
-
-<h3>Step1</h3>
-
-<p>需產生兩組不同的 ssh ，如原先已設定好 ssh 則可跳過此步驟。</p>
-
-<p>首先產生私人帳號 personal 的金鑰，</p>
-
-<pre><code>$ ssh-keygen -t rsa -C "personal@mail.com"
-Generating public/private rsa key pair.
-Enter file in which to save the key (/Users/username/.ssh/id_rsa): 
-</code></pre>
-
-<p><font color="#1E90FF">~/.ssh/id_rsa_personal</font></p>
-
-<pre><code>Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-</code></pre>
-
-<p><font color="#1E90FF">輸入密碼</font></p>
-
-<pre><code>Your identification has been saved in ~/.ssh/id_rsa_personal.
-Your public key has been saved in ~/.ssh/id_rsa_personal.pub.
-The key fingerprint is:
-SHA256:RP68Sn3j79q8U2h80cpifw3WKNTDn7b6aw8YDLbJ9Uo personal@mail.com
-</code></pre>
-
-<p>接著將 <code>~/.ssh/id_rsa_personal.pub</code> 中的金鑰複製起來，</p>
-
-<p>再到 GitHub   點選右上角帳號圖像，選 Settings ， 進入 SSH and GPG Keys ，</p>
-
-<p>點選 New SSH Key ，在 title 輸入方便自己辨識的名稱，例如 homeComputer-personal ssh ，</p>
-
-<p>並將剛才複製的金鑰貼在 key 的區塊，再按下 Add SSH Key 按鈕完成。</p>
-
-<p>再使用指令 <code>ssh-keygen -t rsa -C "work@mail.com"</code> 針對工作帳號 work 重複上面的步驟，</p>
-
-<h3>Step2</h3>
-
-<p>切換至 ssh 資料夾，並新增 config 檔案。</p>
-
-<pre><code>$ cd ~/.ssh
-$ touch ~/.ssh/config
-</code></pre>
-
-<p>將下方 code 複製到 config 檔案中</p>
-
-<pre><code>Host github.com-personal
-HostName github.com
-User git
-IdentityFile ~/.ssh/id_rsa_personal
-
-Host github.com-work
-HostName github.com
-User git
-IdentityFile ~/.ssh/id_rsa_work
-</code></pre>
-
-<p>接下來將 project 的 remote url 設為 config 中的 host 名稱。</p>
-
-<p>例如原本是 git@<font color="red">github.com</font>:personal/personalproject.git 更新為 git@<font color="red">github.com-personal</font>:personal/personalproject.git</p>
-
-<pre><code>$ cd yourPersonalProjectPath
-$ git remote set-url origin git@github.com-personal:personal/personalproject
-$ cd yourWorkProjectPath
-$ git remote set-url origin git@github.com-work:work/workproject
-</code></pre>
-
-<p>若此時仍是以原先帳號上傳，則可使用指令 <code>ssh-add -l</code> 查看目前 ssh agent 有在管控的 key passphrase 。</p>
-
-<p>使用 <code>ssh-add -d</code> 把所有舊的 ssh agent 管控的 key passphrase 都清掉。</p>
-
-<p>也可使用 <code>ssh -T github.com-personal</code> 測試是否有已設定的 ssh 連線，</p>
-
-<p>正確的話 username 會出現相應的名稱，例如 <strong>personal</strong> 。</p>
-
-<p>Hi <strong>username</strong>! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access.</p>
-
-<hr />
-
-<p>相關文章：</p>
-
-<p><a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-21T10:53:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/git/'>Git</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1406,23 +876,23 @@ $ git remote set-url origin git@github.com-work:work/workproject
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/17/yunlinxian-douliu-food-list/">[美食][斗六] 夏天吃吃賞</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">[美食][新莊] 夏天吃吃賞</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/">[推薦碼0125005366] 台新卡得利 Cardaily - 信用卡專屬 APP 輸入推薦碼送 $50 刷卡金</a>
       </li>
     
       <li class="post">
         <a href="/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code/">[綁定好友推薦] 台新 Richart 網銀開戶送 $500 優惠金</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/07/complaint-of-clarisonic-facial-cleansing-brushes/">[抱怨] Clarisonic 科萊麗洗臉機 Mia2，洗得很乾淨，也壞得很乾脆。</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/02/02/recommend-movie-la-la-land/">[電影推薦] 樂來越愛你 La La Land - 愛情與夢想的抉擇，音樂太好聽先給1000分！！</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/12/19/truly-recommend-mefen-fc-tablets-for-menstrual-pain/">[真心推薦] 拯救經痛人生的神奇止痛藥-井田莫炎膜衣錠</a>
       </li>
     
   </ul>
@@ -1434,6 +904,7 @@ $ git remote set-url origin git@github.com-work:work/workproject
 <li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
 <li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
 <li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
 <li class='category'><a href='/blog/categories/git/'>Git (2)</a></li>
 <li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
 <li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
@@ -1445,7 +916,7 @@ $ git remote set-url origin git@github.com-work:work/workproject
 <li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
 <li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (2)</a></li>
-<li class='category'><a href='/blog/categories/uncatagorized-comments/'>Uncatagorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
 
   </ul>
