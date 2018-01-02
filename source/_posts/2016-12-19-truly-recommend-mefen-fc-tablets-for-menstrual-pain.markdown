@@ -3,7 +3,7 @@ layout: post
 title: "[真心推薦] 拯救經痛人生的神奇止痛藥-井田莫炎膜衣錠"
 date: 2016-12-19 20:00
 comments: true
-categories: [Uncatagorized Comments]
+categories: [Uncategorized Comments]
 ---
 
 好的，雖然我標題打出了商品名稱、廠商名稱，

@@ -3,7 +3,7 @@ layout: post
 title: "[感想] Wingbra CP值 小朋友掰掰了"
 date: 2016-03-31 06:04
 comments: true
-categories: [Uncatagorized Comments]
+categories: [Uncategorized Comments]
 ---
 
 因為拍婚紗的關係，踏上了找尋 nu bra 之路。
