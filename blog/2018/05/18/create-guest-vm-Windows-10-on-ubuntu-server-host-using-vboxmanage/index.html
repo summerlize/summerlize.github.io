@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Octopress 安裝 + GitHub 架設部落格筆記 - 這個夏天。</title>
+	<title>安裝 Guest VM Windows 10 於 Ubuntu Server Host - 這個夏天。</title>
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="終於在奮戰了幾天之後，架好了我的 Octopress >__&lt; 還記得小時候 (?) 一直都有寫 blog 的習慣，反而因為變成大人 (?) 之後荒廢了， 雖然號稱小小程式設計者，但我的學習歷程一直著重在邏輯的處理， 技術上長期沒什麼突破&hellip; (汗) anyway &hellip;">
+	<meta name="description" content="Ubuntu 版本: 16.04 Xenial VBoxManage: 5.1.34_Ubuntur121010 首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔， 使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,7 +81,7 @@
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Octopress 安裝 + GitHub 架設部落格筆記</h2>
+	<h2 class="title">安裝 Guest VM Windows 10 於 Ubuntu Server Host</h2>
 	<div class="entry-content">
 		<!-- AddThis Button -->
 		<div class="addthis_toolbox addthis_default_style ">
@@ -105,238 +105,142 @@
 		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
 		<!-- AddThis Button END -->
-		<p>終於在奮戰了幾天之後，架好了我的 Octopress >__&lt;</p>
+		<p>Ubuntu 版本: 16.04 Xenial</p>
 
-<p>還記得小時候 (?) 一直都有寫 blog 的習慣，反而因為變成大人 (?) 之後荒廢了，</p>
+<p>VBoxManage: 5.1.34_Ubuntur121010</p>
 
-<p>雖然號稱小小程式設計者，但我的學習歷程一直著重在邏輯的處理，</p>
+<p>首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔，</p>
 
-<p>技術上長期沒什麼突破&hellip; (汗)</p>
+<p>使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下，</p>
 
-<p>anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這個好東西，</p>
+<pre><code>$ vboxmanage list ostypes|grep Windows
 
-<p>不但可以用來撰寫技術文章，還可以達到快速排版的效果，</p>
-
-<p>真的很吸引我這個懶惰蟲～</p>
-
-<p>可是～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
-
-<p>對一個剛接觸「指令操作」不久、git 完全不熟悉的新手而言真的會覺得有點恐懼，</p>
-
-<p>因此在這邊記錄我的安裝過程以及遇到的問題，希望能對跟我一樣困惑的小朋友有所幫助 :P</p>
-
-<h4>作業系統：OS X 10.9</h4>
-
-<h3>Step1 安裝GIT</h3>
-
-<p>直接到網址下載安裝即可。</p>
-
-<p><a href="http://code.google.com/p/git-osx-installer">http://code.google.com/p/git-osx-installer</a></p>
-
-<p>或者參考官網安裝方式。</p>
-
-<p><a href="http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit">http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit</a></p>
-
-<h3>Step2 安裝Ruby</h3>
-
-<p>Ruby 有兩種版本控管工具，分別是 RVM 及 Rbenv ，<strong>選擇一種安裝即可</strong>。</p>
-
-<p>一開始我照著官網安裝 RVM 失敗了，所以當時改以 Rbenv 來安裝。</p>
-
-<p>但因為歷史久遠我已經忘記拉～所以這邊先依照官網的說明貼上 XD</p>
-
-<p>以下是 Mac 的建議安裝方法，先使用 Homebrew 套件管理工具來安裝 Rbenv ，</p>
-
-<p>由於 Rbenv 只對 Ruby 進行版本控管，並沒有安裝的功能，因此必須另外安裝 ruby-build 才能進行安裝。</p>
-
-<h4>Rbenv</h4>
-
-<pre><code>$ brew update
-$ brew install rbenv
-$ brew install ruby-build
+Family Desc: Microsoft Windows
+ID:          Windows10_64
+Description: Windows 10 (64-bit)
+Family ID:   Windows
 </code></pre>
 
-<p>安裝完 Rbenv 及 ruby-build 後便可以開始安裝 ruby 囉！</p>
+<p>使用指令新增 VM，這裡將 VM 命名 WIN10，ostype 代入上面查出之 ID。</p>
 
-<p>最後必須執行 rehash 來進行版本重置。</p>
+<pre><code>$ vboxmanage createvm --name WIN10 --ostype Windows10_64 --register
 
-<pre><code>$ rbenv install 1.9.3-p0
-$ rbenv rehash
+Virtual machine 'WIN10' is created and registered.
+UUID: 17b26672-f7cb-432e-a4e9-b8c0784da1d4
+Settings file: '/home/pipi/VirtualBox VMs/WIN10/WIN10.vbox'
 </code></pre>
 
-<p>然後～～～～</p>
+<p>指派記憶體、CPU等硬體資源，</p>
 
-<p>我的第一次 Octopress 安裝就到這裡中斷了 (掩面) ，</p>
-
-<p>當時假會的裝了新版的 Ruby 2.0 ，</p>
-
-<p>後來竟然和我的工作環境衝突，只好進行降版，</p>
-
-<p>使用 Rbenv 降版幾次都失敗後，<del>就被迫改以 RVM 重新安裝</del>，</p>
-
-<p><del>畢竟工作時間就是金錢，老闆是不會等我 try N 次的 (哭)</del>，</p>
-
-<p>一樣乖乖地輸入完下面的指令就可以摟～</p>
-
-<h4>RVM</h4>
-
-<pre><code>$ \curl -L https://get.rvm.io | bash
-$ \curl -L https://get.rvm.io | bash -s -- --autolibs=read-fail
-$ \curl -L https://get.rvm.io | bash -s stable --ruby
-
-// 舊版 rvm 指令
-// $ rvm install 1.9.3p327
-// 新版 rvm 1.29.3 ，版本命名方式有調整喔
-$ rvm install ruby-1.9.3-p327
+<pre><code>$ vboxmanage modifyvm WIN10 --memory 4096 --vram 32 --acpi on --ioapic on --cpus 2 --rtcuseutc on --cpuhotplug on --pae on --hwvirtex on11
 </code></pre>
 
-<p>完成後可以輸入 <code>ruby --version</code> 來檢視是否安裝成功，</p>
+<p>設定 bridged 網路，</p>
 
-<p>輸出訊息如： <em>ruby 1.9.3p327 (2012-11-10 revision 37606) [x86_64-darwin13.0.0]</em>。</p>
-
-<p>準備好 Octopress 的前置工作終於可以進入正題了！</p>
-
-<h3>Step3 安裝Octopress</h3>
-
-<p>先將 Octopress 的 source code 複製到本機，</p>
-
-<p>指令的最後指的是你希望存放的資料夾名稱，如果參考官網預設是使用 <code>octopress</code> 。</p>
-
-<pre><code>$ git clone git://github.com/imathis/octopress.git yourProjectName
-$ cd yourProjectName
+<pre><code>$ vboxmanage modifyvm WIN10 --nic1 bridged --bridgeadapter1 eno0 --cableconnected1 on
 </code></pre>
 
-<p>接著安裝 bundler</p>
+<p>指派 vrde (VirtualBox Remote Desktop Extension) port，可使用遠端桌面軟體連線。</p>
 
-<pre><code>$ gem install bundler
-$ rbenv rehash    #使用Rbenv套件者才需執行
-$ bundle install
+<pre><code>$ vboxmanage modifyvm WIN10 --vrde on --vrdeport 5001 --vrdeauthtype null
 </code></pre>
 
-<p>最後安裝 Octopress 預設的布景主題</p>
+<p>新增 VM 硬碟容量 50G，</p>
 
-<pre><code>$ rake install
+<pre><code>$ vboxmanage createhd --filename /vm/hd/WIN10.vdi --size 51200
 </code></pre>
 
-<p>基本上到這邊算是完成了 Octopress 的安裝，可以輸入以下指令來檢視是否安裝成功。</p>
+<p>加入 SATA 控制器，</p>
 
-<pre><code>$ rake generate
-$ rake preview
+<p>ps. 可依需求自設選項 (Hard disk controllers: IDE, SATA (AHCI), SCSI, SAS, USB MSD, NVMe)</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "SATA controller" --add sata
 </code></pre>
 
-<p>執行 <code>rake preview</code> 啓動 server 後，可以在 <a href="http://localhost:4000">http://localhost:4000</a> 檢視部落格。</p>
+<p>連結硬碟，</p>
 
-<h3>Step4 部署GitHub</h3>
-
-<p>首先必須申請 <a href="https://github.com/">GitHub</a> 帳號，並且建立一個用來存放部落格代碼的程式庫 (Repository) 。</p>
-
-<p>Repo 的命名必須遵照規則 <strong>username.github.io</strong> ，</p>
-
-<p>例如我帳號/組織代號為 <strong>summerlize</strong> ， Repo 則需命名為 <strong>summerlize</strong>.github.io 。</p>
-
-<p>輸入指令設定 GitHub page</p>
-
-<pre><code>$ rake setup_github_pages
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "SATA controller" --port 0 --device 0 --type hdd --medium /vm/hd/WIN10.vdi
 </code></pre>
 
-<p>接著會要求輸入 Repo 的 URL ， ex: <em>git@github.com:summerlize/summerlize.github.io.git</em></p>
+<p>加入 IDE 控制器，</p>
 
-<h4>Error：repository not found. fatal: The remote end hung up…</h4>
-
-<p>由於 GitHub SSH 對大小寫檢查非常敏感，若輸入錯誤則會遇到上方訊息，</p>
-
-<p>建議從 Repo 頁面中右下方的 SSH clone URL 直接複製貼上，也可輸入 <code>git remote -v show</code> 檢查 URL 是否正確。</p>
-
-<p><img src="http://farm6.staticflickr.com/5494/10768727923_aecb64d43a_o.png" alt="GitHub: SSH clone URL" /></p>
-
-<p>編譯及發佈部落格</p>
-
-<pre><code>$ rake generate
-$ rake deploy
+<pre><code>$ vboxmanage storagectl WIN10 --name "IDE controller" --add ide
 </code></pre>
 
-<hr />
+<p>以光碟機方式連結 OS 安裝檔，</p>
 
-<h4>Error：permission denied(publickey)</h4>
-
-<p>在執行 deploy 時我遇到了 <strong>permission denied(publickey)</strong> 的錯誤訊息，</p>
-
-<p>原因是因為沒有 SSH 連結造成，若無此問題可跳過，</p>
-
-<p>參考官方解決方法 <a href="https://help.github.com/articles/generating-ssh-keys">GitHub：Generating SSH Keys</a></p>
-
-<pre><code>$ cd ~/.ssh
-$ ls
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "IDE controller"  --port 0 --device 0 --type dvddrive --medium /home/user/Windows10_64bit.iso
 </code></pre>
 
-<p>檢視路徑中是否存在 <code>id_rsa.pub</code> 或 <code>id_dsa.pub</code> 檔案，</p>
+<p>啟動 VM 後，就能用 windows 的遠端桌面連線 (RDC) 連上 VM 完成後續安裝步驟囉！</p>
 
-<p>如果沒有則需產生一組 SSH KEY ，如果有則可略過至<a href="#next">下一步驟</a>。</p>
+<h3>常用 command</h3>
 
-<pre><code>$ ssh-keygen -t rsa -C "your_email@example.com"
-# Creates a new ssh key, using the provided email as a label
-# Generating public/private rsa key pair.
-# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-這邊直接按 enter
+<p>啟動 VM</p>
+
+<p><code>$ vboxmanage startvm WIN10 --type headless</code></p>
+
+<p>關機 VM</p>
+
+<p><code>$ vboxmanage controlvm WIN10 poweroff</code></p>
+
+<p>list 所有 VM</p>
+
+<p><code>$ vboxmanage list vms</code></p>
+
+<p>list 執行中的 VM</p>
+
+<p><code>$ vboxmanage list runningvms</code></p>
+
+<p>show VM 資訊</p>
+
+<p><code>$ vboxmanage showvminfo WIN10</code></p>
+
+<p>移除 VM 但保留相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10</code></p>
+
+<p>移除 VM 並刪除相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10 --delete</code></p>
+
+<p>匯出 VM</p>
+
+<p><code>$ vboxmanage export WIN10 -o /home/user/WIN10.ova</code></p>
+
+<p>增加硬碟容量，進入 OS 使用電腦管理>> 磁碟管理分配容量。</p>
+
+<p><code>$ vboxmanage modifyhd /vm/hd/WIN10.vdi --resize 81920</code></p>
+
+<p>調整記憶體大小</p>
+
+<p><code>$ vboxmanage modifyvm WIN10 --memory 8192</code></p>
+
+<p>詳細 API 請參考 <a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></p>
+
+<h3>區網 IP 設置</h3>
+
+<p>前面已設置一組 bridged network nic1 for 設置固定 IP 使用，</p>
+
+<p>接下來再設置一組 nat network nic2 for 區網 IP。</p>
+
+<pre><code># 設置一組 nat 區域網路 IP 命名為 natnet1
+$ vboxmanage natnetwork add --netname natnet1 --network "192.168.0.101/24" --enable
+
+$ vboxmanage natnetwork modify --netname natnet1 --dhcp on
+
+# 啟動 nat 網路設定
+$ VBoxManage natnetwork start --netname natnet1
+
+# 關機
+$ vboxmanage controlvm WIN10 poweroff
+
+# 將 natnet1 加入至 VM 網路
+$ vboxmanage modifyvm WIN10 --nic2 nat --nat-network2 natnet1
+
+# 開機
+$ vboxmanage startvm WIN10 --type headless
 </code></pre>
-
-<p>系統會要求輸入一組密碼，注意千萬<strong>不可空白</strong>否則就要重做了。</p>
-
-<pre><code>Enter passphrase (empty for no passphrase): [Type a passphrase]
-# Enter same passphrase again: [Type passphrase again]
-</code></pre>
-
-<p id="next"></p>
-
-
-<p>產生出的檔名為 id_rsa.pub ，接著複製 SSH KEY 。</p>
-
-<pre><code>$ pbcopy &lt; ~/.ssh/id_rsa.pub
-</code></pre>
-
-<p>進入 GitHub 網頁中的 Account Setting ，選單中的 SSH Keys 按下新增，</p>
-
-<p>將複製的內容貼在Key的位置，回到 terminal 輸入以下指令，</p>
-
-<pre><code>$ ssh -T git@github.com
-</code></pre>
-
-<p>收到以下訊息輸入 yes</p>
-
-<pre><code>The authenticity of host 'github.com (207.97.227.239)' can't be established.
-# RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-# Are you sure you want to continue connecting (yes/no)?
-yes
-</code></pre>
-
-<p>看到以下訊息表示授權成功</p>
-
-<pre><code>Hi username! You've successfully authenticated, but GitHub does not
-# provide shell access.
-</code></pre>
-
-<hr />
-
-<p>重新 deploy ，第一次發佈會時間會比較長，</p>
-
-<p>沒耐心的時間感判斷大約等了十分鐘有，</p>
-
-<p>之後發佈也是不太一定，時快時慢的，所以要多重新整理幾次。</p>
-
-<p>發佈完成把網址改成 GitHub 帳號就可以查看部落格囉～ <a href="http://username.github.com/">http://username.github.com/</a></p>
-
-<p>最後記得要把 Octopress source 也上傳到 GitHub</p>
-
-<pre><code>$ git add .
-$ git commit -m 'initial source commit'
-$ git push origin source
-</code></pre>
-
-<hr />
-
-<p>相關文章：</p>
-
-<p><a href="/blog/2013/11/12/post-article-by-octopress/">使用 Octopress 部落格發佈文章</a></p>
 
 	</div>
 
@@ -354,11 +258,11 @@ $ git push origin source
   
 
 
-<time datetime="2013-11-10T05:11:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2013</time></div>
+<time datetime="2018-05-18T12:00:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2018</time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+	<a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>
 
 
 </div>
@@ -531,8 +435,8 @@ $ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://summerlize.github.io/blog/2013/11/10/install-octopress-and-host-with-github/';
-        var disqus_url = 'http://summerlize.github.io/blog/2013/11/10/install-octopress-and-host-with-github/';
+        var disqus_identifier = 'http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/';
+        var disqus_url = 'http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/';
         var disqus_script = 'embed.js';
       
     (function () {

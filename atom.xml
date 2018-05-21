@@ -4,7 +4,7 @@
   <title><![CDATA[這個夏天。]]></title>
   <link href="http://summerlize.github.io/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-01-17T13:57:52+08:00</updated>
+  <updated>2018-05-21T16:08:44+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -12,6 +12,150 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[安裝 Guest VM Windows 10 於 Ubuntu Server Host]]></title>
+    <link href="http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/"/>
+    <updated>2018-05-18T12:00:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage</id>
+    <content type="html"><![CDATA[<p>Ubuntu 版本: 16.04 Xenial</p>
+
+<p>VBoxManage: 5.1.34_Ubuntur121010</p>
+
+<p>首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔，</p>
+
+<p>使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下，</p>
+
+<pre><code>$ vboxmanage list ostypes|grep Windows
+
+Family Desc: Microsoft Windows
+ID:          Windows10_64
+Description: Windows 10 (64-bit)
+Family ID:   Windows
+</code></pre>
+
+<p>使用指令新增 VM，這裡將 VM 命名 WIN10，ostype 代入上面查出之 ID。</p>
+
+<pre><code>$ vboxmanage createvm --name WIN10 --ostype Windows10_64 --register
+
+Virtual machine 'WIN10' is created and registered.
+UUID: 17b26672-f7cb-432e-a4e9-b8c0784da1d4
+Settings file: '/home/pipi/VirtualBox VMs/WIN10/WIN10.vbox'
+</code></pre>
+
+<p>指派記憶體、CPU等硬體資源，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --memory 4096 --vram 32 --acpi on --ioapic on --cpus 2 --rtcuseutc on --cpuhotplug on --pae on --hwvirtex on11
+</code></pre>
+
+<p>設定 bridged 網路，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --nic1 bridged --bridgeadapter1 eno0 --cableconnected1 on
+</code></pre>
+
+<p>指派 vrde (VirtualBox Remote Desktop Extension) port，可使用遠端桌面軟體連線。</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --vrde on --vrdeport 5001 --vrdeauthtype null
+</code></pre>
+
+<p>新增 VM 硬碟容量 50G，</p>
+
+<pre><code>$ vboxmanage createhd --filename /vm/hd/WIN10.vdi --size 51200
+</code></pre>
+
+<p>加入 SATA 控制器，</p>
+
+<p>ps. 可依需求自設選項 (Hard disk controllers: IDE, SATA (AHCI), SCSI, SAS, USB MSD, NVMe)</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "SATA controller" --add sata
+</code></pre>
+
+<p>連結硬碟，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "SATA controller" --port 0 --device 0 --type hdd --medium /vm/hd/WIN10.vdi
+</code></pre>
+
+<p>加入 IDE 控制器，</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "IDE controller" --add ide
+</code></pre>
+
+<p>以光碟機方式連結 OS 安裝檔，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "IDE controller"  --port 0 --device 0 --type dvddrive --medium /home/user/Windows10_64bit.iso
+</code></pre>
+
+<p>啟動 VM 後，就能用 windows 的遠端桌面連線 (RDC) 連上 VM 完成後續安裝步驟囉！</p>
+
+<h3>常用 command</h3>
+
+<p>啟動 VM</p>
+
+<p><code>$ vboxmanage startvm WIN10 --type headless</code></p>
+
+<p>關機 VM</p>
+
+<p><code>$ vboxmanage controlvm WIN10 poweroff</code></p>
+
+<p>list 所有 VM</p>
+
+<p><code>$ vboxmanage list vms</code></p>
+
+<p>list 執行中的 VM</p>
+
+<p><code>$ vboxmanage list runningvms</code></p>
+
+<p>show VM 資訊</p>
+
+<p><code>$ vboxmanage showvminfo WIN10</code></p>
+
+<p>移除 VM 但保留相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10</code></p>
+
+<p>移除 VM 並刪除相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10 --delete</code></p>
+
+<p>匯出 VM</p>
+
+<p><code>$ vboxmanage export WIN10 -o /home/user/WIN10.ova</code></p>
+
+<p>增加硬碟容量，進入 OS 使用電腦管理>> 磁碟管理分配容量。</p>
+
+<p><code>$ vboxmanage modifyhd /vm/hd/WIN10.vdi --resize 81920</code></p>
+
+<p>調整記憶體大小</p>
+
+<p><code>$ vboxmanage modifyvm WIN10 --memory 8192</code></p>
+
+<p>詳細 API 請參考 <a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></p>
+
+<h3>區網 IP 設置</h3>
+
+<p>前面已設置一組 bridged network nic1 for 設置固定 IP 使用，</p>
+
+<p>接下來再設置一組 nat network nic2 for 區網 IP。</p>
+
+<pre><code># 設置一組 nat 區域網路 IP 命名為 natnet1
+$ vboxmanage natnetwork add --netname natnet1 --network "192.168.0.101/24" --enable
+
+$ vboxmanage natnetwork modify --netname natnet1 --dhcp on
+
+# 啟動 nat 網路設定
+$ VBoxManage natnetwork start --netname natnet1
+
+# 關機
+$ vboxmanage controlvm WIN10 poweroff
+
+# 將 natnet1 加入至 VM 網路
+$ vboxmanage modifyvm WIN10 --nic2 nat --nat-network2 natnet1
+
+# 開機
+$ vboxmanage startvm WIN10 --type headless
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[美食][斗六] 夏天吃吃賞]]></title>
@@ -525,15 +669,13 @@
 
 <p>他們家則是切成較大的塊狀，清脆爽口，有置身田園的感覺～～哈</p>
 
-<p>推薦百頁豆腐、米血、豬頭皮、素雞，</p>
+<p>推薦百頁豆腐、米血、豬頭皮、甜不辣、素雞，</p>
 
 <p>（偷偷說&hellip;便宜的東西比貴的好吃之夏天不負責評論報導 XD）</p>
 
-<p>營業時間看網友說是下午四點開始，</p>
+<p>大概九點後東西就會剩比較少喔～～</p>
 
-<p>我自己的經驗晚上十點還有買過～</p>
-
-<p>營業時間：週日、週一固定公休，另會不定時休息。 (2018 / 1月資訊)</p>
+<p>營業時間：約17:00–23:00，週日、週一固定公休，另會不定時休息。 (2018 / 1月資訊)</p>
 
 <p>地址：新北市新莊區中港路與中安街口交叉分隔島上(中港路306號麥當勞對面)</p>
 
@@ -738,6 +880,16 @@
 
 <p><font size="4pt" color="BLUE">四顆星星賞★★★★</font></p>
 
+<h3>莒光路40巷米粉湯（未完成）</h3>
+
+<p>和西市鹹酥雞並列我心目中第一名的鹹酥雞，</p>
+
+<p>必點米血、雞屁股、豆干～</p>
+
+<p>晚上才開，沒有固定的休息日。</p>
+
+<p>地址：新北市新莊區福壽街幸福路口</p>
+
 <h3>黃石市場蘿蔔糕、糯米腸、芋粿Q</h3>
 
 <p>我跟小狐狸點了一份綜合和一碗隔壁的生炒魷魚，兩個人就吃的飽飽，</p>
@@ -917,7 +1069,7 @@
     <id>http://summerlize.github.io/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code</id>
     <content type="html"><![CDATA[<p>6/20修正：經網友李先生反應直接填寫 Source Code 無法獲得回饋，在此另外提供綁定連結方式。</p>
 
-<p><strong><font size="4px">Step 1: <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">點此連結綁定優惠碼</a>
+<p><strong><font size="4px">Step 1: <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY">點此連結綁定優惠碼</a>
 <font color="#444444">  ricahrt 開戶獲得 </font><font color="#CC0000">$500元現金</font></p>
 
 <p><strong><font size="4px">Step 2: <a href="https://richart.tw/TSDIB_RichartWeb/static/event/school/guide/pc.html">點此連結至台新 Richart 官網開戶</a>
@@ -937,7 +1089,7 @@
 
 <p>如果常用戶頭非台新，只要使用 richart 網銀 APP 並善用五次跨行轉帳，不用出門不用手續費，資金流動完全無負擔！</p>
 
-<p>是不是很值得辦一下，花錢、存錢一次滿足！</p>
+<p>是不是很值得辦一下，消費、儲蓄一次滿足！</p>
 
 <p>文章開頭的官網中有非常詳細的開戶教學，可以一次完成開戶 + 信用卡申辦，</p>
 
@@ -955,7 +1107,7 @@
 
 <p>所以這部分也可以考慮開戶跟信用卡申辦分開進行。</p>
 
-<p>最後當然就是使用  <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">夏天的推薦連結</a> 就可以得到 $500拉，推薦人也會得到 $100 。</p>
+<p>最後當然就是使用  <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY">夏天的推薦連結</a> 就可以得到 $500拉，推薦人也會得到 $100 。</p>
 
 <p><del>當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～</del></p>
 
@@ -965,7 +1117,7 @@
 
 <p><del>蝦皮活動請參考網址 <a href="https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html">https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html</a></del></p>
 
-<p>夏天的推薦連結 <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53</a></p>
+<p>夏天的推薦連結 <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY">https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=UCUMY</a></p>
 
 <br />
 
@@ -2302,108 +2454,6 @@ Hello World!
 <p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
 
 <p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress: 變更 master 分支中 commit 的創作者 (author)]]></title>
-    <link href="http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/"/>
-    <updated>2016-05-30T04:46:00+08:00</updated>
-    <id>http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch</id>
-    <content type="html"><![CDATA[<p>使用 Octopress 基本上會有兩個分支 source 和 master ，</p>
-
-<p>其中 source 是由使用者自行管理 git ，</p>
-
-<p>而 master 則是透過 rake deploy 自動管理，</p>
-
-<p>想要變更 source 分支的 commitments author ，</p>
-
-<p>可以參考這篇 <a href="http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a> ，</p>
-
-<p>變更之後再將 origin source 刪除重新 push 即可，</p>
-
-<p>但如果是 master 分支照做之後，下次 rake deploy 時又會以舊的作者重新 commit ，</p>
-
-<p>並顯示錯誤訊息：</p>
-
-<pre><code>error: failed to push some refs to 'git@github.com-xxxxxxxx'
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: 'git pull ...') before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-</code></pre>
-
-<p>此時照著訊息做是無效的，</p>
-
-<p>必須用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，如此舊作者的 commit 紀錄才會被刪除。</p>
-
-<p>ps. 在這之前還是需要先把 octopress 的 git user 變更設定為新作者的喔，請參考 <a href="http://summerlize.github.io/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">前面提到的文章</a> 。</p>
-
-<p>一般應該是做到這邊就能完成，但如果有設定過 git global user 則會無法成功，</p>
-
-<p>rake deploy 會使用 global user 進行 commit 。</p>
-
-<p>使用指令 <code>git config --global user.name</code> 可以確認是否有設定過，</p>
-
-<p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
-
-<figure class='code'><figcaption><span>Rakefile </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">deploy_dir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
-</span><span class='line'>      
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
-</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
-
-<p>一般會有這樣的設定大部分是因為有一個以上的 github 帳號，</p>
-
-<p>因此在 <code>rake setup_github_pages</code> 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。</p>
-
-<pre><code>$ rake setup_github_pages
-Enter the read/write url for your repository
-(For example, 'git@github.com:your_username/your_username.github.io.git)
-           or 'https://github.com/your_username/your_username.github.io')
-
-Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
-</code></pre>
-
-<p>可參考此篇 <a href="http://summerlize.github.io/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a></p>
-
-<p>最後再run <code>rake_deploy</code> 就能看到 commit author 變成新的了～</p>
 ]]></content>
   </entry>
   

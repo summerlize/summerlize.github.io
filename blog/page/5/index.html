@@ -7,7 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="此次完全就是跟風部落客推薦的伴手禮來進行採買， 而食物以外必買的 CHARLES &amp; KEITH &lt;&lt; 真心大推， 考慮到在網路上已有很多分享資訊，之後有時間再來聊聊它。 這邊會依照推薦購買的指數排序，還沒有吃過的會先隨機排，陸續再調整更新。 PRIMA TASTE &hellip;">
+	<meta name="description" content="使用 Octopress 基本上會有兩個分支 source 和 master ， 其中 source 是由使用者自行管理 git ， 而 master 則是透過 rake deploy 自動管理， 想要變更 source 分支的 commitments author ， 可以參考這篇 Git: &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +134,179 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/">
+		
+			Octopress: 變更 Master 分支中 Commit 的創作者 (Author)</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>使用 Octopress 基本上會有兩個分支 source 和 master ，</p>
+
+<p>其中 source 是由使用者自行管理 git ，</p>
+
+<p>而 master 則是透過 rake deploy 自動管理，</p>
+
+<p>想要變更 source 分支的 commitments author ，</p>
+
+<p>可以參考這篇 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a> ，</p>
+
+<p>變更之後再將 origin source 刪除重新 push 即可，</p>
+
+<p>但如果是 master 分支照做之後，下次 rake deploy 時又會以舊的作者重新 commit ，</p>
+
+<p>並顯示錯誤訊息：</p>
+
+<pre><code>error: failed to push some refs to 'git@github.com-xxxxxxxx'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+
+<p>此時照著訊息做是無效的，</p>
+
+<p>必須用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，如此舊作者的 commit 紀錄才會被刪除。</p>
+
+<p>ps. 在這之前還是需要先把 octopress 的 git user 變更設定為新作者的喔，請參考 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">前面提到的文章</a> 。</p>
+
+<p>一般應該是做到這邊就能完成，但如果有設定過 git global user 則會無法成功，</p>
+
+<p>rake deploy 會使用 global user 進行 commit 。</p>
+
+<p>使用指令 <code>git config --global user.name</code> 可以確認是否有設定過，</p>
+
+<p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
+
+<figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">deploy_dir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
+</span><span class='line'>      
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
+
+<p>一般會有這樣的設定大部分是因為有一個以上的 github 帳號，</p>
+
+<p>因此在 <code>rake setup_github_pages</code> 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。</p>
+
+<pre><code>$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, 'git@github.com:your_username/your_username.github.io.git)
+           or 'https://github.com/your_username/your_username.github.io')
+
+Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
+</code></pre>
+
+<p>可參考此篇 <a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a></p>
+
+<p>最後再run <code>rake_deploy</code> 就能看到 commit author 變成新的了～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-30T04:46:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -1060,7 +1233,7 @@ $ git remote set-url origin git@github.com-work:work/workproject
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits/">
@@ -1201,137 +1374,6 @@ $ git config user.email "summerlize@gmail.com"
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/03/31/ponta-promo-invitation-code-coupon/">
-		
-			[推薦碼0XLD6] 註冊得易 Ponta 會員輸入推薦碼送 100 點</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p><strong><font size="4px"> <a href="https://www.ponta.com.tw/register/QuickCard.action?paChannelSource=3&amp;paSaleCode=MP2015042701&amp;paCampaignCode=DSMP2015111901&amp;paShopCode=8881329000015&amp;passRecmdPersonId=WT0wWExENk1G">點此註冊得易Ponta會員</a>
-<font color="#444444">立即獲得 </font><font color="#CC0000">100點</font></p>
-
-<p onclick="copyPromoCode()"><font color="blue">推薦碼：0XLD6</font></p>
-
-
-<p></font></strong></p>
-
-<p>活動時間：2016年1月1日至2016年12月31日止</p>
-
-<p><a href="https://mk.ponta.com.tw/mgm/">點我查看詳細活動辦法</a></p>
-
-<p><strong>Ｑ：什麼是得易Ponta？</strong></p>
-
-<p>由東森整合行銷公司所發行的點數卡，消費順便集點，點數可兌換商品～</p>
-
-<p>東森購物、森森購物、嘟嘟房、Agoda.com、順發3C、OK便利商店、萊爾富&hellip;等，虛擬通路、實體商店通通可以集點！</p>
-
-<p><a href="https://www.ponta.com.tw/MerchantRanking.action?func=qryByView&amp;title=%E5%BA%97%E5%AE%B6%E6%8E%92%E8%A1%8C">點我查看特約店家列表</a></p>
-
-<p>最新活動可與一卡通綁定，嗶一卡通集Ponta點！</p>
-
-<p>綁定先送200點，於店家會員日達滿額消費點數享五倍送！ 活動至2016年6月30日止</p>
-
-<p><strong>Ｑ：辦卡要錢嗎？</strong></p>
-
-<p>完全免費喔～辦了也不吃虧！</p>
-
-<p><input type="text" id="promoCode" onclick="copyPromoCode()" value="0XLD6"></p>
-
-<script language="javascript">
-    function copyPromoCode(){
-        var obj = document.getElementById("promoCode");
-        obj.select();
-        document.execCommand("Copy");
-        alert("已複製序號"+obj.value);
-    }
-</script>
-
-
-
-
-<br />
-
-
-<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-03-31T17:00:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/03/31/ponta-promo-invitation-code-coupon/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1341,6 +1383,10 @@ $ git config user.email "summerlize@gmail.com"
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/12/17/yunlinxian-douliu-food-list/">[美食][斗六] 夏天吃吃賞</a>
@@ -1356,10 +1402,6 @@ $ git config user.email "summerlize@gmail.com"
     
       <li class="post">
         <a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/">[推薦碼0125005366] 台新卡得利 Cardaily - 信用卡專屬 APP 輸入推薦碼送 $50 刷卡金</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code/">[綁定好友推薦] 台新 Richart 網銀開戶送 $500 優惠金</a>
       </li>
     
   </ul>
@@ -1382,7 +1424,7 @@ $ git config user.email "summerlize@gmail.com"
 <li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (5)</a></li>
 <li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
 <li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
-<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (2)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
 
