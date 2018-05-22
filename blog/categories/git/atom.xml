@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | 這個夏天。]]></title>
   <link href="http://summerlize.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:43:42+08:00</updated>
+  <updated>2018-05-22T12:48:59+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git: 將已存在的分支轉換為全新的程式庫(不保留舊的 commit，但維持目前版本的程式碼)]]></title>
+    <title type="html"><![CDATA[Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 commit，但維持目前版本的程式碼)]]></title>
     <link href="http://summerlize.github.io/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/"/>
     <updated>2018-05-22T12:10:00+08:00</updated>
     <id>http://summerlize.github.io/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository</id>
@@ -29,6 +29,9 @@
 <p>This can be useful when you want to publish the tree from a commit without exposing its full history. You might want to do this to publish an open source branch of a project whose current tree is &ldquo;clean&rdquo;, but whose full history contains proprietary or otherwise encumbered bits of code.</p>
 
 <p>If you want to start a disconnected history that records a set of paths that is totally different from the one of &lt;start_point>, then you should clear the index and the working tree right after creating the orphan branch by running &ldquo;git rm -rf .&rdquo; from the top level of the working tree. Afterwards you will be ready to prepare your new files, repopulating the working tree, by copying them from elsewhere, extracting a tarball, etc.</p></blockquote>
+
+<br />
+
 
 <pre><code># checkout 成不繼承舊 commit 的全新分支(latest_branch)，
 $ git checkout --orphan latest_branch
@@ -165,58 +168,31 @@ $ touch gitFilterBranch.sh
 
 <p><code>NEW_EMAIL</code> 為欲變更的新的作者信箱。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>git filter branch &ndash; gitFilterBranch.sh </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;git filter-branch -f &amp;mdash;env-filter &amp;lsquo;
-</span><span class='line'><span class="nv">OLD_EMAIL</span><span class="o">=</span>&amp;ldquo;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#x61;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#x3a;&amp;#111;&amp;#x6c;&amp;#100;&amp;#x40;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#46;&amp;#99;&amp;#x6f;&amp;#109;&quot;</span>&gt;&amp;#x6f;&amp;#x6c;&amp;#x64;&amp;#64;&amp;#x6d;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x2e;&amp;#99;&amp;#x6f;&amp;#109;&lt;/a&gt;&amp;rdquo;
-</span><span class='line'><span class="nv">NEW_NAME</span><span class="o">=</span>&amp;ldquo;newUser&amp;rdquo;
-</span><span class='line'><span class="nv">NEW_EMAIL</span><span class="o">=</span>&amp;ldquo;&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#110;&amp;#x65;&amp;#x77;&amp;#x40;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#x2e;&amp;#99;&amp;#x6f;&amp;#x6d;&quot;</span>&gt;&amp;#x6e;&amp;#101;&amp;#119;&amp;#x40;&amp;#x6d;&amp;#97;&amp;#105;&amp;#x6c;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;&amp;rdquo;
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> &amp;ldquo;<span class="nv">$GIT_COMMITTER_EMAIL</span>&amp;rdquo; <span class="o">=</span> &amp;ldquo;<span class="nv">$OLD_EMAIL</span>&amp;rdquo; <span class="o">]</span>
-</span><span class='line'><span class="k">then</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;export <span class="nv">GIT_COMMITTER_NAME</span><span class="o">=</span><span class="s2">&quot;$NEW_NAME&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GIT_COMMITTER_EMAIL</span><span class="o">=</span><span class="s2">&quot;$NEW_EMAIL&quot;</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;fi
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> &amp;ldquo;<span class="nv">$GIT_AUTHOR_EMAIL</span>&amp;rdquo; <span class="o">=</span> &amp;ldquo;<span class="nv">$OLD_EMAIL</span>&amp;rdquo; <span class="o">]</span>
-</span><span class='line'><span class="k">then</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;export <span class="nv">GIT_AUTHOR_NAME</span><span class="o">=</span><span class="s2">&quot;$NEW_NAME&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GIT_AUTHOR_EMAIL</span><span class="o">=</span><span class="s2">&quot;$NEW_EMAIL&quot;</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;fi
-</span><span class='line'>&amp;lsquo; &amp;mdash;tag-name-filter cat &amp;mdash; &amp;mdash;branches &amp;mdash;tags&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock git filter branch &ndash; gitFilterBranch.sh lang:sh %}</p>
+
+<p>git filter-branch -f &mdash;env-filter &lsquo;
+OLD_EMAIL=&ldquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#108;&#100;&#x40;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#111;&#x6c;&#100;&#x40;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a>&rdquo;
+NEW_NAME=&ldquo;newUser&rdquo;
+NEW_EMAIL=&ldquo;<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#110;&#x65;&#x77;&#x40;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#x6e;&#101;&#119;&#64;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a>&rdquo;
+if [ &ldquo;$GIT_COMMITTER_EMAIL&rdquo; = &ldquo;$OLD_EMAIL&rdquo; ]
+then</p>
+
+<pre><code>export GIT_COMMITTER_NAME="$NEW_NAME"
+export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+</code></pre>
+
+<p>fi
+if [ &ldquo;$GIT_AUTHOR_EMAIL&rdquo; = &ldquo;$OLD_EMAIL&rdquo; ]
+then</p>
+
+<pre><code>export GIT_AUTHOR_NAME="$NEW_NAME"
+export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+</code></pre>
+
+<p>fi
+&lsquo; &mdash;tag-name-filter cat &mdash; &mdash;branches &mdash;tags</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>輸入指令 <code>chmod +x gitFilterBranch.sh</code> 將檔案變更為可執行檔</p>
 

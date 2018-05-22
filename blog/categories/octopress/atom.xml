@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 這個夏天。]]></title>
   <link href="http://summerlize.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:43:42+08:00</updated>
+  <updated>2018-05-22T12:48:59+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -80,50 +80,29 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 <p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Rakefile </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="c1">#{deploy_dir}&amp;rdquo; do&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;amp;hellip;&#39; &amp;gt; index.html&quot;</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
-</span><span class='line'><span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock Rakefile lang:rb %}
+cd &ldquo;#{deploy_dir}&rdquo; do</p>
+
+<pre><code>system "git init"
+
+system "git config user.name \"summerlize\""                //加入此行
+system "git config user.email \"summerlize@gmail.com\""     //加入此行
+
+system "echo 'My Octoprese is coming soon &amp;hellip;' &gt; index.html"
+system "git add ."
+system "git commit -m \"Octopress init\""
+system "git branch -m gh-pages" unless branch == 'master'
+system "git remote add origin #{repo_url}"
+rakefile = IO.read(__FILE__)
+rakefile.sub!(/deploy_branch(\s*)=(\s*)(["'])[\w-]*["']/, "deploy_branch\\1=\\2\\3#{branch}\\3")
+rakefile.sub!(/deploy_default(\s*)=(\s*)(["'])[\w-]*["']/, "deploy_default\\1=\\2\\3push\\3")
+File.open(__FILE__, 'w') do |f|
+  f.write rakefile
+end
+</code></pre>
+
+<p>  end
+{% endcodeblock %}</p>
 
 <p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grails | 這個夏天。]]></title>
   <link href="http://summerlize.github.io/blog/categories/grails/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:43:42+08:00</updated>
+  <updated>2018-05-22T12:48:59+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -24,80 +24,42 @@
 
 <p>參考 <a href="http://docs.grails.org/2.4.5/guide/single.html#criteria">官方 references #combining criteria</a></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Grails &ndash; combining criteria closures </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;class CriteriaFilters {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">def</span> <span class="n">create</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">condition</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">eq</span><span class="o">(</span><span class="s2">&quot;title&quot;</span><span class="o">,</span> <span class="s2">&quot;Harry Potter&quot;</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;class BookController {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">def</span> <span class="n">index</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">lastUpdated</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">createCriteria</span><span class="o">().</span><span class="na">get</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">projections</span><span class="o">{</span>
-</span><span class='line'>            <span class="n">max</span> <span class="s1">&#39;lastUpdated&#39;</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">condition</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CriteriaFilters</span><span class="o">().</span><span class="na">create</span><span class="o">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">Book</span><span class="o">.</span><span class="na">createCriteria</span><span class="o">().</span><span class="na">list</span><span class="o">(</span><span class="nl">max:</span> <span class="mi">10</span><span class="o">,</span> <span class="nl">offset:</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">condition</span><span class="o">.</span><span class="na">delegate</span> <span class="o">=</span> <span class="n">delegate</span>
-</span><span class='line'>        <span class="n">condition</span><span class="o">()</span>
-</span><span class='line'>        <span class="c1">//可加入其他規則</span>
-</span><span class='line'>        <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;lastUpdated&#39;</span><span class="o">,</span> <span class="n">lastUpdated</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock Grails &ndash; combining criteria closures lang:groovy %}</p>
+
+<p>class CriteriaFilters {</p>
+
+<pre><code>def create = {
+    def condition = {
+        eq("title", "Harry Potter")
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class BookController {</p>
+
+<pre><code>def index() {
+    def lastUpdated = Book.createCriteria().get {
+        projections{
+            max 'lastUpdated'
+        }
+    }
+
+    def condition = new CriteriaFilters().create()
+
+    Book.createCriteria().list(max: 10, offset: 10) {
+        condition.delegate = delegate
+        condition()
+        //可加入其他規則
+        eq('lastUpdated', lastUpdated)
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>delegate 預設儲存為自身 owner，表示由 owner 來執行，print 出來會比較好理解，</p>
 
@@ -121,102 +83,53 @@
 
 <p>再於最後加入包含其他規則的第二個閉包。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Grails &ndash; namedQueries example from official API </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;class Publication {</span>
-</span><span class='line'><span class="s">   String title</span>
-</span><span class='line'><span class="s">   String author</span>
-</span><span class='line'><span class="s">   Date datePublished</span>
-</span><span class='line'><span class="s">   Integer numberOfPages&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>   <span class="kd">static</span> <span class="n">namedQueries</span> <span class="o">=</span> <span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;   recentPublications {</span>
-</span><span class='line'><span class="s">       def now = new Date()</span>
-</span><span class='line'><span class="s">       gt &#39;datePublished&#39;, now - 365</span>
-</span><span class='line'><span class="s">   }</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">   oldPublicationsLargerThan { pageCount -&amp;gt;</span>
-</span><span class='line'><span class="s">       def now = new Date()</span>
-</span><span class='line'><span class="s">       lt &#39;datePublished&#39;, now - 365</span>
-</span><span class='line'><span class="s">       gt &#39;numberOfPages&#39;, pageCount</span>
-</span><span class='line'><span class="s">   }</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">   publicationsWithBookInTitle {</span>
-</span><span class='line'><span class="s">       like &#39;title&#39;, &#39;%Book%&#39;</span>
-</span><span class='line'><span class="s">   }</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">   recentPublicationsWithBookInTitle {</span>
-</span><span class='line'><span class="s">       // calls to other named queries…</span>
-</span><span class='line'><span class="s">       recentPublications()</span>
-</span><span class='line'><span class="s">       publicationsWithBookInTitle()</span>
-</span><span class='line'><span class="s">  }</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;   }</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kt">def</span> <span class="n">books</span> <span class="o">=</span> <span class="n">Publication</span><span class="o">.</span><span class="na">recentPublications</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="nl">max:</span> <span class="mi">10</span><span class="o">,</span> <span class="nl">offset:</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;//可加入其他規則</span>
-</span><span class='line'><span class="s">or {</span>
-</span><span class='line'><span class="s">    like &#39;author&#39;, &#39;Tony%&#39;</span>
-</span><span class='line'><span class="s">    like &#39;author&#39;, &#39;Phil%&#39;</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock Grails &ndash; namedQueries example from official API lang:groovy %}</p>
+
+<p>class Publication {
+   String title
+   String author
+   Date datePublished
+   Integer numberOfPages</p>
+
+<p>   static namedQueries = {</p>
+
+<pre><code>   recentPublications {
+       def now = new Date()
+       gt 'datePublished', now - 365
+   }
+
+   oldPublicationsLargerThan { pageCount -&gt;
+       def now = new Date()
+       lt 'datePublished', now - 365
+       gt 'numberOfPages', pageCount
+   }
+
+   publicationsWithBookInTitle {
+       like 'title', '%Book%'
+   }
+
+   recentPublicationsWithBookInTitle {
+       // calls to other named queries…
+       recentPublications()
+       publicationsWithBookInTitle()
+  }
+</code></pre>
+
+<p>   }
+}</p>
+
+<p>def books = Publication.recentPublications.list(max: 10, offset: 5) {</p>
+
+<pre><code>//可加入其他規則
+or {
+    like 'author', 'Tony%'
+    like 'author', 'Phil%'
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <h3>方法三：將 HibernateCriteriaBuild 設為參數，使其他方法可用以執行規則</h3>
 
@@ -230,60 +143,32 @@
 
 <p>而此方法則是每次都必須傳送 delegate。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>book update &ndash; solution 2 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;Book.createCriteria().list(max: 10, offset: 10) {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">title</span><span class="o">(</span><span class="n">delegate</span><span class="o">,</span> <span class="s1">&#39;Harry Potter%&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="n">author</span><span class="o">(</span><span class="n">delegate</span><span class="o">,</span> <span class="s1">&#39;J. K. Rowling&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="c1">//可加入其他規則</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;private void title(builder, String title) {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">builder</span><span class="o">.</span><span class="na">ilike</span> <span class="s1">&#39;title&#39;</span><span class="o">,</span> <span class="n">title</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;private void author(builder, String authorName) {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">builder</span><span class="o">.</span><span class="na">eq</span> <span class="s1">&#39;author&#39;</span><span class="o">,</span> <span class="n">authorName</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock book update &ndash; solution 2 lang:groovy %}</p>
+
+<p>Book.createCriteria().list(max: 10, offset: 10) {</p>
+
+<pre><code>title(delegate, 'Harry Potter%')
+author(delegate, 'J. K. Rowling')
+//可加入其他規則
+</code></pre>
+
+<p>}</p>
+
+<p>private void title(builder, String title) {</p>
+
+<pre><code>builder.ilike 'title', title
+</code></pre>
+
+<p>}</p>
+
+<p>private void author(builder, String authorName) {</p>
+
+<pre><code>builder.eq 'author', authorName
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <p><font color="#fcfcfc">gorm criteria、條件、規則、sql</font></p>
 ]]></content>
@@ -354,42 +239,23 @@
 
 <p>將<em>yourProjectPath</em>/grails-app/conf/<strong>buildConfig.groovy</strong> 中 <code>runtime ':resources:1.n.n'</code> 替換為 <code>org.grails.plugins:asset-pipeline:2.n.n</code></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>grails-app/conf/buildConfig.groovy </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;plugins {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="n">build</span> <span class="s1">&#39;:tomcat:7.0.54&#39;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">runtime</span> <span class="s1">&#39;:hibernate4:4.3.5.2&#39;</span>
-</span><span class='line'>    <span class="n">runtime</span> <span class="s1">&#39;:database-migration:1.4.0&#39;</span>
-</span><span class='line'>    <span class="n">compile</span> <span class="s2">&quot;:jquery:1.11.1&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">runtime</span> <span class="s1">&#39;:resources:1.2.14&#39;</span> <span class="c1">//刪除此行</span>
-</span><span class='line'>    <span class="n">compile</span> <span class="s2">&quot;org.grails.plugins:asset-pipeline:2.8.0&quot;</span> <span class="c1">//新增此行</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock grails-app/conf/buildConfig.groovy lang:groovy %}</p>
+
+<p>plugins {</p>
+
+<pre><code>    build ':tomcat:7.0.54'
+
+    runtime ':hibernate4:4.3.5.2'
+    runtime ':database-migration:1.4.0'
+    compile ":jquery:1.11.1"
+
+    runtime ':resources:1.2.14' //刪除此行
+    compile "org.grails.plugins:asset-pipeline:2.8.0" //新增此行
+</code></pre>
+
+<p> }</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>啟動 grails 會發現 <em>yourProjectPath</em>/grails-app 底下多了 <strong>assets</strong> 資料夾</p>
 
@@ -522,109 +388,58 @@
 
 <p>假設 Domain 定義如下：</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Book.groovy </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;class Book{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">String</span> <span class="n">name</span>
-</span><span class='line'><span class="n">String</span> <span class="n">title</span>
-</span><span class='line'><span class="n">Author</span> <span class="n">author</span>
-</span><span class='line'><span class="n">Publisher</span> <span class="n">publisher</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">])</span>
-</span><span class='line'>    <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock Book.groovy lang:groovy %}</p>
+
+<p>class Book{</p>
+
+<pre><code>String name
+String title  
+Author author
+Publisher publisher
+
+static constraints = {
+    name(unique:['author','publisher'])
+    publisher nullable:true   
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>由於 publisher 允許為 null，造成 <code>name(unique:['author','publisher']</code> 沒有正確判斷，</p>
 
 <p>此時可以自行加入判斷如下：</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>start:8 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;static constraints = {</span>
-</span><span class='line'><span class="s">    name(unique:[&#39;author&#39;,&#39;publisher&#39;],</span>
-</span><span class='line'><span class="s">        validator: { name, book -&amp;gt;</span>
-</span><span class='line'><span class="s">            def existingRecord = Book.withCriteria(){</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">                if (book.id){</span>
-</span><span class='line'><span class="s">                    ne(&#39;id&#39;, book.id)</span>
-</span><span class='line'><span class="s">                }</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">                eq(&#39;author&#39;, book.author)</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">                if (book.publisher){</span>
-</span><span class='line'><span class="s">                    eq(&#39;publisher&#39;, book.publisher)</span>
-</span><span class='line'><span class="s">                }</span>
-</span><span class='line'><span class="s">                else {</span>
-</span><span class='line'><span class="s">                    isNull(&#39;supplier&#39;)</span>
-</span><span class='line'><span class="s">                }</span>
-</span><span class='line'><span class="s">            }//end withCreiteria</span>
-</span><span class='line'><span class="s">        }//end validator</span>
-</span><span class='line'><span class="s">    )</span>
-</span><span class='line'><span class="s">    publisher nullable:true  </span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:groovy start:8 %}</p>
+
+<pre><code>static constraints = {
+    name(unique:['author','publisher'],
+        validator: { name, book -&gt;
+            def existingRecord = Book.withCriteria(){
+
+                if (book.id){
+                    ne('id', book.id)
+                }
+
+                eq('author', book.author)
+
+                if (book.publisher){
+                    eq('publisher', book.publisher)
+                }
+                else {
+                    isNull('supplier')
+                }
+            }//end withCreiteria
+        }//end validator
+    )
+    publisher nullable:true  
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>完成後就可以正確判斷 unique 摟～</p>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[這個夏天。]]></title>
   <link href="http://summerlize.github.io/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:43:42+08:00</updated>
+  <updated>2018-05-22T12:48:43+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Git: 將已存在的分支轉換為全新的程式庫(不保留舊的 commit，但維持目前版本的程式碼)]]></title>
+    <title type="html"><![CDATA[Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 commit，但維持目前版本的程式碼)]]></title>
     <link href="http://summerlize.github.io/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/"/>
     <updated>2018-05-22T12:10:00+08:00</updated>
     <id>http://summerlize.github.io/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository</id>
@@ -29,6 +29,9 @@
 <p>This can be useful when you want to publish the tree from a commit without exposing its full history. You might want to do this to publish an open source branch of a project whose current tree is &ldquo;clean&rdquo;, but whose full history contains proprietary or otherwise encumbered bits of code.</p>
 
 <p>If you want to start a disconnected history that records a set of paths that is totally different from the one of &lt;start_point>, then you should clear the index and the working tree right after creating the orphan branch by running &ldquo;git rm -rf .&rdquo; from the top level of the working tree. Afterwards you will be ready to prepare your new files, repopulating the working tree, by copying them from elsewhere, extracting a tarball, etc.</p></blockquote>
+
+<br />
+
 
 <pre><code># checkout 成不繼承舊 commit 的全新分支(latest_branch)，
 $ git checkout --orphan latest_branch

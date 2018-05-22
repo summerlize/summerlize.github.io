@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ExtJS | 這個夏天。]]></title>
   <link href="http://summerlize.github.io/blog/categories/extjs/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:43:42+08:00</updated>
+  <updated>2018-05-22T12:48:59+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -43,36 +43,20 @@
 
 <p>由於我的 record 並沒有唯一識別值，暫時設置為 undefined。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>book update </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;proxy: {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nl">type:</span> <span class="s1">&#39;memory&#39;</span><span class="o">,</span>
-</span><span class='line'><span class="nl">reader:</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nl">type:</span> <span class="s1">&#39;json&#39;</span><span class="o">,</span>
-</span><span class='line'>    <span class="nl">idProperty:</span> <span class="s1">&#39;undefined&#39;</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock book update lang:groovy %}</p>
+
+<p>proxy: {</p>
+
+<pre><code>type: 'memory',
+reader: {
+    type: 'json',
+    idProperty: 'undefined'
+}
+</code></pre>
+
+<p>}</p>
+
+<p>{% endcodeblock %}</p>
 
 <p>另外 API 也提到 <code>store.loadData(record)</code> 定義為預設資料已經處理成正確格式，</p>
 
