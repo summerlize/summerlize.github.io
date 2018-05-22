@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: macOS/OSX | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/macos-slash-osx/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2018-05-22T14:09:23+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[macOS: High Sierra / brew 安裝問題 link Permission denied]]></title>
+    <link href="http://summerlize.github.io/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/"/>
+    <updated>2018-05-22T13:44:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution</id>
+    <content type="html"><![CDATA[<p>使用 brew 安裝 python 時出現錯誤，</p>
+
+<pre><code>You can try again using `brew link gdbm`
+</code></pre>
+
+<p>再重新安裝顯示已安裝成功，</p>
+
+<pre><code>Warning: python 3.6.5 is already installed, it's just not linked
+You can use `brew link python` to link this version.
+</code></pre>
+
+<p>執行<code>$ brew link python</code>出現錯誤，</p>
+
+<pre><code>Linking /usr/local/Cellar/python/3.6.5... Error: Permission denied @ dir_s_mkdir - /usr/local/Frameworks
+</code></pre>
+
+<p>解決方法：</p>
+
+<pre><code>$ sudo mkdir /usr/local/Frameworks
+$ sudo chown $(whoami):admin /usr/local/Frameworks
+$ brew link python
+Linking /usr/local/Cellar/carthage/0.28.0... 4 symlinks created
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

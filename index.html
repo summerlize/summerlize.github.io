@@ -7,7 +7,8 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="GIT API 參考 &mdash;orphan &lt;new_branch&gt; Create a new orphan branch, named &lt;new_branch>, started from &lt;start_point> and switch to it. The &hellip;">
+	<meta name="description" content="使用 brew 安裝 python 時出現錯誤， You can try again using `brew link gdbm` 再重新安裝顯示已安裝成功， Warning: python 3.6.5 is already installed, it's just not linked
+You &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +135,108 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">
+		
+			macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>使用 brew 安裝 python 時出現錯誤，</p>
+
+<pre><code>You can try again using `brew link gdbm`
+</code></pre>
+
+<p>再重新安裝顯示已安裝成功，</p>
+
+<pre><code>Warning: python 3.6.5 is already installed, it's just not linked
+You can use `brew link python` to link this version.
+</code></pre>
+
+<p>執行<code>$ brew link python</code>出現錯誤，</p>
+
+<pre><code>Linking /usr/local/Cellar/python/3.6.5... Error: Permission denied @ dir_s_mkdir - /usr/local/Frameworks
+</code></pre>
+
+<p>解決方法：</p>
+
+<pre><code>$ sudo mkdir /usr/local/Frameworks
+$ sudo chown $(whoami):admin /usr/local/Frameworks
+$ brew link python
+Linking /usr/local/Cellar/carthage/0.28.0... 4 symlinks created
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-22T13:44:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2018</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/macos-slash-osx/'>macOS/OSX</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -941,7 +1044,7 @@ $ vboxmanage startvm WIN10 --type headless
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">
@@ -1291,228 +1394,6 @@ $ vboxmanage startvm WIN10 --type headless
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">
-		
-			[美食][板橋] 夏天吃吃賞</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>目前文章暫時只用來記錄夏天覺得值得收藏的口袋名單，</p>
-
-<p>即使星星數不多也是好吃的才會列出，</p>
-
-<p>星星評比標準包含了 特色、口味、食材、cp值 還有夏天個人喜好 :P</p>
-
-<p>如果有時間的話會考慮寫食記：）</p>
-
-<p>但是因為我沒有用餐前先拍照紀錄的習慣，</p>
-
-<p>得等日後有機會回訪才能慢慢補了～</p>
-
-<p>每個人口味不同～可以多交叉參考其他網路上的意見～</p>
-
-<p><font color="#CC0000">2017/12/17 更新</font></p>
-
-<p><font size="4pt" color="BLUE">五顆星星賞★★★★★</font></p>
-
-<h3>一品溫州大餛飩</h3>
-
-<p>鮮蝦餛飩好好吃（滿足）</p>
-
-<p>地址：新北市板橋區中山路與懷仁街口 <a href="https://www.google.com.tw/maps/place/220%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E4%B8%AD%E5%B1%B1%E8%B7%AF%E4%BA%8C%E6%AE%B5267%E8%99%9F/@25.0179075,121.4777221,3a,75y,288.76h,82.75t/data=!3m6!1e1!3m4!1sEJTswhs17NPEdE-vdrd8ow!2e0!7i13312!8i6656!4m8!1m2!2m1!1z5Lit5bGx6Lev5LqM5q61MjY36Jmf!3m4!1s0x3442a83a5115f7c9:0x18b026b5ecba477b!8m2!3d25.018017!4d121.477504">Google MAP</a></p>
-
-<p>從 google 門牌看地址似乎是 新北市板橋區中山路二段267號，可以用連結確認位置。</p>
-
-<p><font size="4pt" color="BLUE">四顆星星賞★★★★</font></p>
-
-<h3>莒光路40巷米粉湯（未完成）</h3>
-
-<p>和西市鹹酥雞並列我心目中第一名的鹹酥雞，</p>
-
-<p>必點米血、雞屁股、豆干～</p>
-
-<p>晚上才開，沒有固定的休息日。</p>
-
-<p>地址：新北市新莊區福壽街幸福路口</p>
-
-<h3>黃石市場蘿蔔糕、糯米腸、芋粿Q</h3>
-
-<p>我跟小狐狸點了一份綜合和一碗隔壁的生炒魷魚，兩個人就吃的飽飽，</p>
-
-<p>糯米腸炸得很剛好～帶有黏性的糯米和些微米香是我最喜歡的～～</p>
-
-<p>蘿蔔糕超大一塊，芋粿 Q 則因為缺乏芋香我比較不愛，</p>
-
-<p>一份綜合吃下來只要 $45，是不是很佛心價！</p>
-
-<p>營業時間：08:00–17:00 週一公休 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區宮口街28號(黃石市場)</p>
-
-<p>電話：<a href="tel:0229603503">(02)2960-3503</a></p>
-
-<p><font size="4pt" color="BLUE">三顆星星賞★★★</font></p>
-
-<h3>福記燒臘便當</h3>
-
-<p>便當、炒飯都好吃，</p>
-
-<p>配菜可以選，味道也棒棒，</p>
-
-<p>但比較偏油。</p>
-
-<p>營業時間：11:00–14:00，16:00–20:00，週日公休。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區雙十路二段47巷8號</p>
-
-<p>電話：<a href="tel:0222513090">(02)2251-3090</a></p>
-
-<h3>阿達師牛肉麵</h3>
-
-<p>家常麵條好吃，四川麻辣牛肉麵也值得吃。</p>
-
-<p>營業時間：週一至六 11:30–14:00，17:00–00:00，週日 23:00 打烊。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區莒光路80號</p>
-
-<p>電話：<a href="tel:0222583858">(02)2258-3858</a></p>
-
-<p><font size="4pt" color="BLUE">二顆星星賞★★</font></p>
-
-<h3>食八辣麻辣滷味板橋漢生西總店</h3>
-
-<p>中辣有辣湯好喝，可以街口付款讚讚。</p>
-
-<p>營業時間：週一至五 11:30–01:00，六日 15:30–01:00。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區漢生西路90號</p>
-
-<p>電話：<a href="tel:0968864046">0968-864-046</a></p>
-
-<h3>振興好吃雞肉飯</h3>
-
-<p>雞肉是切塊的，類似一般好吃土雞肉店那樣，不是一般的飯上面放肉絲或小肉塊那種，</p>
-
-<p>有 60 元的雞肉便當附湯，湯很好喝，不過夏天感覺味精應該加超多 @_@</p>
-
-<p>淋在飯上的醬油好吃，帶點雞油香不偏鹹也不偏甜恰到好處，</p>
-
-<p>營業時間：週一至六 10:00–21:00，週日公休。 (2018 / 1月資訊)</p>
-
-<p>地址：新北市板橋區三民路一段31巷57號</p>
-
-<p>電話：<a href="tel:0229555868">02-2955-5868</a></p>
-
-<p><font size="4pt" color="BLUE">一顆星星賞★</font></p>
-
-<h3>冠品屋日式料理</h3>
-
-<p>天婦羅丼不錯，蛋包飯不愛。</p>
-
-<p>營業時間：11:30–14:30，17:30–21:30。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區文化路一段421巷1號</p>
-
-<p>電話：<a href="tel:0222256554">(02)2255-6554</a></p>
-
-<h3>OEC水餃飽店</h3>
-
-<p>整體味道ok，主要優勢是cp值高。</p>
-
-<p>水餃超大顆，女生應該六顆就夠，</p>
-
-<p>牛肉麵不錯，鮮蝦餛飩麵佛心價。</p>
-
-<p>營業時間：11:10–13:50，17:30–20:10，週日公休。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區莊敬路80號</p>
-
-<p>電話：<a href="tel:0222559100">(02)2255-9100</a></p>
-
-<h3>西螺當歸鴨肉麵線</h3>
-
-<p>豬心冬粉不錯，份量不多。</p>
-
-<p>營業時間：週一至六 10:30–01:00，週日 10:30–00:00。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區民治街116號</p>
-
-<p>電話：<a href="tel:0222561618">(02)2256-1618</a></p>
-
-<p><font color="#fcfcfc">推薦</font></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-12-17T12:59:00+08:00" pubdate data-updated="true">Dec 17<span>th</span>, 2017</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/food/'>Food</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1522,6 +1403,10 @@ $ vboxmanage startvm WIN10 --type headless
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
@@ -1537,10 +1422,6 @@ $ vboxmanage startvm WIN10 --type headless
     
       <li class="post">
         <a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">[美食][新莊] 夏天吃吃賞</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
       </li>
     
   </ul>
@@ -1566,6 +1447,7 @@ $ vboxmanage startvm WIN10 --type headless
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
 
   </ul>
 </section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

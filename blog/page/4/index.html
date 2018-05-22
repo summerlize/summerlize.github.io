@@ -7,9 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="使用指令 sudo vi /etc/crontab 編輯檔案 加入備份指令如下 # 分 時 日 月 週 使用者 指令
-# 表示於每日12點整，以 root 身份備份 mysql 所有資料庫並存放到 /home/user/mysqldump/ 資料夾中
-0 0 * * * root &hellip;">
+	<meta name="description" content="step1: 下載 ssmtp $ sudo apt-get update &amp;&amp; echo y | sudo apt-get install ssmtp mailutils step2: 編輯 ssmtp.conf 檔 $ sudo rm /etc/ssmtp/ssmtp. &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -136,6 +134,171 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/">
+		
+			自動將 Ubuntu Server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理</a>
+	</h2>
+	
+	<div class="entry-content">
+		<h3>step1: 下載 ssmtp</h3>
+
+<p><code>$ sudo apt-get update &amp;&amp; echo y | sudo apt-get install ssmtp mailutils</code></p>
+
+<h3>step2: 編輯 ssmtp.conf 檔</h3>
+
+<p><code>$ sudo rm /etc/ssmtp/ssmtp.conf &amp;&amp; sudo nano /etc/ssmtp/ssmtp.conf</code></p>
+
+<p>將下方內容貼至 ssmtp.conf 檔案中</p>
+
+<pre><code># Config file for sSMTP sendmail
+# DONT CHANGE BELOW FOR @GMAIL.COM
+mailhub=smtp.gmail.com:587
+rewriteDomain=gmail.com
+hostname=localhost
+FromLineOverride=YES
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# CHANGE NEXT 3 OPTIONS 將下方三行改為自己的帳號密碼
+# Username/Password (NO @Gmail)
+root=yourusername@gmail.com
+AuthUser=yourusername
+AuthPass=yourpassword
+</code></pre>
+
+<h3>step3: 編輯 revaliases 檔</h3>
+
+<p><code>$ sudo nano /etc/ssmtp/revaliases</code></p>
+
+<p>將下方內容貼至 revaliases 檔案中</p>
+
+<pre><code># sSMTP aliases
+# linux user:mail:stmp port
+# 將 ubuntu 中的使用者 (user) 對應其 email
+root:yourusername@gmail.com:smtp.gmail.com:587
+guest:somebody@gmail.com:smtp.gmail.com:587
+</code></pre>
+
+<h3>step4: 測試是否可寄送 email</h3>
+
+<p><code>$ ssmtp yourusername@gmail.com</code></p>
+
+<p>輸入上方指令按下 enter，貼上下方段落 email 內容。</p>
+
+<p>note: Subject 之後一定要空行</p>
+
+<pre><code>To: yourusername@gmail.com
+From: yourusername@gmail.com
+Subject: test
+
+Hello World!
+</code></pre>
+
+<p>完成後使用 <code>ctrl+d</code> 跳出，至信箱檢查 email。</p>
+
+<p>也可使用指令 <code>echo "Hello world mail content" | mail -s "Hello world Subject" yourusername@gmail.com</code> 測試寄信。</p>
+
+<h3>若顯示錯誤訊息 Authorization failed (534 5.7.14 <a href="https://support.google.com/mail/answer/78754">https://support.google.com/mail/answer/78754</a> tm1sm6036157pac.23 &ndash; gsmtp</h3>
+
+<p>首先到 <a href="https://www.google.com/settings/u/1/security/lesssecureapps">https://www.google.com/settings/u/1/security/lesssecureapps</a> 將 <code>安全性較低的應用程式存取權限</code> 設為 <code>開啟</code></p>
+
+<p>再試試 step4 ，若還是一樣顯示錯誤，則可試第二種方法，</p>
+
+<p>下載文字瀏覽器 w3m，</p>
+
+<p><code>$ sudo apt-get install w3m w3m-img</code></p>
+
+<p>連結至 gmail 頁面，並輸入帳號密碼登入，</p>
+
+<p><code>$ w3m mail.google.com</code></p>
+
+<p>初次登入 gmail 會要求輸入備援電話號碼之驗證碼或備援電子信箱，</p>
+
+<p>登入成功後再重新試 step4。</p>
+
+<h3>step5: 使日常排程將 log 自動發送至 email</h3>
+
+<p>前面測試寄送 email 成功後，使用指令編輯 crontab，</p>
+
+<p><code>$sudo vi /etc/crontab</code></p>
+
+<p>在 crontab 中 PATH 下一行加入</p>
+
+<pre><code>MAILTO=yourusername@gmail.com
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-07-08T01:42:00+08:00" pubdate data-updated="true">Jul 8<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -420,7 +583,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/">
@@ -510,208 +673,6 @@
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/">
-		
-			[分享][新莊] 許燕斌手作烘焙</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>超愛吃麵包的夏天，從許燕斌手作烘焙開店前裝潢就注意到他了～</p>
-
-<p>夏天喜歡歐式麵包，尤其法國麵包更是大愛～～</p>
-
-<p>所以平常買的麵包價格也都比傳統麵包高一點。</p>
-
-<p>記得許燕斌剛開幕前幾天我就去了，沒想到價錢真的有點嚇到我，</p>
-
-<p>夏天也不是沒買過一百元以上的麵包，但還是會看一下麵包大小份量是否值得，</p>
-
-<p>當天兩手空空的離開，基本上我從麵包店空手離開的機率是 0 耶耶～ (實在有點太震驚)</p>
-
-<p>幾個月後我娘說看到有人推薦，價錢也沒有我說的那麼誇張，(我第一次去的時候沒有找到低於60元的麵包)</p>
-
-<p>於是又燃起我再次挑戰的決心～～</p>
-
-<p>這次是下午去所以麵包還很多，</p>
-
-<p>現在很多麵包店都會提供質感很好的紙袋，要記得重複使用比較環保喔～～</p>
-
-<p><img src="https://c1.staticflickr.com/8/7695/26810605384_21209be8dd.jpg" height="350" width="350" alt="" /></p>
-
-<h3>蔥仔胖</h3>
-
-<p>首先是我娘看到別人大推的蔥麵包，其實他外觀沒有很吸引我 XDD</p>
-
-<p>因為我個人很討厭美乃滋 (很多台灣店家氾濫使用廉價美乃滋阿)，所以只要看到有美乃滋的產品多是敬謝不敏，</p>
-
-<p>但這次來就是抱著實驗的精神，加上已經有人掛保證，一定要買一個試一下的，</p>
-
-<p>這一試真是驚為天人阿～～蔥麵包的鹹度很剛好，加上少許的美乃滋不會過甜也不會膩，</p>
-
-<p>形成絕妙的搭配，而且也不會像一般蔥麵包過油的感覺，</p>
-
-<p>真的好好吃喔～～～推推推推！</p>
-
-<p>註：夏天第二次回購時，麵包比較不鹹，但是鹹一些比較好吃捏～</p>
-
-<p><img src="https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg" height="300" width="400" alt="" />
-<img src="https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg" height="300" width="300" alt="" /></p>
-
-<h3>原味脆皮泡芙</h3>
-
-<p>前幾天食尚玩家正好在介紹高雄有名的泡芙，勾起夏天滿滿的泡芙慾～手刀買一個</p>
-
-<p>脆皮泡芙的內餡是鮮奶油，不是卡士達醬路線，應該是香草牛奶口味？</p>
-
-<p>我自己是覺得還好～～表現一般 XD</p>
-
-<p>倒是包裝超級可愛～～很療癒：）</p>
-
-<p><img src="https://c3.staticflickr.com/8/7286/27385219506_26a6963863.jpg" height="220" width="220" alt="" />
-<img src="https://c3.staticflickr.com/8/7401/27385216826_8623a7842d.jpg" height="220" width="220" alt="" />
-<img src="https://c6.staticflickr.com/8/7725/27419224125_31b2a6bcbc.jpg" height="220" width="220" alt="" /></p>
-
-<h3>小腹胖胖</h3>
-
-<p>取這個名字是否會讓很多少女卻步呢 XDD</p>
-
-<p>還好夏天是不會為了身材跟美食 say no 的 XDD</p>
-
-<p>這個巧克力麵包其實蠻多歐式麵包店都有出，通常表現也不會太差，</p>
-
-<p>不過許燕斌的夏天給 95 分喔喔喔～～</p>
-
-<p>他的內餡甜度適中，還能吃到巧克力豆！是個堪稱完美比例的巧克力內餡。</p>
-
-<p>扣五分是因為醬蠻集中在一個區域的，我跟小狐狸一人剝一半吃，有些地方沒有醬拉拉～～</p>
-
-<p>夏天吃過蠻多麵包店做的同款～許燕斌的很好吃了～～推薦！</p>
-
-<p><img src="https://c2.staticflickr.com/8/7533/27419227265_587fe996e5.jpg" height="300" width="300" alt="" />
-<img src="https://c6.staticflickr.com/8/7725/27419225565_02e35a4020.jpg" height="300" width="300" alt="" /></p>
-
-<h3>可麗露</h3>
-
-<p>夏天第一次去的時候就注意到這個可麗露，實在烤的太美拉～</p>
-
-<p>口感很好，表面酥脆內部濕潤，可是表皮的味道有點奇怪 ＠_＠&hellip;</p>
-
-<p>和夏天以前吃過某留法甜點師傅做得不太一樣，</p>
-
-<p>不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P</p>
-
-<p><img src="https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg" height="250" width="250" alt="" />
-<img src="https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg" height="250" width="250" alt="" /></p>
-
-<h3>伯爵美人</h3>
-
-<p>伯爵茶的香氣實在太吸引夏天了～麵包本身的伯爵茶味很出色，超有下午茶的感覺～</p>
-
-<p>中間搭配奶酥我覺得蠻妙，很好吃～不過有奶酥的時候似乎掩蓋了伯爵茶味，</p>
-
-<p>有一好沒兩好的概念 XDD</p>
-
-<p><img src="https://c1.staticflickr.com/8/7298/27420815152_f3552477d8.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/8/7298/27420812422_5b1f5ab453.jpg" height="250" width="250" alt="" />
-<img src="https://c2.staticflickr.com/8/7356/26911467753_49bbd02d5d.jpg" height="250" width="250" alt="" /></p>
-
-<h3>白燒芋頭</h3>
-
-<p>白燒芋頭走人如其名的路線～((覺得貼切 XD))</p>
-
-<p>咬下一口的時候想說：ㄟˊㄟˊ我的芋頭呢？</p>
-
-<p>原來芋頭在底部，蠻有趣的！試吃感想口味中規中矩 :)</p>
-
-<p>不甜不膩是蠻值得讚賞的一點，而且可以吃到完整的塊狀芋頭耶～不是只有芋泥喔！</p>
-
-<p><img src="https://c4.staticflickr.com/8/7400/26911466483_4e75df8a52.jpg" height="250" width="250" alt="" />
-<img src="https://c5.staticflickr.com/8/7391/27243092060_2a1c2356f5.jpg" height="250" width="250" alt="" />
-<img src="https://c6.staticflickr.com/8/7541/26911465133_1f9067e813.jpg" height="250" width="250" alt="" /></p>
-
-<p><a href="https://www.facebook.com/%E8%A8%B1%E7%87%95%E6%96%8C%E6%89%8B%E4%BD%9C%E7%83%98%E7%84%99-549595445218233/">許燕斌手作烘焙粉絲團</a></p>
-
-<p>營業時間：11:00 &ndash; 21:00 (2016 / 6月資訊)</p>
-
-<p>地址：新北市新莊區中平路274號</p>
-
-<p>電話：<a href="tel:0223939889">(02)8991-5828</a></p>
-
-<p>偷偷許願老闆售價可以再可愛一點嗎 >///&lt; 夏天會常常光顧的～～</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-06-01T23:00:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/uncategorized-comments/'>Uncategorized Comments</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -721,6 +682,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
@@ -736,10 +701,6 @@
     
       <li class="post">
         <a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">[美食][新莊] 夏天吃吃賞</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
       </li>
     
   </ul>
@@ -765,6 +726,7 @@
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
 
   </ul>
 </section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

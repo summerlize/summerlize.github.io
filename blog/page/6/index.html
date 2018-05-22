@@ -7,8 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="變更過去已 commit 的 author 首先在 project 中建立一個 sh 檔案 $ cd yourProjectPath
-$ touch gitFilterBranch.sh 接著將下方語法複製到檔案中，並且修正 OLD_EMAIL 為欲取代的舊的作者信箱、 NEW_NAME &hellip;">
+	<meta name="description" content="現實中我們可能希望 GitHub 的私人與工作帳號能有所區分， 假設私人帳號為 personal 、工作帳號為 work ，步驟如下： Step1 需產生兩組不同的 ssh ，如原先已設定好 ssh 則可跳過此步驟。 首先產生私人帳號 personal 的金鑰， $ ssh-keygen -t &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -135,6 +134,170 @@ $ touch gitFilterBranch.sh 接著將下方語法複製到檔案中，並且修�
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">
+		
+			同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>現實中我們可能希望 GitHub 的私人與工作帳號能有所區分，</p>
+
+<p>假設私人帳號為 personal 、工作帳號為 work ，步驟如下：</p>
+
+<h3>Step1</h3>
+
+<p>需產生兩組不同的 ssh ，如原先已設定好 ssh 則可跳過此步驟。</p>
+
+<p>首先產生私人帳號 personal 的金鑰，</p>
+
+<pre><code>$ ssh-keygen -t rsa -C "personal@mail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa): 
+</code></pre>
+
+<p><font color="#1E90FF">~/.ssh/id_rsa_personal</font></p>
+
+<pre><code>Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+
+<p><font color="#1E90FF">輸入密碼</font></p>
+
+<pre><code>Your identification has been saved in ~/.ssh/id_rsa_personal.
+Your public key has been saved in ~/.ssh/id_rsa_personal.pub.
+The key fingerprint is:
+SHA256:RP68Sn3j79q8U2h80cpifw3WKNTDn7b6aw8YDLbJ9Uo personal@mail.com
+</code></pre>
+
+<p>接著將 <code>~/.ssh/id_rsa_personal.pub</code> 中的金鑰複製起來，</p>
+
+<p>再到 GitHub   點選右上角帳號圖像，選 Settings ， 進入 SSH and GPG Keys ，</p>
+
+<p>點選 New SSH Key ，在 title 輸入方便自己辨識的名稱，例如 homeComputer-personal ssh ，</p>
+
+<p>並將剛才複製的金鑰貼在 key 的區塊，再按下 Add SSH Key 按鈕完成。</p>
+
+<p>再使用指令 <code>ssh-keygen -t rsa -C "work@mail.com"</code> 針對工作帳號 work 重複上面的步驟，</p>
+
+<h3>Step2</h3>
+
+<p>切換至 ssh 資料夾，並新增 config 檔案。</p>
+
+<pre><code>$ cd ~/.ssh
+$ touch ~/.ssh/config
+</code></pre>
+
+<p>將下方 code 複製到 config 檔案中</p>
+
+<pre><code>Host github.com-personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_personal
+
+Host github.com-work
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_work
+</code></pre>
+
+<p>接下來將 project 的 remote url 設為 config 中的 host 名稱。</p>
+
+<p>例如原本是 git@<font color="red">github.com</font>:personal/personalproject.git 更新為 git@<font color="red">github.com-personal</font>:personal/personalproject.git</p>
+
+<pre><code>$ cd yourPersonalProjectPath
+$ git remote set-url origin git@github.com-personal:personal/personalproject
+$ cd yourWorkProjectPath
+$ git remote set-url origin git@github.com-work:work/workproject
+</code></pre>
+
+<p>若此時仍是以原先帳號上傳，則可使用指令 <code>ssh-add -l</code> 查看目前 ssh agent 有在管控的 key passphrase 。</p>
+
+<p>使用 <code>ssh-add -d</code> 把所有舊的 ssh agent 管控的 key passphrase 都清掉。</p>
+
+<p>也可使用 <code>ssh -T github.com-personal</code> 測試是否有已設定的 ssh 連線，</p>
+
+<p>正確的話 username 會出現相應的名稱，例如 <strong>personal</strong> 。</p>
+
+<p>Hi <strong>username</strong>! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access.</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-21T10:53:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/git/'>Git</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -565,7 +728,7 @@ $ git config user.email "summerlize@gmail.com"
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2016/03/31/nutella-sold-in-taiwan-taste-different-than-which-bought-from-uk/">
@@ -705,143 +868,6 @@ $ git config user.email "summerlize@gmail.com"
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/03/29/gomaji-pay-promo-code-coupon/">
-		
-			[優惠碼NNQT9] GOMAJI Pay 折抵 NT$100</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>GOMAJI 推出行動支付服務【GOMAJI Pay】</p>
-
-<p>輸入優惠碼 NNQT9 就可以獲得
-<font color="darkred" size="5px"><strong>NT$100</strong></font> 抵用金！</p>
-
-<p onclick="copyPromoCode()">
-<font color="#4590a3" size="5px">複製優惠碼</font>
-<font color="darkred" size="5px"><strong>NNQT9</strong></font>，</p>
-
-
-<p>由於 GOMAJI 活動調整，推薦人並不會得到任何獎勵喔～</p>
-
-<p>但您還是可以輸入夏天的優惠碼取得 100 元抵用金。</p>
-
-<p><img src="https://farm2.staticflickr.com/1520/26018602092_91638022d7_c.jpg" height="350" width="230" alt="Step1" /></p>
-
-<p><img src="https://farm2.staticflickr.com/1585/26044850881_457c8ef48b_c.jpg" height="350" width="230" alt="Step2" /></p>
-
-<p><img src="https://farm2.staticflickr.com/1444/26018151392_147b9e5445_c.jpg" height="350" width="230" alt="Step3" /></p>
-
-<p>只要在App設定好信用卡，</p>
-
-<p>就能直接使用手機掃描條碼付款，</p>
-
-<p>台北已有上千家餐廳加入，其他地區也已陸續增加中喔！</p>
-
-<p>不必預約，立刻搜尋附近店家，</p>
-
-<p>臨時起意吃美食，還有折扣優惠，</p>
-
-<p>又可以手機付款，是不是很吸引人呀呀呀～</p>
-
-<p>趕快到 <a href="http://www.gomaji.com/event/gomaji-pay/">GOMAJI Pay</a> 下載吧～</p>
-
-<p><input type="text" id="promoCode" onclick="copyPromoCode()" value="NNQT9"></p>
-
-<script language="javascript">
-    function copyPromoCode(){
-        var obj = document.getElementById("promoCode");
-        obj.select();
-        document.execCommand("Copy");
-        alert("已複製序號"+obj.value);
-    }
-</script>
-
-
-
-
-<br />
-
-
-<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-03-29T22:15:00+08:00" pubdate data-updated="true">Mar 29<span>th</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/03/29/gomaji-pay-promo-code-coupon/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -851,6 +877,10 @@ $ git config user.email "summerlize@gmail.com"
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
@@ -866,10 +896,6 @@ $ git config user.email "summerlize@gmail.com"
     
       <li class="post">
         <a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">[美食][新莊] 夏天吃吃賞</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
       </li>
     
   </ul>
@@ -895,6 +921,7 @@ $ git config user.email "summerlize@gmail.com"
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
 
   </ul>
 </section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

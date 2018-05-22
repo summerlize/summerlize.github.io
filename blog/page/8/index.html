@@ -7,16 +7,8 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="Grails 版本: 2.3.5 以下面的程式碼為例， 我們希望找到 author 之後，將 author 存回 book 中， 再呼叫 book 做 save()， 但實測發現 book 在 if 之前就已自動儲存， book update 1
-2
-3
-4
-5
-6
-7
-8
-9
-def book &hellip;">
+	<meta name="description" content="Ext JS 版本: 4.2.x Sencha Architect 版本: 2.2.3 此處希望建立一個共用的 grid 來顯示不同 table 的資料， 如下 Json Data 所示： Json Data
+[{"id":1, "name": "Java Programming", " &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -143,6 +135,135 @@ def book &hellip;">
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/">
+		
+			Ext JS: Store loadData() Id 重複導致只顯示一筆資料</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Ext JS 版本: 4.2.x</p>
+
+<p>Sencha Architect 版本: 2.2.3</p>
+
+<p>此處希望建立一個共用的 grid 來顯示不同 table 的資料，</p>
+
+<p>如下 Json Data 所示：</p>
+
+<pre><code>Json Data
+[{"id":1, "name": "Java Programming", "title": "Java 程式設計"},
+ {"id":1, "name": "Fashion Magazine", "title": "時尚雜誌"}]
+</code></pre>
+
+<p>在執行 <code>grid.getStore.loadData(record)</code> 後卻只有顯示一筆資料，</p>
+
+<p>檢查後發現是 id 重複造成，</p>
+
+<p>由於資料存於不同的資料表，因此後端 query 出預備載入的 record 便可能會有重複 id ，</p>
+
+<p>API 說明 proxy 中 reader 的 idProperty 設定，是用該欄位作為 record 的唯一識別值，預設為 id 欄位，</p>
+
+<p>因此我們可以將 idProperty 定義為實際的唯一識別欄位，避免相同 id 的資料被覆蓋，</p>
+
+<p>由於我的 record 並沒有唯一識別值，暫時設置為 undefined。</p>
+
+<figure class='code'><figcaption><span>book update </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="nl">proxy:</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nl">type:</span> <span class="s1">&#39;memory&#39;</span><span class="o">,</span>
+</span><span class='line'>  <span class="nl">reader:</span> <span class="o">{</span>
+</span><span class='line'>      <span class="nl">type:</span> <span class="s1">&#39;json&#39;</span><span class="o">,</span>
+</span><span class='line'>      <span class="nl">idProperty:</span> <span class="s1">&#39;undefined&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>另外 API 也提到 <code>store.loadData(record)</code> 定義為預設資料已經處理成正確格式，</p>
+
+<p>因此不會經過 reader 二次處理，</p>
+
+<p>若希望使用 reader 處理，需改為使用 <code>store.loadRawData(record)</code>。</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-14T11:55:00+08:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/extjs/'>ExtJS</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -580,7 +701,7 @@ def book &hellip;">
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2013/11/12/post-article-by-octopress/">
@@ -790,317 +911,6 @@ set LANG=zh_TW.UTF-8
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/11/10/install-octopress-and-host-with-github/">
-		
-			Octopress 安裝 + GitHub 架設部落格筆記</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>終於在奮戰了幾天之後，架好了我的 Octopress >__&lt;</p>
-
-<p>還記得小時候 (?) 一直都有寫 blog 的習慣，反而因為變成大人 (?) 之後荒廢了，</p>
-
-<p>雖然號稱小小程式設計者，但我的學習歷程一直著重在邏輯的處理，</p>
-
-<p>技術上長期沒什麼突破&hellip; (汗)</p>
-
-<p>anyway 在某因緣際會下認識了 Markdown 進而發現了 Octopress 這個好東西，</p>
-
-<p>不但可以用來撰寫技術文章，還可以達到快速排版的效果，</p>
-
-<p>真的很吸引我這個懶惰蟲～</p>
-
-<p>可是～～～～～～～～～～～～～～～～～～～～～～～～～～</p>
-
-<p>對一個剛接觸「指令操作」不久、git 完全不熟悉的新手而言真的會覺得有點恐懼，</p>
-
-<p>因此在這邊記錄我的安裝過程以及遇到的問題，希望能對跟我一樣困惑的小朋友有所幫助 :P</p>
-
-<h4>作業系統：OS X 10.9</h4>
-
-<h3>Step1 安裝GIT</h3>
-
-<p>直接到網址下載安裝即可。</p>
-
-<p><a href="http://code.google.com/p/git-osx-installer">http://code.google.com/p/git-osx-installer</a></p>
-
-<p>或者參考官網安裝方式。</p>
-
-<p><a href="http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit">http://git-scm.com/book/zh-tw/%E9%96%8B%E5%A7%8B-%E5%AE%89%E8%A3%9DGit</a></p>
-
-<h3>Step2 安裝Ruby</h3>
-
-<p>Ruby 有兩種版本控管工具，分別是 RVM 及 Rbenv ，<strong>選擇一種安裝即可</strong>。</p>
-
-<p>一開始我照著官網安裝 RVM 失敗了，所以當時改以 Rbenv 來安裝。</p>
-
-<p>但因為歷史久遠我已經忘記拉～所以這邊先依照官網的說明貼上 XD</p>
-
-<p>以下是 Mac 的建議安裝方法，先使用 Homebrew 套件管理工具來安裝 Rbenv ，</p>
-
-<p>由於 Rbenv 只對 Ruby 進行版本控管，並沒有安裝的功能，因此必須另外安裝 ruby-build 才能進行安裝。</p>
-
-<h4>Rbenv</h4>
-
-<pre><code>$ brew update
-$ brew install rbenv
-$ brew install ruby-build
-</code></pre>
-
-<p>安裝完 Rbenv 及 ruby-build 後便可以開始安裝 ruby 囉！</p>
-
-<p>最後必須執行 rehash 來進行版本重置。</p>
-
-<pre><code>$ rbenv install 1.9.3-p0
-$ rbenv rehash
-</code></pre>
-
-<p>然後～～～～</p>
-
-<p>我的第一次 Octopress 安裝就到這裡中斷了 (掩面) ，</p>
-
-<p>當時假會的裝了新版的 Ruby 2.0 ，</p>
-
-<p>後來竟然和我的工作環境衝突，只好進行降版，</p>
-
-<p>使用 Rbenv 降版幾次都失敗後，<del>就被迫改以 RVM 重新安裝</del>，</p>
-
-<p><del>畢竟工作時間就是金錢，老闆是不會等我 try N 次的 (哭)</del>，</p>
-
-<p>一樣乖乖地輸入完下面的指令就可以摟～</p>
-
-<h4>RVM</h4>
-
-<pre><code>$ \curl -L https://get.rvm.io | bash
-$ \curl -L https://get.rvm.io | bash -s -- --autolibs=read-fail
-$ \curl -L https://get.rvm.io | bash -s stable --ruby
-
-// 舊版 rvm 指令
-// $ rvm install 1.9.3p327
-// 新版 rvm 1.29.3 ，版本命名方式有調整喔
-$ rvm install ruby-1.9.3-p327
-</code></pre>
-
-<p>完成後可以輸入 <code>ruby --version</code> 來檢視是否安裝成功，</p>
-
-<p>輸出訊息如： <em>ruby 1.9.3p327 (2012-11-10 revision 37606) [x86_64-darwin13.0.0]</em>。</p>
-
-<p>準備好 Octopress 的前置工作終於可以進入正題了！</p>
-
-<h3>Step3 安裝Octopress</h3>
-
-<p>先將 Octopress 的 source code 複製到本機，</p>
-
-<p>指令的最後指的是你希望存放的資料夾名稱，如果參考官網預設是使用 <code>octopress</code> 。</p>
-
-<pre><code>$ git clone git://github.com/imathis/octopress.git yourProjectName
-$ cd yourProjectName
-</code></pre>
-
-<p>接著安裝 bundler</p>
-
-<pre><code>$ gem install bundler
-$ rbenv rehash    #使用Rbenv套件者才需執行
-$ bundle install
-</code></pre>
-
-<p>最後安裝 Octopress 預設的布景主題</p>
-
-<pre><code>$ rake install
-</code></pre>
-
-<p>基本上到這邊算是完成了 Octopress 的安裝，可以輸入以下指令來檢視是否安裝成功。</p>
-
-<pre><code>$ rake generate
-$ rake preview
-</code></pre>
-
-<p>執行 <code>rake preview</code> 啓動 server 後，可以在 <a href="http://localhost:4000">http://localhost:4000</a> 檢視部落格。</p>
-
-<h3>Step4 部署GitHub</h3>
-
-<p>首先必須申請 <a href="https://github.com/">GitHub</a> 帳號，並且建立一個用來存放部落格代碼的程式庫 (Repository) 。</p>
-
-<p>Repo 的命名必須遵照規則 <strong>username.github.io</strong> ，</p>
-
-<p>例如我帳號/組織代號為 <strong>summerlize</strong> ， Repo 則需命名為 <strong>summerlize</strong>.github.io 。</p>
-
-<p>輸入指令設定 GitHub page</p>
-
-<pre><code>$ rake setup_github_pages
-</code></pre>
-
-<p>接著會要求輸入 Repo 的 URL ， ex: <em>git@github.com:summerlize/summerlize.github.io.git</em></p>
-
-<h4>Error：repository not found. fatal: The remote end hung up…</h4>
-
-<p>由於 GitHub SSH 對大小寫檢查非常敏感，若輸入錯誤則會遇到上方訊息，</p>
-
-<p>建議從 Repo 頁面中右下方的 SSH clone URL 直接複製貼上，也可輸入 <code>git remote -v show</code> 檢查 URL 是否正確。</p>
-
-<p><img src="http://farm6.staticflickr.com/5494/10768727923_aecb64d43a_o.png" alt="GitHub: SSH clone URL" /></p>
-
-<p>編譯及發佈部落格</p>
-
-<pre><code>$ rake generate
-$ rake deploy
-</code></pre>
-
-<hr />
-
-<h4>Error：permission denied(publickey)</h4>
-
-<p>在執行 deploy 時我遇到了 <strong>permission denied(publickey)</strong> 的錯誤訊息，</p>
-
-<p>原因是因為沒有 SSH 連結造成，若無此問題可跳過，</p>
-
-<p>參考官方解決方法 <a href="https://help.github.com/articles/generating-ssh-keys">GitHub：Generating SSH Keys</a></p>
-
-<pre><code>$ cd ~/.ssh
-$ ls
-</code></pre>
-
-<p>檢視路徑中是否存在 <code>id_rsa.pub</code> 或 <code>id_dsa.pub</code> 檔案，</p>
-
-<p>如果沒有則需產生一組 SSH KEY ，如果有則可略過至<a href="#next">下一步驟</a>。</p>
-
-<pre><code>$ ssh-keygen -t rsa -C "your_email@example.com"
-# Creates a new ssh key, using the provided email as a label
-# Generating public/private rsa key pair.
-# Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-這邊直接按 enter
-</code></pre>
-
-<p>系統會要求輸入一組密碼，注意千萬<strong>不可空白</strong>否則就要重做了。</p>
-
-<pre><code>Enter passphrase (empty for no passphrase): [Type a passphrase]
-# Enter same passphrase again: [Type passphrase again]
-</code></pre>
-
-<p id="next"></p>
-
-
-<p>產生出的檔名為 id_rsa.pub ，接著複製 SSH KEY 。</p>
-
-<pre><code>$ pbcopy &lt; ~/.ssh/id_rsa.pub
-</code></pre>
-
-<p>進入 GitHub 網頁中的 Account Setting ，選單中的 SSH Keys 按下新增，</p>
-
-<p>將複製的內容貼在Key的位置，回到 terminal 輸入以下指令，</p>
-
-<pre><code>$ ssh -T git@github.com
-</code></pre>
-
-<p>收到以下訊息輸入 yes</p>
-
-<pre><code>The authenticity of host 'github.com (207.97.227.239)' can't be established.
-# RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-# Are you sure you want to continue connecting (yes/no)?
-yes
-</code></pre>
-
-<p>看到以下訊息表示授權成功</p>
-
-<pre><code>Hi username! You've successfully authenticated, but GitHub does not
-# provide shell access.
-</code></pre>
-
-<hr />
-
-<p>重新 deploy ，第一次發佈會時間會比較長，</p>
-
-<p>沒耐心的時間感判斷大約等了十分鐘有，</p>
-
-<p>之後發佈也是不太一定，時快時慢的，所以要多重新整理幾次。</p>
-
-<p>發佈完成把網址改成 GitHub 帳號就可以查看部落格囉～ <a href="http://username.github.com/">http://username.github.com/</a></p>
-
-<p>最後記得要把 Octopress source 也上傳到 GitHub</p>
-
-<pre><code>$ git add .
-$ git commit -m 'initial source commit'
-$ git push origin source
-</code></pre>
-
-<hr />
-
-<p>相關文章：</p>
-
-<p><a href="/blog/2013/11/12/post-article-by-octopress/">使用 Octopress 部落格發佈文章</a></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-10T05:11:00+08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/11/10/install-octopress-and-host-with-github/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1110,6 +920,10 @@ $ git push origin source
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
@@ -1125,10 +939,6 @@ $ git push origin source
     
       <li class="post">
         <a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">[美食][新莊] 夏天吃吃賞</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
       </li>
     
   </ul>
@@ -1154,6 +964,7 @@ $ git push origin source
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
 
   </ul>
 </section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -1179,6 +990,8 @@ $ git push origin source
     
         <a href="/blog/page/7/" class="prev">Prev</a>
     
+    
+        <a href="/blog/page/9/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav>

@@ -4,7 +4,7 @@
   <title><![CDATA[這個夏天。]]></title>
   <link href="http://summerlize.github.io/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-22T12:52:09+08:00</updated>
+  <updated>2018-05-22T14:09:23+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[macOS: High Sierra / brew 安裝問題 link Permission denied]]></title>
+    <link href="http://summerlize.github.io/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/"/>
+    <updated>2018-05-22T13:44:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution</id>
+    <content type="html"><![CDATA[<p>使用 brew 安裝 python 時出現錯誤，</p>
+
+<pre><code>You can try again using `brew link gdbm`
+</code></pre>
+
+<p>再重新安裝顯示已安裝成功，</p>
+
+<pre><code>Warning: python 3.6.5 is already installed, it's just not linked
+You can use `brew link python` to link this version.
+</code></pre>
+
+<p>執行<code>$ brew link python</code>出現錯誤，</p>
+
+<pre><code>Linking /usr/local/Cellar/python/3.6.5... Error: Permission denied @ dir_s_mkdir - /usr/local/Frameworks
+</code></pre>
+
+<p>解決方法：</p>
+
+<pre><code>$ sudo mkdir /usr/local/Frameworks
+$ sudo chown $(whoami):admin /usr/local/Frameworks
+$ brew link python
+Linking /usr/local/Cellar/carthage/0.28.0... 4 symlinks created
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 commit，但維持目前版本的程式碼)]]></title>
@@ -2268,137 +2299,6 @@ Hello World!
 <p>在右邊畫面下方可以找到<strong>+新增平台</strong>按鈕，點下後選取網頁類型並輸入網站網址，</p>
 
 <p>完成後按下<strong>立即開始</strong>，將程式碼加入網頁中的 body 區塊即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[分享][新莊] 許燕斌手作烘焙]]></title>
-    <link href="http://summerlize.github.io/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/"/>
-    <updated>2016-06-01T23:00:00+08:00</updated>
-    <id>http://summerlize.github.io/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung</id>
-    <content type="html"><![CDATA[<p>超愛吃麵包的夏天，從許燕斌手作烘焙開店前裝潢就注意到他了～</p>
-
-<p>夏天喜歡歐式麵包，尤其法國麵包更是大愛～～</p>
-
-<p>所以平常買的麵包價格也都比傳統麵包高一點。</p>
-
-<p>記得許燕斌剛開幕前幾天我就去了，沒想到價錢真的有點嚇到我，</p>
-
-<p>夏天也不是沒買過一百元以上的麵包，但還是會看一下麵包大小份量是否值得，</p>
-
-<p>當天兩手空空的離開，基本上我從麵包店空手離開的機率是 0 耶耶～ (實在有點太震驚)</p>
-
-<p>幾個月後我娘說看到有人推薦，價錢也沒有我說的那麼誇張，(我第一次去的時候沒有找到低於60元的麵包)</p>
-
-<p>於是又燃起我再次挑戰的決心～～</p>
-
-<p>這次是下午去所以麵包還很多，</p>
-
-<p>現在很多麵包店都會提供質感很好的紙袋，要記得重複使用比較環保喔～～</p>
-
-<p><img src="https://c1.staticflickr.com/8/7695/26810605384_21209be8dd.jpg" height="350" width="350" alt="" /></p>
-
-<h3>蔥仔胖</h3>
-
-<p>首先是我娘看到別人大推的蔥麵包，其實他外觀沒有很吸引我 XDD</p>
-
-<p>因為我個人很討厭美乃滋 (很多台灣店家氾濫使用廉價美乃滋阿)，所以只要看到有美乃滋的產品多是敬謝不敏，</p>
-
-<p>但這次來就是抱著實驗的精神，加上已經有人掛保證，一定要買一個試一下的，</p>
-
-<p>這一試真是驚為天人阿～～蔥麵包的鹹度很剛好，加上少許的美乃滋不會過甜也不會膩，</p>
-
-<p>形成絕妙的搭配，而且也不會像一般蔥麵包過油的感覺，</p>
-
-<p>真的好好吃喔～～～推推推推！</p>
-
-<p>註：夏天第二次回購時，麵包比較不鹹，但是鹹一些比較好吃捏～</p>
-
-<p><img src="https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg" height="300" width="400" alt="" />
-<img src="https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg" height="300" width="300" alt="" /></p>
-
-<h3>原味脆皮泡芙</h3>
-
-<p>前幾天食尚玩家正好在介紹高雄有名的泡芙，勾起夏天滿滿的泡芙慾～手刀買一個</p>
-
-<p>脆皮泡芙的內餡是鮮奶油，不是卡士達醬路線，應該是香草牛奶口味？</p>
-
-<p>我自己是覺得還好～～表現一般 XD</p>
-
-<p>倒是包裝超級可愛～～很療癒：）</p>
-
-<p><img src="https://c3.staticflickr.com/8/7286/27385219506_26a6963863.jpg" height="220" width="220" alt="" />
-<img src="https://c3.staticflickr.com/8/7401/27385216826_8623a7842d.jpg" height="220" width="220" alt="" />
-<img src="https://c6.staticflickr.com/8/7725/27419224125_31b2a6bcbc.jpg" height="220" width="220" alt="" /></p>
-
-<h3>小腹胖胖</h3>
-
-<p>取這個名字是否會讓很多少女卻步呢 XDD</p>
-
-<p>還好夏天是不會為了身材跟美食 say no 的 XDD</p>
-
-<p>這個巧克力麵包其實蠻多歐式麵包店都有出，通常表現也不會太差，</p>
-
-<p>不過許燕斌的夏天給 95 分喔喔喔～～</p>
-
-<p>他的內餡甜度適中，還能吃到巧克力豆！是個堪稱完美比例的巧克力內餡。</p>
-
-<p>扣五分是因為醬蠻集中在一個區域的，我跟小狐狸一人剝一半吃，有些地方沒有醬拉拉～～</p>
-
-<p>夏天吃過蠻多麵包店做的同款～許燕斌的很好吃了～～推薦！</p>
-
-<p><img src="https://c2.staticflickr.com/8/7533/27419227265_587fe996e5.jpg" height="300" width="300" alt="" />
-<img src="https://c6.staticflickr.com/8/7725/27419225565_02e35a4020.jpg" height="300" width="300" alt="" /></p>
-
-<h3>可麗露</h3>
-
-<p>夏天第一次去的時候就注意到這個可麗露，實在烤的太美拉～</p>
-
-<p>口感很好，表面酥脆內部濕潤，可是表皮的味道有點奇怪 ＠_＠&hellip;</p>
-
-<p>和夏天以前吃過某留法甜點師傅做得不太一樣，</p>
-
-<p>不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P</p>
-
-<p><img src="https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg" height="250" width="250" alt="" />
-<img src="https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg" height="250" width="250" alt="" /></p>
-
-<h3>伯爵美人</h3>
-
-<p>伯爵茶的香氣實在太吸引夏天了～麵包本身的伯爵茶味很出色，超有下午茶的感覺～</p>
-
-<p>中間搭配奶酥我覺得蠻妙，很好吃～不過有奶酥的時候似乎掩蓋了伯爵茶味，</p>
-
-<p>有一好沒兩好的概念 XDD</p>
-
-<p><img src="https://c1.staticflickr.com/8/7298/27420815152_f3552477d8.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/8/7298/27420812422_5b1f5ab453.jpg" height="250" width="250" alt="" />
-<img src="https://c2.staticflickr.com/8/7356/26911467753_49bbd02d5d.jpg" height="250" width="250" alt="" /></p>
-
-<h3>白燒芋頭</h3>
-
-<p>白燒芋頭走人如其名的路線～((覺得貼切 XD))</p>
-
-<p>咬下一口的時候想說：ㄟˊㄟˊ我的芋頭呢？</p>
-
-<p>原來芋頭在底部，蠻有趣的！試吃感想口味中規中矩 :)</p>
-
-<p>不甜不膩是蠻值得讚賞的一點，而且可以吃到完整的塊狀芋頭耶～不是只有芋泥喔！</p>
-
-<p><img src="https://c4.staticflickr.com/8/7400/26911466483_4e75df8a52.jpg" height="250" width="250" alt="" />
-<img src="https://c5.staticflickr.com/8/7391/27243092060_2a1c2356f5.jpg" height="250" width="250" alt="" />
-<img src="https://c6.staticflickr.com/8/7541/26911465133_1f9067e813.jpg" height="250" width="250" alt="" /></p>
-
-<p><a href="https://www.facebook.com/%E8%A8%B1%E7%87%95%E6%96%8C%E6%89%8B%E4%BD%9C%E7%83%98%E7%84%99-549595445218233/">許燕斌手作烘焙粉絲團</a></p>
-
-<p>營業時間：11:00 &ndash; 21:00 (2016 / 6月資訊)</p>
-
-<p>地址：新北市新莊區中平路274號</p>
-
-<p>電話：<a href="tel:0223939889">(02)8991-5828</a></p>
-
-<p>偷偷許願老闆售價可以再可愛一點嗎 >///&lt; 夏天會常常光顧的～～</p>
 ]]></content>
   </entry>
   
