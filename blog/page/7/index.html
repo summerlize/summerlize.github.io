@@ -7,7 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="拖了好久才開始動工的峇里島遊記～ 選擇了印尼航空的轉機行程，除了省錢之外也希望可以增加一些搭機的經驗， (結果明明就驚慌失措嚇得半屎) 關於我們嚇死人不償命的轉機大冒險可以參考這篇 印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程 第一天基本上就是在搭機中度過， &hellip;">
+	<meta name="description" content="Grails 版本: 2.3.11 當 domain 中 unique 條件關聯的屬性包含了 nullable 類型， grails 會忽視 unique 限制導致誤判， 根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。 假設 Domain &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +134,178 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/">
+		
+			Grails: Nullable 屬性導致 Unique 限制式失效</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 版本: 2.3.11</p>
+
+<p>當 domain 中 unique 條件關聯的屬性包含了 nullable 類型，</p>
+
+<p>grails 會忽視 unique 限制導致誤判，</p>
+
+<p>根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。</p>
+
+<p>假設 Domain 定義如下：</p>
+
+<figure class='code'><figcaption><span>Book.groovy </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kd">class</span> <span class="nc">Book</span><span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">String</span> <span class="n">name</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">title</span>
+</span><span class='line'>  <span class="n">Author</span> <span class="n">author</span>
+</span><span class='line'>  <span class="n">Publisher</span> <span class="n">publisher</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">])</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由於 publisher 允許為 null，造成 <code>name(unique:['author','publisher']</code> 沒有正確判斷，</p>
+
+<p>此時可以自行加入判斷如下：</p>
+
+<figure class='code'><figcaption><span>start:8 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>   <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">],</span>
+</span><span class='line'>          <span class="nl">validator:</span> <span class="o">{</span> <span class="n">name</span><span class="o">,</span> <span class="n">book</span> <span class="o">-&gt;</span>
+</span><span class='line'>              <span class="kt">def</span> <span class="n">existingRecord</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">withCriteria</span><span class="o">(){</span>
+</span><span class='line'>              
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">ne</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;author&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">author</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;publisher&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>                  <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">isNull</span><span class="o">(</span><span class="s1">&#39;supplier&#39;</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span><span class="c1">//end withCreiteria</span>
+</span><span class='line'>          <span class="o">}</span><span class="c1">//end validator</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完成後就可以正確判斷 unique 摟～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-30T01:39:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -799,7 +971,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/">
@@ -922,192 +1094,6 @@
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/14/grails-gorm-automaticlly-save-issue/">
-		
-			Grails: GORM 自動更新儲存問題</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>Grails 版本: 2.3.5</p>
-
-<p>以下面的程式碼為例，</p>
-
-<p>我們希望找到 author 之後，將 author 存回 book 中，</p>
-
-<p>再呼叫 book 做 save()，</p>
-
-<p>但實測發現 book 在 if 之前就已自動儲存，</p>
-
-<figure class='code'><figcaption><span>book update </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查了一下 Grails API 找到 <a href="http://grails.org/doc/2.3.4/ref/Domain%20Classes/discard.html">discard()</a> 方法，<strong>用來避免自動執行儲存</strong>，</p>
-
-<p>測試的程式碼如下，結果 book 仍然自動更新 (暈) ，</p>
-
-<figure class='code'><figcaption><span>book update - test discard </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">discard</span><span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>繼續 try 不同的組合後發現似乎是<strong> findBy() 指令造成 book 自動儲存</strong>，</p>
-
-<p>在此提供兩種解決方式，<strong>第一種是在 mapping params 之前先執行完 findBy() </strong>，</p>
-
-<figure class='code'><figcaption><span>book update - solution 1 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>若因為處理邏輯的因素 findBy() 一定得在 book.properties = params 之後，</p>
-
-<p>我們可以用<strong>第二種方式，使用 new Book(params) 來取代 book.properties = params </strong>。</p>
-
-<figure class='code'><figcaption><span>book update - solution 2 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">params</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-14T03:59:00+08:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/grails/'>Grails</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/05/14/grails-gorm-automaticlly-save-issue/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1117,6 +1103,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫(不保留舊的 Commit，但維持目前版本的程式碼)</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
@@ -1134,10 +1124,6 @@
         <a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">[美食][板橋] 夏天吃吃賞</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/">[推薦碼0125005366] 台新卡得利 Cardaily - 信用卡專屬 APP 輸入推薦碼送 $50 刷卡金</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1148,7 +1134,7 @@
 <li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
 <li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
 <li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
-<li class='category'><a href='/blog/categories/git/'>Git (2)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
 <li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
 <li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
 <li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
