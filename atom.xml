@@ -4,7 +4,7 @@
   <title><![CDATA[這個夏天。]]></title>
   <link href="http://summerlize.github.io/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2018-05-28T16:02:23+08:00</updated>
+  <updated>2018-07-02T22:00:23+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100]]></title>
+    <link href="http://summerlize.github.io/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/"/>
+    <updated>2018-07-02T21:40:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2018/07/02/shopee-promo-invitation-code-coupon copy</id>
+    <content type="html"><![CDATA[<p><strong><font size="4px"> <a href="https://shp.ee/bz6trhd">點此註冊蝦皮會員</a> 使用我的折扣碼YUUBA222，<font color="darkred">第一筆訂單立即享有 NT$100 折扣</font> (2018/7/2更新)</p>
+
+<p><font color="blue" onclick="copyPromoCode()">推薦折扣碼：YUUBA222</font>
+</font></strong></p>
+
+<p>使用推薦折扣碼，在<b><font color="red"> 蝦皮購物 APP 限商城 </font></b>的<b><font color="red">第一筆</font></b>訂單，需<b><font color="red">滿 500 </font></b>方可折抵，</p>
+
+<p>朋友完成訂單後我也會獲得100蝦幣喔～</p>
+
+<p>有需要的捧油歡迎使用，</p>
+
+<p>因為夏天沒有新帳號能實測，只能依照官方說明，幫大家紅字標註重點～</p>
+
+<p><input type="text" id="promoCode" onclick="copyPromoCode()" value="YUUBA222"></p>
+
+<script language="javascript">
+    function copyPromoCode(){
+        var obj = document.getElementById("promoCode");
+        obj.select();
+        document.execCommand("Copy");
+        alert("已複製序號"+obj.value);
+    }
+</script>
+
+
+
+
+<br />
+
+
+<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[macOS: High Sierra / brew 安裝問題 link Permission denied]]></title>
@@ -2294,31 +2339,6 @@ Hello World!
     &lt;/cookie-config&gt;
 &lt;/session-config&gt;
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Facebook 按鈕造成 The domain of this URL isn't included in the app's domains... 錯誤 如:讚(like)、分享(share)、登入(login)...等]]></title>
-    <link href="http://summerlize.github.io/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/"/>
-    <updated>2016-06-03T07:06:00+08:00</updated>
-    <id>http://summerlize.github.io/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains</id>
-    <content type="html"><![CDATA[<p>最近發現網頁出現錯誤訊息：</p>
-
-<p><font color="red">無法載入網址: The domain of this URL isn&rsquo;t included in the app&rsquo;s domains. To be able to load this URL, add all domains and subdomains of your app to the App Domains field in your app settings.</font></p>
-
-<p>檢查後發現是 facebook 按鈕造成的，</p>
-
-<p>查了相關資料應該是要將網頁與 facebook 的開發管理網站連結，</p>
-
-<p>其實不做的話按鈕還是可以正常使用，只是夏天有潔癖看了不開心 XDD</p>
-
-<p>首先登入 <a href="https://developers.facebook.com">Facebook 開發者網站</a> ，</p>
-
-<p>接著新增一個應用程式，在左邊選單點選<strong>設定</strong>選項，</p>
-
-<p>在右邊畫面下方可以找到<strong>+新增平台</strong>按鈕，點下後選取網頁類型並輸入網站網址，</p>
-
-<p>完成後按下<strong>立即開始</strong>，將程式碼加入網頁中的 body 區塊即可。</p>
 ]]></content>
   </entry>
   
