@@ -7,7 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="最近發現網頁出現錯誤訊息： 無法載入網址: The domain of this URL isn&rsquo;t included in the app&rsquo;s domains. To be able to load this URL, add all domains and &hellip;">
+	<meta name="description" content="Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出， 這是由於 cookie 名稱相同所造成， 解決方式： 先安裝 templates $grails install-templates， 在 src/templates/war/web.xml 中新增自訂的名稱即可 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +134,101 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/">
+		
+			Grails: 更改 Cookie 名稱以解決多專案無法同時登入問題</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出，</p>
+
+<p>這是由於 cookie 名稱相同所造成，</p>
+
+<p>解決方式：</p>
+
+<p>先安裝 templates <code>$grails install-templates</code>，</p>
+
+<p>在 src/templates/war/web.xml 中新增自訂的名稱即可。</p>
+
+<pre><code>&lt;session-config&gt;
+    &lt;cookie-config&gt;
+        &lt;name&gt;MY_SESSION_NAME&lt;/name&gt;
+    &lt;/cookie-config&gt;
+&lt;/session-config&gt;
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-07T22:15:00+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -603,7 +698,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/">
@@ -770,529 +865,6 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2016/05/23/comments-of-recommended-singapore-food-gift-from-bloggers/">
-		
-			[分享] 部落客推薦之新加坡必買伴手禮食用心得</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>此次完全就是跟風部落客推薦的伴手禮來進行採買，</p>
-
-<p>而食物以外必買的 CHARLES &amp; KEITH &lt;&lt; 真心大推，</p>
-
-<p>考慮到在網路上已有很多分享資訊，之後有時間再來聊聊它。</p>
-
-<p>這邊會依照推薦購買的指數排序，還沒有吃過的會先隨機排，陸續再調整更新。</p>
-
-<ol>
-<li><h3><strong>PRIMA TASTE Laksa LaMian 百勝廚叻沙拉麵    評論：推薦必買</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7381/26605423323_b861218bfe_b.jpg" height="280" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>得過世界泡麵評比的第二名及第三名、部落客評比第一名，</p>
-
-<p>烹調方式標示要煮 7 分鐘，但實際上應該是接近 7 分鐘就行了，</p>
-
-<p>不要超過喔，麵條才會 QQQ ～～～</p>
-
-<p>如果本身不排斥南洋風味料理，這款真的大推，</p>
-
-<p>濃郁的湯頭很難想像竟然是靠幾包調味料煮出來的～～</p>
-
-<p>椰奶的味道好香好濃～～加上夏天本身又愛吃辣，完全命中～～</p>
-
-<p>吃的時候忘了拍照，等下次煮再補上，到時候一定要去買一些海鮮加加 (大心)</p>
-
-<p>在寫這篇的時候發現同品牌的咖哩口味也是有得名的，竟然沒買回來！(驚)</p>
-
-<p>這款泡麵蠻大包的，相對體積也大，所以行李箱要很～大～咖才能多帶幾包，</p>
-
-<p>女生一個人吃會很飽～～</p>
-
-<p>登登～補上夏天版豪華海鮮 laksa ，第一次是小狐狸煮的，所以夏天不知道調味包長怎樣，</p>
-
-<p>見到本人發現它超大包的，一包滿滿的 laksa 醬，和一包滿滿的椰漿粉，</p>
-
-<p>我覺得 laksa 包聞起來有蝦醬的味道唷～～</p>
-
-<p>難怪湯頭超厲害拉～～不過為什麼可以放常溫呢～～疑惑 :P</p>
-
-<p><img src="https://c3.staticflickr.com/8/7122/26842540314_f2a167a49f.jpg" height="400" width="400" alt="" /></p>
-
-<p>有沒有有沒有！大師一出手便知有沒有 (自己說) ，哈哈，其實還有蛤蜊忘了撈起來拍了拉！</p></li>
-<li><h3><strong>PRIMA TASTE Chilli Crab LaMian 百勝廚辣椒螃蟹拉麵    評論：推薦</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7496/26605425453_026ed49a0a_b.jpg" height="280" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>一樣是百勝廚的另一款辣椒螃蟹拉麵，麵體跟 laksa 拉麵是一樣的，</p>
-
-<p>因為辣椒螃蟹也是新加坡的名產之一，於是我們也跟著手滑下去 XD</p>
-
-<p>這包是煮成乾麵的，麵條一樣好 Q 好好吃，</p>
-
-<p>醬包的份量恰到好處，每一根麵條都能附著到醬汁，</p>
-
-<p>吃起來像是泰式風味，醬汁小小辣也加分，吃起來不會不舒服的那種～</p>
-
-<p>該不會百勝廚的系列都很值得買吧！？ 前兩名已被攻佔 XDD</p>
-
-<p><img src="https://c6.staticflickr.com/9/8438/29588085621_dcff7c071e_k.jpg" height="300" width="340" alt="" /></p>
-
-<p>好的，因為這不是我煮的 XD 所以醜醜的請見諒(我就是等著吃啊) 哈哈</p></li>
-<li><h3><strong>黃亞細正宗潮州肉骨茶包    評論：推薦</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7799/26605431223_e0e9b64083_b.jpg" height="250" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：黃亞細肉骨茶 醉花林俱樂部分店</strong></font></p>
-
-<p>分店資訊：<a href="http://www.ngahsio.com/tc/chui-huay-lim-club">http://www.ngahsio.com/tc/chui-huay-lim-club</a></p>
-
-<p>有上網做過功課的孩子們應該都會知道，大多部落客比較推薦的是松發肉骨茶，</p>
-
-<p>對黃亞細的評語都是根本在喝胡椒湯之類的，</p>
-
-<p>而我和小狐狸是熱愛胡椒又嗜辣之人，想說可以挑戰一下，</p>
-
-<p>一喝下去立馬愛上那胡椒的香濃及辣舌的口感～～ (大心)(真心沒覺得是單純的胡椒湯呀)</p>
-
-<p>不過如果不特別偏好胡椒又不敢吃辣就略過它吧！</p>
-
-<p>因為太好喝了我們決定直接買它的肉骨茶包送禮，</p>
-
-<p><img src="https://c8.staticflickr.com/8/7609/28075089391_58255fd765_k.jpg" height="300" width="300" alt="" /></p>
-
-<p>可惜煮出來的湯頭還是跟店裡喝到的差很大，</p>
-
-<p>自己煮出來的是清湯路線，不濃也不辣帶些白胡椒香，</p>
-
-<p>店裡的有加整顆黑胡椒粒下去熬，喝完碗底還看的到一堆黑胡椒籽，</p>
-
-<p>不過這個肉骨茶包還是得到了我家母親大人的好評～</p>
-
-<p>anyway 買不買這個牌子是其次，但是夏天覺得肉骨茶包絕對是非常有代表性的新加坡伴手禮～～</p></li>
-<li><h3><strong>OWL Roast &amp; Ground Coffee 濾袋式沖泡研磨咖啡 含奶精    評論：推薦</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7460/27237168975_9954cb8050_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>在新加坡點茶或咖啡時， O 表示加糖， C 表示加奶加糖， Kosong 表示不加糖 &amp; 奶，</p>
-
-<p>那麼 Kopi-C Kosong 呢？加糖加奶又不加糖不加奶是怎樣 XD</p>
-
-<p>好拉～看到包裝上寫是的淡奶味咖啡，聰明的大家應該猜到了是無糖有奶咖啡了吧～</p>
-
-<p>雖然說是淡奶味咖啡，但下方的奶含量指標可是有四顆星呢！</p>
-
-<p>甜度也有半顆，實在不太明白新加坡捧油們的邏輯～～ :P</p>
-
-<p><img src="https://c1.staticflickr.com/1/523/31975360194_3ef09c78e7.jpg" height="199" width="150" alt="" />
-<img src="https://c1.staticflickr.com/3/2525/32777506146_12eeb54c95.jpg" height="199" width="139" alt="" />
-<img src="https://c1.staticflickr.com/1/359/32694929931_067e97e635.jpg" height="199" width="150" alt="" /></p>
-
-<p>裡面的小包裝和外袋幾乎一模模一樣樣，夏天自己覺得蠻可愛的有種復古感，</p>
-
-<p>而內包裝人如其名就是濾袋，夏天平時並不算常喝咖啡，但要喝一定要加奶不加糖的，</p>
-
-<p>和我喜好一樣的話我覺得蠻推薦的，咖啡濃郁，奶味香醇，且不苦不酸不澀，兩著搭配得非常平衡。</p>
-
-<p>沖泡方式完全照說明即可，水量 200-250 cc 不要多，然後時間一定要 3 分鐘以上，</p>
-
-<p>因為我一開始沒有注意時間的部分，喝了一口，還想說也太&#8221;淡&#8221;奶味了吧！ XD</p>
-
-<p>三分鐘後整個醇濃香都出來了呀～後來還回沖兩三次，喝起來還是「很可以」喔！～～</p></li>
-<li><h3><strong>BENGAWANSOLO Pandan Chiffon 班蘭葉綠蛋糕    評論：推薦嚐鮮，可買可不買</strong></h3>
-
-<p><font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font></p>
-
-<p><img src="https://c3.staticflickr.com/8/7001/27144299242_aba50f602d.jpg" height="260" width="330" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 BENGAWAN SOLO (近C登機門)</strong></font></p>
-
-<p>這是繼黑胡椒蟹外讓夏天奔波吐血的另一個伴手禮，忘記拍照只好抓官網圖了，</p>
-
-<p>由於我們是在第三航廈轉機，但先抵達第二航廈，於是就打算登機前再買才不會大包小包，</p>
-
-<p>在受某某長輩之託的尋找 Gucci 包之旅中，</p>
-
-<p>已從第二航廈 > 第三航廈 > 第一航廈 > 第二航廈 > 第三航廈 進入萬劫不復的循環中，</p>
-
-<p>轉機時間四小時就這麼快速的流逝了，沒錯，就是四小時。</p>
-
-<p>正逢準備登機前，帶著愉悅的心情去買綠蛋糕之際，</p>
-
-<p>登愣～可愛的蛋糕、人人推薦必買的蛋糕竟然位於 Check-in 大廳，也就是轉機無法進入的 Check-in 大廳，</p>
-
-<p>於是我們摸摸鼻子又往第二航廈前進，長途跋涉腳已快斷竟然沒有整顆的班蘭葉蛋糕，只有零散的小塊裝，</p>
-
-<p>詢問了店員表示要中午 12 點才會有，究竟究竟究竟？</p>
-
-<p>考慮到要送人散裝實在不太合適，可是我們 11 點半就最後登機了耶耶，</p>
-
-<p>不死心再問其他航廈會有嗎，店員說都一樣要等 12 點，</p>
-
-<p>就在我內心天人交戰決定要不要相信他，還是就這麼放棄之時，</p>
-
-<p>小狐狸用為難的臉對我說：不然就去另一家看看吧 (看我一臉沒買到很痛苦的樣子) ，</p>
-
-<p>剩沒多少時間的情況下，我們又手刀飛奔到了第一航廈，</p>
-
-<p>結果現場超多完整的班蘭蛋糕，一堆人在排隊耶！(不由得 mur mur 二航的店員一番)</p>
-
-<p>盒裝的體積還蠻大的，是很難買多的類型，</p>
-
-<p>外觀看起來像綠色的古早味蛋糕 XD</p>
-
-<p>班蘭葉的香氣非常濃厚，不過有種聞得到吃不到的感覺，</p>
-
-<p>海綿蛋糕本體則是非常的濕軟綿密，經實測冷藏大約可保存一個禮拜，</p>
-
-<p>店員是說兩三天就要吃完拉～個人經驗供大家參考。</p>
-
-<p>另外我們還有買一小塊 Pandan Cheese Roll 來試吃，是瑞士卷型態的班蘭蛋糕中間夾鹹起司，</p>
-
-<p><img src="https://c1.staticflickr.com/8/7676/27215197816_e71a7b68ac.jpg" height="200" width="200" alt="" /></p>
-
-<p>蠻好吃的，兩人分食比較不會膩。</p>
-
-<p>整體而言感想是人生中有吃過一次就 ok 的伴手禮。</p></li>
-<li><h3><strong>NISSIN Chilli Crab 日清辣椒蟹/<del>黑胡椒蟹杯麵</del> 評論：推薦，可買可不買</strong></h3>
-
-<p><font color="pink" size="+2">推薦的是辣椒蟹口味喔！</font></p>
-
-<p><img src="https://c6.staticflickr.com/8/7216/26605428133_ac74a0c24a_b.jpg" height="250" width="350" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這是因為當時鬼打牆找不到 SUPER CUP 而買的日清螃蟹杯麵，</p>
-
-<p>打開後看到調味粉已經灑在麵體上，只有一包辣醬是有包裝的，</p>
-
-<p>這次吃的是<strong>辣椒蟹</strong>杯麵，醬包全加～因為夏天很愛吃辣～～</p>
-
-<p>泡好的時候浮現滿滿的蟹肉條整個讓人心花怒放耶～哈</p>
-
-<p><img src="https://c5.staticflickr.com/9/8242/28602280020_771bf0f6fd_k.jpg" height="250" width="250" alt="" />
-<img src="https://c6.staticflickr.com/8/7736/28886825885_4254b0fd17_k.jpg" height="250" width="250" alt="" />
-<img src="https://c7.staticflickr.com/9/8075/28269690334_42b1bf1005_k.jpg" height="250" width="250" alt="" /></p>
-
-<p>吃前三口的時候還可以稍微感受到辣味～之後就完全無感了拉～～～不辣不辣</p>
-
-<p>麵條是細麵條，口感很不錯很適中，我真的很害怕軟爛的麵條～～～</p>
-
-<p>湯頭喝起來倒是沒覺得有什麼特別，別看它顏色很深，喝起來還算是清湯的感覺(就是調味粉重的清湯)</p>
-
-<p>不知道有沒有人懂我在說什麼耶 哈哈</p>
-
-<p>因為它的麵條很棒，所以夏天覺得蠻值得一買的～</p>
-
-<p>但若要針對是否很有「新加坡特色」，倒是還好囉～～～</p>
-
-<p>如果行李已經沒有空間就不用勉強這樣＾＾</p>
-
-<hr />
-
-<p>好der，終於來到了<strong>黑胡椒蟹</strong>的部分，</p>
-
-<p>調味模式和辣椒蟹口味是差不多的，只是辣椒蟹的醬包蠻大包，</p>
-
-<p>黑胡椒蟹則只有一小小的油包，麵條一樣是好棒棒，</p>
-
-<p>不過蟹肉少很多只有兩三塊，另外有不少的乾燥蛋，</p>
-
-<p>原本以為同品牌不同口味應該是不會差太多，所以歸類在一起，</p>
-
-<p>沒想到這湯的味道跟 SUPER CUP 有點像耶～暈</p>
-
-<p>對夏天來說太重鹹了，雖然可以看到黑胡椒粒但沒什麼黑胡椒味道，</p>
-
-<p>因為沒注意到黑胡椒醬都在底部，所以沒有攪拌的很均勻，</p>
-
-<p>吃到一半才發現下面有一大坨，趕緊攪一攪又變得更重口味了＠＠</p>
-
-<p>很像超市一種現成的黑胡椒牛排醬，太白粉勾芡口感，</p>
-
-<p>所以這款是絕對不推薦的 T_T</p>
-
-<p>也許這就是新加坡的黑胡椒口味，但不是夏天的菜～～</p>
-
-<p>ps. 因為趕著出門所以照片拍得不太好，請各位看倌見諒 >__&lt;</p>
-
-<p><img src="https://c6.staticflickr.com/6/5772/30008845021_8c602fbd55_k.jpg" height="250" width="250" alt="" />
-<img src="https://c8.staticflickr.com/6/5634/29464695463_d12a88353c_k.jpg" height="250" width="250" alt="" />
-<img src="https://c3.staticflickr.com/6/5655/30057850306_9ed6a34de7_k.jpg" height="250" width="250" alt="" /></p></li>
-<li><h3><strong>KOKA Laksa 星洲叻沙味快熟麵    評論：可買可不買</strong></h3>
-
-<p><img src="https://c8.staticflickr.com/8/7270/26605424223_2c7f4a59b2_b.jpg" height="280" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>一樣是 laksa 口味的泡麵，不得不說相較之下百勝廚真的大勝，</p>
-
-<p>雖然也是會驚嘆一下靠著幾包粉末就能煮出濃濃的湯汁，</p>
-
-<p>但是椰奶的滑順香濃口感還是略遜一籌，</p>
-
-<p>這款標示只要煮兩分鐘，真的只要兩分鐘，</p>
-
-<p>我請母親大人幫我煮，只是不小心煮了兩分鐘多一點吃起來就不 Q 了，</p>
-
-<p>然後湯喝起來有蠻重的薑味，個人不喜番 >__&lt;</p>
-
-<p>如果不排斥薑味的話應該也算值得一買，畢竟價錢也比百勝廚便宜很多，</p>
-
-<p>單包份量也較小，適合沒有很餓的時候吃～～</p></li>
-<li><h3><strong>GOLD KILI Double Shot White Milk Tea 特濃白奶茶    評論：可買可不買</strong></h3>
-
-<p><img src="https://c3.staticflickr.com/8/7503/27140097482_1732e005f2_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>在土司工坊吃早餐的時候，一個被新加坡奶茶驚豔到的 move ～</p>
-
-<p>雖然糖度還是有點偏甜，但是茶和奶的濃淡比例卻是恰到好處，且喝起來很柔順，</p>
-
-<p>平常愛喝奶茶的小狐狸和我看到奶茶粉馬上就決定要買，事先沒有做功課的概念 XDD</p>
-
-<p>夏天覺得喝起來像不甜的印尼拉茶美詩 (Max Tea Tarikk) 還不錯，雖然跟土司工坊喝到的還是很不一樣～</p>
-
-<p>一般我都會加比較多的水去泡喔～ &lt;&mdash;&mdash;很怕死甜的人</p></li>
-<li><h3><strong>TWG 馬卡龍    評論：可買可不買</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7306/27251162685_6d965eb8db.jpg" height="200" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 TWG Tea Boutique</strong></font></p>
-
-<p>以新加坡的物價來說，TWG 的馬卡龍應該算是超便宜的，一顆約莫 50 元左右，</p>
-
-<p>台灣很多糟糕的馬卡龍都還賣一顆 $100，</p>
-
-<p>因為在機場秒吃完&hellip;&hellip;，所以又忘記拍照了 T_T</p>
-
-<p>夏天買了四種口味，</p>
-
-<p>分別是伯爵巧克力(Earl Grey Fortune &amp; Chocolate)、抹茶(Matcha)、玫瑰(Bain de Rose Tea) 及限定口味櫻花(Sakura! Sakura! Tea)，</p>
-
-<p>雖然比起很多甜死人不償命的馬卡龍已經好很多，但還是偏甜，吃多會膩，</p>
-
-<p>不同口味吃起來的差異性並不是很明顯，所以還是無法超越目前在我心中第一名的 Ladurée ，</p>
-
-<p>但外殼的酥脆度表現不錯，整體仍然有 70 &ndash; 80 分的水準。</p></li>
-<li><h3><strong>GOLD KILI Matcha Latte 即溶抹茶拿鐵    評論：不推薦</strong></h3>
-
-<p><img src="https://c1.staticflickr.com/8/7387/27140096472_eee2bedf61_b.jpg" height="300" width="300" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>自從喝過國產品牌泰山推出的抹茶拿鐵即溶茶粉～就一直讓我念念不忘，</p>
-
-<p>很喜歡它帶有微苦的香氣，可惜後來都找不到哪裡還有在賣，</p>
-
-<p>夏天不喜歡太奶和太甜，偏好口感清爽的飲品，</p>
-
-<p>看到這個包裝好像很清爽的樣子 (？)，就默默的被吸引了，</p>
-
-<p>實際泡起來很甜很濃，還多了一個說不上來奇特茶味，有點拉茶的厚度，</p>
-
-<p>不是我的愛哈。</p></li>
-<li><h3><strong>SUPER CUP Black Pepper Crab 黑胡椒蟹麵    評論：不推薦</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7067/27141881051_4e71c60973_b.jpg" height="250" width="200" alt="" />
-<img src="https://c6.staticflickr.com/8/7263/27141887261_2f235056f8_b.jpg" height="250" width="240" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這款完全是被某 Blog 燒到，格主表示自己買了整箱，還很怕以後吃不到該怎麼辦的感覺～</p>
-
-<p>加上夏天熱愛胡椒口味的食物，出發前立志什麼都沒買也要買到它，</p>
-
-<p>但是沒想到它竟然偷偷換了包裝，而我也因為對自己過人的眼力太有信心，</p>
-
-<p>覺得我看到包裝一眼就能認出它，就沒注意是什麼品牌，</p>
-
-<p>就這樣害我跑了一家、兩家、三家&hellip;&hellip; fair price ，四家、五家、六家&hellip;&hellip;便利商店，</p>
-
-<p>希望大家不要學夏天當時鬼附身的執著，一整個後悔哈哈，</p>
-
-<p>在進了前兩家超市都沒找到之後，當機立斷決定其他牌子各買個兩杯吃看看，</p>
-
-<p>其中一個是日清，沒想到另一個「其他牌子」就是我尋尋覓覓的 SUPER CUP ， 囧</p>
-
-<p>直到晚上回飯店有了 wifi 才真相大白，可是隔天一早就要直奔機場沒有時間再去買，</p>
-
-<p>沒想到我竟然瘋狂到進入機場也要去機場超市看看能不能再多買一些帶回台灣，</p>
-
-<p>可惜老天爺並沒有讓我如願～～</p>
-
-<p>吃完之後的感想竟然是：感謝上蒼沒讓我多買幾杯回家 =.=</p>
-
-<p>一杯的量明明少少，但是因為不合我跟小狐狸的胃口，</p>
-
-<p>到最後兩人竟然在互推誰把剩下幾口吃掉，</p>
-
-<p>總而言之這款對夏天來說已經是比普通還糟的等級，</p>
-
-<p>味道也蠻難描述的，大概就是醬油之類的，做了些新加坡變種吧，then 完全沒有胡椒味 = =</p>
-
-<p>千萬不要跟夏天一樣「堅持」～～ XDD</p></li>
-<li><h3><strong>PRIMA TASTE Laksa 百勝廚叻沙調味包    評論：推薦</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7698/26605422373_6e6f4202be_b.jpg" height="250" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p>
-
-<p>這次我有非常認真記得要拍照紀錄，內容物是一張說明書與三個料包，</p>
-
-<p><img src="https://c3.staticflickr.com/6/5654/31087330642_59e517ffe4_k.jpg" height="290" width="220" alt="" />
-<img src="https://c5.staticflickr.com/6/5723/31195701756_6bfc0cc47e_k.jpg" height="293" width="293" alt="" /></p></li>
-</ol>
-
-
-<p>下面是此次準備的食材，蝦子數隻與松阪豬一片，麵條挑拉麵或黃麵類的會比較適合喔～</p>
-
-<p><img src="https://c3.staticflickr.com/6/5344/31195695426_f511541d5f_k.jpg" height="200" width="350" alt="" /></p>
-
-<p>裡頭的醬包分別長這樣，A包就是椰漿粉，</p>
-
-<p><img src="https://c1.staticflickr.com/6/5330/31195702696_2f5a2b5f20_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>B包是叻沙糊，也就是有蝦醬味道的那包，</p>
-
-<p><img src="https://c7.staticflickr.com/6/5761/31195699086_9fdadd3f7f_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>C包是叁峇辣椒醬，說明書上有寫可依個人口味酌量加入，</p>
-
-<p>但是因為夏天一開始沒認真看就直接加整包啦～ 還好我們不怕辣 XDD</p>
-
-<p><img src="https://c7.staticflickr.com/6/5346/31195697646_8f75c65781_k.jpg" height="220" width="220" alt="" /></p>
-
-<p>最後附上料理完成照一張。</p>
-
-<p><img src="https://c5.staticflickr.com/6/5725/31195700596_71341f377f_k.jpg" height="300" width="300" alt="" /></p>
-
-<p>好的，接下來要說說為什麼推薦他，卻又把他擺在後面呢～～</p>
-
-<p>因為夏天覺得味道吃起來跟第一名叻沙拉麵 (泡麵) 是完全一樣的，價格換算起來也差不多，</p>
-
-<p>有附麵條的拉麵會比較方便～ 且跟叻沙的契合度也會更好，</p>
-
-<p>如果純粹需要叻沙口味但不做成湯麵的捧油，這款仍然大大推薦唷！</p>
-
-<ol>
-<li><h3><strong>PRIMA TASTE Singapore Curry 百勝廚新加坡咖哩調味包 (尚未食用)</strong></h3>
-
-<p><img src="https://c4.staticflickr.com/8/7706/26605419643_6eec47d44f_b.jpg" height="240" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p></li>
-<li><h3><strong>PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹調味包 (尚未食用)</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7375/26605420973_8d1cb769dc_b.jpg" height="260" width="250" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：fair price 超市</strong></font></p></li>
-<li><h3><strong>TWG White Sky Tea (尚未食用)</strong></h3>
-
-<p><img src="https://c6.staticflickr.com/8/7134/27237167765_eec071e096_b.jpg" height="200" width="450" alt="" /></p>
-
-<p><font color="blue"><strong>購買地點：樟宜機場第一航廈 TWG Tea Boutique</strong></font></p>
-
-<p>這間也是在三個航廈都有點，在第一航廈看到覺得蠻大間就先進去逛了，</p>
-
-<p>熱愛英國茶、花茶的夏天免不了要買一下，</p>
-
-<p>TWG 每一種茶旁邊都會有試聞的茶葉罐，且種類算是很豐富的，</p>
-
-<p>每一種味道都很分明，不會聞了之後嗅覺錯亂挑不出來這樣，</p>
-
-<p>印象中我挑的 white sky tea 試聞時帶有柚子香氣～～</p></li>
-</ol>
-
-
-<hr />
-
-<p>樟宜機場變化蠻快的，商店裝修、變更地點等等，</p>
-
-<p>所以建議大家下載樟宜機場 APP ，方便查詢各航廈最新的商店資訊及位置喔～～</p>
-
-<p>樟宜機場 APP下載 > <a href="http://www.changiairport.com/en/download-app.html">iChangi App</a></p>
-
-<p><a href="http://www.fairprice.com.sg/webapp/wcs/stores/servlet/AjaxStoreLocatorDisplayView?storeId=10001">點我查看 Fair Price 分店資訊及營業時間</a></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-23T23:00:00+08:00" pubdate data-updated="true">May 23<span>rd</span>, 2016</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>, <a class='category' href='/blog/categories/singapore/'>Singapore</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2016/05/23/comments-of-recommended-singapore-food-gift-from-bloggers/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1302,6 +874,10 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
@@ -1319,10 +895,6 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
         <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/12/17/yunlinxian-douliu-food-list/">[美食][斗六] 夏天吃吃賞</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1330,6 +902,7 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
   <ul id="categories">
     <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
 <li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
 <li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
 <li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
 <li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
@@ -1339,6 +912,7 @@ Repository url: git@github.com-personal:personal/personalproject.github.io.git  
 <li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
 <li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/orchid-island/'>Orchid Island (1)</a></li>
 <li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
 <li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (6)</a></li>
 <li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
