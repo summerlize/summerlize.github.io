@@ -1,0 +1,488 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>安裝 Guest VM Windows 10 於 Ubuntu Server Host - 這個夏天。</title>
+	<meta name="author" content="SUMMERLIZE">
+
+	
+	<meta name="description" content="Ubuntu 版本: 16.04 Xenial VBoxManage: 5.1.34_Ubuntur121010 首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔， 使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="這個夏天。" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1790808934333010",
+    enable_page_level_ads: true
+  });
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="innerHeader" role="banner"><h1><a href="/">這個夏天。</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:summerlize.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:summerlize.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">安裝 Guest VM Windows 10 於 Ubuntu Server Host</h2>
+	<div class="entry-content">
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+		<p>Ubuntu 版本: 16.04 Xenial</p>
+
+<p>VBoxManage: 5.1.34_Ubuntur121010</p>
+
+<p>首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔，</p>
+
+<p>使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下，</p>
+
+<pre><code>$ vboxmanage list ostypes|grep Windows
+
+Family Desc: Microsoft Windows
+ID:          Windows10_64
+Description: Windows 10 (64-bit)
+Family ID:   Windows
+</code></pre>
+
+<p>使用指令新增 VM，這裡將 VM 命名 WIN10，ostype 代入上面查出之 ID。</p>
+
+<pre><code>$ vboxmanage createvm --name WIN10 --ostype Windows10_64 --register
+
+Virtual machine 'WIN10' is created and registered.
+UUID: 17b26672-f7cb-432e-a4e9-b8c0784da1d4
+Settings file: '/home/pipi/VirtualBox VMs/WIN10/WIN10.vbox'
+</code></pre>
+
+<p>指派記憶體、CPU等硬體資源，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --memory 4096 --vram 32 --acpi on --ioapic on --cpus 2 --rtcuseutc on --cpuhotplug on --pae on --hwvirtex on11
+</code></pre>
+
+<p>設定 bridged 網路，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --nic1 bridged --bridgeadapter1 eno0 --cableconnected1 on
+</code></pre>
+
+<p>指派 vrde (VirtualBox Remote Desktop Extension) port，可使用遠端桌面軟體連線。</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --vrde on --vrdeport 5001 --vrdeauthtype null
+</code></pre>
+
+<p>新增 VM 硬碟容量 50G，</p>
+
+<pre><code>$ vboxmanage createhd --filename /vm/hd/WIN10.vdi --size 51200
+</code></pre>
+
+<p>加入 SATA 控制器，</p>
+
+<p>ps. 可依需求自設選項 (Hard disk controllers: IDE, SATA (AHCI), SCSI, SAS, USB MSD, NVMe)</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "SATA controller" --add sata
+</code></pre>
+
+<p>連結硬碟，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "SATA controller" --port 0 --device 0 --type hdd --medium /vm/hd/WIN10.vdi
+</code></pre>
+
+<p>加入 IDE 控制器，</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "IDE controller" --add ide
+</code></pre>
+
+<p>以光碟機方式連結 OS 安裝檔，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "IDE controller"  --port 0 --device 0 --type dvddrive --medium /home/user/Windows10_64bit.iso
+</code></pre>
+
+<p>啟動 VM 後，就能用 windows 的遠端桌面連線 (RDC) 連上 VM 完成後續安裝步驟囉！</p>
+
+<h3>常用 command</h3>
+
+<p>啟動 VM</p>
+
+<p><code>$ vboxmanage startvm WIN10 --type headless</code></p>
+
+<p>關機 VM</p>
+
+<p><code>$ vboxmanage controlvm WIN10 poweroff</code></p>
+
+<p>list 所有 VM</p>
+
+<p><code>$ vboxmanage list vms</code></p>
+
+<p>list 執行中的 VM</p>
+
+<p><code>$ vboxmanage list runningvms</code></p>
+
+<p>show VM 資訊</p>
+
+<p><code>$ vboxmanage showvminfo WIN10</code></p>
+
+<p>移除 VM 但保留相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10</code></p>
+
+<p>移除 VM 並刪除相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10 --delete</code></p>
+
+<p>匯出 VM</p>
+
+<p><code>$ vboxmanage export WIN10 -o /home/user/WIN10.ova</code></p>
+
+<p>增加硬碟容量，進入 OS 使用電腦管理>> 磁碟管理分配容量。</p>
+
+<p><code>$ vboxmanage modifyhd /vm/hd/WIN10.vdi --resize 81920</code></p>
+
+<p>調整記憶體大小</p>
+
+<p><code>$ vboxmanage modifyvm WIN10 --memory 8192</code></p>
+
+<p>詳細 API 請參考 <a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></p>
+
+<h3>區網 IP 設置</h3>
+
+<p>前面已設置一組 bridged network nic1 for 設置固定 IP 使用，</p>
+
+<p>接下來再設置一組 nat network nic2 for 區網 IP。</p>
+
+<pre><code># 設置一組 nat 區域網路 IP 命名為 natnet1
+$ vboxmanage natnetwork add --netname natnet1 --network "192.168.0.101/24" --enable
+
+$ vboxmanage natnetwork modify --netname natnet1 --dhcp on
+
+# 啟動 nat 網路設定
+$ VBoxManage natnetwork start --netname natnet1
+
+# 關機
+$ vboxmanage controlvm WIN10 poweroff
+
+# 將 natnet1 加入至 VM 網路
+$ vboxmanage modifyvm WIN10 --nic2 nat --nat-network2 natnet1
+
+# 開機
+$ vboxmanage startvm WIN10 --type headless
+</code></pre>
+
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-18T12:00:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2018</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+
+	<div class="share">
+<!--
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		
+		
+		<a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+		
+		
+		<a class="addthis_counter addthis_pill_style"></a>
+		
+	</div>
+	
+
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+	
+-->
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+     <a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+</div> 
+
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_plurk"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_blogger"></a>
+<a class="addthis_button_sinaweibo"></a>
+<a class="addthis_button_wordpress"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52836c2b4360f9e8"></script>
+<!-- AddThis Button END -->
+<!-- AddThis Button END -->
+
+</div>
+
+
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
+<li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
+<li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
+<li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
+<li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
+<li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/orchid-island/'>Orchid Island (1)</a></li>
+<li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
+<li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (6)</a></li>
+<li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer's Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
+<li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
+
+  </ul>
+</section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4414414286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+  
+</aside>
+
+<div class="fakeplace"></div></div>
+	<footer id="footer" class="inner" role="contentinfo">Copyright &copy; 2018
+
+    SUMMERLIZE
+
+<p>-</p>
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'summerlize';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/';
+        var disqus_url = 'http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-78711361-1', 'auto');
+  		ga('send', 'pageview');
+
+	</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '569493293211047',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ExtJS | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/extjs/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2018-08-07T15:02:15+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ext JS: store loadData() id 重複導致只顯示一筆資料]]></title>
+    <link href="http://summerlize.github.io/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/"/>
+    <updated>2014-05-14T11:55:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id</id>
+    <content type="html"><![CDATA[<p>Ext JS 版本: 4.2.x</p>
+
+<p>Sencha Architect 版本: 2.2.3</p>
+
+<p>此處希望建立一個共用的 grid 來顯示不同 table 的資料，</p>
+
+<p>如下 Json Data 所示：</p>
+
+<pre><code>Json Data
+[{"id":1, "name": "Java Programming", "title": "Java 程式設計"},
+ {"id":1, "name": "Fashion Magazine", "title": "時尚雜誌"}]
+</code></pre>
+
+<p>在執行 <code>grid.getStore.loadData(record)</code> 後卻只有顯示一筆資料，</p>
+
+<p>檢查後發現是 id 重複造成，</p>
+
+<p>由於資料存於不同的資料表，因此後端 query 出預備載入的 record 便可能會有重複 id ，</p>
+
+<p>API 說明 proxy 中 reader 的 idProperty 設定，是用該欄位作為 record 的唯一識別值，預設為 id 欄位，</p>
+
+<p>因此我們可以將 idProperty 定義為實際的唯一識別欄位，避免相同 id 的資料被覆蓋，</p>
+
+<p>由於我的 record 並沒有唯一識別值，暫時設置為 undefined。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>book update </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;proxy: {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="nl">type:</span> <span class="s1">&#39;memory&#39;</span><span class="o">,</span>
+</span><span class='line'><span class="nl">reader:</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nl">type:</span> <span class="s1">&#39;json&#39;</span><span class="o">,</span>
+</span><span class='line'>    <span class="nl">idProperty:</span> <span class="s1">&#39;undefined&#39;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>另外 API 也提到 <code>store.loadData(record)</code> 定義為預設資料已經處理成正確格式，</p>
+
+<p>因此不會經過 reader 二次處理，</p>
+
+<p>若希望使用 reader 處理，需改為使用 <code>store.loadRawData(record)</code>。</p>
+]]></content>
+  </entry>
+  
+</feed>

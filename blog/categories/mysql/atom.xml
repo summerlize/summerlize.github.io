@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mysql | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2018-08-07T15:02:15+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[於 Ubuntu Server 使用 crontab 定時自動備份 mysql 資料庫]]></title>
+    <link href="http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server/"/>
+    <updated>2016-07-08T01:02:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server</id>
+    <content type="html"><![CDATA[<p>使用指令 <code>sudo vi /etc/crontab</code> 編輯檔案</p>
+
+<p>加入備份指令如下</p>
+
+<pre><code># 分 時 日 月 週 使用者 指令
+# 表示於每日12點整，以 root 身份備份 mysql 所有資料庫並存放到 /home/user/mysqldump/ 資料夾中
+0 0 * * * root mysqldump -u root -proot --all-databases &gt; /home/user/mysqldump/database_`date '+\%Y-\%m-\%d'`.sql
+# 只備份指定的資料庫 somedb
+0 0 * * * root mysqldump -u root -proot somedb &gt; /home/user/mysqldump/somedb_`date '+\%Y-\%m-\%d'`.sql
+</code></pre>
+
+<p>使用指令 <code>sudo service cron restart</code> 重啟 crontab 服務</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/">自動將 Ubuntu Server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理</a></p>
+]]></content>
+  </entry>
+  
+</feed>

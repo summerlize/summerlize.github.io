@@ -1,0 +1,1022 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>這個夏天。</title>
+	<meta name="author" content="SUMMERLIZE">
+
+	
+	<meta name="description" content="Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出， 這是由於 cookie 名稱相同所造成， 解決方式： 先安裝 templates $grails install-templates， 在 src/templates/war/web.xml 中新增自訂的名稱即可 &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="這個夏天。" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1790808934333010",
+    enable_page_level_ads: true
+  });
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="innerHeader" role="banner"><h1><a href="/">這個夏天。</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:summerlize.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:summerlize.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner">
+<div class="shareHead">
+<!--
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		
+		
+		<a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+		
+		
+		<a class="addthis_counter addthis_pill_style"></a>
+		
+	</div>
+	
+
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+	
+&#8211;>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+     <a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+</div> 
+
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_plurk"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_blogger"></a>
+<a class="addthis_button_sinaweibo"></a>
+<a class="addthis_button_wordpress"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52836c2b4360f9e8"></script>
+<!-- AddThis Button END -->
+<!-- AddThis Button END -->
+
+</div>
+
+
+
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/">
+		
+			Grails: 更改 Cookie 名稱以解決多專案無法同時登入問題</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 同時 run 多專案時，若一專案登入帳號，另一專案便會自動登出，</p>
+
+<p>這是由於 cookie 名稱相同所造成，</p>
+
+<p>解決方式：</p>
+
+<p>先安裝 templates <code>$grails install-templates</code>，</p>
+
+<p>在 src/templates/war/web.xml 中新增自訂的名稱即可。</p>
+
+<pre><code>&lt;session-config&gt;
+    &lt;cookie-config&gt;
+        &lt;name&gt;MY_SESSION_NAME&lt;/name&gt;
+    &lt;/cookie-config&gt;
+&lt;/session-config&gt;
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-07T22:15:00+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/07/grails-change-session-cookie-name-to-solve-multiple-projects-problem-when-one-login-others-logout/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/">
+		
+			Facebook 按鈕造成 the Domain of This URL Isn&#8217;t Included in the App&#8217;s Domains&#8230; 錯誤 如:讚(like)、分享(share)、登入(login)&#8230;等</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>最近發現網頁出現錯誤訊息：</p>
+
+<p><font color="red">無法載入網址: The domain of this URL isn&rsquo;t included in the app&rsquo;s domains. To be able to load this URL, add all domains and subdomains of your app to the App Domains field in your app settings.</font></p>
+
+<p>檢查後發現是 facebook 按鈕造成的，</p>
+
+<p>查了相關資料應該是要將網頁與 facebook 的開發管理網站連結，</p>
+
+<p>其實不做的話按鈕還是可以正常使用，只是夏天有潔癖看了不開心 XDD</p>
+
+<p>首先登入 <a href="https://developers.facebook.com">Facebook 開發者網站</a> ，</p>
+
+<p>接著新增一個應用程式，在左邊選單點選<strong>設定</strong>選項，</p>
+
+<p>在右邊畫面下方可以找到<strong>+新增平台</strong>按鈕，點下後選取網頁類型並輸入網站網址，</p>
+
+<p>完成後按下<strong>立即開始</strong>，將程式碼加入網頁中的 body 區塊即可。</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-03T07:06:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/facebook/'>Facebook</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/03/facebook-buttons-cause-error-the-domain-of-this-url-isnt-included-in-the-apps-domains/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/">
+		
+			[分享][新莊] 許燕斌手作烘焙</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>超愛吃麵包的夏天，從許燕斌手作烘焙開店前裝潢就注意到他了～</p>
+
+<p>夏天喜歡歐式麵包，尤其法國麵包更是大愛～～</p>
+
+<p>所以平常買的麵包價格也都比傳統麵包高一點。</p>
+
+<p>記得許燕斌剛開幕前幾天我就去了，沒想到價錢真的有點嚇到我，</p>
+
+<p>夏天也不是沒買過一百元以上的麵包，但還是會看一下麵包大小份量是否值得，</p>
+
+<p>當天兩手空空的離開，基本上我從麵包店空手離開的機率是 0 耶耶～ (實在有點太震驚)</p>
+
+<p>幾個月後我娘說看到有人推薦，價錢也沒有我說的那麼誇張，(我第一次去的時候沒有找到低於60元的麵包)</p>
+
+<p>於是又燃起我再次挑戰的決心～～</p>
+
+<p>這次是下午去所以麵包還很多，</p>
+
+<p>現在很多麵包店都會提供質感很好的紙袋，要記得重複使用比較環保喔～～</p>
+
+<p><img src="https://c1.staticflickr.com/8/7695/26810605384_21209be8dd.jpg" height="350" width="350" alt="" /></p>
+
+<h3>蔥仔胖</h3>
+
+<p>首先是我娘看到別人大推的蔥麵包，其實他外觀沒有很吸引我 XDD</p>
+
+<p>因為我個人很討厭美乃滋 (很多台灣店家氾濫使用廉價美乃滋阿)，所以只要看到有美乃滋的產品多是敬謝不敏，</p>
+
+<p>但這次來就是抱著實驗的精神，加上已經有人掛保證，一定要買一個試一下的，</p>
+
+<p>這一試真是驚為天人阿～～蔥麵包的鹹度很剛好，加上少許的美乃滋不會過甜也不會膩，</p>
+
+<p>形成絕妙的搭配，而且也不會像一般蔥麵包過油的感覺，</p>
+
+<p>真的好好吃喔～～～推推推推！</p>
+
+<p>註：夏天第二次回購時，麵包比較不鹹，但是鹹一些比較好吃捏～</p>
+
+<p><img src="https://c7.staticflickr.com/8/7487/27385214566_dac6512a6d.jpg" height="300" width="400" alt="" />
+<img src="https://c2.staticflickr.com/8/7740/27419228905_aae5154199.jpg" height="300" width="300" alt="" /></p>
+
+<h3>原味脆皮泡芙</h3>
+
+<p>前幾天食尚玩家正好在介紹高雄有名的泡芙，勾起夏天滿滿的泡芙慾～手刀買一個</p>
+
+<p>脆皮泡芙的內餡是鮮奶油，不是卡士達醬路線，應該是香草牛奶口味？</p>
+
+<p>我自己是覺得還好～～表現一般 XD</p>
+
+<p>倒是包裝超級可愛～～很療癒：）</p>
+
+<p><img src="https://c3.staticflickr.com/8/7286/27385219506_26a6963863.jpg" height="220" width="220" alt="" />
+<img src="https://c3.staticflickr.com/8/7401/27385216826_8623a7842d.jpg" height="220" width="220" alt="" />
+<img src="https://c6.staticflickr.com/8/7725/27419224125_31b2a6bcbc.jpg" height="220" width="220" alt="" /></p>
+
+<h3>小腹胖胖</h3>
+
+<p>取這個名字是否會讓很多少女卻步呢 XDD</p>
+
+<p>還好夏天是不會為了身材跟美食 say no 的 XDD</p>
+
+<p>這個巧克力麵包其實蠻多歐式麵包店都有出，通常表現也不會太差，</p>
+
+<p>不過許燕斌的夏天給 95 分喔喔喔～～</p>
+
+<p>他的內餡甜度適中，還能吃到巧克力豆！是個堪稱完美比例的巧克力內餡。</p>
+
+<p>扣五分是因為醬蠻集中在一個區域的，我跟小狐狸一人剝一半吃，有些地方沒有醬拉拉～～</p>
+
+<p>夏天吃過蠻多麵包店做的同款～許燕斌的很好吃了～～推薦！</p>
+
+<p><img src="https://c2.staticflickr.com/8/7533/27419227265_587fe996e5.jpg" height="300" width="300" alt="" />
+<img src="https://c6.staticflickr.com/8/7725/27419225565_02e35a4020.jpg" height="300" width="300" alt="" /></p>
+
+<h3>可麗露</h3>
+
+<p>夏天第一次去的時候就注意到這個可麗露，實在烤的太美拉～</p>
+
+<p>口感很好，表面酥脆內部濕潤，可是表皮的味道有點奇怪 ＠_＠&hellip;</p>
+
+<p>和夏天以前吃過某留法甜點師傅做得不太一樣，</p>
+
+<p>不過礙於自己也不知道道地的可麗露口味，只能說這次吃到的味道不是我喜歡的 :P</p>
+
+<p><img src="https://c1.staticflickr.com/8/7005/27424610336_d33b991486.jpg" height="250" width="250" alt="" />
+<img src="https://c5.staticflickr.com/8/7368/27424611916_6edfec9fc7.jpg" height="250" width="250" alt="" />
+<img src="https://c7.staticflickr.com/8/7336/27424614446_bd0dda8cc7.jpg" height="250" width="250" alt="" /></p>
+
+<h3>伯爵美人</h3>
+
+<p>伯爵茶的香氣實在太吸引夏天了～麵包本身的伯爵茶味很出色，超有下午茶的感覺～</p>
+
+<p>中間搭配奶酥我覺得蠻妙，很好吃～不過有奶酥的時候似乎掩蓋了伯爵茶味，</p>
+
+<p>有一好沒兩好的概念 XDD</p>
+
+<p><img src="https://c1.staticflickr.com/8/7298/27420815152_f3552477d8.jpg" height="250" width="250" alt="" />
+<img src="https://c7.staticflickr.com/8/7298/27420812422_5b1f5ab453.jpg" height="250" width="250" alt="" />
+<img src="https://c2.staticflickr.com/8/7356/26911467753_49bbd02d5d.jpg" height="250" width="250" alt="" /></p>
+
+<h3>白燒芋頭</h3>
+
+<p>白燒芋頭走人如其名的路線～((覺得貼切 XD))</p>
+
+<p>咬下一口的時候想說：ㄟˊㄟˊ我的芋頭呢？</p>
+
+<p>原來芋頭在底部，蠻有趣的！試吃感想口味中規中矩 :)</p>
+
+<p>不甜不膩是蠻值得讚賞的一點，而且可以吃到完整的塊狀芋頭耶～不是只有芋泥喔！</p>
+
+<p><img src="https://c4.staticflickr.com/8/7400/26911466483_4e75df8a52.jpg" height="250" width="250" alt="" />
+<img src="https://c5.staticflickr.com/8/7391/27243092060_2a1c2356f5.jpg" height="250" width="250" alt="" />
+<img src="https://c6.staticflickr.com/8/7541/26911465133_1f9067e813.jpg" height="250" width="250" alt="" /></p>
+
+<p><a href="https://www.facebook.com/%E8%A8%B1%E7%87%95%E6%96%8C%E6%89%8B%E4%BD%9C%E7%83%98%E7%84%99-549595445218233/">許燕斌手作烘焙粉絲團</a></p>
+
+<p>營業時間：11:00 &ndash; 21:00 (2016 / 6月資訊)</p>
+
+<p>地址：新北市新莊區中平路274號</p>
+
+<p>電話：<a href="tel:0223939889">(02)8991-5828</a></p>
+
+<p>偷偷許願老闆售價可以再可愛一點嗎 >///&lt; 夏天會常常光顧的～～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-01T23:00:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/uncategorized-comments/'>Uncategorized Comments</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/01/comments-of-xu-yan-bin-backery-in-xinzhaung/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/06/01/uber-promo-invitation-code-coupon/">
+		
+			[優惠序號2na28dkvue] 註冊優步 UBER 會員輸入優惠代碼折抵 NT$100 搭乘金</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p><strong><font size="4px"> <a href="https://get.uber.com/invite/2na28dkvue">點此註冊 UBER 會員</a>
+立即獲得 <font color="darkred">4次乘車每次折抵 NT$50</font> (2017/8/31更新)</p>
+
+<p><font color="blue" onclick="copyPromoCode()">優惠序號 / 代碼：2na28dkvue</font>
+</font></strong></p>
+
+<p>如果已經註冊會員，還是可以輸入優惠序號，但是必需是首次搭乘喔～</p>
+
+<p onclick="copyPromoCode()">輸入序號 <b>2na28dkvue</b></p>
+
+
+<p><img src="https://c7.staticflickr.com/8/7088/27289188422_63ea4a025e.jpg" height="350" width="230" alt="" />
+<img src="https://c4.staticflickr.com/8/7436/27316255931_1823e2170a.jpg" height="350" width="230" alt="" />
+<img src="https://c5.staticflickr.com/8/7221/27289189692_e0ca5c2af1.jpg" height="350" width="230" alt="" /></p>
+
+<h3>如何搭乘 UBER</h3>
+
+<p>在 App 的主畫面中，輸入乘車地點及目的地，可以輸入地址，也可以自動定位後移動大頭針調整位置。</p>
+
+<p>輸入好之後如果附近有車就會跑出車子的圖案，並顯示多久時間能到達你的上車地點，</p>
+
+<p>點一下「設定上車地點！」右方的三角箭頭，進入確認叫車畫面。</p>
+
+<p><img src="https://c4.staticflickr.com/8/7146/27387126035_f23e9c191b.jpg" height="350" width="230" alt="" /></p>
+
+<p>在叫車畫面中，可以點選預估車資進行試算。</p>
+
+<p><img src="https://c5.staticflickr.com/8/7578/27289189852_ff01de1d9e.jpg" height="350" width="230" alt="" />
+<img src="https://c5.staticflickr.com/8/7387/27289189932_f94af55557.jpg" height="350" width="230" alt="" /></p>
+
+<p onclick="copyPromoCode()">尚未輸入折抵序號也可以點選優惠序號輸入 <b>2na28dkvue</b>。</p>
+
+
+<p><img src="https://c6.staticflickr.com/8/7671/27316256501_56223a7e53.jpg" height="350" width="230" alt="" />
+<img src="https://c1.staticflickr.com/8/7428/27289190272_8db877cc40.jpg" height="350" width="230" alt="" /></p>
+
+<p>點下確認在此處叫車之後，就能看到司機的資訊和行駛的路徑囉～</p>
+
+<p><img src="https://c7.staticflickr.com/8/7324/27295030142_40bb79f467.jpg" height="350" width="230" alt="" /></p>
+
+<h3>經驗分享</h3>
+
+<p>夏天的 UBER 首搭是在新加坡完成的，</p>
+
+<p>原本打算去魚尾獅公園看燈光秀，</p>
+
+<p>但是司機迷路了，一直在飯店附近的巷子繞圈圈，</p>
+
+<p>由於在國外手機也沒辦法聯絡，加上時間太趕怕來不及，</p>
+
+<p>只好 cancel 掉改搭路邊計程車，沒有搭乘成功。</p>
+
+<p>後來要去機場時又再試了試，這次很順利的搭上車了，</p>
+
+<p>下車之後也不需要操作什麼就會自動扣款，</p>
+
+<p>過一段時間會傳來完成搭乘的扣款訊息，搭配序號從飯店到機場才花了台幣 $40 XD</p>
+
+<p>不過這邊有個小地方要注意的是， UBER APP 中雖然會顯示司機距離你多久時間，</p>
+
+<p>但實際時間都會比 APP 預估的長，不知道是不是用直線距離計算的，</p>
+
+<p>在地圖中看到司機往乘客地點移動時，計算出的距離時間還會突然增加，趕時間的話可能會心臟病發 XDD</p>
+
+<p><input type="text" id="promoCode" onclick="copyPromoCode()" value="2na28dkvue"></p>
+
+<script language="javascript">
+    function copyPromoCode(){
+        var obj = document.getElementById("promoCode");
+        obj.select();
+        document.execCommand("Copy");
+        alert("已複製序號"+obj.value);
+    }
+</script>
+
+
+
+
+<br />
+
+
+<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+
+<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-01T09:00:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/06/01/uber-promo-invitation-code-coupon/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <lastarticle class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/">
+		
+			Octopress: 變更 Master 分支中 Commit 的創作者 (Author)</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>使用 Octopress 基本上會有兩個分支 source 和 master ，</p>
+
+<p>其中 source 是由使用者自行管理 git ，</p>
+
+<p>而 master 則是透過 rake deploy 自動管理，</p>
+
+<p>想要變更 source 分支的 commitments author ，</p>
+
+<p>可以參考這篇 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a> ，</p>
+
+<p>變更之後再將 origin source 刪除重新 push 即可，</p>
+
+<p>但如果是 master 分支照做之後，下次 rake deploy 時又會以舊的作者重新 commit ，</p>
+
+<p>並顯示錯誤訊息：</p>
+
+<pre><code>error: failed to push some refs to 'git@github.com-xxxxxxxx'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+
+<p>此時照著訊息做是無效的，</p>
+
+<p>必須用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，如此舊作者的 commit 紀錄才會被刪除。</p>
+
+<p>ps. 在這之前還是需要先把 octopress 的 git user 變更設定為新作者的喔，請參考 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">前面提到的文章</a> 。</p>
+
+<p>一般應該是做到這邊就能完成，但如果有設定過 git global user 則會無法成功，</p>
+
+<p>rake deploy 會使用 global user 進行 commit 。</p>
+
+<p>使用指令 <code>git config --global user.name</code> 可以確認是否有設定過，</p>
+
+<p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
+
+<figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">deploy_dir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
+</span><span class='line'>      
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
+
+<p>一般會有這樣的設定大部分是因為有一個以上的 github 帳號，</p>
+
+<p>因此在 <code>rake setup_github_pages</code> 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。</p>
+
+<pre><code>$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, 'git@github.com:your_username/your_username.github.io.git)
+           or 'https://github.com/your_username/your_username.github.io')
+
+Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
+</code></pre>
+
+<p>可參考此篇 <a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a></p>
+
+<p>最後再run <code>rake_deploy</code> 就能看到 commit author 變成新的了～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-30T04:46:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</lastarticle>
+  
+
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
+<li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
+<li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
+<li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
+<li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
+<li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/orchid-island/'>Orchid Island (1)</a></li>
+<li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
+<li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (6)</a></li>
+<li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
+<li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
+
+  </ul>
+</section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4414414286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+  
+</aside>
+
+<div class="fakeplace"></div>
+
+<nav id="pagenavi" role="navigation">
+    
+        <a href="/blog/page/4/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/6/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+
+</div>
+	<footer id="footer" class="inner" role="contentinfo">Copyright &copy; 2018
+
+    SUMMERLIZE
+
+<p>-</p>
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'summerlize';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-78711361-1', 'auto');
+  		ga('send', 'pageview');
+
+	</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '569493293211047',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+</body>
+</html>

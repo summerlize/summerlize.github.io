@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubuntu | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2018-08-07T15:02:15+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[安裝 Guest VM Windows 10 於 Ubuntu Server Host]]></title>
+    <link href="http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/"/>
+    <updated>2018-05-18T12:00:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage</id>
+    <content type="html"><![CDATA[<p>Ubuntu 版本: 16.04 Xenial</p>
+
+<p>VBoxManage: 5.1.34_Ubuntur121010</p>
+
+<p>首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔，</p>
+
+<p>使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下，</p>
+
+<pre><code>$ vboxmanage list ostypes|grep Windows
+
+Family Desc: Microsoft Windows
+ID:          Windows10_64
+Description: Windows 10 (64-bit)
+Family ID:   Windows
+</code></pre>
+
+<p>使用指令新增 VM，這裡將 VM 命名 WIN10，ostype 代入上面查出之 ID。</p>
+
+<pre><code>$ vboxmanage createvm --name WIN10 --ostype Windows10_64 --register
+
+Virtual machine 'WIN10' is created and registered.
+UUID: 17b26672-f7cb-432e-a4e9-b8c0784da1d4
+Settings file: '/home/pipi/VirtualBox VMs/WIN10/WIN10.vbox'
+</code></pre>
+
+<p>指派記憶體、CPU等硬體資源，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --memory 4096 --vram 32 --acpi on --ioapic on --cpus 2 --rtcuseutc on --cpuhotplug on --pae on --hwvirtex on11
+</code></pre>
+
+<p>設定 bridged 網路，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --nic1 bridged --bridgeadapter1 eno0 --cableconnected1 on
+</code></pre>
+
+<p>指派 vrde (VirtualBox Remote Desktop Extension) port，可使用遠端桌面軟體連線。</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --vrde on --vrdeport 5001 --vrdeauthtype null
+</code></pre>
+
+<p>新增 VM 硬碟容量 50G，</p>
+
+<pre><code>$ vboxmanage createhd --filename /vm/hd/WIN10.vdi --size 51200
+</code></pre>
+
+<p>加入 SATA 控制器，</p>
+
+<p>ps. 可依需求自設選項 (Hard disk controllers: IDE, SATA (AHCI), SCSI, SAS, USB MSD, NVMe)</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "SATA controller" --add sata
+</code></pre>
+
+<p>連結硬碟，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "SATA controller" --port 0 --device 0 --type hdd --medium /vm/hd/WIN10.vdi
+</code></pre>
+
+<p>加入 IDE 控制器，</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "IDE controller" --add ide
+</code></pre>
+
+<p>以光碟機方式連結 OS 安裝檔，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "IDE controller"  --port 0 --device 0 --type dvddrive --medium /home/user/Windows10_64bit.iso
+</code></pre>
+
+<p>啟動 VM 後，就能用 windows 的遠端桌面連線 (RDC) 連上 VM 完成後續安裝步驟囉！</p>
+
+<h3>常用 command</h3>
+
+<p>啟動 VM</p>
+
+<p><code>$ vboxmanage startvm WIN10 --type headless</code></p>
+
+<p>關機 VM</p>
+
+<p><code>$ vboxmanage controlvm WIN10 poweroff</code></p>
+
+<p>list 所有 VM</p>
+
+<p><code>$ vboxmanage list vms</code></p>
+
+<p>list 執行中的 VM</p>
+
+<p><code>$ vboxmanage list runningvms</code></p>
+
+<p>show VM 資訊</p>
+
+<p><code>$ vboxmanage showvminfo WIN10</code></p>
+
+<p>移除 VM 但保留相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10</code></p>
+
+<p>移除 VM 並刪除相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10 --delete</code></p>
+
+<p>匯出 VM</p>
+
+<p><code>$ vboxmanage export WIN10 -o /home/user/WIN10.ova</code></p>
+
+<p>增加硬碟容量，進入 OS 使用電腦管理>> 磁碟管理分配容量。</p>
+
+<p><code>$ vboxmanage modifyhd /vm/hd/WIN10.vdi --resize 81920</code></p>
+
+<p>調整記憶體大小</p>
+
+<p><code>$ vboxmanage modifyvm WIN10 --memory 8192</code></p>
+
+<p>詳細 API 請參考 <a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></p>
+
+<h3>區網 IP 設置</h3>
+
+<p>前面已設置一組 bridged network nic1 for 設置固定 IP 使用，</p>
+
+<p>接下來再設置一組 nat network nic2 for 區網 IP。</p>
+
+<pre><code># 設置一組 nat 區域網路 IP 命名為 natnet1
+$ vboxmanage natnetwork add --netname natnet1 --network "192.168.0.101/24" --enable
+
+$ vboxmanage natnetwork modify --netname natnet1 --dhcp on
+
+# 啟動 nat 網路設定
+$ VBoxManage natnetwork start --netname natnet1
+
+# 關機
+$ vboxmanage controlvm WIN10 poweroff
+
+# 將 natnet1 加入至 VM 網路
+$ vboxmanage modifyvm WIN10 --nic2 nat --nat-network2 natnet1
+
+# 開機
+$ vboxmanage startvm WIN10 --type headless
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[自動將 Ubuntu server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理]]></title>
+    <link href="http://summerlize.github.io/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/"/>
+    <updated>2016-07-08T01:42:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server</id>
+    <content type="html"><![CDATA[<h3>step1: 下載 ssmtp</h3>
+
+<p><code>$ sudo apt-get update &amp;&amp; echo y | sudo apt-get install ssmtp mailutils</code></p>
+
+<h3>step2: 編輯 ssmtp.conf 檔</h3>
+
+<p><code>$ sudo rm /etc/ssmtp/ssmtp.conf &amp;&amp; sudo nano /etc/ssmtp/ssmtp.conf</code></p>
+
+<p>將下方內容貼至 ssmtp.conf 檔案中</p>
+
+<pre><code># Config file for sSMTP sendmail
+# DONT CHANGE BELOW FOR @GMAIL.COM
+mailhub=smtp.gmail.com:587
+rewriteDomain=gmail.com
+hostname=localhost
+FromLineOverride=YES
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# CHANGE NEXT 3 OPTIONS 將下方三行改為自己的帳號密碼
+# Username/Password (NO @Gmail)
+root=yourusername@gmail.com
+AuthUser=yourusername
+AuthPass=yourpassword
+</code></pre>
+
+<h3>step3: 編輯 revaliases 檔</h3>
+
+<p><code>$ sudo nano /etc/ssmtp/revaliases</code></p>
+
+<p>將下方內容貼至 revaliases 檔案中</p>
+
+<pre><code># sSMTP aliases
+# linux user:mail:stmp port
+# 將 ubuntu 中的使用者 (user) 對應其 email
+root:yourusername@gmail.com:smtp.gmail.com:587
+guest:somebody@gmail.com:smtp.gmail.com:587
+</code></pre>
+
+<h3>step4: 測試是否可寄送 email</h3>
+
+<p><code>$ ssmtp yourusername@gmail.com</code></p>
+
+<p>輸入上方指令按下 enter，貼上下方段落 email 內容。</p>
+
+<p>note: Subject 之後一定要空行</p>
+
+<pre><code>To: yourusername@gmail.com
+From: yourusername@gmail.com
+Subject: test
+
+Hello World!
+</code></pre>
+
+<p>完成後使用 <code>ctrl+d</code> 跳出，至信箱檢查 email。</p>
+
+<p>也可使用指令 <code>echo "Hello world mail content" | mail -s "Hello world Subject" yourusername@gmail.com</code> 測試寄信。</p>
+
+<h3>若顯示錯誤訊息 Authorization failed (534 5.7.14 <a href="https://support.google.com/mail/answer/78754">https://support.google.com/mail/answer/78754</a> tm1sm6036157pac.23 &ndash; gsmtp</h3>
+
+<p>首先到 <a href="https://www.google.com/settings/u/1/security/lesssecureapps">https://www.google.com/settings/u/1/security/lesssecureapps</a> 將 <code>安全性較低的應用程式存取權限</code> 設為 <code>開啟</code></p>
+
+<p>再試試 step4 ，若還是一樣顯示錯誤，則可試第二種方法，</p>
+
+<p>下載文字瀏覽器 w3m，</p>
+
+<p><code>$ sudo apt-get install w3m w3m-img</code></p>
+
+<p>連結至 gmail 頁面，並輸入帳號密碼登入，</p>
+
+<p><code>$ w3m mail.google.com</code></p>
+
+<p>初次登入 gmail 會要求輸入備援電話號碼之驗證碼或備援電子信箱，</p>
+
+<p>登入成功後再重新試 step4。</p>
+
+<h3>step5: 使日常排程將 log 自動發送至 email</h3>
+
+<p>前面測試寄送 email 成功後，使用指令編輯 crontab，</p>
+
+<p><code>$sudo vi /etc/crontab</code></p>
+
+<p>在 crontab 中 PATH 下一行加入</p>
+
+<pre><code>MAILTO=yourusername@gmail.com
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[於 Ubuntu Server 使用 crontab 定時自動備份 mysql 資料庫]]></title>
+    <link href="http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server/"/>
+    <updated>2016-07-08T01:02:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2016/07/08/mysql-backup-automatically-by-crontab-on-ubuntu-server</id>
+    <content type="html"><![CDATA[<p>使用指令 <code>sudo vi /etc/crontab</code> 編輯檔案</p>
+
+<p>加入備份指令如下</p>
+
+<pre><code># 分 時 日 月 週 使用者 指令
+# 表示於每日12點整，以 root 身份備份 mysql 所有資料庫並存放到 /home/user/mysqldump/ 資料夾中
+0 0 * * * root mysqldump -u root -proot --all-databases &gt; /home/user/mysqldump/database_`date '+\%Y-\%m-\%d'`.sql
+# 只備份指定的資料庫 somedb
+0 0 * * * root mysqldump -u root -proot somedb &gt; /home/user/mysqldump/somedb_`date '+\%Y-\%m-\%d'`.sql
+</code></pre>
+
+<p>使用指令 <code>sudo service cron restart</code> 重啟 crontab 服務</p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2016/07/08/sending-log-email-by-crontab-daily-schedule-from-ubuntu-server/">自動將 Ubuntu Server 日常排程(crontab)執行訊息(log)傳送至 Gmail 及 Authorication Failed 處理</a></p>
+]]></content>
+  </entry>
+  
+</feed>

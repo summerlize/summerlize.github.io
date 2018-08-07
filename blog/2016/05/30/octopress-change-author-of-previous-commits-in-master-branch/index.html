@@ -1,0 +1,446 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Octopress: 變更 master 分支中 commit 的創作者 (author) - 這個夏天。</title>
+	<meta name="author" content="SUMMERLIZE">
+
+	
+	<meta name="description" content="使用 Octopress 基本上會有兩個分支 source 和 master ， 其中 source 是由使用者自行管理 git ， 而 master 則是透過 rake deploy 自動管理， 想要變更 source 分支的 commitments author ， 可以參考這篇 Git: &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="這個夏天。" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1790808934333010",
+    enable_page_level_ads: true
+  });
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="innerHeader" role="banner"><h1><a href="/">這個夏天。</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:summerlize.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:summerlize.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Octopress: 變更 Master 分支中 Commit 的創作者 (Author)</h2>
+	<div class="entry-content">
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+		<p>使用 Octopress 基本上會有兩個分支 source 和 master ，</p>
+
+<p>其中 source 是由使用者自行管理 git ，</p>
+
+<p>而 master 則是透過 rake deploy 自動管理，</p>
+
+<p>想要變更 source 分支的 commitments author ，</p>
+
+<p>可以參考這篇 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">Git: 批量變更已 commit 的創作者(author)及欲 commit 的創作者</a> ，</p>
+
+<p>變更之後再將 origin source 刪除重新 push 即可，</p>
+
+<p>但如果是 master 分支照做之後，下次 rake deploy 時又會以舊的作者重新 commit ，</p>
+
+<p>並顯示錯誤訊息：</p>
+
+<pre><code>error: failed to push some refs to 'git@github.com-xxxxxxxx'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</code></pre>
+
+<p>此時照著訊息做是無效的，</p>
+
+<p>必須用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，如此舊作者的 commit 紀錄才會被刪除。</p>
+
+<p>ps. 在這之前還是需要先把 octopress 的 git user 變更設定為新作者的喔，請參考 <a href="/blog/2016/05/21/git-batch-change-author-of-previous-old-commits-and-new-commits">前面提到的文章</a> 。</p>
+
+<p>一般應該是做到這邊就能完成，但如果有設定過 git global user 則會無法成功，</p>
+
+<p>rake deploy 會使用 global user 進行 commit 。</p>
+
+<p>使用指令 <code>git config --global user.name</code> 可以確認是否有設定過，</p>
+
+<p>如果有則需在 octopress 資料夾中的 Rakefile 加入兩行指令，來變更 _deploy 資料夾 git user 的設定，</p>
+
+<figure class='code'><figcaption><span>Rakefile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">cd</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">deploy_dir</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git init&quot;</span>
+</span><span class='line'>      
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.name </span><span class="se">\&quot;</span><span class="s2">summerlize</span><span class="se">\&quot;</span><span class="s2">&quot;</span>                <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git config user.email </span><span class="se">\&quot;</span><span class="s2">summerlize@gmail.com</span><span class="se">\&quot;</span><span class="s2">&quot;</span>     <span class="sr">//</span><span class="err">加入此行</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;echo &#39;My Octoprese is coming soon &amp;hellip;&#39; &gt; index.html&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git add .&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git commit -m </span><span class="se">\&quot;</span><span class="s2">Octopress init</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git branch -m gh-pages&quot;</span> <span class="k">unless</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span>
+</span><span class='line'>    <span class="nb">system</span> <span class="s2">&quot;git remote add origin </span><span class="si">#{</span><span class="n">repo_url</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">rakefile</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_branch(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_branch</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3</span><span class="si">#{</span><span class="n">branch</span><span class="si">}</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">rakefile</span><span class="o">.</span><span class="n">sub!</span><span class="p">(</span><span class="sr">/deploy_default(\s*)=(\s*)([&quot;&#39;])[\w-]*[&quot;&#39;]/</span><span class="p">,</span> <span class="s2">&quot;deploy_default</span><span class="se">\\</span><span class="s2">1=</span><span class="se">\\</span><span class="s2">2</span><span class="se">\\</span><span class="s2">3push</span><span class="se">\\</span><span class="s2">3&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">rakefile</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>並且重新使用 <code>rake setup_github_pages</code> 重新生成 _deploy 資料夾，</p>
+
+<p>一般會有這樣的設定大部分是因為有一個以上的 github 帳號，</p>
+
+<p>因此在 <code>rake setup_github_pages</code> 的時候也需輸入正確的 url 才能使用對應的 ssh-key 。</p>
+
+<pre><code>$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, 'git@github.com:your_username/your_username.github.io.git)
+           or 'https://github.com/your_username/your_username.github.io')
+
+Repository url: git@github.com-personal:personal/personalproject.github.io.git   //指定 ssh-key 的 url
+</code></pre>
+
+<p>可參考此篇 <a href="/blog/2016/05/21/multiple-github-accounts-with-different-ssh-key/">同時使用多個 GitHub 帳號與多個 SSH 認證金鑰之設定方式</a></p>
+
+<p>最後再run <code>rake_deploy</code> 就能看到 commit author 變成新的了～</p>
+
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-30T04:46:00+08:00" pubdate data-updated="true">May 30<span>th</span>, 2016</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+
+	<div class="share">
+<!--
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		
+		
+		<a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+		
+		
+		<a class="addthis_counter addthis_pill_style"></a>
+		
+	</div>
+	
+
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+	
+-->
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+     <a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+</div> 
+
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_plurk"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_blogger"></a>
+<a class="addthis_button_sinaweibo"></a>
+<a class="addthis_button_wordpress"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52836c2b4360f9e8"></script>
+<!-- AddThis Button END -->
+<!-- AddThis Button END -->
+
+</div>
+
+
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
+<li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
+<li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
+<li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
+<li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
+<li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/orchid-island/'>Orchid Island (1)</a></li>
+<li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
+<li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (6)</a></li>
+<li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer's Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
+<li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
+
+  </ul>
+</section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4414414286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+  
+</aside>
+
+<div class="fakeplace"></div></div>
+	<footer id="footer" class="inner" role="contentinfo">Copyright &copy; 2018
+
+    SUMMERLIZE
+
+<p>-</p>
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'summerlize';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/';
+        var disqus_url = 'http://summerlize.github.io/blog/2016/05/30/octopress-change-author-of-previous-commits-in-master-branch/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-78711361-1', 'auto');
+  		ga('send', 'pageview');
+
+	</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '569493293211047',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+</body>
+</html>

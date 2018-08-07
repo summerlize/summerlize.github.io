@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iReport | 這個夏天。]]></title>
+  <link href="http://summerlize.github.io/blog/categories/ireport/atom.xml" rel="self"/>
+  <link href="http://summerlize.github.io/"/>
+  <updated>2018-08-07T15:02:15+08:00</updated>
+  <id>http://summerlize.github.io/</id>
+  <author>
+    <name><![CDATA[SUMMERLIZE]]></name>
+    <email><![CDATA[summerlize@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Grails + iReport: PDF 繁體中文無法顯示解決方法]]></title>
+    <link href="http://summerlize.github.io/blog/2014/04/26/tranditional-chinese-problem-in-ireport-pdf-with-grails/"/>
+    <updated>2014-04-26T02:59:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2014/04/26/tranditional-chinese-problem-in-ireport-pdf-with-grails</id>
+    <content type="html"><![CDATA[<p>Grails 版本: 2.3.5</p>
+
+<p>iReport 版本: 5.5.1</p>
+
+<p>iReport 在產生 PDF 檔一直都有中文顯示異常的問題，</p>
+
+<p>此次要記錄的是在 Grails 中的解決辦法，</p>
+
+<p>首先在 iReport 中將顯示中文的欄位屬性設定如下，</p>
+
+<p><strong>Pdf Font name is now deprecated. &ndash;> MSung-Light</strong></p>
+
+<p><strong>Pdf Embedded &ndash;>勾選</strong></p>
+
+<p><strong>Pdf Enconding &ndash;> UniCNS-UCS2-H(Chinese traditional)</strong></p>
+
+<p><img src="https://farm3.staticflickr.com/2930/13987705336_f0d5782478_n.jpg" alt="iReport Field Properties" /></p>
+
+<p>再到 iReport 安裝路徑中複製出 iTextAsian.jar ，</p>
+
+<p>夏天安裝在 mac 中路徑如下，找不到的話應該可以從網路上下載。</p>
+
+<p>/Applications/Jaspersoft iReport Designer.app/Contents/Resources/ireport/ireport/libs</p>
+
+<p><img src="https://farm6.staticflickr.com/5331/13987706016_05fe74337a.jpg" alt="iTextAsian @iReport" /></p>
+
+<p>接著將檔案丟到 Grails Project 中的 lib 資料夾下</p>
+
+<p><img src="https://farm8.staticflickr.com/7374/13987705366_2f5173dc86.jpg" alt="iTextAsian @Grails" /></p>
+
+<p>這樣輸出的 PDF 就可以顯示中文摟～ ：）</p>
+]]></content>
+  </entry>
+  
+</feed>

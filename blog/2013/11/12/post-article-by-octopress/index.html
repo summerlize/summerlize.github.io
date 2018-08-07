@@ -1,0 +1,490 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用 Octopress 部落格發佈文章 - 這個夏天。</title>
+	<meta name="author" content="SUMMERLIZE">
+
+	
+	<meta name="description" content="1. Octopress Blog 基本設定 在 Octopress 資料夾中可以找到一個 _config.yml 的檔案， 是用來設定部落格產生時讀取的預設資料，可以分為以下幾個部分： 基本預設資料： url: http://summerlize.github.io #部落格網址
+title &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="這個夏天。" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1790808934333010",
+    enable_page_level_ads: true
+  });
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="innerHeader" role="banner"><h1><a href="/">這個夏天。</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:summerlize.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:summerlize.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">使用 Octopress 部落格發佈文章</h2>
+	<div class="entry-content">
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+		<h2>1. Octopress Blog 基本設定</h2>
+
+<p>在 Octopress 資料夾中可以找到一個 <code>_config.yml</code> 的檔案，</p>
+
+<p>是用來設定部落格產生時讀取的預設資料，可以分為以下幾個部分：</p>
+
+<pre><code>基本預設資料：   
+url: http://summerlize.github.io            #部落格網址
+title: 這個夏天。                             #部落格標題
+subtitle: 小小筆記本                          #部落格副標題
+author: SUMMERLIZE                          #作者名稱
+simple_search: http://google.com/search     #搜尋引擎
+description: 我是一個部落格                   #部落格描述
+date_format: "ordinal"                      #日期格式*
+subscribe_rss: /atom.xml                    #RSS服務
+subscribe_email: summerlize@gmail.com       #Email
+category_feeds: false                       #訂閱指定分類文章 預設為否
+email: summerlize@gmail.com                 #在RSS中列出Email   
+</code></pre>
+
+<ul>
+<li>日期格式可到 <a href="http://www.ruby-doc.org/core-2.0.0/Time.html">Ruby API</a> 查詢</li>
+</ul>
+
+
+<p>有做過功課大多會發現 Octopress 是利用 Jekyll 產生出靜態網頁的，</p>
+
+<p>如果沒有特殊需求，採用預設值即可。</p>
+
+<pre><code>Jekyll靜態網頁產生器與附加元件設定：
+
+#直接部署的octopress專案通常不需要修改root，除非有另外包資料夾，
+#最簡單的方式是觀察網址，假如首頁為http://summerlize.github.io/project，那麼root便是/project
+
+root: /
+
+#此處為部落格文章的預設路徑，預設為/blog/年/月/日/文章標題
+
+permalink: /blog/:year/:month/:day/:title/
+
+#原始碼資料路徑，預設為source，同上面的例子則為/project/source
+
+source: source
+
+#預設編譯的資料夾路徑，預設為public，同上面的例子則為/project/public
+
+destination: public
+
+#預設附加元件路徑，預設為plugins，同上面的例子則為/project/plugins
+
+plugins: plugins
+
+code_dir: downloads/code
+
+#編譯後的部落格分類路徑
+category_dir: blog/categories
+
+
+markdown: rdiscount
+rdiscount:
+    extensions:
+        - autolink
+        - footnotes
+        - smart
+
+pygments: false # default python pygments have been replaced by pygments.rb
+
+paginate: 10          #首頁顯示的文章數
+
+pagination_dir: blog  #Directory base for pagination URLs eg. /blog/page/2/
+
+recent_posts: 5       #最近發表的文章顯示篇數
+
+excerpt_link: "Read on &amp;rarr;"  #文章末處提示繼續閱讀全文連結字樣
+
+titlecase: true       # Converts page and post titles to titlecase
+
+#側邊列表顯示的內容，預設為最近發表文章、github、delicious、pinboard、googleplus等。
+
+default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
+</code></pre>
+
+<h3>按讚或分享部落格</h3>
+
+<p>官方內建的第三方服務包含了幾個知名社群類型網站，</p>
+
+<p>像是 Twitter 、 Google+ 、 Facebook 等，另外也有 Google 統計分析工具等擴充。</p>
+
+<pre><code>第三方服務設定（社群服務等）：
+github_user:                    #輸入GitHub帳號便會自動生成按鈕連結，其他以此類推。
+github_repo_count: 0            #輸入GitHub Repo數
+github_show_profile_link: true #顯示GitHub檔案連結，預設開啟。
+</code></pre>
+
+<h3>COMMENTS功能</h3>
+
+<p>其中 disqus 的設定，是用來提供訪客留言的功能，大推～</p>
+
+<p>到 <a href="https://disqus.com/">Disqus官方網站</a> 申請帳號後設定即可。</p>
+
+<h2>2. Octopress Blog 新增/發佈文章</h2>
+
+<p>終於進入正題囉～首先使用 <code>rake -T</code> 可以查看 Octopress 的所有指令，</p>
+
+<p>新增文章使用 <code>rake new_post["title"]</code>，在 title 處輸入文章標題即可，</p>
+
+<p>有趣的是如果輸入的是中文，Octopress 會自動轉換成羅馬拼音的檔名，</p>
+
+<p>因此建議還是輸入有意義的英文標題，撰寫文章時再改成中文標題摟～</p>
+
+<p>產生的文章會在 octopress/source/_post/ 底下，</p>
+
+<p>找到剛才新增的檔案後用文字編輯器打開，</p>
+
+<p>就可以開始使用 Markdown 編輯文章了。 <a href="http://mouapp.com/">下載好用的 Markdown 編輯器 Mou</a></p>
+
+<p>編輯完成之後，以 <code>rake generate</code> 產生靜態部落格網頁，</p>
+
+<p>再以 <code>rake deploy</code> 發佈就可以在網址中檢視了。</p>
+
+<p>ps. 目前使用 GitHub 的經驗，第一次會很快，第二次之後大概需要 10 到 20 分鐘不等才會更新。</p>
+
+<p>在發佈新文章之前，也可以使用 <code>rake preview</code> 來預覽你的部落格，</p>
+
+<p>預設的預覽網址為 <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+
+<p>另外若要以 utf8 編碼在 generate 前需要設定，目前還沒有用過，記下來參考。</p>
+
+<pre><code>set LC_ALL=zh_TW.UTF-8
+set LANG=zh_TW.UTF-8
+</code></pre>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2013/11/10/install-octopress-and-host-with-github/">Octopress 安裝 + GitHub 架設部落格筆記</a></p>
+
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-12T02:38:00+08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+
+	<div class="share">
+<!--
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		
+		
+		<a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+		
+		
+		<a class="addthis_counter addthis_pill_style"></a>
+		
+	</div>
+	
+
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+	
+-->
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+     <a class="addthis_button_facebook_like" fb:like:layout="standard"></a> 
+</div> 
+
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_plurk"></a>
+<a class="addthis_button_linkedin"></a>
+<a class="addthis_button_blogger"></a>
+<a class="addthis_button_sinaweibo"></a>
+<a class="addthis_button_wordpress"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52836c2b4360f9e8"></script>
+<!-- AddThis Button END -->
+<!-- AddThis Button END -->
+
+</div>
+
+
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
+<li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
+<li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
+<li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
+<li class='category'><a href='/blog/categories/github/'>GitHub (1)</a></li>
+<li class='category'><a href='/blog/categories/grails/'>Grails (7)</a></li>
+<li class='category'><a href='/blog/categories/movie/'>Movie (1)</a></li>
+<li class='category'><a href='/blog/categories/mysql/'>Mysql (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/orchid-island/'>Orchid Island (1)</a></li>
+<li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
+<li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (6)</a></li>
+<li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer's Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
+<li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
+<li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
+<li class='category'><a href='/blog/categories/macos-slash-osx/'>macOS/OSX (1)</a></li>
+
+  </ul>
+</section><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4414414286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+  
+</aside>
+
+<div class="fakeplace"></div></div>
+	<footer id="footer" class="inner" role="contentinfo">Copyright &copy; 2018
+
+    SUMMERLIZE
+
+<p>-</p>
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p></footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'summerlize';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://summerlize.github.io/blog/2013/11/12/post-article-by-octopress/';
+        var disqus_url = 'http://summerlize.github.io/blog/2013/11/12/post-article-by-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+
+  		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  		ga('create', 'UA-78711361-1', 'auto');
+  		ga('send', 'pageview');
+
+	</script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '569493293211047',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+</body>
+</html>
