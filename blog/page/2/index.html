@@ -7,7 +7,8 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="目前文章暫時只用來記錄夏天覺得值得收藏的口袋名單， 即使星星數不多也是好吃的才會列出， 星星評比標準包含了 特色、口味、食材、cp值 還有夏天個人喜好 :P 如果有時間的話會考慮寫食記：） 但是因為我沒有用餐前先拍照紀錄的習慣， 得等日後有機會回訪才能慢慢補了～ 每個人口味不同～ &hellip;">
+	<meta name="description" content="使用 brew 安裝 python 時出現錯誤， You can try again using `brew link gdbm` 再重新安裝顯示已安裝成功， Warning: python 3.6.5 is already installed, it's just not linked
+You &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +135,435 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">
+		
+			macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>使用 brew 安裝 python 時出現錯誤，</p>
+
+<pre><code>You can try again using `brew link gdbm`
+</code></pre>
+
+<p>再重新安裝顯示已安裝成功，</p>
+
+<pre><code>Warning: python 3.6.5 is already installed, it's just not linked
+You can use `brew link python` to link this version.
+</code></pre>
+
+<p>執行<code>$ brew link python</code>出現錯誤，</p>
+
+<pre><code>Linking /usr/local/Cellar/python/3.6.5... Error: Permission denied @ dir_s_mkdir - /usr/local/Frameworks
+</code></pre>
+
+<p>解決方法：</p>
+
+<pre><code>$ sudo mkdir /usr/local/Frameworks
+$ sudo chown $(whoami):admin /usr/local/Frameworks
+$ brew link python
+Linking /usr/local/Cellar/carthage/0.28.0... 4 symlinks created
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-22T13:44:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2018</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/macos-slash-osx/'>macOS/OSX</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">
+		
+			Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>GIT API 參考</p>
+
+<blockquote><p>&mdash;orphan &lt;new_branch&gt;</p>
+
+<p>Create a new orphan branch, named &lt;new_branch>, started from &lt;start_point> and switch to it. The first commit made on this new branch will have no parents and it will be the root of a new history totally disconnected from all the other branches and commits.</p>
+
+<p>The index and the working tree are adjusted as if you had previously run &ldquo;git checkout &lt;start_point>&rdquo;. This allows you to start a new history that records a set of paths similar to &lt;start_point> by easily running &ldquo;git commit -a&rdquo; to make the root commit.</p>
+
+<p>This can be useful when you want to publish the tree from a commit without exposing its full history. You might want to do this to publish an open source branch of a project whose current tree is &ldquo;clean&rdquo;, but whose full history contains proprietary or otherwise encumbered bits of code.</p>
+
+<p>If you want to start a disconnected history that records a set of paths that is totally different from the one of &lt;start_point>, then you should clear the index and the working tree right after creating the orphan branch by running &ldquo;git rm -rf .&rdquo; from the top level of the working tree. Afterwards you will be ready to prepare your new files, repopulating the working tree, by copying them from elsewhere, extracting a tarball, etc.</p></blockquote>
+
+<br />
+
+
+<pre><code># checkout 成不繼承舊 commit 的全新分支(latest_branch)，
+$ git checkout --orphan latest_branch
+
+# 加入所有檔案
+$ git add -A
+
+# commit 初始記錄
+$ git commit -am "init project"
+
+# 刪除已存在的 master 分支
+$ git branch -D master
+
+# 將目前分支 latest_branch 重新命名為 master
+$ git branch -m master
+
+# 強制更新遠端程式庫 master 分支
+$ git push -f origin master
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-22T12:10:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2018</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/git/'>Git</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">
+		
+			安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Ubuntu 版本: 16.04 Xenial</p>
+
+<p>VBoxManage: 5.1.34_Ubuntur121010</p>
+
+<p>首先需要安裝好 VirtualBox 和 並準備好 win10 的 iso 安裝檔，</p>
+
+<p>使用指令確認欲安裝的 windows 版本對應之 ID，查出 win10 64bit 資訊如下，</p>
+
+<pre><code>$ vboxmanage list ostypes|grep Windows
+
+Family Desc: Microsoft Windows
+ID:          Windows10_64
+Description: Windows 10 (64-bit)
+Family ID:   Windows
+</code></pre>
+
+<p>使用指令新增 VM，這裡將 VM 命名 WIN10，ostype 代入上面查出之 ID。</p>
+
+<pre><code>$ vboxmanage createvm --name WIN10 --ostype Windows10_64 --register
+
+Virtual machine 'WIN10' is created and registered.
+UUID: 17b26672-f7cb-432e-a4e9-b8c0784da1d4
+Settings file: '/home/pipi/VirtualBox VMs/WIN10/WIN10.vbox'
+</code></pre>
+
+<p>指派記憶體、CPU等硬體資源，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --memory 4096 --vram 32 --acpi on --ioapic on --cpus 2 --rtcuseutc on --cpuhotplug on --pae on --hwvirtex on11
+</code></pre>
+
+<p>設定 bridged 網路，</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --nic1 bridged --bridgeadapter1 eno0 --cableconnected1 on
+</code></pre>
+
+<p>指派 vrde (VirtualBox Remote Desktop Extension) port，可使用遠端桌面軟體連線。</p>
+
+<pre><code>$ vboxmanage modifyvm WIN10 --vrde on --vrdeport 5001 --vrdeauthtype null
+</code></pre>
+
+<p>新增 VM 硬碟容量 50G，</p>
+
+<pre><code>$ vboxmanage createhd --filename /vm/hd/WIN10.vdi --size 51200
+</code></pre>
+
+<p>加入 SATA 控制器，</p>
+
+<p>ps. 可依需求自設選項 (Hard disk controllers: IDE, SATA (AHCI), SCSI, SAS, USB MSD, NVMe)</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "SATA controller" --add sata
+</code></pre>
+
+<p>連結硬碟，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "SATA controller" --port 0 --device 0 --type hdd --medium /vm/hd/WIN10.vdi
+</code></pre>
+
+<p>加入 IDE 控制器，</p>
+
+<pre><code>$ vboxmanage storagectl WIN10 --name "IDE controller" --add ide
+</code></pre>
+
+<p>以光碟機方式連結 OS 安裝檔，</p>
+
+<pre><code>$ vboxmanage storageattach WIN10 --storagectl "IDE controller"  --port 0 --device 0 --type dvddrive --medium /home/user/Windows10_64bit.iso
+</code></pre>
+
+<p>啟動 VM 後，就能用 windows 的遠端桌面連線 (RDC) 連上 VM 完成後續安裝步驟囉！</p>
+
+<h3>常用 command</h3>
+
+<p>啟動 VM</p>
+
+<p><code>$ vboxmanage startvm WIN10 --type headless</code></p>
+
+<p>關機 VM</p>
+
+<p><code>$ vboxmanage controlvm WIN10 poweroff</code></p>
+
+<p>list 所有 VM</p>
+
+<p><code>$ vboxmanage list vms</code></p>
+
+<p>list 執行中的 VM</p>
+
+<p><code>$ vboxmanage list runningvms</code></p>
+
+<p>show VM 資訊</p>
+
+<p><code>$ vboxmanage showvminfo WIN10</code></p>
+
+<p>移除 VM 但保留相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10</code></p>
+
+<p>移除 VM 並刪除相關檔案</p>
+
+<p><code>$ vboxmanage unregistervm WIN10 --delete</code></p>
+
+<p>匯出 VM</p>
+
+<p><code>$ vboxmanage export WIN10 -o /home/user/WIN10.ova</code></p>
+
+<p>增加硬碟容量，進入 OS 使用電腦管理>> 磁碟管理分配容量。</p>
+
+<p><code>$ vboxmanage modifyhd /vm/hd/WIN10.vdi --resize 81920</code></p>
+
+<p>調整記憶體大小</p>
+
+<p><code>$ vboxmanage modifyvm WIN10 --memory 8192</code></p>
+
+<p>詳細 API 請參考 <a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></p>
+
+<h3>區網 IP 設置</h3>
+
+<p>前面已設置一組 bridged network nic1 for 設置固定 IP 使用，</p>
+
+<p>接下來再設置一組 nat network nic2 for 區網 IP。</p>
+
+<pre><code># 設置一組 nat 區域網路 IP 命名為 natnet1
+$ vboxmanage natnetwork add --netname natnet1 --network "192.168.0.101/24" --enable
+
+$ vboxmanage natnetwork modify --netname natnet1 --dhcp on
+
+# 啟動 nat 網路設定
+$ VBoxManage natnetwork start --netname natnet1
+
+# 關機
+$ vboxmanage controlvm WIN10 poweroff
+
+# 將 natnet1 加入至 VM 網路
+$ vboxmanage modifyvm WIN10 --nic2 nat --nat-network2 natnet1
+
+# 開機
+$ vboxmanage startvm WIN10 --type headless
+</code></pre>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-18T12:00:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2018</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -634,7 +1064,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2017/12/17/xinbeishi-xinzhaung-food-list/">
@@ -1102,504 +1532,6 @@
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/">
-		
-			[美食][板橋] 夏天吃吃賞</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>目前文章暫時只用來記錄夏天覺得值得收藏的口袋名單，</p>
-
-<p>即使星星數不多也是好吃的才會列出，</p>
-
-<p>星星評比標準包含了 特色、口味、食材、cp值 還有夏天個人喜好 :P</p>
-
-<p>如果有時間的話會考慮寫食記：）</p>
-
-<p>但是因為我沒有用餐前先拍照紀錄的習慣，</p>
-
-<p>得等日後有機會回訪才能慢慢補了～</p>
-
-<p>每個人口味不同～可以多交叉參考其他網路上的意見～</p>
-
-<p><font color="#CC0000">2017/12/17 更新</font></p>
-
-<p><font size="4pt" color="BLUE">五顆星星賞★★★★★</font></p>
-
-<h3>一品溫州大餛飩</h3>
-
-<p>鮮蝦餛飩好好吃（滿足）</p>
-
-<p>地址：新北市板橋區中山路與懷仁街口 <a href="https://www.google.com.tw/maps/place/220%E6%96%B0%E5%8C%97%E5%B8%82%E6%9D%BF%E6%A9%8B%E5%8D%80%E4%B8%AD%E5%B1%B1%E8%B7%AF%E4%BA%8C%E6%AE%B5267%E8%99%9F/@25.0179075,121.4777221,3a,75y,288.76h,82.75t/data=!3m6!1e1!3m4!1sEJTswhs17NPEdE-vdrd8ow!2e0!7i13312!8i6656!4m8!1m2!2m1!1z5Lit5bGx6Lev5LqM5q61MjY36Jmf!3m4!1s0x3442a83a5115f7c9:0x18b026b5ecba477b!8m2!3d25.018017!4d121.477504">Google MAP</a></p>
-
-<p>從 google 門牌看地址似乎是 新北市板橋區中山路二段267號，可以用連結確認位置。</p>
-
-<p><font size="4pt" color="BLUE">四顆星星賞★★★★</font></p>
-
-<h3>莒光路40巷米粉湯（未完成）</h3>
-
-<p>和西市鹹酥雞並列我心目中第一名的鹹酥雞，</p>
-
-<p>必點米血、雞屁股、豆干～</p>
-
-<p>晚上才開，沒有固定的休息日。</p>
-
-<p>地址：新北市新莊區福壽街幸福路口</p>
-
-<h3>黃石市場蘿蔔糕、糯米腸、芋粿Q</h3>
-
-<p>我跟小狐狸點了一份綜合和一碗隔壁的生炒魷魚，兩個人就吃的飽飽，</p>
-
-<p>糯米腸炸得很剛好～帶有黏性的糯米和些微米香是我最喜歡的～～</p>
-
-<p>蘿蔔糕超大一塊，芋粿 Q 則因為缺乏芋香我比較不愛，</p>
-
-<p>一份綜合吃下來只要 $45，是不是很佛心價！</p>
-
-<p>營業時間：08:00–17:00 週一公休 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區宮口街28號(黃石市場)</p>
-
-<p>電話：<a href="tel:0229603503">(02)2960-3503</a></p>
-
-<p><font size="4pt" color="BLUE">三顆星星賞★★★</font></p>
-
-<h3>福記燒臘便當</h3>
-
-<p>便當、炒飯都好吃，</p>
-
-<p>配菜可以選，味道也棒棒，</p>
-
-<p>但比較偏油。</p>
-
-<p>營業時間：11:00–14:00，16:00–20:00，週日公休。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區雙十路二段47巷8號</p>
-
-<p>電話：<a href="tel:0222513090">(02)2251-3090</a></p>
-
-<h3>阿達師牛肉麵</h3>
-
-<p>家常麵條好吃，四川麻辣牛肉麵也值得吃。</p>
-
-<p>營業時間：週一至六 11:30–14:00，17:00–00:00，週日 23:00 打烊。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區莒光路80號</p>
-
-<p>電話：<a href="tel:0222583858">(02)2258-3858</a></p>
-
-<p><font size="4pt" color="BLUE">二顆星星賞★★</font></p>
-
-<h3>食八辣麻辣滷味板橋漢生西總店</h3>
-
-<p>中辣有辣湯好喝，可以街口付款讚讚。</p>
-
-<p>營業時間：週一至五 11:30–01:00，六日 15:30–01:00。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區漢生西路90號</p>
-
-<p>電話：<a href="tel:0968864046">0968-864-046</a></p>
-
-<h3>振興好吃雞肉飯</h3>
-
-<p>雞肉是切塊的，類似一般好吃土雞肉店那樣，不是一般的飯上面放肉絲或小肉塊那種，</p>
-
-<p>有 60 元的雞肉便當附湯，湯很好喝，不過夏天感覺味精應該加超多 @_@</p>
-
-<p>淋在飯上的醬油好吃，帶點雞油香不偏鹹也不偏甜恰到好處，</p>
-
-<p>營業時間：週一至六 10:00–21:00，週日公休。 (2018 / 1月資訊)</p>
-
-<p>地址：新北市板橋區三民路一段31巷57號</p>
-
-<p>電話：<a href="tel:0229555868">02-2955-5868</a></p>
-
-<p><font size="4pt" color="BLUE">一顆星星賞★</font></p>
-
-<h3>冠品屋日式料理</h3>
-
-<p>天婦羅丼不錯，蛋包飯不愛。</p>
-
-<p>營業時間：11:30–14:30，17:30–21:30。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區文化路一段421巷1號</p>
-
-<p>電話：<a href="tel:0222256554">(02)2255-6554</a></p>
-
-<h3>OEC水餃飽店</h3>
-
-<p>整體味道ok，主要優勢是cp值高。</p>
-
-<p>水餃超大顆，女生應該六顆就夠，</p>
-
-<p>牛肉麵不錯，鮮蝦餛飩麵佛心價。</p>
-
-<p>營業時間：11:10–13:50，17:30–20:10，週日公休。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區莊敬路80號</p>
-
-<p>電話：<a href="tel:0222559100">(02)2255-9100</a></p>
-
-<h3>西螺當歸鴨肉麵線</h3>
-
-<p>豬心冬粉不錯，份量不多。</p>
-
-<p>營業時間：週一至六 10:30–01:00，週日 10:30–00:00。 (2017 / 12月資訊)</p>
-
-<p>地址：新北市板橋區民治街116號</p>
-
-<p>電話：<a href="tel:0222561618">(02)2256-1618</a></p>
-
-<p><font color="#fcfcfc">推薦</font></p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-12-17T12:59:00+08:00" pubdate data-updated="true">Dec 17<span>th</span>, 2017</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/food/'>Food</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2017/12/17/xinbeishi-banqiao-food-list/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/">
-		
-			[推薦碼0125005366] 台新卡得利 Cardaily - 信用卡專屬 APP 輸入推薦碼送 $50 刷卡金</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p><strong><font size="4px"> <a href="https://www.taishinbank.com.tw/event/CARDaily/">至台新官網下載卡得利APP</a>，</p>
-
-<p>或者到 App Store / Google Play 輸入台新卡得利下載，</p>
-
-<p><font color="#444444"> 使用推薦碼 0125005366 立即獲得 </font><font color="#CC0000">$50元刷卡金</font></p>
-
-<p onclick="copyPromoCode()"><font color="blue">複製推薦人代碼：0125005366</font></p>
-
-
-<p></font></strong></p>
-
-<p>台新信用卡專屬的 APP，</p>
-
-<p>讓使用者可以很快速找到信用卡活動登錄頁面，</p>
-
-<p>也可以使用 APP 繳款公共事業(水電)、信用卡、電信、有線電視、保險等費用，</p>
-
-<p>我自己最喜歡的功能是可以查詢信用卡即時消費，</p>
-
-<p>一般在使用消費時會收到個簡訊通知，</p>
-
-<p>但是過了一兩個禮拜後，想查詢過去確切消費的金額，</p>
-
-<p>往往會因為銀行尚未入帳而查詢不到記錄，</p>
-
-<p>有了即時消費的功能，就能隨時掌握自己的刷卡狀況拉～</p>
-
-<p>夏天我真的是很需要這個功能，推薦給大家。</p>
-
-<p onclick="copyPromoCode()"> 下載及註冊 APP 之後 (有台新網銀帳號者不必重新註冊)，填寫夏天的推薦碼 0125005366 可以得到 $50 元刷卡金囉～</p>
-
-
-<p><input type="text" id="promoCode" onclick="copyPromoCode()" value="0125005366"></p>
-
-<script language="javascript">
-    function copyPromoCode(){
-        var obj = document.getElementById("promoCode");
-        obj.select();
-        document.execCommand("Copy");
-        alert("已複製序號"+obj.value);
-    }
-</script>
-
-
-
-
-<br />
-
-
-<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-05-22T21:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2017</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2017/05/22/taishin-credit-card-app-cardaily-promo-invitation-code/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code/">
-		
-			[綁定好友推薦] 台新 Richart 網銀開戶送 $500 優惠金</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>6/20修正：經網友李先生反應直接填寫 Source Code 無法獲得回饋，在此另外提供綁定連結方式。</p>
-
-<p><strong><font size="4px">Step 1: <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">點此連結綁定優惠碼</a>
-<font color="#444444">  ricahrt 開戶獲得 </font><font color="#CC0000">$500元現金</font></p>
-
-<p><strong><font size="4px">Step 2: <a href="https://richart.tw/TSDIB_RichartWeb/static/event/school/guide/pc.html">點此連結至台新 Richart 官網開戶</a>
-<font color="#444444"></p>
-
-<p>火紅了好一陣子的 richart 網銀戶頭，主打高利活儲，不僅能開心領利息，又保有資金彈性的靈活度，</p>
-
-<p>設定 ACH 自動轉帳，首年更優惠 1% 利率直逼定存，</p>
-
-<p>這都還不夠吸引，沒關係，更厲害的是搭配台新自家的 GOGO 信用卡，</p>
-
-<p>可以享有網路消費 3.5% 、一般消費 1.5% 的現金回饋，可說是目前最強大的信用卡了。</p>
-
-<p>(回饋有上限喔～要注意)</p>
-
-<p>帳戶還提供每月 5 次跨行提款免手續費 + 5 次跨行轉帳免手續費，</p>
-
-<p>如果常用戶頭非台新，只要使用 richart 網銀 APP 並善用五次跨行轉帳，不用出門不用手續費，資金流動完全無負擔！</p>
-
-<p>是不是很值得辦一下，消費、儲蓄一次滿足！</p>
-
-<p>文章開頭的官網中有非常詳細的開戶教學，可以一次完成開戶 + 信用卡申辦，</p>
-
-<p>我個人<strong>推薦使用電腦版申請</strong>，因為自己辦的時候用 APP 發現某些地方會有 bug，</p>
-
-<p>像是自然人憑證驗證即使有設定行動版，還是一直過不了，改用電腦到官網進行認證才通過，</p>
-
-<p>幫家人辦時直接用電腦版很順利，後來爬文才發現客服叫大家不要用 APP 辦 orz，</p>
-
-<p>信用卡的部分也是有點問題，不論是電腦版或 APP 版，完成開戶之後 richart APP 都一直顯示審核中，</p>
-
-<p>但是到台新官網的信用卡進度頁面完全查不到，等了幾天直接打去客服問表示沒有收到申請進件，</p>
-
-<p>跟他說明是開戶同時辦理的，客服回覆會去查看看，一天後信用卡進度查詢果然有資料了，</p>
-
-<p>所以這部分也可以考慮開戶跟信用卡申辦分開進行。</p>
-
-<p>最後當然就是使用  <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">夏天的推薦連結</a> 就可以得到 $500拉，推薦人也會得到 $100 。</p>
-
-<p><del>當然也可以選擇填寫銀行提供的優惠碼 SA2017 得到 $300 唷～</del></p>
-
-<p><del>在修改文章的同時我已經找不到這組優惠碼的資訊，</del></p>
-
-<p>改提供 台新x蝦皮 的活動，填優惠碼一樣可以拿 500 喔，已加碼延長到 2017/12/31。</p>
-
-<p><del>蝦皮活動請參考網址 <a href="https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html">https://richart.tw/TSDIB_RichartWeb/static/event/Shopee/201706/Friend/p3.html</a></del></p>
-
-<p>夏天的推薦連結 <a href="https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53">https://richart.tw/TSDIB_RichartWeb/RC07/RC070100?sn=5WK53</a></p>
-
-<br />
-
-
-<p>聲明提醒：申辦方式與優惠內容可能隨著官方活動而不斷改變或調整規則，夏天不是專職的部落客，平常也要上班工作無法隨時取得最新資訊，但每一篇的文章內容絕對是當下親自確認使用過的，很重要所以說三次：</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-<p>請各位小讀者們務必自行再次確認核對官方最新說明與規則。</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-04-20T13:00:00+08:00" pubdate data-updated="true">Apr 20<span>th</span>, 2017</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2017/04/20/taishin-richart-account-opening-promo-invitation-code/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1611,23 +1543,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/04/16/pregnancy/">備孕歷程</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/04/16/extjs-build-without-split-all-css-or-with-single-css/">ExtJS 6 Css 設定編譯成單一檔案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/04/15/extjs-upgrade-from-511-to-670/">ExtJS 版本升級 從 5.1.1 到 6.7.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
       </li>
     
   </ul>
@@ -1638,7 +1570,7 @@
     <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
 <li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
 <li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
-<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (3)</a></li>
 <li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
 <li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
 <li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
@@ -1651,7 +1583,7 @@
 <li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
 <li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (5)</a></li>
 <li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
-<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (2)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>

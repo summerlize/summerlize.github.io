@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ExtJS | 這個夏天。]]></title>
   <link href="http://summerlize.github.io/blog/categories/extjs/atom.xml" rel="self"/>
   <link href="http://summerlize.github.io/"/>
-  <updated>2019-02-28T15:37:34+08:00</updated>
+  <updated>2019-05-02T17:36:21+08:00</updated>
   <id>http://summerlize.github.io/</id>
   <author>
     <name><![CDATA[SUMMERLIZE]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ExtJS 6 css 設定編譯成單一檔案]]></title>
+    <link href="http://summerlize.github.io/blog/2019/04/16/extjs-build-without-split-all-css-or-with-single-css/"/>
+    <updated>2019-04-16T03:30:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2019/04/16/extjs-build-without-split-all-css-or-with-single-css</id>
+    <content type="html"><![CDATA[<p>為了避免 IE 對 css 檔案過大的限制，</p>
+
+<p>ExtJS 6 將編譯後的 app-all.css 檔拆成兩個檔案 app-all_1.css app-all_2.css，</p>
+
+<p>如果仍想要保持編譯成單一 css 檔，</p>
+
+<p>可在 app.json 中設定 css split 參數。</p>
+
+<pre><code>"output": {
+   "css": {
+      "split": 18288
+   },
+},
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ExtJS 版本升級 從 5.1.1 到 6.7.0]]></title>
+    <link href="http://summerlize.github.io/blog/2019/04/15/extjs-upgrade-from-511-to-670/"/>
+    <updated>2019-04-15T04:35:00+08:00</updated>
+    <id>http://summerlize.github.io/blog/2019/04/15/extjs-upgrade-from-511-to-670</id>
+    <content type="html"><![CDATA[<p>夏天搭配 ExtJS 使用的工具有 Sencha CMD 和 Sencha Architect，</p>
+
+<p>因此升級時也是搭配工具處理，同時也會將工具版本更新，若沒有使用工具仍然可以手動作業替代，</p>
+
+<p>以下是此次升級的內容：</p>
+
+<ul>
+<li><p>ExtJS 5.1.1 &rarr; 6.7.0</p></li>
+<li><p>Sencha CMD 6.1.2.15 &rarr; 6.7.0.63</p></li>
+<li><p>Sencha Architect 3.5.1 &rarr; 4.2.5</p></li>
+</ul>
+
+
+<p>因為 Architect 無法一次升到最高版本，因此我這邊也會採取分次升級的方式進行，</p>
+
+<p>且 Architect 3.5.1 的 ExtJS 最高版本為 6.0.x，</p>
+
+<p>夏天選擇先不升級工具版本，將 ExtJS 升到當前最高後再升級工具。</p>
+
+<h3>ExtJS 5.1.1 &rArr; 6.0.2</h3>
+
+<p>使用 CMD 指令進行升級，置換 project 中的 ext sdk 資料夾，</p>
+
+<pre><code>$ sencha app upgrade path/to/ext60
+</code></pre>
+
+<p>將 project 中自行引入的 ux 或 plugin 移至 project/resources/js/ 底下，</p>
+
+<p>因為使用 Architect 不可手動設定 app.json 中的 classpath，</p>
+
+<p>將其放置於預設路徑底下便可正確導入，</p>
+
+<p>接著使用 Architect 內的功能升版，此步驟只是讓 Architect 識別使用的 ExtJS 版本，</p>
+
+<pre><code>Project Setting &gt; Framework &gt; upgrade to EXT JS 6.0.x
+</code></pre>
+
+<p>由於新版將 ext- 或 sencha- 開頭的套件 prefix 去除，</p>
+
+<p>因此我們將 app.json 中 的 theme 由 &ldquo;ext-theme-neptune&rdquo; 改為 &ldquo;theme-neptune"。</p>
+
+<p>其他：</p>
+
+<ol>
+<li>新版編譯檔多了副檔名為 jsonp 的檔案，將其加入 gitignore 中。</li>
+<li>將專案中引用的開源套件，更換升級至相應版本。</li>
+<li><p>新的 extjs 將 css build 成兩個檔案，</p>
+
+<p>但因爲我們的專案有置換 css 的讀取順序，</p>
+
+<p>所以需要編譯成一個檔案，參考 <a href="/blog/2019/04/16/extjs-build-without-split-all-css-or-with-single-css">ExtJS 6 css 設定編譯成單一檔案</a>。</p></li>
+</ol>
+
+
+<h3>CMD 6.1.2.15 &rArr; 6.7.0.63</h3>
+
+<p>安裝 Sencha CMD 6.7.0.63 後，與專案中使用指令升級：</p>
+
+<pre><code>$ senhca app upgrade
+</code></pre>
+
+<h3>Architect 3.5.1 &rArr; 4.2.5</h3>
+
+<p>安裝 Sencha Architect 4.2.5 後，使用 Architect 開啟專案並儲存即可。</p>
+
+<h3>ExtJS 6.0.2 &rArr; 6.2.1</h3>
+
+<p>使用 CMD 指令進行升級，置換 project 中的 ext sdk 資料夾，</p>
+
+<pre><code>$ sencha app upgrade path/to/ext62
+</code></pre>
+
+<p>接著使用 Architect 內的功能升版，此步驟只是讓 Architect 識別使用的 ExtJS 版本，</p>
+
+<pre><code>Project Setting &gt; Framework &gt; upgrade to EXT JS 6.2.x Classic   
+</code></pre>
+
+<p>此時 Architect 會將過去建立的 override js 加入 app.json之中，</p>
+
+<p>必須手動將這些 js 的 config requiresSdk 設置為 true 才能正確編譯。</p>
+
+<p>其他：</p>
+
+<ol>
+<li>將專案中引用的開源套件，更換升級至相應版本。</li>
+<li><p>專案中有 accordion layout 的 container，</p>
+
+<p> 其中 placeholder config 使用 object 無法被正確 create，</p>
+
+<p> 改成在 event render 時使用 Ext.create 建立後再設定 placeholder。</p></li>
+</ol>
+
+
+<h3>ExtJS 6.2.1 &rArr; 6.5.3 &rArr; 6.6.0 &rArr; 6.7.0</h3>
+
+<p>接下來的升級都是重複動作，比較沒有需要額外調整的內容，只要將 sdk 指定至正確版本即可。</p>
+
+<p>使用 CMD 指令進行升級，置換 project 中的 ext sdk 資料夾，</p>
+
+<pre><code>$ sencha app upgrade -full path/to/ext65
+</code></pre>
+
+<p>接著使用 Architect 內的功能升版，此步驟只是讓 Architect 識別使用的 ExtJS 版本，</p>
+
+<pre><code>Project Setting &gt; Framework &gt; upgrade to EXT JS 6.5.x Classic
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ext JS: store loadData() id 重複導致只顯示一筆資料]]></title>

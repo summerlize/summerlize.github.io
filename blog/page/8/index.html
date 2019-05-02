@@ -7,7 +7,7 @@
 	<meta name="author" content="SUMMERLIZE">
 
 	
-	<meta name="description" content="[貼心小提醒] 如果沒有時間看夏天落落長歷險記的話 :P 可點此觀看流程精簡版 印航今年推出了台北到峇里島的優惠票價， 代價就是需要在雅加達轉機，含轉機等候至少會比直飛多花四小時的時間， 因為過去也有不少搭飛機的經驗，心想應該不會太困難， 我原先訂的團體行程沒有成行，導致後面改訂 mini &hellip;">
+	<meta name="description" content="Grails 版本: 2.3.11 當 domain 中 unique 條件關聯的屬性包含了 nullable 類型， grails 會忽視 unique 限制導致誤判， 根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。 假設 Domain &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -134,6 +134,505 @@
 
 
 
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/">
+		
+			Grails: Nullable 屬性導致 Unique 限制式失效</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>Grails 版本: 2.3.11</p>
+
+<p>當 domain 中 unique 條件關聯的屬性包含了 nullable 類型，</p>
+
+<p>grails 會忽視 unique 限制導致誤判，</p>
+
+<p>根據 api 可在 constraints 中加入 validator 來自定義需要驗證的內容。</p>
+
+<p>假設 Domain 定義如下：</p>
+
+<figure class='code'><figcaption><span>Book.groovy </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kd">class</span> <span class="nc">Book</span><span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">String</span> <span class="n">name</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">title</span>
+</span><span class='line'>  <span class="n">Author</span> <span class="n">author</span>
+</span><span class='line'>  <span class="n">Publisher</span> <span class="n">publisher</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">])</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由於 publisher 允許為 null，造成 <code>name(unique:['author','publisher']</code> 沒有正確判斷，</p>
+
+<p>此時可以自行加入判斷如下：</p>
+
+<figure class='code'><figcaption><span>start:8 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>   <span class="kd">static</span> <span class="n">constraints</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">name</span><span class="o">(</span><span class="nl">unique:</span><span class="o">[</span><span class="s1">&#39;author&#39;</span><span class="o">,</span><span class="s1">&#39;publisher&#39;</span><span class="o">],</span>
+</span><span class='line'>          <span class="nl">validator:</span> <span class="o">{</span> <span class="n">name</span><span class="o">,</span> <span class="n">book</span> <span class="o">-&gt;</span>
+</span><span class='line'>              <span class="kt">def</span> <span class="n">existingRecord</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">withCriteria</span><span class="o">(){</span>
+</span><span class='line'>              
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">ne</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;author&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">author</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">){</span>
+</span><span class='line'>                      <span class="n">eq</span><span class="o">(</span><span class="s1">&#39;publisher&#39;</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">publisher</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>                  <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">isNull</span><span class="o">(</span><span class="s1">&#39;supplier&#39;</span><span class="o">)</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>              <span class="o">}</span><span class="c1">//end withCreiteria</span>
+</span><span class='line'>          <span class="o">}</span><span class="c1">//end validator</span>
+</span><span class='line'>      <span class="o">)</span>
+</span><span class='line'>      <span class="n">publisher</span> <span class="nl">nullable:</span><span class="kc">true</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完成後就可以正確判斷 unique 摟～</p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-30T01:39:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/grails/'>Grails</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/09/30/grails-domain-unique-constraint-with-nullable-properties/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/">
+		
+			峇里島 Day 1。印尼航空&好好海鮮餐館鹹蛋螃蟹</a>
+	</h2>
+	
+	<div class="entry-content">
+		<p>拖了好久才開始動工的峇里島遊記～</p>
+
+<p>選擇了印尼航空的轉機行程，除了省錢之外也希望可以增加一些搭機的經驗，</p>
+
+<p><del>(結果明明就驚慌失措嚇得半屎)</del></p>
+
+<p>關於我們嚇死人不償命的轉機大冒險可以參考這篇 <a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/">印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程</a></p>
+
+<p>第一天基本上就是在搭機中度過，先來一張台灣的海岸線～</p>
+
+<p><img src="https://farm6.staticflickr.com/5577/14749697444_4bb361fae8_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>印航不時會提供一些小點心，早上有一包辣辣的果仁零食，下午還有糖果、飲料、 Häagen-Dazs 冰淇淋～</p>
+
+<p><del>(拿相機對著空姐真的需要臉皮很厚)</del></p>
+
+<p><img src="https://farm3.staticflickr.com/2905/14749698384_0cdda3e225_n.jpg" height="250" width="200" alt="" />
+<img src="https://farm6.staticflickr.com/5570/14752548542_29e3c4bb9c_n.jpg" height="250" width="200" alt="" /></p>
+
+<p>台灣-雅加達的班機會提供餐點 menu ，雅加達-峇里島則沒有，但兩段航程都有提供飛機餐喔。</p>
+
+<p>只有拍去程的，回程的部分看了我的轉機奇遇記之後就可以理解我根本沒力氣拍阿!! XDD</p>
+
+<p><img src="https://farm4.staticflickr.com/3918/14729039076_ce94f9dafb_n.jpg" height="280" width="250" alt="" /></p>
+
+<p>有中式口味和印尼口味，印象中都是印尼口味比較好吃，</p>
+
+<p>印尼餐點的神奇在於本來不好吃的東西只要加了ABC辣醬味道都超合 (個人覺得) ，算是走重口味路線。</p>
+
+<p>飲品的部分選擇也蠻多的，去回總共吃了四次的飛機餐，我和小狐狸每次都點不同的嚐鮮，</p>
+
+<p>Guava Juice 紅芭樂汁：五顆星</p>
+
+<p>Bintang 印尼啤酒：四顆星</p>
+
+<p>少一顆的原因是因為&hellip; 大家到了國外常會說當地的啤酒多好喝好喝，</p>
+
+<p>可是我個人挑戰完的心得是只要新鮮又冰的啤酒都很好喝～ :P</p>
+
+<p>日本、大陸、印尼的啤酒都偏淡，是覺得好喝但沒有特別驚豔 XD</p>
+
+<p>Santa Carolina 紅酒：四顆星 以飛機上的紅酒來說很值得喝一下～</p>
+
+<p>Gordon&rsquo;s Dry Gin 琴酒：零分 哈&hellip;</p>
+
+<p>好奇心驅使點來喝，空姐有問要不要加其他東西 (琴酒適合做基酒) ，</p>
+
+<p>但我想喝喝看琴酒本身的味道便拒絕了，結果真的是超.難.喝 <del>(空姐我錯了)</del> ，</p>
+
+<p>有一種薑味混合藥草的感覺。</p>
+
+<hr />
+
+<p>雅加達海岸線，那一大坨的灰蒙蒙的土是正在進行的填海工程。</p>
+
+<p><img src="https://farm4.staticflickr.com/3919/14748884541_6d1472365b_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>走進雅機達機場立馬看到傳統雕刻藝術～ (峇里島機場更誇張外觀跟廟差不多)</p>
+
+<p><img src="https://farm4.staticflickr.com/3880/14771916753_06882afae4_n.jpg" height="220" width="300" alt="" />
+<img src="https://farm3.staticflickr.com/2938/14751738422_3daa9bb165_n.jpg" height="220" width="300" alt="" /></p>
+
+<p>印尼是個宗教國家，宗教與政治關係密不可分，正好可以從公共建築形式印證，</p>
+
+<p>導遊還跟我們說當地總統候選人一定得是回教徒， (雖然我上網查好像沒有一定拉，只是因為印尼伊斯蘭教佔大宗)</p>
+
+<p>在機場也可以看到超多伊斯蘭教徒，想像一下這時候暑假大熱天的，</p>
+
+<p>伊斯蘭教女人卻要全身包緊緊的，真的很辛苦～而且裡面還有穿便服，我都要替他流汗了～～ orz</p>
+
+<p><del>(話說我偷拍北鼻大姐怎麼看鏡頭呢)</del></p>
+
+<p><img src="https://farm4.staticflickr.com/3871/14771918703_19054df4f2_n.jpg" height="250" width="200" alt="" /></p>
+
+<p>由於一夫多妻制，在機場排隊時也常看到一個先生後面站了好幾個太太的有趣畫面，</p>
+
+<p>老公穿的一身帥氣，老婆卻只能烏漆麻黑!! (淚)</p>
+
+<p>過海關時只要先生代表就可以通關，一個人拿五本護照<del>好像很帥氣!!</del></p>
+
+<p>不過在回程時也有看到海關要求太太過去露臉的，</p>
+
+<p>太太看起來很痛苦緩慢的移動面罩，先生則很心疼一手撫著太太的頭避免被海關以外的人看見，</p>
+
+<p>面罩拉了一半左右海關便立馬揮揮手示意可以了，</p>
+
+<p>真是有趣的人生觀察。</p>
+
+<p>到峇里島摟～偷拍了有點正但好像不太開心的空姐～晚上的飛機好像也有點漂亮，嘻嘻 :D</p>
+
+<p><img src="https://farm4.staticflickr.com/3858/14565371800_edd3be9a51_n.jpg" height="250" width="175" alt="" />
+<img src="https://farm6.staticflickr.com/5570/14565408198_4c8df1d10f_n.jpg" height="250" width="350" alt="" /></p>
+
+<hr />
+
+<p>出機場之後已經快九點多了，第一天的行程就只有晚餐而已，</p>
+
+<p>本來安排的是 hard rock 的 buffet ，但是我們才在飛機上吃過晚餐欸欸欸～</p>
+
+<p>後來導遊說因為太晚了 hard rock 已經打烊，因此改吃螃蟹餐，</p>
+
+<p>我們還暗暗竊喜了一下，想說這樣分量應該不會太多，沒想到根本大錯特錯，</p>
+
+<p>而且這一餐也是整個行程下來吃最好的一餐 &ndash;_______&ndash;</p>
+
+<p>餐廳的招牌寫著大大的中文字：好好海鮮餐館，</p>
+
+<p>在毫無心理準備的情況下，服務生上菜有如滔滔江水綿延不絕～</p>
+
+<p>菜色如下：</p>
+
+<p>玉米濃湯、鹹蛋螃蟹、辣醬蝦、炸魚、燴豆腐、辣醬空心菜、蒜炒油菜、白飯、茶、水果</p>
+
+<p><img src="https://farm4.staticflickr.com/3915/14565445239_603f5a94e7_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3923/14565441028_2b28fd8563_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3896/14751779422_f74a7fb38e_n.jpg" height="120" width="180" alt="" /></p>
+
+<p><img src="https://farm3.staticflickr.com/2938/14565444289_a6a70a335b_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3864/14565442098_fdd6701689_n.jpg" height="120" width="180" alt="" />
+<img src="https://farm4.staticflickr.com/3870/14771962043_bd2d3aac3c_n.jpg" height="120" width="180" alt="" /></p>
+
+<p>看看我們<strong>兩個人</strong>要吃完誇張的整桌菜，而且還吃過晚餐，<del>是豬逆</del>，</p>
+
+<p>最後還是棄械投降請導遊和司機一起幫忙解決。</p>
+
+<p><img src="https://farm3.staticflickr.com/2911/14565411268_6ea5f1664c_c.jpg" height="300" width="450" alt="" /></p>
+
+<hr />
+
+<p>相關文章：</p>
+
+<p><a href="/blog/2014/06/25/transfer-from-jakarta-to-bali/">印尼航空(Garuda Indonesia)。雅加達轉機峇里島去回流程</a></p>
+
+<p><a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/">2014 信用卡國際機場外圍免費停車</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-27T06:14:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bali/'>Bali</a>, <a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/27/bali-trip-1st-day-garuda-indonesia-and-bali-nikmat-salted-egg-yolk-crab/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
+
+
+
+  
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/">
+		
+			2014 信用卡國際機場外圍免費停車-富邦數位生活卡</a>
+	</h2>
+	
+	<div class="entry-content">
+		<h2>富邦銀行</h2>
+
+<h3>數位生活卡</h3>
+
+<p>刷卡支付當次出國航程全額機票或80％，</p>
+
+<p><strong>鈦金卡</strong>可享<strong>每年不限次數、每次7天之免費停車優惠</strong></p>
+
+<p><strong>白金卡</strong>可享<strong>每年2次、每次7天之免費停車優惠</strong></p>
+
+<p>我和小狐狸都是 MasterCard ，但一張是綠色一張是藍色，</p>
+
+<p>綠色的是鈦金卡，藍色則是白金卡，(額度的差別)</p>
+
+<p>這次我們刷的是白金卡，配合的是東航國際機場專屬停車場，距離機場大約5分鐘車程，</p>
+
+<p>場地看起來有點舊舊的，車子停好後填寫信用卡資料就可以了～會有 24hr 接駁車去回接送。</p>
+
+<p>回國領完行李就可以打電話請接駁車過來，出發跟回程幾乎都沒什麼等就上車了，整體來說很滿意～</p>
+
+<p>接送司機的服務態度意外的很不錯 (給一個大拇哥) 。</p>
+
+<p>機場接駁上下車在同一個地方，</p>
+
+<p><del>但我自己覺得路線還蠻不好記又沒有明顯指標，還特地拍了一張照避免回程找不到，哈哈。</del></p>
+
+<p><img src="https://farm4.staticflickr.com/3869/14557531928_08bda2ab4d_n.jpg" height="200" width="300" alt="" /></p>
+
+<p>東航國際機場專屬停車場</p>
+
+<p>地址：桃園縣大園鄉三民路二段69號</p>
+
+<p>電話：<a href="tel:0800022999">0800-022-999</a>、<a href="tel:033838888">(03)383-8888</a></p>
+
+<p><a href="https://www.fubon.com/bank/creditcard/member_rights/001creditCard_100parking01.htm">點我查看富邦卡友權益</a></p>
+
+		
+		
+
+		<!-- AddThis Button -->
+		<div class="addthis_toolbox addthis_default_style ">
+    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
+		</div> 
+		<p style="padding : 1px"></p>
+		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
+		<a class="addthis_button_preferred_1"></a>
+		<a class="addthis_button_preferred_2"></a>
+		<a class="addthis_button_preferred_3"></a>
+		<a class="addthis_button_preferred_4"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_plurk"></a>
+		<a class="addthis_button_linkedin"></a>
+		<a class="addthis_button_blogger"></a>
+		<a class="addthis_button_sinaweibo"></a>
+		<a class="addthis_button_wordpress"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+		</div>
+		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
+		<!-- AddThis Button END -->
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-26T06:59:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/credit-card/'>Credit Card</a>, <a class='category' href='/blog/categories/overseas-trip/'>Overseas Trip</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/07/26/free-airport-parking-offered-by-credit-card/#disqus_thread">Comments</a></div>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- small rectangle 150x300 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:150px;height:300px"
+     data-ad-client="ca-pub-1790808934333010"
+     data-ad-slot="4682841085"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</article>
+  
 
 
 
@@ -472,7 +971,7 @@
 
 
   
-    <article class="post">
+    <lastarticle class="post">
 	<h2 class="title">
 		
 		<a href="/blog/2014/05/14/extjs-store-loaddata-only-single-record-when-records-with-same-id/">
@@ -595,439 +1094,6 @@
 </script>
 </div>
 
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/05/14/grails-gorm-automaticlly-save-issue/">
-		
-			Grails: GORM 自動更新儲存問題</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>Grails 版本: 2.3.5</p>
-
-<p>以下面的程式碼為例，</p>
-
-<p>我們希望找到 author 之後，將 author 存回 book 中，</p>
-
-<p>再呼叫 book 做 save()，</p>
-
-<p>但實測發現 book 在 if 之前就已自動儲存，</p>
-
-<figure class='code'><figcaption><span>book update </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查了一下 Grails API 找到 <a href="http://grails.org/doc/2.3.4/ref/Domain%20Classes/discard.html">discard()</a> 方法，<strong>用來避免自動執行儲存</strong>，</p>
-
-<p>測試的程式碼如下，結果 book 仍然自動更新 (暈) ，</p>
-
-<figure class='code'><figcaption><span>book update - test discard </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">discard</span><span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>繼續 try 不同的組合後發現似乎是<strong> findBy() 指令造成 book 自動儲存</strong>，</p>
-
-<p>在此提供兩種解決方式，<strong>第一種是在 mapping params 之前先執行完 findBy() </strong>，</p>
-
-<figure class='code'><figcaption><span>book update - solution 1 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'><span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>若因為處理邏輯的因素 findBy() 一定得在 book.properties = params 之後，</p>
-
-<p>我們可以用<strong>第二種方式，使用 new Book(params) 來取代 book.properties = params </strong>。</p>
-
-<figure class='code'><figcaption><span>book update - solution 2 </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Book</span><span class="o">(</span><span class="n">params</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="kt">def</span> <span class="n">author</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="na">findByName</span><span class="o">(</span><span class="n">params</span><span class="o">[</span><span class="s2">&quot;author.name&quot;</span><span class="o">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span><span class="o">(</span><span class="n">author</span><span class="o">){</span>
-</span><span class='line'>  <span class="kt">def</span> <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">properties</span> <span class="o">=</span> <span class="n">params</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">author</span> <span class="o">=</span> <span class="n">author</span>
-</span><span class='line'>  <span class="n">book</span><span class="o">.</span><span class="na">save</span><span class="o">()</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-14T03:59:00+08:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/grails/'>Grails</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/05/14/grails-gorm-automaticlly-save-issue/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2014/04/26/tranditional-chinese-problem-in-ireport-pdf-with-grails/">
-		
-			Grails + iReport: PDF 繁體中文無法顯示解決方法</a>
-	</h2>
-	
-	<div class="entry-content">
-		<p>Grails 版本: 2.3.5</p>
-
-<p>iReport 版本: 5.5.1</p>
-
-<p>iReport 在產生 PDF 檔一直都有中文顯示異常的問題，</p>
-
-<p>此次要記錄的是在 Grails 中的解決辦法，</p>
-
-<p>首先在 iReport 中將顯示中文的欄位屬性設定如下，</p>
-
-<p><strong>Pdf Font name is now deprecated. &ndash;> MSung-Light</strong></p>
-
-<p><strong>Pdf Embedded &ndash;>勾選</strong></p>
-
-<p><strong>Pdf Enconding &ndash;> UniCNS-UCS2-H(Chinese traditional)</strong></p>
-
-<p><img src="https://farm3.staticflickr.com/2930/13987705336_f0d5782478_n.jpg" alt="iReport Field Properties" /></p>
-
-<p>再到 iReport 安裝路徑中複製出 iTextAsian.jar ，</p>
-
-<p>夏天安裝在 mac 中路徑如下，找不到的話應該可以從網路上下載。</p>
-
-<p>/Applications/Jaspersoft iReport Designer.app/Contents/Resources/ireport/ireport/libs</p>
-
-<p><img src="https://farm6.staticflickr.com/5331/13987706016_05fe74337a.jpg" alt="iTextAsian @iReport" /></p>
-
-<p>接著將檔案丟到 Grails Project 中的 lib 資料夾下</p>
-
-<p><img src="https://farm8.staticflickr.com/7374/13987705366_2f5173dc86.jpg" alt="iTextAsian @Grails" /></p>
-
-<p>這樣輸出的 PDF 就可以顯示中文摟～ ：）</p>
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-26T02:59:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/grails/'>Grails</a>, <a class='category' href='/blog/categories/ireport/'>iReport</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2014/04/26/tranditional-chinese-problem-in-ireport-pdf-with-grails/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</article>
-  
-
-
-
-  
-    <lastarticle class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2013/11/13/test/">
-		
-			Test</a>
-	</h2>
-	
-	<div class="entry-content">
-		
-
-<figure class='code'><figcaption><span>Javascript Array Syntax</span><a href='http://j.mp/pPUUmW'>MDN Documentation </a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">arrayLength</span><span class="p">);</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">element0</span><span class="p">,</span> <span class="nx">element1</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">elementN</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Time to be Awesome - code_block.rb </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Float</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">number_decimal_places</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">to_fraction</span>
-</span><span class='line'>    <span class="n">higher</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="nb">self</span><span class="o">.</span><span class="n">number_decimal_places</span>
-</span><span class='line'>    <span class="n">lower</span> <span class="o">=</span> <span class="nb">self</span><span class="o">*</span><span class="n">higher</span>
-</span><span class='line'>    <span class="n">gcden</span> <span class="o">=</span> <span class="n">greatest_common_divisor</span><span class="p">(</span><span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">lower</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">,</span> <span class="p">(</span><span class="n">higher</span><span class="o">/</span><span class="n">gcden</span><span class="p">)</span><span class="o">.</span><span class="n">round</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">greatest_common_divisor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-</span><span class='line'>     <span class="k">while</span> <span class="n">a</span><span class="o">%</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span>
-</span><span class='line'>       <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">round</span><span class="p">,(</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">round</span>
-</span><span class='line'>     <span class="k">end</span>
-</span><span class='line'>     <span class="k">return</span> <span class="n">b</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-
-		<!-- AddThis Button -->
-		<div class="addthis_toolbox addthis_default_style ">
-    	<a class="addthis_toolboxbutton_facebook_like" fb:like:layout="standard"></a> 
-		</div> 
-		<p style="padding : 1px"></p>
-		<div class="addthis_toolbox addthis_default_style addthis_20x20_style">
-		<a class="addthis_button_preferred_1"></a>
-		<a class="addthis_button_preferred_2"></a>
-		<a class="addthis_button_preferred_3"></a>
-		<a class="addthis_button_preferred_4"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_plurk"></a>
-		<a class="addthis_button_linkedin"></a>
-		<a class="addthis_button_blogger"></a>
-		<a class="addthis_button_sinaweibo"></a>
-		<a class="addthis_button_wordpress"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-		</div>
-		<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527e0b5965f57456"></script>
-		<!-- AddThis Button END -->
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-13T23:46:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time></div>
-	<div class="tags">
-
-</div>
-	
-	<div class="comments"><a href="/blog/2013/11/13/test/#disqus_thread">Comments</a></div>
-	
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- small rectangle 150x300 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:150px;height:300px"
-     data-ad-client="ca-pub-1790808934333010"
-     data-ad-slot="4682841085"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
 </lastarticle>
   
 
@@ -1039,23 +1105,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/04/16/pregnancy/">備孕歷程</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/04/16/extjs-build-without-split-all-css-or-with-single-css/">ExtJS 6 Css 設定編譯成單一檔案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/04/15/extjs-upgrade-from-511-to-670/">ExtJS 版本升級 從 5.1.1 到 6.7.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/08/01/orchid-island-3-days-2-nights-itinerary-meals-experience-and-cost-details/">蘭嶼三天兩夜行程、餐食感想及費用明細（文字紀錄）</a>
       </li>
     
       <li class="post">
         <a href="/blog/2018/07/02/shopee-promo-invitation-code-coupon+copy/">[推薦折扣碼YUUBA222] 註冊蝦皮會員首筆訂單折抵 NT$100</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/22/macos-high-sierra-brew-install-problem-link-permission-denied-solution/">macOS: High Sierra / Brew 安裝問題 Link Permission Denied</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/22/make-an-existed-git-branch-as-a-newborn-repository/">Git: 將已存在的分支轉換為全新的程式庫 (不保留舊的 Commit，但維持目前版本的程式碼)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/05/18/create-guest-vm-Windows-10-on-ubuntu-server-host-using-vboxmanage/">安裝 Guest VM Windows 10 於 Ubuntu Server Host</a>
       </li>
     
   </ul>
@@ -1066,7 +1132,7 @@
     <li class='category'><a href='/blog/categories/bali/'>Bali (2)</a></li>
 <li class='category'><a href='/blog/categories/credit-card/'>Credit Card (1)</a></li>
 <li class='category'><a href='/blog/categories/domestic-travel/'>Domestic Travel (1)</a></li>
-<li class='category'><a href='/blog/categories/extjs/'>ExtJS (1)</a></li>
+<li class='category'><a href='/blog/categories/extjs/'>ExtJS (3)</a></li>
 <li class='category'><a href='/blog/categories/facebook/'>Facebook (1)</a></li>
 <li class='category'><a href='/blog/categories/food/'>Food (3)</a></li>
 <li class='category'><a href='/blog/categories/git/'>Git (3)</a></li>
@@ -1079,7 +1145,7 @@
 <li class='category'><a href='/blog/categories/overseas-trip/'>Overseas Trip (4)</a></li>
 <li class='category'><a href='/blog/categories/promo-slash-invitation-code/'>Promo/Invitation Code (5)</a></li>
 <li class='category'><a href='/blog/categories/singapore/'>Singapore (1)</a></li>
-<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (1)</a></li>
+<li class='category'><a href='/blog/categories/summers-wedding/'>Summer&#8217;s Wedding (2)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>Ubuntu (3)</a></li>
 <li class='category'><a href='/blog/categories/uncategorized-comments/'>Uncategorized Comments (7)</a></li>
 <li class='category'><a href='/blog/categories/ireport/'>iReport (1)</a></li>
