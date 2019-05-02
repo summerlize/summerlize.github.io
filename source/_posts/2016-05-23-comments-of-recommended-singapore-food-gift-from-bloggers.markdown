@@ -135,7 +135,41 @@ categories: [Singapore, Overseas Trip]
 	因為我一開始沒有注意時間的部分，喝了一口，還想說也太"淡"奶味了吧！ XD
 	
 	三分鐘後整個醇濃香都出來了呀～後來還回沖兩三次，喝起來還是「很可以」喔！～～
+
+1.  ###**PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹調味包 評論：推薦**
+
+	![](https://c6.staticflickr.com/8/7375/26605420973_8d1cb769dc_b.jpg =250x260)
+	![](https://live.staticflickr.com/65535/32679190567_a1b04b8435_k.jpg =250x260)
+
+	<font color="blue">**購買地點：fair price 超市**</font>
 	
+	夏天做的是蟹蟹豬豬義大利麵佐辣椒螃蟹醬 XDD 亂取一通
+
+	使用的材料有蟹肉棒、九層塔、豬肉片、雞蛋，
+	
+	![](https://live.staticflickr.com/65535/40655368033_03c6c2a36f_k.jpg =350x200)
+	
+	首先將義大利麵水煮 6 分鐘備用，
+	
+	將蟹肉棒、豬肉片炒 5 分熟後加入九層塔炒 30 秒，加入 A 包再炒 30 秒，
+	
+	依照說明加入一些水到鍋內，再加入 B 包，
+	
+	加入義大利麵一同拌煮數分鐘，
+	
+	將 C 包與 30 ml 的水攪拌均勻，加入拌炒 30 秒，
+	
+	最後將火開大，加入攪拌好的雞蛋 1 ～ 2 秒便完成啦～
+	
+	![](https://live.staticflickr.com/65535/46897537604_191aa5b9a6_k.jpg =350x200)
+	![](https://live.staticflickr.com/65535/32679191977_d11c5dd2ff_k.jpg =197x200)
+	
+	吃起來甜甜辣辣的，我覺得跟在珍寶吃到的味道有 8 成像，
+	
+	珍寶多了帶有蟹味的油香，吃起來更讓人覺得口齒留香啦～
+	
+	如果有去採買螃蟹，相信可以在家裡重現珍寶的味道！
+
 1.  ###**BENGAWANSOLO Pandan Chiffon 班蘭葉綠蛋糕    評論：推薦嚐鮮，可買可不買**
 
 	<font color="pink" size="+3">轉機必知！只有第一、第二航廈才能買喔～～ (2016資訊)</font>
@@ -423,12 +457,6 @@ C包是叁峇辣椒醬，說明書上有寫可依個人口味酌量加入，
 1.  ###**PRIMA TASTE Singapore Curry 百勝廚新加坡咖哩調味包 (尚未食用)**
 
 	![](https://c4.staticflickr.com/8/7706/26605419643_6eec47d44f_b.jpg =250x240)
-	
-	<font color="blue">**購買地點：fair price 超市**</font>
-	
-1.  ###**PRIMA TASTE Chilli Crab 百勝廚辣椒螃蟹調味包 (尚未食用)**
-
-	![](https://c6.staticflickr.com/8/7375/26605420973_8d1cb769dc_b.jpg =250x260)
 	
 	<font color="blue">**購買地點：fair price 超市**</font>
 	
